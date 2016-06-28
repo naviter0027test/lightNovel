@@ -1,6 +1,22 @@
-#content .articleItem > a.see {
+.articleData h2 {
+    text-align : center;
+}
+
+.articleData h3 {
+    color : #777777;
+    text-align : center;
+}
+
+.operPanel select {
     float : right;
     display : inline-block;
+    margin : 5px;
+}
+
+.operPanel a {
+    float : right;
+    display : inline-block;
+    margin : 5px;
     padding : 5px;
 
     color : white;
@@ -12,8 +28,19 @@
     -o-transition: background 0.5s ease-in-out;
     -ms-transition: background 0.5s ease-in-out;
     transition: background 0.5s ease-in-out;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
 }
 
-#content .articleItem > a.see:hover {
+.operPanel a:hover {
     background : #006080;
+}
+
+.userMsg {
+    margin-top : 20px;
+}
+
+.userMsg img {
+    float : left;
 }
