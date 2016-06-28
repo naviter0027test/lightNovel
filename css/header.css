@@ -1,0 +1,139 @@
+#header .nav {
+    background : black;
+}
+
+#header .nav a {
+    display : inline-block;
+    padding : 10px;
+
+    color : white;
+    text-decoration : none;
+    -webkit-transition: background 0.5s ease-in-out;
+    -moz-transition: background 0.5s ease-in-out;
+    -o-transition: background 0.5s ease-in-out;
+    -ms-transition: background 0.5s ease-in-out;
+    transition: background 0.5s ease-in-out;
+}
+
+#header .nav a:hover {
+    background : #666666;
+}
+
+#header .nav a.nowChoose {
+    background : #0099cc;
+}
+
+#header .nav a.rightNav {
+    float : right;
+}
+
+#header .nav a.rightNavHover {
+    background : #666666;
+}
+
+#header > span {
+    float : right;
+    display : inline-block;
+    vertical-align : bottom;
+}
+
+#header #loginPanel {
+    display : none;
+    position : absolute;
+    padding : 8px;
+    width : 250px;
+
+    color : white;
+    background : #00344d;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    z-index : 5;
+}
+
+
+#header #loginPanel h3 {
+    position : relative;
+    top : -10px;
+    margin : 0;
+    padding : 5px 5px 10px 5px;
+
+    text-align : center;
+    border-bottom : 1px solid #b3e7ff;
+}
+
+#header #loginPanel div.top-arrow {
+    position : relative;
+    top : -15px;
+    left : 200px;
+    width : 0;
+    height : 0;
+    border-style : solid;
+    border-width : 0 15px 15px 15px;
+    border-color : transparent transparent #00344d transparent; 
+}
+
+#header #loginPanel span {
+    display : inline-block;
+    margin-top : 5px;
+}
+
+#header #loginPanel input.input {
+    margin-top : 5px;
+    padding : 3px;
+
+    color : black;
+    border : 1px solid #b3e7ff;
+}
+
+#header #loginPanel input[type=checkbox] {
+    margin : 3px;
+}
+
+#header #loginPanel button {
+    padding : 3px;
+    margin : 10px 0px 10px 0px;
+    background : #00344d;
+    box-shadow : 0px 0px 3px 3px #b3e7ff;
+    border : 0px solid transparent;
+    -webkit-transition: background 0.5s ease-in-out;
+    -moz-transition: background 0.5s ease-in-out;
+    -o-transition: background 0.5s ease-in-out;
+    -ms-transition: background 0.5s ease-in-out;
+    transition: background 0.5s ease-in-out;
+}
+
+#header #loginPanel button:hover {
+    background : #0099cc;
+}
+
+#header #loginPanel a.forget {
+    position : relative;
+    left : 80px;
+    margin : 15px;
+
+    color : white;
+    text-decoration : none;
+    border-bottom : 1px solid white;
+}
+
+#header #loginPanel a.register {
+    padding : 3px;
+    margin : 10px 0px 10px 0px;
+
+    color : white;
+    text-decoration : none;
+    text-align : center;
+    background : #00344d;
+    box-shadow : 0px 0px 3px 3px #b3e7ff;
+    border : 0px solid transparent;
+    -webkit-transition: background 0.5s ease-in-out;
+    -moz-transition: background 0.5s ease-in-out;
+    -o-transition: background 0.5s ease-in-out;
+    -ms-transition: background 0.5s ease-in-out;
+    transition: background 0.5s ease-in-out;
+}
+
+#header #loginPanel a.register:hover {
+    background : #0099cc;
+}
