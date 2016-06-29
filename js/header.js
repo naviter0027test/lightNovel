@@ -1,12 +1,25 @@
 function loginPanelPositionSet() {
     var offset = $(".rightNav").offset();
-    $("#loginPanel").offset( { 'top' : offset.top+50, 'left': offset.left-190});
+    $(".floatPanel").offset( { 'top' : offset.top+50, 'left': offset.left-190});
 }
 $(document).ready(function() {
     TSC('gb');
     loginPanelPositionSet();
     $(window).resize(function() {
         loginPanelPositionSet();
+    });
+    $(".status").on("click", function() {
+        if($("#memberPanel").hasClass("show")) {
+            $("#memberPanel").fadeOut();
+            $("#memberPanel").removeClass("show");
+        }
+        else {
+            $("#memberPanel").fadeIn();
+            $("#memberPanel").addClass("show");
+            loginPanelPositionSet();
+        }
+        $(this).toggleClass("rightNavHover");
+        return false;
     });
     $(".login").on("click", function() {
         if($("#loginPanel").hasClass("show")) {
@@ -18,8 +31,8 @@ $(document).ready(function() {
             $("#loginPanel").addClass("show");
             loginPanelPositionSet();
         }
-    $(this).toggleClass("rightNavHover");
-    return false;
+        $(this).toggleClass("rightNavHover");
+        return false;
     });
 });
 

@@ -37,7 +37,7 @@
     vertical-align : bottom;
 }
 
-#header #loginPanel {
+#header .floatPanel {
     display : none;
     position : absolute;
     padding : 8px;
@@ -52,7 +52,7 @@
 }
 
 
-#header #loginPanel h3 {
+#header .floatPanel h3 {
     position : relative;
     top : -10px;
     margin : 0;
@@ -62,7 +62,7 @@
     border-bottom : 1px solid #b3e7ff;
 }
 
-#header #loginPanel div.top-arrow {
+#header .floatPanel div.top-arrow {
     position : relative;
     top : -15px;
     left : 200px;
@@ -73,12 +73,12 @@
     border-color : transparent transparent #00344d transparent; 
 }
 
-#header #loginPanel span {
+#header .floatPanel span {
     display : inline-block;
     margin-top : 5px;
 }
 
-#header #loginPanel input.input {
+#header .floatPanel input.input {
     margin-top : 5px;
     padding : 3px;
 
@@ -86,11 +86,11 @@
     border : 1px solid #b3e7ff;
 }
 
-#header #loginPanel input[type=checkbox] {
+#header .floatPanel input[type=checkbox] {
     margin : 3px;
 }
 
-#header #loginPanel button {
+#header .floatPanel button {
     padding : 3px;
     margin : 10px 0px 10px 0px;
     background : #00344d;
@@ -103,11 +103,11 @@
     transition: background 0.5s ease-in-out;
 }
 
-#header #loginPanel button:hover {
+#header .floatPanel button:hover {
     background : #0099cc;
 }
 
-#header #loginPanel a.forget {
+#header .floatPanel a.forget {
     position : relative;
     left : 80px;
     margin : 15px;
@@ -117,7 +117,7 @@
     border-bottom : 1px solid white;
 }
 
-#header #loginPanel a.register {
+#header .floatPanel a.register {
     padding : 3px;
     margin : 10px 0px 10px 0px;
 
@@ -134,6 +134,6 @@
     transition: background 0.5s ease-in-out;
 }
 
-#header #loginPanel a.register:hover {
+#header .floatPanel a.register:hover {
     background : #0099cc;
 }
