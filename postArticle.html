@@ -1,0 +1,98 @@
+<html>
+    <head>
+        <title>樓誠文庫</title>
+        <meta charset="utf-8" />
+	<link href='lib/bootstrap/dist/css/bootstrap.min.css' rel='stylesheet' />
+	<link href='lib/bootstrap/dist/css/bootstrap-theme.min.css' rel='stylesheet' />
+	<link rel="stylesheet" type="text/css" href="css/header.css" />
+	<link rel="stylesheet" type="text/css" href="css/dashboard.css" />
+    </head>
+    <body>
+        <div id="header">
+            <img src="imgs/LogoTemplate.png" />
+            <span class="col-xs-3">
+                <a href="javascript:TSC('gb')">簡體</a> /
+                <a href="javascript:TSC('big5')">繁體</a>
+            </span>
+            <div class="nav col-xs-12">
+                <a class="" href="dashboard.html">Dashboard</a>
+                <a class=""  href="index.html">文章瀏覽</a>
+                <a class="nowChoose" href="postArticle.html">發文</a>
+                <a class="rightNav status" href="#">狀態</a>
+            </div>
+            <form id="memberPanel" class="floatPanel">
+                <div class="top-arrow"></div>
+                <h3 class="col-xs-12">XXX 您好！</h3>
+                我的禮物 : <label>功能未開放</label> <br />
+                我的訂閱 : <label>功能未開放</label> <br />
+                收到的評論 : <label>功能未開放</label> <br />
+                <hr />
+                <button class="col-xs-12">登出</button>
+            </form>
+        </div>
+        <div id="content">
+            <label>標題</label> <input type="text" /> <br />
+            <label>屬性</label> <input type="radio" name="articleType" value="article" />文 <input type="radio" name="articleType" value="postArticle" />推文 <br />
+            <label>分級</label>
+            <select name="level">
+                <option value="gen">Gen</option>
+                <option value="pg">PG</option>
+                <option value="nc17">NC17</option>
+            </select>
+            <br />
+            <label>主CP1</label>
+            <input type="text" name="cp1[]" readonly /> /
+            <input type="text" name="cp1[]" readonly />
+            <br />
+            <label>主CP2</label>
+            <input type="text" name="cp2[]" readonly /> /
+            <input type="text" name="cp2[]" readonly />
+            <br />
+            <label>副CP</label>
+            <input type="text" name="viceCp" placeholder="以分號隔開" />
+            <br />
+            <label>系列</label>
+            <select name="series">
+                <option value="">請選擇</option>
+                <option value="神雕俠侶">神雕俠侶</option>
+                <option value="射雕英雄傳">射雕英雄傳</option>
+            </select>
+            或新系列 <input type="text" name="series" />
+            <br />
+            <label>警告</label>
+            <input type="checkbox" name="alert[]" value="OMC" />OMC 
+            <input type="checkbox" name="alert[]" value="OFC" />OFC
+            <input type="checkbox" name="alert[]" value="DEATH" />DEATH
+            <input type="checkbox" name="alert[]" value="NON-CON" />NON-CON
+            <input type="checkbox" name="alert[]" value="BG" />BF
+            <br />
+            <input type="checkbox" name="alert[]" value="other" />其他
+            自訂，以分號分隔
+            <br />
+            <label>標籤</label>
+            <input type="checkbox" name="tag[]" value="ABO" />ABO 
+            <input type="checkbox" name="tag[]" value="PWP" />PWP
+            <input type="checkbox" name="tag[]" value="AU" />AU
+            <input type="checkbox" name="tag[]" value="domsub" />domsub
+            <input type="checkbox" name="tag[]" value="crossover" />corssover
+            <br />
+            <input type="checkbox" name="tag[]" value="other" />其他
+            自訂，以分號分隔
+            <br />
+            <label>章節標題</label> <input type="text" name="articleTitle"/>
+            <br />
+            <label>章節</label> <input type="text" /> / <input type="text" />
+            <br />
+            <label>章節備註</label> <textarea placeholder="最多輸入300字，顯示於文章開頭"> </textarea>
+            <br />
+            <h4>文章撰寫</h4>
+            <textarea name="content"></textarea>
+        </div>
+        <div id="footer">
+        </div>
+    </body>
+    <script src="lib/jquery-2.1.4.min.js"></script>
+    <script src='lib/bootstrap/dist/js/bootstrap.min.js'></script>
+    <script src="lib/langConvert.js"></script>
+    <script src="js/header.js"></script>
+</html>
