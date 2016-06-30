@@ -5,7 +5,7 @@
 	<link href='lib/bootstrap/dist/css/bootstrap.min.css' rel='stylesheet' />
 	<link href='lib/bootstrap/dist/css/bootstrap-theme.min.css' rel='stylesheet' />
 	<link rel="stylesheet" type="text/css" href="css/header.css" />
-	<link rel="stylesheet" type="text/css" href="css/dashboard.css" />
+	<link rel="stylesheet" type="text/css" href="css/postArticle.css" />
     </head>
     <body>
         <div id="header">
@@ -20,7 +20,7 @@
                 <a class="nowChoose" href="postArticle.html">發文</a>
                 <a class="rightNav status" href="#">狀態</a>
             </div>
-            <form id="memberPanel" class="floatPanel">
+            <form id="memberPanel" class="floatPanel" action="index.html">
                 <div class="top-arrow"></div>
                 <h3 class="col-xs-12">XXX 您好！</h3>
                 我的禮物 : <label>功能未開放</label> <br />
@@ -30,68 +30,107 @@
                 <button class="col-xs-12">登出</button>
             </form>
         </div>
-        <div id="content">
-            <label>標題</label> <input type="text" /> <br />
-            <label>屬性</label> <input type="radio" name="articleType" value="article" />文 <input type="radio" name="articleType" value="postArticle" />推文 <br />
-            <label>分級</label>
-            <select name="level">
-                <option value="gen">Gen</option>
-                <option value="pg">PG</option>
-                <option value="nc17">NC17</option>
-            </select>
-            <br />
-            <label>主CP1</label>
-            <input type="text" name="cp1[]" readonly /> /
-            <input type="text" name="cp1[]" readonly />
-            <br />
-            <label>主CP2</label>
-            <input type="text" name="cp2[]" readonly /> /
-            <input type="text" name="cp2[]" readonly />
-            <br />
-            <label>副CP</label>
-            <input type="text" name="viceCp" placeholder="以分號隔開" />
-            <br />
-            <label>系列</label>
-            <select name="series">
-                <option value="">請選擇</option>
-                <option value="神雕俠侶">神雕俠侶</option>
-                <option value="射雕英雄傳">射雕英雄傳</option>
-            </select>
-            或新系列 <input type="text" name="series" />
-            <br />
-            <label>警告</label>
-            <input type="checkbox" name="alert[]" value="OMC" />OMC 
-            <input type="checkbox" name="alert[]" value="OFC" />OFC
-            <input type="checkbox" name="alert[]" value="DEATH" />DEATH
-            <input type="checkbox" name="alert[]" value="NON-CON" />NON-CON
-            <input type="checkbox" name="alert[]" value="BG" />BF
-            <br />
-            <input type="checkbox" name="alert[]" value="other" />其他
-            自訂，以分號分隔
-            <br />
-            <label>標籤</label>
-            <input type="checkbox" name="tag[]" value="ABO" />ABO 
-            <input type="checkbox" name="tag[]" value="PWP" />PWP
-            <input type="checkbox" name="tag[]" value="AU" />AU
-            <input type="checkbox" name="tag[]" value="domsub" />domsub
-            <input type="checkbox" name="tag[]" value="crossover" />corssover
-            <br />
-            <input type="checkbox" name="tag[]" value="other" />其他
-            自訂，以分號分隔
-            <br />
-            <label>章節標題</label> <input type="text" name="articleTitle"/>
-            <br />
-            <label>章節</label> <input type="text" /> / <input type="text" />
-            <br />
-            <label>章節備註</label> <textarea placeholder="最多輸入300字，顯示於文章開頭"> </textarea>
-            <br />
-            <h4>文章撰寫</h4>
-            <textarea name="content"></textarea>
+        <div id="content" class="postArticle">
+            <h4 class="col-xs-6">發布文章</h4>
+            <form>
+                <input type="hidden" name="instr" value="" />
+                <span class="col-xs-12">
+                    <label class="col-xs-2">標題</label> 
+                    <input class="col-xs-6" type="text" /> 
+                </span>
+                <br />
+                <span class="col-xs-12">
+                    <label class="col-xs-2">屬性</label> 
+                    <input type="radio" name="articleType" value="article" />文 
+                    <input type="radio" name="articleType" value="postArticle" />推文 
+                    <br />
+                </span>
+                <span class="col-xs-12">
+                    <label class="col-xs-2">分級</label>
+                    <select name="level">
+                        <option value="gen">Gen</option>
+                        <option value="pg">PG</option>
+                        <option value="nc17">NC17</option>
+                    </select>
+                </span>
+                <br />
+                <span class="col-xs-12">
+                    <label class="col-xs-2">主CP1</label>
+                    <input type="text" class="smInput" name="cp1[]" readonly /> /
+                    <input type="text" class="smInput" name="cp1[]" readonly />
+                </span>
+                <br />
+                <span class="col-xs-12">
+                    <label class="col-xs-2">主CP2</label>
+                    <input type="text" class="smInput" name="cp2[]" readonly /> /
+                    <input type="text" class="smInput" name="cp2[]" readonly />
+                </span>
+                <br />
+                <span class="col-xs-12">
+                    <label class="col-xs-2">副CP</label>
+                    <input type="text" name="viceCp" placeholder="以分號隔開" />
+                </span>
+                <br />
+                <span class="col-xs-12">
+                    <label class="col-xs-2">系列</label>
+                    <select name="series">
+                        <option value="">請選擇</option>
+                        <option value="神雕俠侶">神雕俠侶</option>
+                        <option value="射雕英雄傳">射雕英雄傳</option>
+                    </select>
+                或新系列 <input type="text" name="series" />
+                </span>
+                <br />
+                <span class="col-xs-12">
+                    <label class="col-xs-2">警告</label>
+                    <input type="checkbox" name="alert[]" value="OMC" />OMC 
+                    <input type="checkbox" name="alert[]" value="OFC" />OFC
+                    <input type="checkbox" name="alert[]" value="DEATH" />DEATH
+                    <input type="checkbox" name="alert[]" value="NON-CON" />NON-CON
+                    <input type="checkbox" name="alert[]" value="BG" />BF
+                    <br />
+                    <input type="checkbox" name="alert[]" value="other" />其他
+                    <input type="text" name="alert[]" placeholder="自訂，以分號分隔" />
+                </span>
+                <br />
+                <span class="col-xs-12">
+                    <label class="col-xs-2">標籤</label>
+                    <input type="checkbox" name="tag[]" value="ABO" />ABO 
+                    <input type="checkbox" name="tag[]" value="PWP" />PWP
+                    <input type="checkbox" name="tag[]" value="AU" />AU
+                    <input type="checkbox" name="tag[]" value="domsub" />domsub
+                    <input type="checkbox" name="tag[]" value="crossover" />corssover
+                    <br />
+                    <input type="checkbox" name="tag[]" value="other" />其他
+                    <input type="text" name="tag[]" placeholder="自訂，以分號分隔" />
+                </span>
+                <br />
+                <span class="col-xs-12">
+                    <label class="col-xs-2">章節標題</label> <input type="text" name="articleTitle"/>
+                </span>
+                <br />
+                <span class="col-xs-12">
+                    <label class="col-xs-2">章節</label> <input class="smInput" type="text" /> / <input class="smInput" type="text" />
+                </span>
+                <br />
+                <span class="col-xs-12">
+                    <label class="col-xs-2">章節備註</label> <textarea class="col-xs-8" placeholder="最多輸入300字，顯示於文章開頭"> </textarea>
+                </span>
+                <br />
+                <span class="col-xs-12">
+                    <h4>文章撰寫</h4>
+                    <textarea id="editor1"  class="ckeditor col-xs-12" name="content"></textarea>
+                </span>
+                <span class="col-xs-12">
+                    <button class="col-xs-3 postBtn">發文</button>
+                </span>
+            </form>
         </div>
         <div id="footer">
         </div>
     </body>
     <script src="lib/jquery-2.1.4.min.js"></script>
+    <script src='lib/ckeditor/ckeditor.js'></script>
     <script src='lib/bootstrap/dist/js/bootstrap.min.js'></script>
     <script src="lib/langConvert.js"></script>
     <script src="js/header.js"></script>
