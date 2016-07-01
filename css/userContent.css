@@ -1,0 +1,40 @@
+.userContent div {
+    margin-top : 15px;
+}
+
+.userContent img {
+    float : left;
+}
+
+.userContent input {
+    padding : 5px;
+    border : 1px solid #aaaaaa;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.userContent input:focus {
+    box-shadow : 0px 0px 5px 0px #80dfff
+}
+
+.userContent button {
+    display : inline-block;
+    margin : 15px 0px 10px 10px;
+    padding : 8px;
+
+    color : white;
+    text-decoration : none;
+    text-align : center;
+    background : #0099cc;
+    border : 0px solid transparent;
+    -webkit-transition: background 0.5s ease-in-out;
+    -moz-transition: background 0.5s ease-in-out;
+    -o-transition: background 0.5s ease-in-out;
+    -ms-transition: background 0.5s ease-in-out;
+    transition: background 0.5s ease-in-out;
+}
+
+.userContent button:hover {
+    background : #006080;
+}
