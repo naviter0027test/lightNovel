@@ -1,0 +1,96 @@
+<html>
+    <head>
+        <title>樓誠文庫</title>
+        <meta charset="utf-8" />
+	<link href='lib/bootstrap/dist/css/bootstrap.min.css' rel='stylesheet' />
+	<link href='lib/bootstrap/dist/css/bootstrap-theme.min.css' rel='stylesheet' />
+	<link rel="stylesheet" type="text/css" href="css/header.css" />
+	<link rel="stylesheet" type="text/css" href="css/dashboard.css" />
+	<link rel="stylesheet" type="text/css" href="css/mySeries.css" />
+    </head>
+    <body>
+        <div id="header">
+            <img src="imgs/LogoTemplate.png" />
+            <span class="col-xs-3">
+                <a href="javascript:TSC('gb')">簡體</a> /
+                <a href="javascript:TSC('big5')">繁體</a>
+            </span>
+            <div class="nav col-xs-12">
+                <a class="nowChoose" href="dashboard.html">Dashboard</a>
+                <a class=""  href="index.html">文章瀏覽</a>
+                <a class="" href="postArticle.html">發文</a>
+                <a class="rightNav status" href="#">狀態</a>
+            </div>
+            <form id="memberPanel" class="floatPanel">
+                <div class="top-arrow"></div>
+                <h3 class="col-xs-12">XXX 您好！</h3>
+                我的禮物 : <label>功能未開放</label> <br />
+                我的訂閱 : <label>功能未開放</label> <br />
+                收到的評論 : <label>功能未開放</label> <br />
+                <hr />
+                <button class="col-xs-12">登出</button>
+            </form>
+        </div>
+        <div id="dashboard" class="col-sm-3">
+            <h3>Dashboard</h3>
+            <ul>
+                <li><a href="dashboard.html">修改個人資料</a><div class="right-arrow"></div></li>
+                <li><a href="resetPass.html">重設密碼</a><div class="right-arrow"></div></li>
+                <li class="nowChoose"><a href="mySeries.html">我的系列</a><div class="right-arrow"></div></li>
+                <li><a href="myLastArticle.html">我的最新文章</a><div class="right-arrow"></div></li>
+                <li><a href="getMessage.html">收到的留言</a><div class="right-arrow"></div></li>
+            </ul>
+        </div>
+        <div id="content" class="col-sm-9 mySeries">
+            <ol class="breadcrumb">
+                <li><a href="#">首頁</a></li>
+                <li><a href="#">Dashboard</a></li>
+                <li class="active">我的系列</li>
+            </ol>
+            <div class="operating">
+                <button>新增系列</button>
+            </div>
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <td>系列名稱</td>
+                        <td>含有篇數</td>
+                        <td>操作</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>東卯</td>
+                        <td>12</td>
+                        <td>
+                            <a class="glyphicon glyphicon-edit" href="#"></a>
+                            <a class="glyphicon glyphicon-trash" href="#"></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>引月</td>
+                        <td>25</td>
+                        <td>
+                            <a class="glyphicon glyphicon-edit" href="#"></a>
+                            <a class="glyphicon glyphicon-trash" href="#"></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>常歌</td>
+                        <td>8</td>
+                        <td>
+                            <a class="glyphicon glyphicon-edit" href="#"></a>
+                            <a class="glyphicon glyphicon-trash" href="#"></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+    <script src="lib/jquery-2.1.4.min.js"></script>
+    <script src='lib/bootstrap/dist/js/bootstrap.min.js'></script>
+    <script src="lib/underscore.js"></script>
+    <script src="lib/backbone.js"></script>
+    <script src="lib/langConvert.js"></script>
+    <script src="js/header.js"></script>
+</html>
