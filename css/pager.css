@@ -1,0 +1,39 @@
+#pager {
+    padding-right : 10%;
+
+    font-size : 18px;
+    text-align : right;
+}
+
+#pager a {
+    display : inline-block;
+    padding : 3px 10px 3px 10px;
+
+    color : white;
+    text-decoration : none;
+    background : #0099cc;
+    border : 1px solid #09C;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-transition: background 0.5s ease-in-out;
+    -moz-transition: background 0.5s ease-in-out;
+    -o-transition: background 0.5s ease-in-out;
+    -ms-transition: background 0.5s ease-in-out;
+    transition: background 0.5s ease-in-out;
+}
+
+#pager a:hover {
+    color : #0099cc;
+    background : white;
+}
+
+#pager label {
+    display : inline-block;
+    padding : 3px 10px 3px 10px;
+
+    border : 1px solid #09C;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}

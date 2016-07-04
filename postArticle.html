@@ -32,7 +32,7 @@
         </div>
         <div id="content" class="postArticle">
             <h4 class="col-xs-6">發布文章</h4>
-            <form>
+            <form id="postArticleForm">
                 <input type="hidden" name="instr" value="" />
                 <span class="col-xs-12">
                     <label class="col-xs-2">標題</label> 
@@ -56,14 +56,14 @@
                 <br />
                 <span class="col-xs-12">
                     <label class="col-xs-2">主CP1</label>
-                    <input type="text" class="smInput" name="cp1[]" readonly /> /
-                    <input type="text" class="smInput" name="cp1[]" readonly />
+                    <input type="text" class="smInput" name="cp1[]" placeholder="點我" readonly /> /
+                    <input type="text" class="smInput" name="cp1[]" placeholder="點我" readonly />
                 </span>
                 <br />
                 <span class="col-xs-12">
                     <label class="col-xs-2">主CP2</label>
-                    <input type="text" class="smInput" name="cp2[]" readonly /> /
-                    <input type="text" class="smInput" name="cp2[]" readonly />
+                    <input type="text" class="smInput" name="cp2[]" placeholder="點我" readonly /> /
+                    <input type="text" class="smInput" name="cp2[]" placeholder="點我" readonly />
                 </span>
                 <br />
                 <span class="col-xs-12">
@@ -126,19 +126,64 @@
                 </span>
             </form>
             <form class="cpPanel">
-                <a class="col-xs-5" href="#cpAclass">樓 & 衍生</a>
-                <a class="col-xs-5" href="#cpBclass">誠 & 衍生</a>
-                <div class="col-xs-12">
-                    <input type="radio" name="cpClassChoose" value="明誠" />  明誠
-                    <input type="radio" name="cpClassChoose" value="靖王" />  靖王
-                    <input type="radio" name="cpClassChoose" value="李薰然" />李薰然
+                <a class="col-xs-5 nowChoose" href="#cpAclass">明楼及衍生</a>
+                <a class="col-xs-5" href="#cpBclass">明诚及衍生</a>
+                <div class="col-xs-12" id="cpAclass">
+                    <input type="radio" name="cpClassChoose" value="明楼" />明楼
+                    <input type="radio" name="cpClassChoose" value="蔺晨" />蔺晨
+                    <input type="radio" name="cpClassChoose" value="谭宗明" />谭宗明
+                    <input type="radio" name="cpClassChoose" value="凌远" />凌远
+                    <input type="radio" name="cpClassChoose" value="荣石" />荣石
+                    <input type="radio" name="cpClassChoose" value="黄志雄" />黄志雄
+                    <input type="radio" name="cpClassChoose" value="胡八一" />胡八一
+                    <input type="radio" name="cpClassChoose" value="杜见锋" />杜见锋
+                    <input type="radio" name="cpClassChoose" value="沈剑秋" />沈剑秋
+                    <input type="radio" name="cpClassChoose" value="李川奇" />李川奇
+                    <input type="radio" name="cpClassChoose" value="何鸣" />何鸣
+                    <input type="radio" name="cpClassChoose" value="徐安" />徐安
+                    <input type="radio" name="cpClassChoose" value="刘彻" />刘彻
+                    <input type="radio" name="cpClassChoose" value="岳振声" />岳振声
+                    <input type="radio" name="cpClassChoose" value="牧良逢" />牧良逢
+                    <input type="radio" name="cpClassChoose" value="秦玄策" />秦玄策
+                    <input type="radio" name="cpClassChoose" value="周永嘉" />周永嘉
+                    <input type="radio" name="cpClassChoose" value="陈近南" />陈近南
+                    <input type="radio" name="cpClassChoose" value="刘华盛" />刘华盛
+                    <input type="radio" name="cpClassChoose" value="李天北" />李天北
+                    <input type="radio" name="cpClassChoose" value="徐世平" />徐世平
+                    <input type="radio" name="cpClassChoose" value="董警官" />董警官
+                    <input type="radio" name="cpClassChoose" value="刘一魁" />刘一魁
+                    <input type="radio" name="cpClassChoose" value="马少飞" />马少飞
+                    <input type="radio" name="cpClassChoose" value="刘凯强" />刘凯强
+                    <input type="radio" name="cpClassChoose" value="张红兵" />张红兵
+                    <input type="radio" name="cpClassChoose" value="王开复" />王开复
+                    <input type="radio" name="cpClassChoose" value="重光葵" />重光葵
+                    <input type="radio" name="cpClassChoose" value="龟田一郎" />龟田一郎
                 </div>
-                <div class="col-xs-12">
-                    <input type="radio" name="cpClassChoose" value="樓宇" />  樓宇
-                    <input type="radio" name="cpClassChoose" value="點侯" />  點侯
-                    <input type="radio" name="cpClassChoose" value="威爵" />  威爵
+                <div class="col-xs-12" id="cpBclass">
+                    <input type="radio" name="cpClassChoose" value="明诚" />明诚
+                    <input type="radio" name="cpClassChoose" value="萧景琰" />萧景琰
+                    <input type="radio" name="cpClassChoose" value="赵启平" />赵启平
+                    <input type="radio" name="cpClassChoose" value="方孟韦" />方孟韦
+                    <input type="radio" name="cpClassChoose" value="李熏然" />李熏然
+                    <input type="radio" name="cpClassChoose" value="石太璞" />石太璞
+                    <input type="radio" name="cpClassChoose" value="季白" />季白
+                    <input type="radio" name="cpClassChoose" value="陈亦度" />陈亦度
+                    <input type="radio" name="cpClassChoose" value="曲和" />曲和
+                    <input type="radio" name="cpClassChoose" value="戴刀" />戴刀
+                    <input type="radio" name="cpClassChoose" value="靳以" />靳以
+                    <input type="radio" name="cpClassChoose" value="齐勇" />齐勇
+                    <input type="radio" name="cpClassChoose" value="郝晨" />郝晨
+                    <input type="radio" name="cpClassChoose" value="王瑞" />王瑞
+                    <input type="radio" name="cpClassChoose" value="许一霖" />许一霖
+                    <input type="radio" name="cpClassChoose" value="公孙泽" />公孙泽
+                    <input type="radio" name="cpClassChoose" value="刘承志" />刘承志
+                    <input type="radio" name="cpClassChoose" value="陈家明" />陈家明
+                    <input type="radio" name="cpClassChoose" value="吴大维" />吴大维
+                    <input type="radio" name="cpClassChoose" value="黄元尚" />黄元尚
+                    <input type="radio" name="cpClassChoose" value="黄克功" />黄克功
+                    <input type="radio" name="cpClassChoose" value="史路威" />史路威
                 </div>
-                <button class="col-xs-3">確定</button>
+                <button class="col-xs-3 check">確定</button>
                 <button class="col-xs-3">取消</button>
             </form>
         </div>
@@ -150,4 +195,5 @@
     <script src='lib/bootstrap/dist/js/bootstrap.min.js'></script>
     <script src="lib/langConvert.js"></script>
     <script src="js/header.js"></script>
+    <script src="js/postArticle.js"></script>
 </html>

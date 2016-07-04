@@ -54,10 +54,50 @@
 
 .cpPanel {
     position : absolute;
+    display : none;
     left : 50%;
     top : 270px;
+
+    background : #f2f2f2;
+    opacity : .8;
+}
+
+.cpPanel a {
+    display : inline-block;
+    padding : 10px;
+
+    color : black;
+    text-decoration : none;
+}
+
+.cpPanel a.nowChoose {
+    color : white;
+    background : #009966;
+}
+
+.cpPanel div {
+    padding : 10px 0px 15px 20px;
+    color : #222222;
+    text-shadow : 2px 2px 1px #aaaaaa;
+    opacity : .9;
+}
+
+.cpPanel div#cpBclass {
+    display : none;
 }
 
 .cpPanel button {
     float : right;
+    display : inline-block;
+    margin : 5px 10px 10px 0px;
+    padding : 3px;
+
+    text-decoration : none;
+    text-align : center;
+    background : white;
+    border : 1px solid transparent;
+}
+
+.cpPanel button:hover {
+    border : 1px solid #006080;
 }
