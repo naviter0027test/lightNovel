@@ -43,15 +43,41 @@ class Member {
         $columns[0] = "*";
 
         $conditionArr = Array();
-        $conditionArr['m_account'] = $user;
+        $conditionArr['m_user'] = $user;
         $conditionArr['m_pass'] = $pass;
+        $conditionArr['m_active'] = "Y";
         $dbAdm->selectData($table, $columns, $conditionArr);
         $dbAdm->execSQL();
         $mems = $dbAdm->getAll();
-        if(count($mems) < 0)
+        if(count($mems) < 1)
             throw new Exception("not find member");
         $mem = $mems[0];
         return $mem['m_id'];
+    }
+
+    public function register($user) {
+        $dbAdm = $this->dbAdm;
+        $insData = Array();
+        $insData['m_user'] = $user['user'];
+        $insData['m_pass'] = md5($user['pass']);
+        $insData['m_email'] = $user['email'];
+        $insData['m_active'] = "Y";
+        $dbAdm->insertData("Member", $insData);
+        $dbAdm->execSQL();
+    }
+
+    public function isRegister($account) {
+        $dbAdm = $this->dbAdm;
+        $columns = Array();
+        $columns[0] = "*";
+        $conditionArr = Array();
+        $conditionArr['m_user'] = $account;
+        $dbAdm->selectData("Member", $columns, $conditionArr);
+        $dbAdm->execSQL();
+        $memAmount = count($dbAdm->getAll());
+        if($memAmount != 0)
+            return true;
+        return false;
     }
 
     public function error() {
