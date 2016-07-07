@@ -55,15 +55,43 @@ class Member {
         return $mem['m_id'];
     }
 
+    public function getOne($user) {
+        $dbAdm = $this->dbAdm;
+        $table = $this->table;
+        $columns = Array();
+        $columns[0] = "*";
+
+        $conditionArr = Array();
+        $conditionArr['m_user'] = $user;
+        $dbAdm->selectData($table, $columns, $conditionArr);
+        $dbAdm->execSQL();
+        $mems = $dbAdm->getAll();
+        $mem = $mems[0];
+        return $mem;
+    }
+
     public function register($user) {
         $dbAdm = $this->dbAdm;
+        if($this->isRegister($user['user']))
+            throw new Exception("member repeat");
         $insData = Array();
         $insData['m_user'] = $user['user'];
         $insData['m_pass'] = md5($user['pass']);
         $insData['m_email'] = $user['email'];
-        $insData['m_active'] = "Y";
+        $insData['m_active'] = "N";
         $dbAdm->insertData("Member", $insData);
         $dbAdm->execSQL();
+    }
+
+    public function upActiveMail($user) {
+        if(file_exists("../srvLib/SmailMail.php")) 
+            require_once("../srvLib/SmailMail.php");
+        else
+            require_once("srvLib/SmailMail.php");
+        $upActive = "http://". $_SERVER['HTTP_HOST']. "/active.php?user=".
+            $user['user']. "&email=". md5($user['email']);
+        $content = "歡迎加入樓誠文庫，<a target='_blank' href='$upActive'>啟用連結</a>";
+        sendMail($user['email'], "[樓誠]啟用信件（系統發信，請勿回覆）", $content);
     }
 
     public function isRegister($account) {

@@ -53,4 +53,14 @@ class MemberTest extends UnitTestCase {
         $member = new Member();
         $this->assertEqual(true, $member->isRegister("test2"));
     }
+
+    function testUpActiveMail() {
+        require_once("../Member/Member.php");
+        $member = new Member();
+        $user = Array();
+        $user['user'] = "test". rand(1000, 9999);
+        $user['pass'] = "123456";
+        $user['email'] = "naviter0027test@gmail.com";
+        $member->upActiveMail($user);
+    }
 }
