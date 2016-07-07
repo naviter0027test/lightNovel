@@ -117,9 +117,21 @@ function login() {
 	throw new Exception("captcha error");
     }
     unset($_SESSION['login']['captcha']);
+    $member = new Member();
+    $_SESSION['mid'] = $member->login($_POST['user'], $_POST['pass']);
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "login success";
+    return $reData;
+}
+
+function logout() {
+    if(isset($_SESSION['mid']))
+        unset($_SESSION['mid']);
+    else
+        throw new Exception("you are not login");
+    $reData['status'] = 200;
+    $reData['msg'] = "logout success";
     return $reData;
 }
 

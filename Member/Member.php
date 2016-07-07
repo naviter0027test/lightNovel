@@ -44,7 +44,7 @@ class Member {
 
         $conditionArr = Array();
         $conditionArr['m_user'] = $user;
-        $conditionArr['m_pass'] = $pass;
+        $conditionArr['m_pass'] = md5($pass);
         $conditionArr['m_active'] = "Y";
         $dbAdm->selectData($table, $columns, $conditionArr);
         $dbAdm->execSQL();

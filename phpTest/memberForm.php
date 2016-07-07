@@ -31,5 +31,9 @@
             <br />
             <button>login</button>
         </form>
+        <form action="../instr.php" method="post">
+            <input type="hidden" name="instr" value="logout" />
+            <button>logout</button>
+        </form>
     </body>
 </html>
