@@ -1,12 +1,15 @@
 #header .nav {
-    background : black;
+    background : #fff7e8;
+    border-top : 1px solid #DDDDDD;
+    border-bottom : 1px solid #DDDDDD;
+    font-weight : bold;
 }
 
 #header .nav a {
     display : inline-block;
     padding : 10px;
 
-    color : white;
+    color : #5b5b5b;
     text-decoration : none;
     -webkit-transition: background 0.5s ease-in-out;
     -moz-transition: background 0.5s ease-in-out;
@@ -16,19 +19,54 @@
 }
 
 #header .nav a:hover {
-    background : #666666;
+    /* background : #666666; */
 }
 
 #header .nav a.nowChoose {
-    background : #0099cc;
+    color : black;
+    background : #F6D1AC;
+    font-weight : bold;
 }
 
 #header .nav a.rightNav {
     float : right;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffbd45+0,fff7e8+100 */
+    background: #ffbd45; /* Old browsers */
+    background: -moz-linear-gradient(top, #ffbd45 0%, #fff7e8 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #ffbd45 0%,#fff7e8 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #ffbd45 0%,#fff7e8 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffbd45', endColorstr='#fff7e8',GradientType=0 ); /* IE6-9 */
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
 
+#header .nav a.rightNav div.bottom-arrow {
+    display : inline-block;
+    float : right;
+    position : relative;
+    margin-left : 5px;
+    top : 5px;
+    width: 0; 
+    height: 0; 
+
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-top: 7px solid black;
+}
+
+#header .nav a.login {
+    float : right;
+    padding : 5px 15px 5px 15px;
+    margin-top : 5px;
+
+    border : 1px solid #DDDDDD;
+    background : white;
+}
+
+
 #header .nav a.rightNavHover {
-    background : #666666;
+    /* background : #666666; */
 }
 
 #header > span {
@@ -43,8 +81,8 @@
     padding : 8px;
     width : 250px;
 
-    color : white;
-    background : #00344d;
+    background : #ffffff;
+    border: 1px solid #dddddd;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
@@ -59,18 +97,18 @@
     padding : 5px 5px 10px 5px;
 
     text-align : center;
-    border-bottom : 1px solid #b3e7ff;
+    border-bottom : 1px solid #dddddd;
 }
 
 #header .floatPanel div.top-arrow {
     position : relative;
-    top : -15px;
+    top : -22px;
     left : 200px;
     width : 0;
     height : 0;
     border-style : solid;
     border-width : 0 15px 15px 15px;
-    border-color : transparent transparent #00344d transparent; 
+    border-color : transparent transparent #dddddd transparent; 
 }
 
 #header .floatPanel span {
@@ -83,7 +121,7 @@
     padding : 3px;
 
     color : black;
-    border : 1px solid #b3e7ff;
+    border : 1px solid #dddddd;
 }
 
 #header .floatPanel input[type=checkbox] {
@@ -93,18 +131,17 @@
 #header .floatPanel button {
     padding : 3px;
     margin : 10px 0px 10px 0px;
-    background : #00344d;
-    box-shadow : 0px 0px 3px 3px #b3e7ff;
-    border : 0px solid transparent;
-    -webkit-transition: background 0.5s ease-in-out;
-    -moz-transition: background 0.5s ease-in-out;
-    -o-transition: background 0.5s ease-in-out;
-    -ms-transition: background 0.5s ease-in-out;
-    transition: background 0.5s ease-in-out;
+    background : #ffffff;
+    /*box-shadow : 0px 0px 3px 3px #b3e7ff;*/
+    border : 1px solid #dddddd;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
 }
 
 #header .floatPanel button:hover {
-    background : #0099cc;
+    color : white;
+    background : #f6d1ac;
 }
 
 #header .floatPanel a.forget {
@@ -121,19 +158,18 @@
     padding : 3px;
     margin : 10px 0px 10px 0px;
 
-    color : white;
+    color : black;
     text-decoration : none;
     text-align : center;
-    background : #00344d;
-    box-shadow : 0px 0px 3px 3px #b3e7ff;
-    border : 0px solid transparent;
-    -webkit-transition: background 0.5s ease-in-out;
-    -moz-transition: background 0.5s ease-in-out;
-    -o-transition: background 0.5s ease-in-out;
-    -ms-transition: background 0.5s ease-in-out;
-    transition: background 0.5s ease-in-out;
+    background : #ffffff;
+    /*box-shadow : 0px 0px 3px 3px #b3e7ff;*/
+    border : 1px solid #dddddd;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
 }
 
 #header .floatPanel a.register:hover {
-    background : #0099cc;
+    color : white;
+    background : #f6d1ac;
 }

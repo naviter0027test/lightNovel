@@ -3,7 +3,6 @@ function loginPanelPositionSet() {
     $(".floatPanel").offset( { 'top' : offset.top+50, 'left': offset.left-190});
 }
 $(document).ready(function() {
-    TSC('gb');
     loginPanelPositionSet();
     $(window).resize(function() {
         loginPanelPositionSet();
