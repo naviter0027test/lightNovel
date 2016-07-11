@@ -48,7 +48,7 @@ class Series {
         $dbAdm->execSQL();
     }
 
-    public function serList($listPara) {
+    public function serList($listPara, $mid) {
         $dbAdm = $this->dbAdm;
         $tablename = $this->table;
 
@@ -60,6 +60,7 @@ class Series {
 	$columns = Array();
 	$columns[0] = "*";
 	$conditionArr = Array();
+        $conditionArr['m_id'] = $mid;
 
         $limit = Array();
         $limit['offset'] = ($nowPage - 1) * $pageLimit;

@@ -14,16 +14,16 @@ function sendMail($mailto, $contentTitle, $contentBody) {
     $mail->IsSMTP();
     $mail->SMTPAuth = true;
 
-    $webmaster_email = "ekSystem2346@gmail.com";
+    $webmaster_email = "l1a3nk7er@gmail.com";
 
     $mail->WordWrap = 50;
 
     $mail->IsHTML(true);
 
-    $mail->Username = "ekSystem2346@gmail.com";
-    $mail->Password = "ek34di593c";
+    $mail->Username = "l1a3nk7er@gmail.com";
+    $mail->Password = "uk8c32m66";
 
-    $mail->FromName = "store System";
+    $mail->FromName = "System";
     $mail->From = $webmaster_email;
 
     $mail->Subject = $contentTitle;
@@ -32,7 +32,7 @@ function sendMail($mailto, $contentTitle, $contentBody) {
     $mail->CharSet = "utf-8";
     $mail->Host = "ssl://smtp.gmail.com:465";
     $mail->Encoding="base64";
-    $mail->AddAddress($mailto, "System");
+    $mail->AddAddress($mailto, "Sys");
 
     if(!$mail->Send()){
         throw new Exception ("send mail error : " . $mail->ErrorInfo);

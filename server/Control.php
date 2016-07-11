@@ -107,6 +107,18 @@ function register() {
     return $reData;
 }
 
+function upActive() {
+    require_once("Member/Member.php");
+    $member = new Member();
+    $user = $_GET['user'];
+    $activeCode = $_GET['email'];
+    $member->authenticate($user, $activeCode);
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "upActive success";
+    return $reData;
+}
+
 function login() {
     require_once("Member/Member.php");
     if(!isset($_SESSION['register']['captcha']))
@@ -145,6 +157,64 @@ function captchaRegister() {
     require_once("srvLib/Captcha.php");
     $_SESSION['register']['captcha'] = rand(1000, 9999);
     $captcha = new Captcha($_SESSION['register']['captcha']);
+}
+
+function seriesAdd() {
+    require_once("Article/Series.php");
+    $series = new Series();
+    $series->serAdd($_POST['mId'], $_POST['seriesName']);
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "series add success";
+    return $reData;
+}
+
+function seriesList() {
+    require_once("Article/Series.php");
+    $series = new Series();
+    $mid = $_POST['mId'];
+    $serieses = $series->serList($_POST, $mid);
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "series list success";
+    $reData['data'] = $serieses;
+    return $reData;
+}
+
+function seriesUpd() {
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "series update success";
+    return $reData;
+}
+
+function seriesDel() {
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "series delete success";
+    return $reData;
+}
+
+function postArticle() {
+    //require_once("Member/Member.php");
+    require_once("Article/Article.php");
+    $articleAdm = new Article();
+    $article = Array();
+    foreach($_POST as $key => $val) {
+        $article[$key] = $val;
+    }
+    $article['cp1'] = implode(",", $article['cp1']);
+    if(is_array($article['cp2'] ))
+        $article['cp2'] = implode(",", $article['cp2']);
+    $article['subCp'] = $article['viceCp'];
+    $article['tag'] = implode(",", $article['tag']);
+    $article['alert'] = implode(",", $article['alert']);
+    $article['aChapter'] = implode(",", $article['aChapter']);
+    $articleAdm->articleAdd($article);
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "post article success";
+    return $reData;
 }
 
 ?>

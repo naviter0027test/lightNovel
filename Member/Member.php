@@ -81,6 +81,7 @@ class Member {
         $insData['m_active'] = "N";
         $dbAdm->insertData("Member", $insData);
         $dbAdm->execSQL();
+        $this->upActiveMail($user);
     }
 
     public function upActiveMail($user) {
@@ -88,10 +89,28 @@ class Member {
             require_once("../srvLib/SmailMail.php");
         else
             require_once("srvLib/SmailMail.php");
-        $upActive = "http://". $_SERVER['HTTP_HOST']. "/active.php?user=".
-            $user['user']. "&email=". md5($user['email']);
+        $upActive = "http://". $_SERVER['HTTP_HOST']. $_SERVER['PHP_SELF']. "?instr=upActive&user=".
+            $user['user']. "&email=". md5($user['email'].$user['user']);
         $content = "歡迎加入樓誠文庫，<a target='_blank' href='$upActive'>啟用連結</a>";
         sendMail($user['email'], "[樓誠]啟用信件（系統發信，請勿回覆）", $content);
+    }
+
+    public function authenticate($user, $authCode) {
+        $dbAdm = $this->dbAdm;
+        $tablename = $this->table;
+        $mem = $this->getOne($user);
+        if(!isset($mem['m_id']))
+            throw new Exception("member not found");
+        if($authCode == md5($mem['m_email'].$mem['m_user'])) {
+            $updata = Array();
+            $updata['m_active'] = "Y";
+            $conditionArr = Array();
+            $conditionArr['m_id'] = $mem['m_id'];
+            $dbAdm->updateData($tablename, $updata, $conditionArr);
+            $dbAdm->execSQL();
+        }
+        else
+            throw new Exception("authentication code error");
     }
 
     public function isRegister($account) {
