@@ -5,6 +5,11 @@ HeadPanel = Backbone.View.extend({
             self.render();
         });
     },
+
+    events : {
+        'click button.logout' : 'logout'
+    },
+
     el : '',
     template : null,
     render : function() {
@@ -19,6 +24,14 @@ HeadPanel = Backbone.View.extend({
         loginPanelBind();
         registerPanelBind();
         memberPanelBind();
+    },
+
+    logout : function() {
+        $("#header").load("template/header.html", function() {
+        });
+        this.model.logout();
+        this.render();
+        return false;
     }
 });
 
@@ -31,6 +44,19 @@ MemberModel = Backbone.Model.extend({
         'orderList' : null,
         'orderDetail' : null,
         'isLogin' : null
+    },
+    logout : function() {
+        var self = this;
+        var postData = {};
+        postData['instr'] = "logout";
+        $.post("instr.php", postData, function(data) {
+            data = JSON.parse(data);
+            console.log(data);
+            if(data['status'] == 200) 
+                self.set("isLogin", false);
+            else
+                self.set("isLogin", true);
+        });
     },
     isLogin : function() {
         var self = this;

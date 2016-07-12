@@ -23,18 +23,16 @@
     margin : 15px 0px 10px 10px;
     padding : 8px;
 
-    color : white;
+    color : black;
     text-decoration : none;
     text-align : center;
-    background : #0099cc;
-    border : 0px solid transparent;
-    -webkit-transition: background 0.5s ease-in-out;
-    -moz-transition: background 0.5s ease-in-out;
-    -o-transition: background 0.5s ease-in-out;
-    -ms-transition: background 0.5s ease-in-out;
-    transition: background 0.5s ease-in-out;
+    background : white;
+    border : 1px solid #dddddd;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
 
 .userContent button:hover {
-    background : #006080;
+    background : #f6d1ac;
 }

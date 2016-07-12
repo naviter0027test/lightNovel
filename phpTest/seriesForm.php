@@ -25,7 +25,8 @@
 
         <form action="../instr.php" method="post">
             <input type="hidden" name="instr" value="seriesUpd" />
-            <input type="hidden" name="mId" value="<?=$_SESSION['mid']?>" />
+            id : 
+            <input type="text" name="asId" /><br />
             series update name : 
             <input type="text" name="seriesName" /><br />
             <button>update</button>

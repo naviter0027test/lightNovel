@@ -182,6 +182,13 @@ function seriesList() {
 }
 
 function seriesUpd() {
+    require_once("Article/Series.php");
+    $data = Array();
+    $series = new Series();
+    $data['as_name'] = $_POST['seriesName'];
+    $data['as_id'] = $_POST['asId'];
+    $series->serUpd($data);
+
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "series update success";
@@ -189,6 +196,9 @@ function seriesUpd() {
 }
 
 function seriesDel() {
+    require_once("Article/Series.php");
+    $series = new Series();
+    $series->serDel($_POST['seriesId']);
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "series delete success";
