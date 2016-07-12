@@ -1,13 +1,16 @@
 HeadPanel = Backbone.View.extend({
     initialize : function() {
         self = this;
+        $('body').append("<div id='headTem' style='display: none;'></div>");
+        $("#headTem").load("template/header.html");
         this.model.on("change:isLogin", function() {
             self.render();
         });
     },
 
     events : {
-        'click button.logout' : 'logout'
+        'click #loginPanel button.loginBtn' : 'login',
+        'click #memberPanel button.logout' : 'logout'
     },
 
     el : '',
@@ -26,9 +29,14 @@ HeadPanel = Backbone.View.extend({
         memberPanelBind();
     },
 
+    login : function() {
+        var loginData = $("#loginPanel").formSerialize();
+        //console.log(loginData);
+        this.model.login(loginData);
+        return false;
+    },
+
     logout : function() {
-        $("#header").load("template/header.html", function() {
-        });
         this.model.logout();
         this.render();
         return false;
@@ -45,6 +53,24 @@ MemberModel = Backbone.Model.extend({
         'orderDetail' : null,
         'isLogin' : null
     },
+
+    login : function(loginData) {
+        var self = this;
+        $.post("instr.php", loginData, function(data) {
+            //console.log(data);
+            data = JSON.parse(data);
+            if(data['status'] == 200) 
+                self.set("isLogin", true);
+            else {
+                if(data['msg'] == "captcha error") 
+                    alert("驗證碼錯誤");
+                else if(data['msg'] == "not find member")
+                    alert("帳密錯誤");
+                $("#loginPanel img").attr("src", "instr.php?instr=captchaLogin&math="+Math.random);
+            }
+        });
+    },
+
     logout : function() {
         var self = this;
         var postData = {};

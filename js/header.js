@@ -49,7 +49,6 @@ function registerPanelBind() {
 }
 
 $(document).ready(function() {
-    TSC('gb');
     loginPanelPositionSet();
     $(window).resize(function() {
         loginPanelPositionSet();
@@ -57,9 +56,9 @@ $(document).ready(function() {
     memberPanelBind();
     loginPanelBind();
     registerPanelBind();
-    $("#header").load("template/header.html", function() {
-        var headerPanel = new HeadPanel({'el' : '#header', 'model' : new MemberModel()});
+    var headerPanel = new HeadPanel({'el' : '#header', 'model' : new MemberModel()});
+    setTimeout(function() {
         headerPanel.model.isLogin();
-    });
+    }, 300);
 });
 

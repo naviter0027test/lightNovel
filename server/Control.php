@@ -121,7 +121,7 @@ function upActive() {
 
 function login() {
     require_once("Member/Member.php");
-    if(!isset($_SESSION['register']['captcha']))
+    if(!isset($_SESSION['login']['captcha']))
 	throw new Exception("captcha error");
     $captcha = $_SESSION['login']['captcha'];
     if($captcha != $_POST['captcha']) {
