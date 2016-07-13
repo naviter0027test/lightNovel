@@ -37,11 +37,11 @@
         <div id="dashboard" class="col-sm-3">
             <ul>
                 <h3>Dashboard</h3>
-                <li class="nowChoose"><a href="dashboard.html">修改個人資料</a><div class="right-arrow"></div></li>
-                <li><a href="resetPass.html">重設密碼</a><div class="right-arrow"></div></li>
-                <li><a href="mySeries.html">我的系列</a><div class="right-arrow"></div></li>
-                <li><a href="myLastArticle.html">我的最新文章</a><div class="right-arrow"></div></li>
-                <li><a href="getMessage.html">收到的留言</a><div class="right-arrow"></div></li>
+                <li class="nowChoose"><a temid="personal" href="personal.html">修改個人資料</a><div class="right-arrow"></div></li>
+                <li><a temid="resetPass" href="resetPass.html">重設密碼</a><div class="right-arrow"></div></li>
+                <li><a temid="mySeries" href="mySeries.html">我的系列</a><div class="right-arrow"></div></li>
+                <li><a temid="myLastArticle" href="myLastArticle.html">我的最新文章</a><div class="right-arrow"></div></li>
+                <li><a temid="getMessage" href="getMessage.html">收到的留言</a><div class="right-arrow"></div></li>
             </ul>
         </div>
         <div id="content" class="col-sm-9 userContent">
@@ -65,6 +65,8 @@
                 <!-- <label>我的文章數量 : </label><span> 22 </span><br /> -->
             </form>
         </div>
+        <div id="contentTem">
+        </div>
         <div id="footer">
         </div>
     </body>
@@ -74,4 +76,6 @@
     <script src="lib/backbone.js"></script>
     <script src="Member/Member.js"></script>
     <script src="js/header.js"></script>
+    <script src="Article/Dashboard.js"></script>
+    <script src="js/dashboard.js"></script>
 </html>
