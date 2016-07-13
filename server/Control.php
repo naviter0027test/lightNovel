@@ -23,6 +23,7 @@ class Control {
 	    $this->instr = $_POST['instr'];
     }
     public function execInstr() {
+        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "postArticle");
 	try {
 	    if(!function_exists($this->instr))
 		throw new Exception("instr not defined");
@@ -33,6 +34,8 @@ class Control {
             fwrite($logFile, $txt);
             fclose($logFile);
 
+            if(in_array($instr, $mustBeLogin) && !isset($_SESSION['mid']))
+                throw new Exception("member not login");
 	    $reData = $instr();
 	    echo json_encode($reData);
 	}
