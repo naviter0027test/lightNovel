@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <title>管理頁面</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+	<link href='../lib/bootstrap/dist/css/bootstrap.min.css' rel='stylesheet' />
+	<link href='../lib/bootstrap/dist/css/bootstrap-theme.min.css' rel='stylesheet' />
+	<link href='../lib/alertify.js-0.3.11/themes/alertify.core.css' rel='stylesheet' />
+	<link href='../lib/alertify.js-0.3.11/themes/alertify.bootstrap.css' rel='stylesheet' />
+	<link href='../lib/alertify.js-0.3.11/themes/alertify.default.css' rel='stylesheet' />
+	<link href='css/header.css' rel='stylesheet' />
+	<link href='css/sidebar.css' rel='stylesheet' />
+	<link href='css/content.css' rel='stylesheet' />
+    </head>
+    <body>
+        <div id="header" class="col-sm-12">
+        </div>
+        <div id="sidebar" class="col-sm-2 sidebar">
+        </div>
+        <div id="content" class="col-sm-10">
+            <div id="pageAdmin" class="col-sm-11">
+                <ol class="breadcrumb">
+                    <li><a href="#">首頁</a></li>
+                    <li class="active">頁面編輯</li>
+                </ol>
+                <form id="pageEditForm" action="instr.php" method="post">
+                    <input type="hidden" name="instr" value="pageEdit"/>
+                    <input type="hidden" name="page" value=""/>
+                    <label>標題</label>
+                    <input name="p_title" type="text" class="form-control" />
+                    <label>內容</label>
+                    <br />
+                    <textarea name="p_content" id="editor1" class="ckeditor" cols="80" rows="10"></textarea>
+                <br />
+                <button class="btn btn-default">修改</button>
+            </form>
+        </div>
+        <div id="footer" class="col-sm-12">
+        </div>
+    </body>
+    <script src='../lib/jquery-2.1.4.min.js'></script>
+    <script src='../lib/jquery.form.js'></script>
+    <script src="../lib/underscore.js"></script>
+    <script src="../lib/backbone.js"></script>
+    <script src="../lib/ckeditor/ckeditor.js"></script>
+    <script src="../lib/alertify.js-0.3.11/lib/alertify.min.js"></script>
+    <script src="pageAdm/Page.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/pageAdmin.js"></script>
+</html>
+

@@ -1,0 +1,41 @@
+.sidebar {
+    padding : 0px;
+    background : #0059b3;
+}
+
+.sidebar ul {
+    padding : 0px;
+}
+
+.sidebar li {
+    list-style : none;
+}
+
+.sidebar a {
+    display : block;
+    padding : 5px 10px 5px 10px;
+
+    font-weight : bold;
+    color : #eeeeee;
+    text-decoration : none;
+    transition : background 0.5s;
+    -webkit-transition : background 0.5s;
+}
+
+.sidebar a:hover {
+    background : #004080;
+}
+
+.sidebar a.choosed {
+    background : #001a33;
+}
+
+.sidebar div a {
+    padding-left : 30px;
+    border-left : 5px solid #0059b3;
+}
+
+.sidebar div a.subChoosed {
+    border-left : 5px solid #4da6ff;
+    background : #004d99;
+}

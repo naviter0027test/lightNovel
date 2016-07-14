@@ -1,0 +1,124 @@
+<html>
+    <head>
+        <title>管理頁面</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+	<link href='../../lib/bootstrap/dist/css/bootstrap.min.css' rel='stylesheet' />
+	<link href='../../lib/bootstrap/dist/css/bootstrap-theme.min.css' rel='stylesheet' />
+	<link href='css/header.css' rel='stylesheet' />
+	<link href='css/sidebar.css' rel='stylesheet' />
+	<link href='css/content.css' rel='stylesheet' />
+    </head>
+    <body>
+        <div id="header" class="col-sm-12">
+            <img src="imgs/adminLogo.png" />
+            <div id="nav">
+                <a href="#">個人</a>
+                <a href="#">幫助</a>
+                <a href="#">設定</a>
+                <a href="#">訪客首頁</a>
+                <a href="#">管理首頁</a>
+                <a href="#">登出</a>
+            </div>
+        </div>
+        <div id="content" class="col-sm-12">
+            <div id="sidebar" class="col-sm-2 sidebar">
+                <ul>
+                    <li><a href="#">廣告管理</a>
+                    <div>
+                        <a href="#">首頁側邊廣告</a>
+                        <a href="#">橫條廣告</a>
+                    </div>
+                    </li>
+                    <li><a href="#">會員列表</a></li>
+                    <li><a href="#">訂單列表</a></li>
+                    <li><a href="#">新聞列表</a></li>
+                    <li><a href="#">頁面列表</a></li>
+                    <li><a href="#" class="choosed">產品列表</a></li>
+                    <li><a href="#">付款方式</a></li>
+                </ul>
+            </div>
+            <div id="prodList" class="col-sm-10">
+                <div id="operatingPanel">
+                    <ol class="breadcrumb">
+                        <li><a href="#">首頁</a></li>
+                        <li class="active">產品列表</li>
+                    </ol>
+                    <a href="prodAdd.html" class="btn btn-default">
+                        產品新增
+                    </a>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>產品編號</td>
+                            <td>名稱</td>
+                            <td>價格</td>
+                            <td>庫存</td>
+                            <td>建立日期</td>
+                            <td>操作</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>PSN18975919128</td>
+                            <td>產品名稱</td>
+                            <td>NT$1200</td>
+                            <td>324</td>
+                            <td>2015-09-17 15:37:58</td>
+                            <td>
+                                <a href="prodEdit.html" class="glyphicon glyphicon-file"></a>
+                                <a href="#" class="glyphicon glyphicon-trash"></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>PSN18974812992</td>
+                            <td>產品名稱</td>
+                            <td>NT$899</td>
+                            <td>74</td>
+                            <td>2015-09-18 11:27:08</td>
+                            <td>
+                                <a href="prodEdit.html" class="glyphicon glyphicon-file"></a>
+                                <a href="#" class="glyphicon glyphicon-trash"></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>PSN18948219089</td>
+                            <td>產品名稱</td>
+                            <td>NT$640</td>
+                            <td>32</td>
+                            <td>2015-09-19 10:17:48</td>
+                            <td>
+                                <a href="prodEdit.html" class="glyphicon glyphicon-file"></a>
+                                <a href="#" class="glyphicon glyphicon-trash"></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>PSN189441820953</td>
+                            <td>產品名稱</td>
+                            <td>NT$340</td>
+                            <td>496</td>
+                            <td>2015-09-20 18:12:48</td>
+                            <td>
+                                <a href="prodEdit.html" class="glyphicon glyphicon-file"></a>
+                                <a href="#" class="glyphicon glyphicon-trash"></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>PSN418209872819</td>
+                            <td>產品名稱</td>
+                            <td>NT$1440</td>
+                            <td>71</td>
+                            <td>2015-09-21 17:14:18</td>
+                            <td>
+                                <a href="prodEdit.html" class="glyphicon glyphicon-file"></a>
+                                <a href="#" class="glyphicon glyphicon-trash"></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
+
