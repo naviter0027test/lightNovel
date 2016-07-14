@@ -69,7 +69,7 @@ MemberModel = Backbone.Model.extend({
     },
     defaults : {
 	'data' : null,
-        'orderList' : null,
+        'myData' : null,
         'orderDetail' : null,
         'isLogin' : null
     },
@@ -115,6 +115,16 @@ MemberModel = Backbone.Model.extend({
                 self.set("isLogin", true);
             else
                 self.set("isLogin", false);
+        });
+    },
+    getMyData : function() {
+        var self = this;
+        var postData = {};
+        postData['instr'] = "myData";
+        $.post("instr.php", postData, function(data) {
+            //console.log(data);
+            data = JSON.parse(data);
+            self.set("myData", data);
         });
     }
 });
