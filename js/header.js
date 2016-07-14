@@ -35,13 +35,5 @@ $(document).ready(function() {
         }
         return false;
     });
-    $("#header .register").on("click", function() {
-        console.log("register");
-        $("#loginPanel").removeClass("show");
-        $("#loginPanel").fadeOut();
-        $("#registerPanel").fadeIn();
-        loginPanelPositionSet();
-        return false;
-    });
 });
 

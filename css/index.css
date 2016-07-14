@@ -1,0 +1,14 @@
+#explan {
+    text-align : left;
+}
+
+.closeExplanStart {
+    color : #5b5b5b;
+    background : white;
+    border : 1px solid #F6D1AC;
+}
+
+.closeExplanStart:hover {
+    color : white;
+    background : #F6D1AC;
+}
