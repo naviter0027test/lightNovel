@@ -10,38 +10,40 @@
     <body>
         <div id="header">
             <img src="imgs/LogoTemplate.png" />
+            <!--
             <span class="col-xs-3">
                 <a href="javascript:TSC('gb')">簡體</a> /
                 <a href="javascript:TSC('big5')">繁體</a>
             </span>
+            -->
             <div class="nav col-xs-12">
                 <a class="" href="dashboard.html">Dashboard</a>
-                <a class=""  href="index.html">文章瀏覽</a>
-                <a class="nowChoose" href="postArticle.html">發文</a>
-                <a class=""  href="useExplan.html">使用說明</a>
-                <a class="rightNav status" href="#">登入者帳號<div class="bottom-arrow"></div></a>
+                <a class=""  href="articleList.html">文章浏览</a>
+                <a class="nowChoose" href="postArticle.html">发文</a>
+                <a class=""  href="useExplan.html">使用说明</a>
+                <a class="rightNav status" href="#">登入者帐号<div class="bottom-arrow"></div></a>
             </div>
             <form id="memberPanel" class="floatPanel" action="index.html">
                 <div class="top-arrow"></div>
                 <h3 class="col-xs-12">XXX 您好！</h3>
-                我的禮物 : <label>功能未開放</label> <br />
-                我的訂閱 : <label>功能未開放</label> <br />
-                收到的評論 : <label>功能未開放</label> <br />
+                我的礼物 : <label>功能未开放</label> <br />
+                我的订阅 : <label>功能未开放</label> <br />
+                收到的评论 : <label>功能未开放</label> <br />
                 <hr />
                 <button class="col-xs-12">登出</button>
             </form>
         </div>
         <div id="content" class="postArticle">
-            <h4 class="col-xs-6">發布文章</h4>
+            <h4 class="col-xs-6">发布文章</h4>
             <form id="postArticleForm">
                 <input type="hidden" name="instr" value="" />
                 <span class="col-xs-12">
-                    <label class="col-xs-2">標題</label> 
+                    <label class="col-xs-2">标题</label> 
                     <input class="col-xs-6" type="text" /> 
                 </span>
                 <br />
                 <span class="col-xs-12">
-                    <label class="col-xs-2">屬性</label> 
+                    <label class="col-xs-2">属性</label> 
                     <input type="radio" name="articleType" value="article" />文 
                     <input type="radio" name="articleType" value="postArticle" />推文 
                     <br />
@@ -75,7 +77,7 @@
                 <span class="col-xs-12">
                     <label class="col-xs-2">系列</label>
                     <select name="series">
-                        <option value="">請選擇</option>
+                        <option value="">请选择</option>
                         <option value="東卯">東卯</option>
                         <option value="常歌">常歌</option>
                     </select>
@@ -86,38 +88,38 @@
                     <label class="col-xs-2">警告</label>
                     <input type="checkbox" name="alert[]" value="主要角色死亡" />主要角色死亡
                     <input type="checkbox" name="alert[]" value="血腥暴力" />血腥暴力
-                    <input type="checkbox" name="alert[]" value="性轉" />性轉
+                    <input type="checkbox" name="alert[]" value="性轉" />性转
                     <br />
                     <input type="checkbox" name="alert[]" value="other" />其他
-                    <input type="text" name="alert[]" placeholder="自訂，以分號分隔" />
+                    <input type="text" name="alert[]" placeholder="自订，以分号分隔" />
                 </span>
                 <br />
                 <span class="col-xs-12">
-                    <label class="col-xs-2">標籤</label>
+                    <label class="col-xs-2">标签</label>
                     <input type="checkbox" name="tag[]" value="ABO" />ABO 
                     <input type="checkbox" name="tag[]" value="PWP" />PWP
                     <input type="checkbox" name="tag[]" value="AU" />AU
-                    <input type="checkbox" name="tag[]" value="哨兵嚮導" />哨兵嚮導
+                    <input type="checkbox" name="tag[]" value="哨兵向导" />哨兵向导
                     <input type="checkbox" name="tag[]" value="互攻" />互攻
                     <br />
                     <input type="checkbox" name="tag[]" value="other" />其他
-                    <input type="text" name="tag[]" placeholder="自訂，以分號分隔" />
+                    <input type="text" name="tag[]" placeholder="自订，以分号分隔" />
                 </span>
                 <br />
                 <span class="col-xs-12">
-                    <label class="col-xs-2">章節標題</label> <input type="text" name="articleTitle"/>
+                    <label class="col-xs-2">章节标题</label> <input type="text" name="articleTitle"/>
                 </span>
                 <br />
                 <span class="col-xs-12">
-                    <label class="col-xs-2">章節</label> <input class="smInput" type="text" /> / <input class="smInput" type="text" />
+                    <label class="col-xs-2">章节</label> <input class="smInput" type="text" /> / <input class="smInput" type="text" />
                 </span>
                 <br />
                 <span class="col-xs-12">
-                    <label class="col-xs-2">章節備註</label> <textarea class="col-xs-8" placeholder="最多輸入300字，顯示於文章開頭"> </textarea>
+                    <label class="col-xs-2">章节备注</label> <textarea class="col-xs-8" placeholder="最多输入300字，显示于文章开头"> </textarea>
                 </span>
                 <br />
                 <span class="col-xs-12">
-                    <h4>文章撰寫</h4>
+                    <h4>文章撰写</h4>
                     <textarea id="editor1"  class="ckeditor col-xs-12" name="content"></textarea>
                 </span>
                 <span class="col-xs-12">

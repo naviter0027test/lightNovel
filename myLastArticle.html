@@ -10,22 +10,25 @@
     <body>
         <div id="header">
             <img src="imgs/LogoTemplate.png" />
+            <!--
             <span class="col-xs-3">
                 <a href="javascript:TSC('gb')">簡體</a> /
                 <a href="javascript:TSC('big5')">繁體</a>
             </span>
+            -->
             <div class="nav col-xs-12">
                 <a class="nowChoose" href="dashboard.html">Dashboard</a>
-                <a class=""  href="index.html">文章瀏覽</a>
-                <a class="" href="postArticle.html">發文</a>
-                <a class="rightNav status" href="#">登入者帳號</a>
+                <a class=""  href="articleList.html">文章浏览</a>
+                <a class="" href="postArticle.html">发文</a>
+                <a class=""  href="useExplan.html">使用说明</a>
+                <a class="rightNav status" href="#">登入者帐号<div class="bottom-arrow"></div></a>
             </div>
-            <form id="memberPanel" class="floatPanel">
+            <form id="memberPanel" class="floatPanel" action="index.html">
                 <div class="top-arrow"></div>
                 <h3 class="col-xs-12">XXX 您好！</h3>
-                我的禮物 : <label>功能未開放</label> <br />
-                我的訂閱 : <label>功能未開放</label> <br />
-                收到的評論 : <label>功能未開放</label> <br />
+                我的礼物 : <label>功能未开放</label> <br />
+                我的订阅 : <label>功能未开放</label> <br />
+                收到的评论 : <label>功能未开放</label> <br />
                 <hr />
                 <button class="col-xs-12">登出</button>
             </form>
@@ -33,8 +36,8 @@
         <div id="dashboard" class="col-sm-3">
             <ul>
                 <h3>Dashboard</h3>
-                <li><a href="dashboard.html">修改個人資料</a><div class="right-arrow"></div></li>
-                <li><a href="resetPass.html">重設密碼</a><div class="right-arrow"></div></li>
+                <li><a href="dashboard.html">修改个人资料</a><div class="right-arrow"></div></li>
+                <li><a href="resetPass.html">重设密码</a><div class="right-arrow"></div></li>
                 <li><a href="mySeries.html">我的系列</a><div class="right-arrow"></div></li>
                 <li class="nowChoose"><a href="myLastArticle.html">我的最新文章</a><div class="right-arrow"></div></li>
                 <li><a href="getMessage.html">收到的留言</a><div class="right-arrow"></div></li>
@@ -117,7 +120,6 @@
     <script src='lib/bootstrap/dist/js/bootstrap.min.js'></script>
     <script src="lib/underscore.js"></script>
     <script src="lib/backbone.js"></script>
-    <script src="lib/langConvert.js"></script>
     <script src="js/header.js"></script>
 </html>
 
