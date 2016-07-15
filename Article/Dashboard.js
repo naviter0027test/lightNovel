@@ -2,7 +2,6 @@ Dashboard = Backbone.View.extend({
     initialize : function() {
     },
     events : {
-        'click a' : 'changePage'
     },
 
     el : '',
@@ -28,6 +27,9 @@ Dashboard = Backbone.View.extend({
         memModel.on("change:myData", function() {
             self.render(memModel.get("myData"));
         });
+        memModel.on("change:seriesList", function() {
+            self.render(memModel.get("seriesList"));
+        });
 
         $("#contentTem").load(loadPage, function() {
             var idname = $(evt.target).attr("temid");
@@ -35,6 +37,12 @@ Dashboard = Backbone.View.extend({
 
             if(idname == "personal") {
                 memModel.getMyData();
+            }
+            else if(idname == "mySeries") {
+                var para = {};
+                para['nowPage'] = 1;
+                para['pageLimit'] = 10;
+                memModel.getMySeriesList(para);
             }
             else
                 self.render();

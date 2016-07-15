@@ -16,22 +16,17 @@
             </tr>
         </thead>
         <tbody>
+            <% _.each(data, function(item) { %>
             <tr>
-                <td>東卯</td>
-                <td>12</td>
+                <td><%=item['as_name']%></td>
+                <td>XX</td>
                 <td>
                     <a class="glyphicon glyphicon-edit" href="#"></a>
                     <a class="glyphicon glyphicon-trash" href="#"></a>
                 </td>
             </tr>
-            <tr>
-                <td>引月</td>
-                <td>25</td>
-                <td>
-                    <a class="glyphicon glyphicon-edit" href="#"></a>
-                    <a class="glyphicon glyphicon-trash" href="#"></a>
-                </td>
-            </tr>
+            <% }); %>
+            <!--
             <tr>
                 <td>常歌</td>
                 <td>8</td>
@@ -40,6 +35,7 @@
                     <a class="glyphicon glyphicon-trash" href="#"></a>
                 </td>
             </tr>
+            -->
         </tbody>
     </table>
 </script>

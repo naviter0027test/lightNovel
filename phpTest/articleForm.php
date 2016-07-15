@@ -5,6 +5,7 @@
         <meta charset="utf-8" />
     </head>
     <body>
+        <h1> mid : <?=$_SESSION['mid']?></h1>
         <form action="../instr.php" method="post">
             <input type="hidden" name="instr" value="articleList" />
             now page : 
@@ -28,6 +29,28 @@
             article id :
             <input type="text" name="articleId" /><br />
             <button>delete</button>
+        </form>
+
+        <form action="../instr.php" method="post">
+            <input type="hidden" name="instr" value="mySeriesList" />
+            now page : 
+            <input type="text" name="nowPage" />
+            <br />
+            page limit : 
+            <input type="text" name="pageLimit" />
+            <br />
+            <button>my series list</button>
+        </form>
+
+        <form action="../instr.php" method="post">
+            <input type="hidden" name="instr" value="myLastArticle" />
+            now page : 
+            <input type="text" name="nowPage" />
+            <br />
+            page limit : 
+            <input type="text" name="pageLimit" />
+            <br />
+            <button>my last article list</button>
         </form>
     </body>
 </html>

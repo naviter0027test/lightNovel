@@ -14,6 +14,12 @@ HeadPanel = Backbone.View.extend({
             }
             self.render();
         });
+
+        this.model.on("change:myData", function() {
+            var data = this.get("myData");
+            $("#memberPanel .memHello").text(data['data']['m_user']+ " 您好！");
+        });
+
     },
 
     events : {
@@ -48,6 +54,8 @@ HeadPanel = Backbone.View.extend({
             if($(links[idx]).attr("href") == nowHref)
                 $(links[idx]).addClass("nowChoose");
         }
+
+        this.model.getMyData();
     },
 
     login : function() {
@@ -70,6 +78,7 @@ MemberModel = Backbone.Model.extend({
     defaults : {
 	'data' : null,
         'myData' : null,
+        'seriesList' : null,
         'orderDetail' : null,
         'isLogin' : null
     },
@@ -125,6 +134,16 @@ MemberModel = Backbone.Model.extend({
             //console.log(data);
             data = JSON.parse(data);
             self.set("myData", data);
+        });
+    },
+    getMySeriesList : function(postData) {
+        var self = this;
+        postData['instr'] = "mySeriesList";
+        $.post("instr.php", postData, function(data) {
+            //console.log(data);
+            data = JSON.parse(data);
+            console.log(data);
+            self.set("seriesList", data);
         });
     }
 });
