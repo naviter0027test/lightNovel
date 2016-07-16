@@ -9,8 +9,9 @@ Dashboard = Backbone.View.extend({
     render : function(data) {
         //console.log(data);
         $("#content").html(this.template(data));
-    },
+    }
 
+          /*
     changePage : function(evt) {
         //console.log("template/"+$(evt.target).attr("href"));
         //console.log(evt.target);
@@ -49,4 +50,5 @@ Dashboard = Backbone.View.extend({
         });
         return false;
     }
+    */
 });

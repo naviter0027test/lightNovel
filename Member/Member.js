@@ -79,6 +79,7 @@ MemberModel = Backbone.Model.extend({
 	'data' : null,
         'myData' : null,
         'seriesList' : null,
+        'seriesListPages' : null,
         'orderDetail' : null,
         'isLogin' : null
     },
