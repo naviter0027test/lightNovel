@@ -8,7 +8,14 @@ Personal = Backbone.View.extend({
     template : null,
     modifyPersonal : function() {
         this.$el.ajaxSubmit(function(data) {
-            console.log(data);
+            //console.log(data);
+            data = JSON.parse(data);
+            //console.log(data);
+            if(data['status'] == 200) {
+                alert("修改成功");
+            }
+            else
+                alert("修改失敗");
         });
         return false;
     }

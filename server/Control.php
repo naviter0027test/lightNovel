@@ -278,6 +278,12 @@ function memSrsPages() {
 }
 
 function personalUpd() {
+    require_once("Member/Member.php");
+    $member = new Member();
+    $colData = Array();
+    $colData['m_email'] = $_POST['email'];
+    $member->dataUpdate($colData, $_SESSION['mid']);
+
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "personalUpd success";
@@ -285,9 +291,14 @@ function personalUpd() {
 }
 
 function personalImg() {
+    require_once("upload/Upload.php");
+    $upfile = new Upload();
+    $upResult = $upfile->uploadFinish();
+
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "personalImg success";
+    $reData['info'] = $upResult;
     return $reData;
 }
 

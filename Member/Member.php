@@ -144,6 +144,16 @@ class Member {
         return false;
     }
 
+    public function dataUpdate($colData, $mid) {
+        $dbAdm = $this->dbAdm;
+        $tablename = $this->table;
+        $conditionArr = Array();
+        $conditionArr['m_id'] = $mid;
+
+        $dbAdm->updateData($tablename, $colData, $conditionArr);
+        $dbAdm->execSQL();
+    }
+
     public function error() {
         $dbAdm = $this->dbAdm;
         return $dbAdm->errorMsg();
