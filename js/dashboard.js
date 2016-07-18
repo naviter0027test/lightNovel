@@ -6,10 +6,11 @@ $(document).ready(function() {
 
 DashboardRout = Backbone.Router.extend({
     routes : {
+        "changePage/:page" : "changePage",
         "changePage/:page/:nowPage/:pageLimit" : "changePage"
     },
     changePage : function(page, nowPage, pageLimit) {
-        console.log(page);
+        //console.log(page);
         //console.log("template/"+$(evt.target).attr("href"));
         //console.log(evt.target);
         var memModel = new MemberModel();
@@ -27,6 +28,10 @@ DashboardRout = Backbone.Router.extend({
         //設定資料修改的瞬間進行render
         memModel.on("change:myData", function() {
             self.render(memModel.get("myData"));
+            $.getScript("Member/Personal.js", function() {
+                personal = new Personal({'el' : "#personalForm"});
+                personalimg = new PersonalImg({'el' : "#personalImg"});
+            });
         });
         memModel.on("change:seriesList", function() {
             self.render(memModel.get("seriesList"));
@@ -35,6 +40,7 @@ DashboardRout = Backbone.Router.extend({
             pager.render(nowPage, pageLimit);
         });
 
+        $("#pager").html('');
         $("#contentTem").load(loadPage, function() {
             var idname = $(clickBtn).attr("temid");
             self.template = _.template($("#"+idname).html());

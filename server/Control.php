@@ -277,4 +277,18 @@ function memSrsPages() {
     return $reData;
 }
 
+function personalUpd() {
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "personalUpd success";
+    return $reData;
+}
+
+function personalImg() {
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "personalImg success";
+    return $reData;
+}
+
 ?>
