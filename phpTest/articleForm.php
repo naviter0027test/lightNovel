@@ -52,5 +52,11 @@
             <br />
             <button>my last article list</button>
         </form>
+
+        <form action="../instr.php" method="post">
+            <input type="hidden" name="instr" value="memSrsPages" />
+            <br />
+            <button>member series pages</button>
+        </form>
     </body>
 </html>

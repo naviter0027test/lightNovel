@@ -79,7 +79,7 @@ MemberModel = Backbone.Model.extend({
 	'data' : null,
         'myData' : null,
         'seriesList' : null,
-        'seriesListPages' : null,
+        'seriesAmount' : null,
         'orderDetail' : null,
         'isLogin' : null
     },
@@ -145,6 +145,17 @@ MemberModel = Backbone.Model.extend({
             data = JSON.parse(data);
             console.log(data);
             self.set("seriesList", data);
+        });
+    },
+    getMySerieses : function() {
+        var self = this;
+        postData = {};
+        postData['instr'] = "memSrsPages";
+        $.post("instr.php", postData, function(data) {
+            //console.log(data);
+            data = JSON.parse(data);
+            console.log(data);
+            self.set("seriesAmount", data['amount']);
         });
     }
 });

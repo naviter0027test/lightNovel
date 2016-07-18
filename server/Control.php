@@ -23,7 +23,7 @@ class Control {
 	    $this->instr = $_POST['instr'];
     }
     public function execInstr() {
-        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "postArticle", "myData", "mySeriesList");
+        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "postArticle", "myData", "mySeriesList", "myLastArticle", "memSrsPages");
 	try {
 	    if(!function_exists($this->instr))
 		throw new Exception("instr not defined");
@@ -261,6 +261,19 @@ function myLastArticle() {
     $reData['status'] = 200;
     $reData['msg'] = "myLastArticle success";
     //$reData['data'] = $Lists;
+    return $reData;
+}
+
+function memSrsPages() {
+    require_once("Article/Series.php");
+    $series = new Series();
+
+    $amount = $series->amount($_SESSION['mid']);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "memSrsPages success";
+    $reData['amount'] = $amount['amount'];
     return $reData;
 }
 
