@@ -119,6 +119,7 @@ MemberModel = Backbone.Model.extend({
         var postData = {};
         postData['instr'] = "isLogin";
         $.post("instr.php", postData, function(data) {
+            //console.log(data);
             data = JSON.parse(data);
             //console.log(data);
             if(data['status'] == 200) 

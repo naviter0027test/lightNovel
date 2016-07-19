@@ -23,7 +23,7 @@ class Control {
 	    $this->instr = $_POST['instr'];
     }
     public function execInstr() {
-        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "postArticle", "myData", "mySeriesList", "myLastArticle", "memSrsPages");
+        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "postArticle", "myData", "mySeriesList", "myLastArticle", "memSrsPages", "personalImg", "personalUpd");
 	try {
 	    if(!function_exists($this->instr))
 		throw new Exception("instr not defined");
@@ -34,8 +34,13 @@ class Control {
             fwrite($logFile, $txt);
             fclose($logFile);
 
-            if(in_array($instr, $mustBeLogin) && !isset($_SESSION['mid']))
+            if(in_array($instr, $mustBeLogin) && !isset($_SESSION['mid'])) {
+                require_once("Admin/Admin.php");
+                $adm = new Admin();
+                if(!$adm->isOpen())
+                    throw new Exception("web not open");
                 throw new Exception("member not login");
+            }
 	    $reData = $instr();
 	    echo json_encode($reData);
 	}

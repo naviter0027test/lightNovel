@@ -34,6 +34,10 @@ class Member {
             $config->getHost(), $config->getDBUser(),
             $config->getDBPass(), $config->getDB());
         $this->table = "Member";
+        
+        //設定php mysql client 的編碼為utf8
+        $this->dbAdm->sqlSet("SET NAMES 'utf8'");
+        $this->dbAdm->execSQL();
     }
 
     public function login($user, $pass) {
