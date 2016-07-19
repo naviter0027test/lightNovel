@@ -21,6 +21,34 @@ Personal = Backbone.View.extend({
     }
 });
 
+PassForm = Backbone.View.extend({ 
+    initialize : function() {
+    },
+    events : {
+        "click button" : "changePass"
+    },
+    el : '',
+    template : null,
+    changePass : function() {
+        //如果沒填完
+        if(!this.$el.validationEngine('validate')) 
+            return false;
+
+        this.$el.ajaxSubmit(function(data) {
+            //console.log(data);
+            data = JSON.parse(data);
+            //console.log(data);
+            if(data['status'] == 200)
+                alert("修改成功");
+            else {
+                if(data['msg'] == "old pass error")
+                    alert("舊密碼輸入錯誤");
+            }
+        });
+        return false;
+    }
+});
+
 PersonalImg = Backbone.View.extend({
     initialize : function() {
     },

@@ -57,6 +57,12 @@ DashboardRout = Backbone.Router.extend({
                 pager = new Pager({'el' : '#pager', 'model' : memModel});
                 memModel.getMySerieses();
             }
+            else if(idname == "resetPass") {
+                self.render();
+                $.getScript("Member/Personal.js", function() {
+                    personal = new PassForm({'el' : "#passUpdForm"});
+                });
+            }
             else
                 self.render();
         });

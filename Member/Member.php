@@ -76,6 +76,21 @@ class Member {
         return $mem;
     }
 
+    public function getOnePassById($mid) {
+        $dbAdm = $this->dbAdm;
+        $table = $this->table;
+        $columns = Array();
+        $columns[0] = "m_pass";
+
+        $conditionArr = Array();
+        $conditionArr['m_id'] = $mid;
+        $dbAdm->selectData($table, $columns, $conditionArr);
+        $dbAdm->execSQL();
+        $mems = $dbAdm->getAll();
+        $pass = $mems[0]['m_pass'];
+        return $pass;
+    }
+
     public function getOne($user) {
         $dbAdm = $this->dbAdm;
         $table = $this->table;

@@ -23,7 +23,7 @@ class Control {
 	    $this->instr = $_POST['instr'];
     }
     public function execInstr() {
-        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "postArticle", "myData", "mySeriesList", "myLastArticle", "memSrsPages", "personalImg", "personalUpd");
+        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "postArticle", "myData", "mySeriesList", "myLastArticle", "memSrsPages", "personalImg", "personalUpd", "passReset");
 	try {
 	    if(!function_exists($this->instr))
 		throw new Exception("instr not defined");
@@ -304,6 +304,24 @@ function personalImg() {
     $reData['status'] = 200;
     $reData['msg'] = "personalImg success";
     $reData['info'] = $upResult;
+    return $reData;
+}
+
+function passReset() {
+    require_once("Member/Member.php");
+    $member = new Member();
+    $pass = $member->getOnePassById($_SESSION['mid']);
+    if($pass == md5($_POST['oldPass'])) {
+        $colData = Array();
+        $colData['m_pass'] = md5($_POST['newPass']);
+        $member->dataUpdate($colData, $_SESSION['mid']);
+    }
+    else
+        throw new Exception("old pass error");
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "passReset success";
     return $reData;
 }
 
