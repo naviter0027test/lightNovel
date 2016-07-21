@@ -60,6 +60,11 @@ PersonalImg = Backbone.View.extend({
     uploadImg : function() {
         this.$el.ajaxSubmit(function(data) {
             console.log(data);
+            data = JSON.parse(data);
+            if(data['status'] == 200) {
+                alert("修改成功");
+                location.reload();
+            }
         });
         return false;
     }

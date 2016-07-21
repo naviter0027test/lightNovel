@@ -240,6 +240,11 @@ function myData() {
     $member = new Member();
     $myData = $member->getOneById($_SESSION['mid']);
 
+    if(file_exists("imgs/tmp/". $myData['m_user']))
+        $myData['headImg'] = "imgs/tmp/". $myData['m_user'];
+    else
+        $myData['headImg'] = "imgs/80x80.png";
+
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "myData success";
@@ -297,8 +302,12 @@ function personalUpd() {
 
 function personalImg() {
     require_once("upload/Upload.php");
+    require_once("Member/Member.php");
+    $member = new Member();
     $upfile = new Upload();
-    $upResult = $upfile->uploadFinish();
+
+    $myData = $member->getOneById($_SESSION['mid']);
+    $upResult = $upfile->uploadFinish($myData['m_user']);
 
     $reData = Array();
     $reData['status'] = 200;
@@ -322,6 +331,18 @@ function passReset() {
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "passReset success";
+    return $reData;
+}
+
+function memArticleList() {
+    require_once("Article/Article.php");
+    $articleAdm = new Article();
+    $articleList = $articleAdm->lastList($_SESSION['mid']);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "memArticleList success";
+    $reData['data'] = $articleList;
     return $reData;
 }
 

@@ -17,7 +17,7 @@ class Upload {
 	$haveError = false;
     }
 
-    public function uploadFinish() {
+    public function uploadFinish($newFileName) {
 	$data = Array();
 	$data['success'] = Array();
 	$data['failed'] = Array();
@@ -42,7 +42,7 @@ class Upload {
 		    $data['success'][$sussCount]['name'] = $_FILES['file']['name'][$count];
 		    $data['success'][$sussCount]['type'] = $_FILES['file']['type'][$count];
 		    $data['success'][$sussCount]['size'] = $_FILES['file']['size'][$count];
-		    move_uploaded_file($_FILES['file']['tmp_name'][$count], "imgs/tmp/". $_FILES['file']['name'][$count]);
+		    move_uploaded_file($_FILES['file']['tmp_name'][$count], "imgs/tmp/$newFileName"); //. $_FILES['file']['name'][$count]);
 		    ++$sussCount;
 		}
 	}

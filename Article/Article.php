@@ -74,7 +74,12 @@ class Article {
         $order = Array();
         $order['col'] = "a_crtime";
         $order['order'] = "desc";
-        $dbAdm->selectData($tablename, $column, $conditionArr, $order);
+
+        $limit = Array();
+        $limit['offset'] = 0;
+        $limit['amount'] = 5;
+
+        $dbAdm->selectData($tablename, $column, $conditionArr, $order, $limit);
         $dbAdm->execSQL();
 
         return $dbAdm->getAll();

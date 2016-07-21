@@ -14,6 +14,7 @@ DashboardRout = Backbone.Router.extend({
         //console.log("template/"+$(evt.target).attr("href"));
         //console.log(evt.target);
         var memModel = new MemberModel();
+        var articleModel = new ArticleModel();
         var self = dashboard;
         var loadPage = "template/"+ page+ ".html";
         var clickBtn = $("#dashboard a[temid="+page+"]");
@@ -56,6 +57,9 @@ DashboardRout = Backbone.Router.extend({
 
                 pager = new Pager({'el' : '#pager', 'model' : memModel});
                 memModel.getMySerieses();
+            }
+            else if(idname == "myLastArticle") {
+                articleModel.myLastArticles();
             }
             else if(idname == "resetPass") {
                 self.render();
