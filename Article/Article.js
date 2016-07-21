@@ -2,12 +2,11 @@ MyArticle = Backbone.View.extend({
     initialize : function() {
         console.log("my article view created");
     },
-    events : {
-    },
 
     el : '',
     template : null,
-    render : function() {
+    render : function(data) {
+        $("#content").html(this.template(data));
     }
 });
 
@@ -19,13 +18,14 @@ ArticleModel = Backbone.Model.extend({
     },
 
     myLastArticles : function() {
-        console.log("get last article");
+        var self = this;
         var postData = {};
         postData['instr'] = "memArticleList";
         $.post("instr.php", postData, function(data) {
             //console.log(data);
             data = JSON.parse(data);
             console.log(data);
+            self.set("myLastArticles", data);
         });
     }
 });

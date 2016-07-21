@@ -61,6 +61,16 @@ class Article {
         $dbAdm->execSQL();
     }
 
+    public function articleDel($aid) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $conditionArr = Array();
+        $conditionArr['a_id'] = $aid;
+        $dbAdm->deleteData($tablename, $conditionArr);
+        $dbAdm->execSQL();
+    }
+
     public function lastList($mid) {
         $tablename = $this->table;
         $dbAdm = $this->dbAdm;
