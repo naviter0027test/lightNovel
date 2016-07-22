@@ -221,13 +221,15 @@ function postArticle() {
     foreach($_POST as $key => $val) {
         $article[$key] = $val;
     }
-    $article['cp1'] = implode(",", $article['cp1']);
+    $article['mId'] = $_SESSION['mid'];
+    $article['cp1'] = implode(";", $article['cp1']);
     if(is_array($article['cp2'] ))
-        $article['cp2'] = implode(",", $article['cp2']);
+        $article['cp2'] = implode(";", $article['cp2']);
     $article['subCp'] = $article['viceCp'];
-    $article['tag'] = implode(",", $article['tag']);
-    $article['alert'] = implode(",", $article['alert']);
-    $article['aChapter'] = implode(",", $article['aChapter']);
+    $article['tag'] = implode(";", $article['tag']);
+    $article['alert'] = implode(";", $article['alert']);
+    //$article['aChapter'] = implode(";", $article['aChapter']);
+    $article['aChapter'] = "";
     $articleAdm->articleAdd($article);
     $reData = Array();
     $reData['status'] = 200;

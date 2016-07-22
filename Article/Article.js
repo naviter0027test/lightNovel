@@ -1,12 +1,28 @@
 MyArticle = Backbone.View.extend({
     initialize : function() {
-        console.log("my article view created");
     },
 
     el : '',
     template : null,
     render : function(data) {
         $("#content").html(this.template(data));
+    }
+});
+
+PostArticleForm = Backbone.View.extend({
+    initialize : function() {
+    },
+    events : {
+        "click button.postBtn" : "postArt"
+    },
+    el : '',
+    template : null,
+    render : function() {
+    },
+    postArt : function() {
+        if(!this.$el.validationEngine("validate"))
+            return false;
+        return false;
     }
 });
 

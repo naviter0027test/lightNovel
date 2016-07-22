@@ -1,4 +1,7 @@
 $(document).ready(function() {
+    var postForm = new PostArticleForm({'el' : "#postArticleForm"});
+
+
     $(".cpPanel a").on("click", function() {
         $(".cpPanel a").removeClass("nowChoose");
         $(this).addClass("nowChoose");

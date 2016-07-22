@@ -4,6 +4,7 @@
         <meta charset="utf-8" />
 	<link href='lib/bootstrap/dist/css/bootstrap.min.css' rel='stylesheet' />
 	<link href='lib/bootstrap/dist/css/bootstrap-theme.min.css' rel='stylesheet' />
+	<link rel="stylesheet" href="lib/validationengine/css/validationEngine.jquery.css" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="css/header.css" />
 	<link rel="stylesheet" type="text/css" href="css/postArticle.css" />
     </head>
@@ -33,22 +34,22 @@
         </div>
         <div id="content" class="postArticle">
             <h4 class="col-xs-6">發布文章</h4>
-            <form id="postArticleForm">
-                <input type="hidden" name="instr" value="" />
+            <form id="postArticleForm" action="instr.php" method="post">
+                <input type="hidden" name="instr" value="postArticle" />
                 <span class="col-xs-12">
                     <label class="col-xs-2">標題</label> 
-                    <input class="col-xs-6" type="text" /> 
+                    <input class="col-xs-6 validate[required]" type="text" name="title"/> 
                 </span>
                 <br />
                 <span class="col-xs-12">
                     <label class="col-xs-2">屬性</label> 
-                    <input type="radio" name="articleType" value="article" />文 
-                    <input type="radio" name="articleType" value="postArticle" />推文 
+                    <input type="radio" name="articleType" class="validate[required]" value="article" />文 
+                    <input type="radio" name="articleType" class="validate[required]" value="postArticle" />推文 
                     <br />
                 </span>
                 <span class="col-xs-12">
                     <label class="col-xs-2">分級</label>
-                    <select name="level">
+                    <select name="level" class="validate[required]">
                         <option value="Gen">Gen</option>
                         <option value="PG">PG</option>
                         <option value="NC17">NC17</option>
@@ -57,14 +58,14 @@
                 <br />
                 <span class="col-xs-12">
                     <label class="col-xs-2">主CP1</label>
-                    <input type="text" class="smInput" name="cp1[]" placeholder="點我" readonly /> /
-                    <input type="text" class="smInput" name="cp1[]" placeholder="點我" readonly />
+                    <input type="text" class="smInput validate[required]" name="cp1[]" placeholder="點我" readonly /> /
+                    <input type="text" class="smInput validate[required]" name="cp1[]" placeholder="點我" readonly />
                 </span>
                 <br />
                 <span class="col-xs-12">
                     <label class="col-xs-2">主CP2</label>
-                    <input type="text" class="smInput" name="cp2[]" placeholder="點我" readonly /> /
-                    <input type="text" class="smInput" name="cp2[]" placeholder="點我" readonly />
+                    <input type="text" class="smInput validate[required]" name="cp2[]" placeholder="點我" readonly /> /
+                    <input type="text" class="smInput validate[required]" name="cp2[]" placeholder="點我" readonly />
                 </span>
                 <br />
                 <span class="col-xs-12">
@@ -76,8 +77,10 @@
                     <label class="col-xs-2">系列</label>
                     <select name="series">
                         <option value="">請選擇</option>
-                        <option value="東卯">東卯</option>
-                        <option value="常歌">常歌</option>
+                        <option value="7">开声</option>
+                        <option value="8">山兵</option>
+                        <option value="9">光凌</option>
+                        <option value="10">徐魁</option>
                     </select>
                 或新系列 <input type="text" name="series" />
                 </span>
@@ -107,20 +110,20 @@
                 </span>
                 <br />
                 <span class="col-xs-12">
-                    <label class="col-xs-2">章節標題</label> <input type="text" name="articleTitle"/>
+                    <label class="col-xs-2">章節標題</label> <input type="text" name="aTitle"/>
                 </span>
                 <br />
                 <span class="col-xs-12">
-                    <label class="col-xs-2">章節</label> <input class="smInput" type="text" /> / <input class="smInput" type="text" />
+                    <label class="col-xs-2">章節</label> <input class="smInput" type="text" /> / <input class="smInput validate[required]" type="text" name="aChapter" />
                 </span>
                 <br />
                 <span class="col-xs-12">
-                    <label class="col-xs-2">章節備註</label> <textarea class="col-xs-8" placeholder="最多輸入300字，顯示於文章開頭"> </textarea>
+                    <label class="col-xs-2">章節備註</label> <textarea name="aMemo" class="col-xs-8" placeholder="最多輸入300字，顯示於文章開頭"> </textarea>
                 </span>
                 <br />
                 <span class="col-xs-12">
                     <h4>文章撰寫</h4>
-                    <textarea id="editor1"  class="ckeditor col-xs-12" name="content"></textarea>
+                    <textarea id="editor1"  class="ckeditor col-xs-12 validate[required]" name="content"></textarea>
                 </span>
                 <span class="col-xs-12">
                     <button class="col-xs-3 postBtn">發文</button>
@@ -194,9 +197,12 @@
     <script src="lib/jquery-2.1.4.min.js"></script>
     <script src='lib/ckeditor/ckeditor.js'></script>
     <script src='lib/bootstrap/dist/js/bootstrap.min.js'></script>
+    <script src="lib/validationengine/js/languages/jquery.validationEngine-zh_TW.js"></script>
+    <script src="lib/validationengine/js/jquery.validationEngine.js"></script>
     <script src="lib/underscore.js"></script>
     <script src="lib/backbone.js"></script>
     <script src="Member/Member.js"></script>
+    <script src="Article/Article.js"></script>
     <script src="js/header.js"></script>
     <script src="js/postArticle.js"></script>
 </html>
