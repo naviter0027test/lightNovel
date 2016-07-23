@@ -6,16 +6,42 @@ $(document).ready(function() {
 
 DashboardRout = Backbone.Router.extend({
     routes : {
+        "addSeries" : "addSeries",
         "articleEdit/:aid" : "articleEdit",
         "articleDel/:aid" : "articleDel",
         "changePage/:page" : "changePage",
         "changePage/:page/:nowPage/:pageLimit" : "changePage"
     },
+
+    addSeries : function() {
+        console.log("add series");
+        var self = dashboard;
+        var loadPage = "template/addSeries.html";
+        $("#contentTem").load(loadPage, function() {
+            self.template = _.template($("#addSeriesTem").html());
+            self.render()
+            $("#addSeriesForm").submit(function() {
+                var postData = $(this).serialize();
+                console.log(postData);
+                $.post("instr.php", postData, function(data) {
+                    console.log(data);
+                    data = JSON.parse(data);
+                    console.log(data);
+                    if(data['status'] == 200) {
+                        alert("新增成功");
+                        history.go(-1);
+                    }
+                });
+                return false;
+            });
+        });
+    },
+
     articleEdit : function(aid) {
         console.log(aid);
     },
+
     articleDel : function(aid) {
-        console.log(aid);
         var postData = {};
         postData['instr'] = "articleDel";
         postData['aid'] = aid;
@@ -29,6 +55,7 @@ DashboardRout = Backbone.Router.extend({
             }
         });
     },
+
     changePage : function(page, nowPage, pageLimit) {
         //console.log(page);
         //console.log("template/"+$(evt.target).attr("href"));

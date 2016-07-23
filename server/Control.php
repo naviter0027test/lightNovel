@@ -170,7 +170,7 @@ function captchaRegister() {
 function seriesAdd() {
     require_once("Article/Series.php");
     $series = new Series();
-    $series->serAdd($_POST['mId'], $_POST['seriesName']);
+    $series->serAdd($_SESSION['mid'], $_POST['seriesName']);
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "series add success";
