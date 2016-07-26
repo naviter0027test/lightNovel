@@ -16,6 +16,8 @@ ArticleRout = Backbone.Router.extend({
     },
     articleShow : function(aid) {
         article.model.getOne(aid);
-        msgArea.model.list(aid, 1);
+        msgArea.model.set("aid", aid);
+        msgArea.model.set("nowPage", 1);
+        msgArea.model.list();
     }
 });

@@ -42,9 +42,10 @@
     </div>
 </script>
 <script id="msgListTem" type="text/template">
-    <textarea class="col-xs-12" placeholder="留言輸入區，登入者才可留言，最多可輸入5000字"></textarea>
+    <h2>我要留言</h2>
+    <textarea id="msgInput" class="col-xs-12" placeholder="留言輸入區，登入者才可留言，最多可輸入5000字"></textarea>
     <br />
-    <button>送出留言</button>
+    <button id="msgSend">送出留言</button>
     <hr />
     <% _.each(data, function(item) { %>
     <div class="userMsg col-xs-12">

@@ -122,7 +122,7 @@ ArticleModel = Backbone.Model.extend({
         $.post("instr.php", postData, function(data) {
             //console.log(data);
             data = JSON.parse(data);
-            console.log(data);
+            //console.log(data);
             self.set("myLastArticles", data);
         });
     },
@@ -135,7 +135,7 @@ ArticleModel = Backbone.Model.extend({
         $.post("instr.php", postData, function(data) {
             //console.log(data);
             data = JSON.parse(data);
-            console.log(data);
+            //console.log(data);
             self.set("data", data);
         });
     },
@@ -148,7 +148,7 @@ ArticleModel = Backbone.Model.extend({
         $.post("instr.php", postData, function(data) {
             //console.log(data);
             data = JSON.parse(data);
-            console.log(data);
+            //console.log(data);
             self.set("data", data);
         });
     }
