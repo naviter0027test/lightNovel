@@ -2,10 +2,10 @@ var articles = null;
 $(document).ready(function() {
     $("#indexScript").load("template/index.html", function() {
         articles = new Article({ 'el' : '#content', "model" : new ArticleModel()});
+        new IndexRout();
+        Backbone.history.start();
+        location.href = "#/1";
     });
-    new IndexRout();
-    Backbone.history.start();
-    location.href = "#/1";
 });
 
 IndexRout = Backbone.Router.extend({

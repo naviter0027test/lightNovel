@@ -110,7 +110,11 @@ class Article {
         if(isset($page['pageLimit']))
             $limit['amount'] = $page['pageLimit'];
 
-        $dbAdm->selectData($tablename, $column, null, null, $limit);
+        $order = Array();
+        $order['col'] = "a_crtime";
+        $order['order'] = "desc";
+
+        $dbAdm->selectData($tablename, $column, null, $order, $limit);
         $dbAdm->execSQL();
 
         return $dbAdm->getAll();
