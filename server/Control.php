@@ -225,7 +225,8 @@ function postArticle() {
     $article['cp1'] = implode(";", $article['cp1']);
     if(is_array($article['cp2'] ))
         $article['cp2'] = implode(";", $article['cp2']);
-    $article['subCp'] = $article['viceCp'];
+    if(isset($article['viceCp']))
+        $article['subCp'] = $article['viceCp'];
     $article['tag'] = implode(";", $article['tag']);
     $article['alert'] = implode(";", $article['alert']);
     //$article['aChapter'] = implode(";", $article['aChapter']);
@@ -372,6 +373,7 @@ function articleList() {
     $reData['status'] = 200;
     $reData['msg'] = "articleList success";
     $reData['data'] = $Lists;
+    $reData['amount'] = $articleAdm->listAmount()['amount'];
     return $reData;
 }
 

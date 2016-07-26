@@ -32,3 +32,15 @@
     -->
 </script>
 
+<script id="pagerTem" type="text/template">
+    <a class="right-arrow" href="#">&rsaquo;</a>
+    <% pageSum = Math.ceil(amount / pageLimit); %>
+    <% for(idx = pageSum; idx >= 1;--idx) { %>
+        <% if(idx == nowPage) { %>
+        <label><%=idx%></label>
+        <% } else { %>
+        <a href="#/<%=idx%>"><%=idx%></a>
+        <% } %>
+    <% } %>
+    <a class="left-arrow" href="#">&lsaquo;</a>
+</script>

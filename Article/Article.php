@@ -44,16 +44,19 @@ class Article {
         $insData['a_title'] = $article['title'];
         $insData['a_attr'] = $article['articleType'];
         $insData['a_level'] = $article['level'];
-        $insData['as_id'] = $article['series'];
+        if(isset($article['series']))
+            $insData['as_id'] = $article['series'];
         $insData['a_mainCp'] = $article['cp1'];
         $insData['a_mainCp2'] = $article['cp2'];
-        $insData['a_subCp'] = $article['subCp']; 
+        if(isset($article['subCp']))
+            $insData['a_subCp'] = $article['subCp']; 
         $insData['a_alert'] = $article['alert']; 
         $insData['m_id'] = $article['mId'];    
         $insData['a_tag'] = $article['tag'];
         $insData['a_aTitle'] = $article['aTitle'];
         $insData['a_chapter'] = $article['aChapter'];
-        $insData['a_memo'] = $article['aMemo']  ;
+        if(isset($article['aMemo']))
+            $insData['a_memo'] = $article['aMemo']  ;
         $insData['a_content'] = $article['content'];
         $insData['a_crtime'] = date('Y-m-d H:i:s');
 
@@ -134,5 +137,17 @@ class Article {
         $dbAdm->execSQL();
 
         return $dbAdm->getAll()[0];
+    }
+
+    public function listAmount() {
+        $dbAdm = $this->dbAdm;
+        $tablename = $this->table;
+
+	$columns = Array();
+	$columns[0] = "count(*) amount";
+
+	$dbAdm->selectData($tablename, $columns);
+	$dbAdm->execSQL();
+	return $dbAdm->getAll()[0];
     }
 }
