@@ -1,3 +1,22 @@
+//所有使用者瀏覽文章用的view
+Article = Backbone.View.extend({
+    initialize : function() {
+        var self = this;
+        this.template = _.template($("#contentTem").html());
+        this.model.on("change:data", function() {
+            self.render();
+        });
+    },
+
+    el : '',
+    template : null,
+    render : function() {
+        var data = this.model.get("data");
+        this.$el.html(this.template(data));
+    }
+});
+
+//登入會員用的view
 MyArticle = Backbone.View.extend({
     initialize : function() {
     },
@@ -93,7 +112,7 @@ ArticleModel = Backbone.Model.extend({
     initialize : function() {
     },
     defaults : {
-        'myLastArticles' : null
+        'data' : null
     },
 
     myLastArticles : function() {
@@ -105,6 +124,32 @@ ArticleModel = Backbone.Model.extend({
             data = JSON.parse(data);
             console.log(data);
             self.set("myLastArticles", data);
+        });
+    },
+
+    articleList : function(nowPage) {
+        var self = this;
+        var postData = {};
+        postData['instr'] = "articleList";
+        postData['nowPage'] = nowPage;
+        $.post("instr.php", postData, function(data) {
+            //console.log(data);
+            data = JSON.parse(data);
+            console.log(data);
+            self.set("data", data);
+        });
+    },
+
+    getOne : function(aid) {
+        var self = this;
+        var postData = {};
+        postData['instr'] = "articleGet";
+        postData['aid'] = aid;
+        $.post("instr.php", postData, function(data) {
+            //console.log(data);
+            data = JSON.parse(data);
+            console.log(data);
+            self.set("data", data);
         });
     }
 });

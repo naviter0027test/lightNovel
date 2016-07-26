@@ -1,0 +1,26 @@
+<script id="contentTem" type="text/template">
+    <% _.each(data, function(item) { %>
+    <div class="articleItem">
+        <h3><a href="article.html"><%=item['a_title']%></a>（系列名稱）By作者名稱</h3>
+        分級：<label><%=item['a_level']%></label> 
+        屬性：<label><%=(item['a_attr']=="article"?"文":"推文")%></label> 更新日期：<label>2016/05/24</label> <br />
+        <h4>主CP：</h4>
+        <h4>副CP：</h4>
+        <h4>警告：</h4>
+        <h4>標籤：</h4>
+        <span class="col-xs-6">章節：<label>3/?</label> <!--讚：<label></label> 點擊數：<label></label> --></span><br />
+    </div>
+    <% }); %>
+    <!--
+    <div class="articleItem">
+        <h3><a href="article.html">文章標題</a>（系列名稱）By作者名稱</h3>
+        分級：<label>Gen</label> 屬性：<label>文</label> 更新日期：<label>2016/05/24</label> <br />
+        <h4>主CP：</h4>
+        <h4>副CP：</h4>
+        <h4>警告：</h4>
+        <h4>標籤：</h4>
+        <span class="col-xs-6">章節：<label>3/?</label> <!--讚：<label></label> 點擊數：<label></label> </span><br />
+    </div>
+    -->
+</script>
+

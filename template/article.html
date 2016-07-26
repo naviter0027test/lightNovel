@@ -1,0 +1,56 @@
+<script id="contentTem" type="text/template">
+    <div class="operPanel col-xs-12">
+        <select class="col-sm-2">
+            <option>選擇章節</option>
+            <option>Ch3 章節標題</option>
+            <option>Ch4 章節標題</option>
+            <option>Ch5 章節標題</option>
+        </select>
+        <a class="col-sm-2" href="#">後一章節</a>
+        <a class="col-sm-2" href="#">前一章節</a>
+        <a class="col-sm-2" href="#">全文顯示</a>
+    </div>
+    <div class="articleItem">
+        分級：<label><%=data['a_level']%></label> 
+        屬性：<label><%=(data['a_attr']=="article"?"文":"推文")%></label> 
+        更新日期：<label><%=data['a_crtime']%></label> <br />
+        <h4>主CP：<%=data['a_mainCp']%></h4>
+        <h4>副CP：<%=data['a_mainCp2']%></h4>
+        <h4>警告：<%=data['a_alert']%></h4>
+        <h4>標籤：<%=data['a_tag']%></h4>
+        <span class="col-xs-6">章節：<label>3/?</label> <!--讚：<label></label> 點擊數：<label></label> --></span><br />
+    </div>
+    <div class="articleData">
+        <hr />
+        <h2><%=data['a_title']%></h2>
+        <h3>作者名稱</h3>
+        <hr />
+        <div class="articleContent">
+            <%=data['a_content']%>
+        </div>
+    </div>
+    <div class="operPanel col-xs-12">
+        <select class="col-sm-2">
+            <option>選擇章節</option>
+            <option>Ch3 章節標題</option>
+            <option>Ch4 章節標題</option>
+            <option>Ch5 章節標題</option>
+        </select>
+        <a class="col-sm-2" href="#">後一章節</a>
+        <a class="col-sm-2" href="#">前一章節</a>
+        <a class="col-sm-2" href="#">全文顯示</a>
+    </div>
+</script>
+<script id="msgListTem" type="text/template">
+    <textarea class="col-xs-12" placeholder="留言輸入區，登入者才可留言，最多可輸入5000字"></textarea>
+    <br />
+    <button>送出留言</button>
+    <hr />
+    <% _.each(data, function(item) { %>
+    <div class="userMsg col-xs-12">
+        <img src="http://fakeimg.pl/80/" />
+        <h5 class="col-xs-6">留言者帳號</h5>
+        <div class="col-xs-6"><%=item['ms_text']%></div>
+    </div>
+    <% }); %>
+</script>

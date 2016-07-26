@@ -94,4 +94,41 @@ class Article {
 
         return $dbAdm->getAll();
     }
+
+    public function articleList($page) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $column = Array();
+        $column[0] = "*";
+
+        $limit = Array();
+        $limit['offset'] = 0;
+        $limit['amount'] = 25;
+        if(isset($page['nowPage']))
+            $limit['offset'] = ($page['nowPage'] -1) * 25;
+        if(isset($page['pageLimit']))
+            $limit['amount'] = $page['pageLimit'];
+
+        $dbAdm->selectData($tablename, $column, null, null, $limit);
+        $dbAdm->execSQL();
+
+        return $dbAdm->getAll();
+    }
+
+    public function get($aid) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $column = Array();
+        $column[0] = "*";
+
+        $conditionArr = Array();
+        $conditionArr['a_id'] = $aid;
+
+        $dbAdm->selectData($tablename, $column, $conditionArr, null, null);
+        $dbAdm->execSQL();
+
+        return $dbAdm->getAll()[0];
+    }
 }

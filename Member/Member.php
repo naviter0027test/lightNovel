@@ -5,8 +5,9 @@
  *  Describe :
  *	會員登入 、
  *	會員修改一般資料 、
- *	會員註冊、
- *	會員修改密碼
+ *	會員註冊、啟用、認證
+ *	會員修改密碼、
+ *	會員留言
  *  Version : 
  *	1.0
  *  Start Date :
@@ -114,7 +115,7 @@ class Member {
         $insData['m_user'] = $user['user'];
         $insData['m_pass'] = md5($user['pass']);
         $insData['m_email'] = $user['email'];
-        $insData['m_active'] = "N";
+        $insData['m_active'] = "Y";
         $dbAdm->insertData("Member", $insData);
         $dbAdm->execSQL();
         $this->upActiveMail($user);
@@ -170,6 +171,34 @@ class Member {
         $conditionArr['m_id'] = $mid;
 
         $dbAdm->updateData($tablename, $colData, $conditionArr);
+        $dbAdm->execSQL();
+    }
+
+    public function randOneMem() {
+        $dbAdm = $this->dbAdm;
+        $tablename = $this->table;
+
+        $dbAdm->sqlSet("select * from Member where m_active = 'Y' order by rand() limit 0, 1");
+        $dbAdm->execSQL();
+        return $dbAdm->getAll()[0];
+    }
+
+    public function addMsg($para) {
+        $dbAdm = $this->dbAdm;
+        $tablename = "Message";
+        if(!isset($para['mid']))
+            throw new Exception("member not login");
+        if(!isset($para['aid']))
+            throw new Exception("article not choose");
+        if(!isset($para['message']) || $para['message'] == "")
+            throw new Exception("message is empty");
+
+        $insData = Array();
+        $insData['a_id'] = $para['aid'];
+        $insData['m_id'] = $para['mid'];
+        $insData['ms_text'] = $para['message'];
+        $insData['ms_crtime'] = date("Y-m-d H:i:s");
+        $dbAdm->insertData($tablename, $insData);
         $dbAdm->execSQL();
     }
 

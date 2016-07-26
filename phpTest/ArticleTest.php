@@ -73,7 +73,9 @@ class ArticleTest extends UnitTestCase {
         echo $contentStart. ",";
         echo $contentStart%3;
         $article['content'] = substr($content, $contentStart-$contentStart%3, rand(400, strlen($content)-1));
-        $article['mId'] = 1;
+        require_once("../Member/Member.php");
+        $randMember = new Member();
+        $article['mId'] = $randMember->randOneMem()['m_id'];
         print_r($article);
         $articleAdm->articleAdd($article);
     }
@@ -88,5 +90,13 @@ class ArticleTest extends UnitTestCase {
         $article1 = $lists[0];
         $article2 = $lists[1];
         $this->assertTrue($article1['a_crtime'] > $article2['a_crtime']);
+    }
+
+    function testGet() {
+        require_once("../Article/Article.php");
+        $articleAdm = new Article();
+        $data = $articleAdm->get(2);
+        $this->assertEqual($data['a_title'], "文章標題6939");
+        $this->assertEqual($data['a_id'], 2);
     }
 }
