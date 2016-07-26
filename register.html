@@ -4,6 +4,7 @@
         <meta charset="utf-8" />
 	<link href='lib/bootstrap/dist/css/bootstrap.min.css' rel='stylesheet' />
 	<link href='lib/bootstrap/dist/css/bootstrap-theme.min.css' rel='stylesheet' />
+	<link rel="stylesheet" href="lib/validationengine/css/validationEngine.jquery.css" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="css/header.css" />
 	<link rel="stylesheet" type="text/css" href="css/register.css" />
 	<link rel="stylesheet" type="text/css" href="css/pager.css" />
@@ -56,14 +57,16 @@
                     <li>理性交流、文明用语。</li>
                 </ol>
             </div>
-            <form id="registerContent" action="afterRegister.html">
+            <form id="registerContent" action="afterRegister.html" method="post">
                 <h3 class="col-xs-12">注册</h3>
                 <span class="col-xs-3">帐号</span>
-                <input class="col-xs-7 input" type="text" name="user" />
+                <input class="col-xs-7 input validate[required]" type="text" name="user" placeholder="请填写新帐号" />
                 <span class="col-xs-3">密码</span>
-                <input class="col-xs-7 input" type="password" name="pass" />
+                <input class="col-xs-7 input validate[required]" type="password" name="pass" placeholder="请填写新密码" />
                 <span class="col-xs-3">密码確認</span>
-                <input class="col-xs-7 input" type="password" name="pass" />
+                <input class="col-xs-7 input validate[required]" type="password" name="passCheck" placeholder="请再次填写新密码"/>
+                <span class="col-xs-3">Email</span>
+                <input class="col-xs-7 input validate[required, custom[email]]" type="text" name="email" placeholder="请再次填写，用于寄送认证信"/>
                 <label class="col-xs-3">&nbsp;</label>
                 <button class="col-xs-6">注册</button>
             </form>
@@ -73,7 +76,17 @@
     </body>
     <script src="lib/jquery-2.1.4.min.js"></script>
     <script src='lib/bootstrap/dist/js/bootstrap.min.js'></script>
+    <script src="lib/validationengine/js/languages/jquery.validationEngine-zh_TW.js"></script>
+    <script src="lib/validationengine/js/jquery.validationEngine.js"></script>
     <script src="lib/underscore.js"></script>
     <script src="lib/backbone.js"></script>
     <script src="js/header.js"></script>
+    <script>
+	$(document).ready(function() {
+	    $("#registerContent").validationEngine({
+		validationEventTrigger : 'submit',
+		notEmpty : true
+	    });
+	});
+    </script>
 </html>

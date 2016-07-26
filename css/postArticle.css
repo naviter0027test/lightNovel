@@ -36,20 +36,15 @@
     margin : 5px 0px 10px 40%;
     padding : 8px;
 
-    color : white;
+    color : #5b5b5b;
     text-decoration : none;
     text-align : center;
-    background : #0099cc;
-    border : 0px solid transparent;
-    -webkit-transition: background 0.5s ease-in-out;
-    -moz-transition: background 0.5s ease-in-out;
-    -o-transition: background 0.5s ease-in-out;
-    -ms-transition: background 0.5s ease-in-out;
-    transition: background 0.5s ease-in-out;
+    border : 1px solid #dddddd;
 }
 
 .postArticle button.postBtn:hover {
-    background : #006080;
+    color : black;
+    background : #f6d1ac;
 }
 
 .cpPanel {
