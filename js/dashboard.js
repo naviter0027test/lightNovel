@@ -64,6 +64,7 @@ DashboardRout = Backbone.Router.extend({
         var articleModel = new ArticleModel();
         var self = dashboard;
         var myArticle = new MyArticle();
+        var message = new MyMessage({"el" : "#content", "model" : new MsgModel()});
         var loadPage = "template/"+ page+ ".html";
         var clickBtn = $("#dashboard a[temid="+page+"]");
 
@@ -87,6 +88,9 @@ DashboardRout = Backbone.Router.extend({
         });
         memModel.on("change:seriesAmount", function() {
             pager.render(nowPage, pageLimit);
+        });
+        message.model.on("change:data", function() {
+            message.render();
         });
 
         //文章取得時切換html
@@ -120,6 +124,15 @@ DashboardRout = Backbone.Router.extend({
                 $.getScript("Member/Personal.js", function() {
                     personal = new PassForm({'el' : "#passUpdForm"});
                 });
+            }
+            else if(idname == "getMessage") {
+                function isNumeric(n) {
+                    return !isNaN(parseFloat(n)) && isFinite(n);
+                }
+                if(isNumeric(nowPage))
+                    message.model.set("nowPage", nowPage);
+                message.template = _.template($("#getMessage").html());
+                message.model.myList();;
             }
             else
                 self.render();

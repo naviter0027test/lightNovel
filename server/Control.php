@@ -422,4 +422,23 @@ function msgList() {
     return $reData;
 }
 
+function msgMyList() {
+    require_once("Article/Message.php");
+    require_once("Article/Article.php");
+    $msg = new Message();
+    $articleAdm = new Article();
+    $articleList = $articleAdm->lastList($_SESSION['mid']);
+    $aids = Array();
+    foreach($articleList as $article) {
+        $aids[] = $article['a_id'];
+    }
+    $data = $msg->myList($aids, $_POST['nowPage'], $_SESSION['mid']);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "msgList success";
+    $reData['data'] = $data;
+    return $reData;
+}
+
 ?>

@@ -57,5 +57,17 @@ class Message {
         $dbAdm->execSQL();
         return $dbAdm->getAll();
     }
+
+    public function myList($aids, $nowPage, $mid) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $nowPage = ($nowPage-1) *10;
+        $aidsStr = implode(",", $aids);
+        $dbAdm->sqlSet("select ms.*, m.m_user from Message ms inner join Member m on m.m_id = ms.m_id where ms.a_id in ($aidsStr) order by ms.ms_crtime desc limit $nowPage, 10");
+        $dbAdm->execSQL();
+
+        return $dbAdm->getAll();
+    }
 }
 ?>
