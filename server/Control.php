@@ -23,7 +23,7 @@ class Control {
 	    $this->instr = $_POST['instr'];
     }
     public function execInstr() {
-        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "postArticle", "myData", "mySeriesList", "myLastArticle", "articleDel", "memSrsPages", "personalImg", "personalUpd", "passReset", "addMessage");
+        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "postArticle", "myData", "mySeriesList", "myLastArticle", "articleDel", "memSrsPages", "personalImg", "personalUpd", "passReset", "addMessage", "pressPraise");
 	try {
 	    if(!function_exists($this->instr))
 		throw new Exception("instr not defined");
@@ -438,6 +438,26 @@ function msgMyList() {
     $reData['status'] = 200;
     $reData['msg'] = "msgList success";
     $reData['data'] = $data;
+    return $reData;
+}
+
+function pressPraise() {
+    require_once("Article/Praise.php");
+    $praise = new Praise();
+    $praiseList = $praise->getPraise($_SESSION['mid'], $_POST['aid']);
+
+    $reData = Array();
+    if(count($praiseList) < 1) {
+        $praise->addPraise($_SESSION['mid'], $_POST['aid']);
+        $reData['status'] = 200;
+        $msg = "pressPraise success";
+    }
+    else {
+        $reData['status'] = 500;
+        $msg = "press praise repeat";
+    }
+
+    $reData['msg'] = $msg;
     return $reData;
 }
 
