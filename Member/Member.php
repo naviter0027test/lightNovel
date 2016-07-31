@@ -44,7 +44,7 @@ class Member {
 
         $conditionArr = Array();
         $conditionArr['m_user'] = $user;
-        $conditionArr['m_pass'] = $pass;
+        $conditionArr['m_pass'] = md5($pass);
         $conditionArr['m_active'] = "Y";
         $dbAdm->selectData($table, $columns, $conditionArr);
         $dbAdm->execSQL();
@@ -55,15 +55,62 @@ class Member {
         return $mem['m_id'];
     }
 
+    public function getOne($user) {
+        $dbAdm = $this->dbAdm;
+        $table = $this->table;
+        $columns = Array();
+        $columns[0] = "*";
+
+        $conditionArr = Array();
+        $conditionArr['m_user'] = $user;
+        $dbAdm->selectData($table, $columns, $conditionArr);
+        $dbAdm->execSQL();
+        $mems = $dbAdm->getAll();
+        $mem = $mems[0];
+        return $mem;
+    }
+
     public function register($user) {
         $dbAdm = $this->dbAdm;
+        if($this->isRegister($user['user']))
+            throw new Exception("member repeat");
         $insData = Array();
         $insData['m_user'] = $user['user'];
         $insData['m_pass'] = md5($user['pass']);
         $insData['m_email'] = $user['email'];
-        $insData['m_active'] = "Y";
+        $insData['m_active'] = "N";
         $dbAdm->insertData("Member", $insData);
         $dbAdm->execSQL();
+        $this->upActiveMail($user);
+    }
+
+    public function upActiveMail($user) {
+        if(file_exists("../srvLib/SmailMail.php")) 
+            require_once("../srvLib/SmailMail.php");
+        else
+            require_once("srvLib/SmailMail.php");
+        $upActive = "http://". $_SERVER['HTTP_HOST']. $_SERVER['PHP_SELF']. "?instr=upActive&user=".
+            $user['user']. "&email=". md5($user['email'].$user['user']);
+        $content = "歡迎加入樓誠文庫，<a target='_blank' href='$upActive'>啟用連結</a>";
+        sendMail($user['email'], "[樓誠]啟用信件（系統發信，請勿回覆）", $content);
+    }
+
+    public function authenticate($user, $authCode) {
+        $dbAdm = $this->dbAdm;
+        $tablename = $this->table;
+        $mem = $this->getOne($user);
+        if(!isset($mem['m_id']))
+            throw new Exception("member not found");
+        if($authCode == md5($mem['m_email'].$mem['m_user'])) {
+            $updata = Array();
+            $updata['m_active'] = "Y";
+            $conditionArr = Array();
+            $conditionArr['m_id'] = $mem['m_id'];
+            $dbAdm->updateData($tablename, $updata, $conditionArr);
+            $dbAdm->execSQL();
+        }
+        else
+            throw new Exception("authentication code error");
     }
 
     public function isRegister($account) {

@@ -2,11 +2,8 @@ function loginPanelPositionSet() {
     var offset = $(".rightNav").offset();
     $(".floatPanel").offset( { 'top' : offset.top+50, 'left': offset.left-190});
 }
-$(document).ready(function() {
-    loginPanelPositionSet();
-    $(window).resize(function() {
-        loginPanelPositionSet();
-    });
+
+function memberPanelBind() {
     $("#header .status").on("click", function() {
         if($("#memberPanel").hasClass("show")) {
             $("#memberPanel").fadeOut();
@@ -20,6 +17,9 @@ $(document).ready(function() {
         $(this).toggleClass("rightNavHover");
         return false;
     });
+}
+
+function loginPanelBind() {
     $("#header .login").on("click", function() {
         if($("#loginPanel").hasClass("show")) {
             $("#loginPanel").fadeOut();
@@ -35,5 +35,32 @@ $(document).ready(function() {
         }
         return false;
     });
+}
+
+function registerPanelBind() {
+    /*
+    $("#header .register").on("click", function() {
+        console.log("register");
+        $("#loginPanel").removeClass("show");
+        $("#loginPanel").fadeOut();
+        $("#registerPanel").fadeIn();
+        loginPanelPositionSet();
+        return false;
+    });
+    */
+}
+
+$(document).ready(function() {
+    loginPanelPositionSet();
+    $(window).resize(function() {
+        loginPanelPositionSet();
+    });
+    memberPanelBind();
+    loginPanelBind();
+    registerPanelBind();
+    var headerPanel = new HeadPanel({'el' : '#header', 'model' : new MemberModel()});
+    setTimeout(function() {
+        headerPanel.model.isLogin();
+    }, 300);
 });
 
