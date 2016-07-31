@@ -4,6 +4,14 @@ HeadPanel = Backbone.View.extend({
         $('body').append("<div id='headTem' style='display: none;'></div>");
         $("#headTem").load("template/header.html");
         this.model.on("change:isLogin", function() {
+            if(this.get("isLogin") == false) {
+                var pathArr = location.pathname.split('/');
+                var nowHref = pathArr[pathArr.length-1];
+
+                //因為這兩個網頁需要登入才能使用，否則強至跳到首頁
+                if(nowHref == "dashboard.html" || nowHref == "postArticle.html")
+                    location.href = "index.html";
+            }
             self.render();
         });
     },
@@ -27,6 +35,19 @@ HeadPanel = Backbone.View.extend({
         loginPanelBind();
         registerPanelBind();
         memberPanelBind();
+
+        var pathArr = location.pathname.split('/');
+        //console.log(pathArr.length);
+        //console.log(pathArr[pathArr.length-1]);
+        var nowHref = pathArr[pathArr.length-1];
+        if(nowHref == "")
+            nowHref = "index.html";
+        var links = this.$el.find(".nav a");
+        $(links).removeClass("nowChoose");
+        for(var idx = 0;idx < links.length;++idx) {
+            if($(links[idx]).attr("href") == nowHref)
+                $(links[idx]).addClass("nowChoose");
+        }
     },
 
     login : function() {
@@ -45,7 +66,6 @@ HeadPanel = Backbone.View.extend({
 
 MemberModel = Backbone.Model.extend({
     initialize : function() {
-        console.log("member model");
     },
     defaults : {
 	'data' : null,
@@ -77,7 +97,7 @@ MemberModel = Backbone.Model.extend({
         postData['instr'] = "logout";
         $.post("instr.php", postData, function(data) {
             data = JSON.parse(data);
-            console.log(data);
+            //console.log(data);
             if(data['status'] == 200) 
                 self.set("isLogin", false);
             else
@@ -90,7 +110,7 @@ MemberModel = Backbone.Model.extend({
         postData['instr'] = "isLogin";
         $.post("instr.php", postData, function(data) {
             data = JSON.parse(data);
-            console.log(data);
+            //console.log(data);
             if(data['status'] == 200) 
                 self.set("isLogin", true);
             else
