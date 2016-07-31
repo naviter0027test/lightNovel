@@ -37,4 +37,20 @@ class MemberTest extends UnitTestCase {
             echo $member->error();
         }
     }
+
+    function testRegister() {
+        require_once("../Member/Member.php");
+        $member = new Member();
+        $user = Array();
+        $user['user'] = "test". rand(1000, 9999);
+        $user['pass'] = "123456";
+        $user['email'] = "t". rand(10000, 99999). "@test.com.tw";
+        $member->register($user);
+    }
+
+    function testIsRegister() {
+        require_once("../Member/Member.php");
+        $member = new Member();
+        $this->assertEqual(true, $member->isRegister("test2"));
+    }
 }
