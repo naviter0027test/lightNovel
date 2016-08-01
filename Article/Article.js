@@ -48,6 +48,8 @@ PostArticleForm = Backbone.View.extend({
         this.$el.validationEngine("hideAll");
         var postData = {};
         postData['instr'] = $("input[name=instr]").val();
+        if(postData['instr'] == "articleEdit")
+            postData['aid'] = $("input[name=aid]").val();
         postData['title'] = $("input[name=title]").val();
         postData['articleType'] = $("input[name=articleType]").val();
         postData['level'] = $("select[name=level]").val();
@@ -107,7 +109,10 @@ PostArticleForm = Backbone.View.extend({
             data = JSON.parse(data);
             //console.log(data);
             if(data['status'] == 200) {
-                alert("發文成功!");
+                if(postData['instr'] == "articleEdit")
+                    alert("編輯成功");
+                else
+                    alert("發文成功!");
                 location.href = "index.html#/1";
             }
         });
