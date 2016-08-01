@@ -1,9 +1,5 @@
 var articles = null;
 $(document).ready(function() {
-    $("#explan").load("template/explan.html", function() {
-        var explan = $('[data-remodal-id=explanStart]').remodal();
-        explan.open();
-    });
     $("#indexScript").load("template/index.html", function() {
         articles = new Article({ 'el' : '#content', "model" : new ArticleModel()});
     });
@@ -20,6 +16,6 @@ IndexRout = Backbone.Router.extend({
     articleList : function(nowPage) {
         setTimeout(function() {
             articles.model.articleList(nowPage);
-        }, 200);
+        }, 500);
     }
 });

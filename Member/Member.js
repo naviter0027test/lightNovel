@@ -3,10 +3,19 @@ HeadPanel = Backbone.View.extend({
         self = this;
         $('body').append("<div id='headTem' style='display: none;'></div>");
         $("#headTem").load("template/header.html");
+        $.getScript("lib/CookieAPI.js");
         this.model.on("change:isLogin", function() {
             if(this.get("isLogin") == false) {
                 var pathArr = location.pathname.split('/');
                 var nowHref = pathArr[pathArr.length-1];
+
+                var isFirst = getCookie("isFirst");
+
+                //若是初次到訪會跳轉到 useExplan.html
+                if(isFirst == "" && (nowHref == "index.html" || nowHref == "")) {
+                    setCookie("isFirst", "hasSee", 3);
+                    location.href = "useExplan.html";
+                }
 
                 //因為這兩個網頁需要登入才能使用，否則強至跳到首頁
                 if(nowHref == "dashboard.html" || nowHref == "postArticle.html")
