@@ -68,7 +68,7 @@
                 <span class="col-xs-3">Email</span>
                 <input class="col-xs-7 input validate[required, custom[email]]" type="text" name="email" placeholder="请再次填写，用于寄送认证信"/>
                 <span class="col-xs-3">验证码 &nbsp;&nbsp;&nbsp;<img src="instr.php?instr=captchaRegister"/></span>
-                <input class="col-xs-7 input" type="text" name="captcha" placeholder="请填写验证码" />
+                <input class="col-xs-7 input validate[required]" type="text" name="captcha" placeholder="请填写验证码" />
                 <label class="col-xs-1">&nbsp;</label>
                 <button class="col-xs-3">注册</button>
                 <label class="col-xs-6">&nbsp;</label>
@@ -85,12 +85,4 @@
     <script src="lib/backbone.js"></script>
     <script src="Member/Member.js"></script>
     <script src="js/header.js"></script>
-    <script>
-	$(document).ready(function() {
-	    $("#registerContent").validationEngine({
-		validationEventTrigger : 'submit',
-		notEmpty : true
-	    });
-	});
-    </script>
 </html>
