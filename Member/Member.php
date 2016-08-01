@@ -34,6 +34,10 @@ class Member {
             $config->getHost(), $config->getDBUser(),
             $config->getDBPass(), $config->getDB());
         $this->table = "Member";
+        
+        //設定php mysql client 的編碼為utf8
+        $this->dbAdm->sqlSet("SET NAMES 'utf8'");
+        $this->dbAdm->execSQL();
     }
 
     public function login($user, $pass) {
@@ -70,6 +74,21 @@ class Member {
         $mems = $dbAdm->getAll();
         $mem = $mems[0];
         return $mem;
+    }
+
+    public function getOnePassById($mid) {
+        $dbAdm = $this->dbAdm;
+        $table = $this->table;
+        $columns = Array();
+        $columns[0] = "m_pass";
+
+        $conditionArr = Array();
+        $conditionArr['m_id'] = $mid;
+        $dbAdm->selectData($table, $columns, $conditionArr);
+        $dbAdm->execSQL();
+        $mems = $dbAdm->getAll();
+        $pass = $mems[0]['m_pass'];
+        return $pass;
     }
 
     public function getOne($user) {
@@ -142,6 +161,16 @@ class Member {
         if($memAmount != 0)
             return true;
         return false;
+    }
+
+    public function dataUpdate($colData, $mid) {
+        $dbAdm = $this->dbAdm;
+        $tablename = $this->table;
+        $conditionArr = Array();
+        $conditionArr['m_id'] = $mid;
+
+        $dbAdm->updateData($tablename, $colData, $conditionArr);
+        $dbAdm->execSQL();
     }
 
     public function error() {

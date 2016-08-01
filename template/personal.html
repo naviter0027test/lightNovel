@@ -1,14 +1,10 @@
 <script id="personal" type="text/template">
-    <form action="instr.php" method="post">
+    <form id="personalForm" action="instr.php" method="post">
+        <input type="hidden" name="instr" value="personalUpd" />
         <div class="col-xs-12">
-            <img src="imgs/80x80.png" />
+            <img src="<%=data['headImg']%>" />
             <h5 class="col-xs-6">使用者帳號</h5>
             <h5 class="col-xs-6"><%=data['m_user']%></h5>
-        </div>
-        <div class="col-xs-12">
-            <label class="col-xs-3">圖像上傳 : </label>
-            <input class="col-xs-6" type="file" name="img[]" />
-            <br />
         </div>
         <div class="col-xs-12">
             <label class="col-xs-3">email : </label>
@@ -17,5 +13,14 @@
         </div>
         <button class="col-xs-3">修改</button>
         <!-- <label>我的文章數量 : </label><span> 22 </span><br /> -->
+    </form>
+    <form id="personalImg" action="instr.php" method="post">
+        <input type="hidden" name="instr" value="personalImg" />
+        <div class="col-xs-12">
+            <label class="col-xs-3">圖像上傳 : </label>
+            <input class="col-xs-6" type="file" name="file[]" />
+            <br />
+        </div>
+        <button class="col-xs-3">上傳</button>
     </form>
 </script>

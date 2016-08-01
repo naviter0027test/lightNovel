@@ -1,6 +1,6 @@
 Pager = Backbone.View.extend({
     initialize : function() {
-        console.log("pager created");
+        //console.log("pager created");
         this.template = _.template($("#pagerTem").html());
     },
     events : {

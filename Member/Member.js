@@ -119,6 +119,7 @@ MemberModel = Backbone.Model.extend({
         var postData = {};
         postData['instr'] = "isLogin";
         $.post("instr.php", postData, function(data) {
+            //console.log(data);
             data = JSON.parse(data);
             //console.log(data);
             if(data['status'] == 200) 
@@ -143,7 +144,7 @@ MemberModel = Backbone.Model.extend({
         $.post("instr.php", postData, function(data) {
             //console.log(data);
             data = JSON.parse(data);
-            console.log(data);
+            //console.log(data);
             self.set("seriesList", data);
         });
     },
@@ -154,7 +155,7 @@ MemberModel = Backbone.Model.extend({
         $.post("instr.php", postData, function(data) {
             //console.log(data);
             data = JSON.parse(data);
-            console.log(data);
+            //console.log(data);
             self.set("seriesAmount", data['amount']);
         });
     }
