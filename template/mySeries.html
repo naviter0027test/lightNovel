@@ -16,22 +16,17 @@
             </tr>
         </thead>
         <tbody>
+            <% _.each(data, function(item) { %>
             <tr>
-                <td>東卯</td>
-                <td>12</td>
+                <td><%=item['as_name']%></td>
+                <td>XX</td>
                 <td>
                     <a class="glyphicon glyphicon-edit" href="#"></a>
                     <a class="glyphicon glyphicon-trash" href="#"></a>
                 </td>
             </tr>
-            <tr>
-                <td>引月</td>
-                <td>25</td>
-                <td>
-                    <a class="glyphicon glyphicon-edit" href="#"></a>
-                    <a class="glyphicon glyphicon-trash" href="#"></a>
-                </td>
-            </tr>
+            <% }); %>
+            <!--
             <tr>
                 <td>常歌</td>
                 <td>8</td>
@@ -40,7 +35,24 @@
                     <a class="glyphicon glyphicon-trash" href="#"></a>
                 </td>
             </tr>
+            -->
         </tbody>
     </table>
 </script>
-
+<script id="pagerTem" type="text/template">
+    <a class="right-arrow" href="#">&rsaquo;</a>
+    <% pageSum = Math.ceil(amount / pageLimit); %>
+    <% for(idx = pageSum; idx >= 1;--idx) { %>
+        <% if(idx == nowPage) { %>
+        <label><%=idx%></label>
+        <% } else { %>
+        <a href="#changePage/mySeries/<%=idx%>/<%=pageLimit%>"><%=idx%></a>
+        <% } %>
+    <% } %>
+    <!--
+    <label>1</label>
+    <a href="#changePage/mySeries/2/10/">2</a>
+    <a href="#changePage/mySeries/3/10/">3</a>
+    -->
+    <a class="left-arrow" href="#">&lsaquo;</a>
+</script>

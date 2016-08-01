@@ -55,6 +55,23 @@ class Member {
         return $mem['m_id'];
     }
 
+    public function getOneById($mid) {
+        $dbAdm = $this->dbAdm;
+        $table = $this->table;
+        $columns = Array();
+        $columns[0] = "m_user";
+        $columns[1] = "m_email";
+        $columns[2] = "m_headImg";
+
+        $conditionArr = Array();
+        $conditionArr['m_id'] = $mid;
+        $dbAdm->selectData($table, $columns, $conditionArr);
+        $dbAdm->execSQL();
+        $mems = $dbAdm->getAll();
+        $mem = $mems[0];
+        return $mem;
+    }
+
     public function getOne($user) {
         $dbAdm = $this->dbAdm;
         $table = $this->table;

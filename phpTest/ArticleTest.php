@@ -77,4 +77,16 @@ class ArticleTest extends UnitTestCase {
         print_r($article);
         $articleAdm->articleAdd($article);
     }
+
+    function testList() {
+        require_once("../Article/Article.php");
+        $articleAdm = new Article();
+
+        $mid = 1;
+        $lists = $articleAdm->lastList($mid);
+        //print_r($lists);
+        $article1 = $lists[0];
+        $article2 = $lists[1];
+        $this->assertTrue($article1['a_crtime'] > $article2['a_crtime']);
+    }
 }

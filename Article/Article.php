@@ -55,8 +55,28 @@ class Article {
         $insData['a_chapter'] = $article['aChapter'];
         $insData['a_memo'] = $article['aMemo']  ;
         $insData['a_content'] = $article['content'];
+        $insData['a_crtime'] = date('Y-m-d H:i:s');
 
         $dbAdm->insertData($tablename, $insData);
         $dbAdm->execSQL();
+    }
+
+    public function lastList($mid) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $column = Array();
+        $column[0] = "*";
+
+        $conditionArr = Array();
+        $conditionArr['m_id'] = $mid;
+
+        $order = Array();
+        $order['col'] = "a_crtime";
+        $order['order'] = "desc";
+        $dbAdm->selectData($tablename, $column, $conditionArr, $order);
+        $dbAdm->execSQL();
+
+        return $dbAdm->getAll();
     }
 }
