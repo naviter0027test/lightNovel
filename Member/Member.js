@@ -17,7 +17,8 @@ HeadPanel = Backbone.View.extend({
 
         this.model.on("change:myData", function() {
             var data = this.get("myData");
-            $("#memberPanel .memHello").text(data['data']['m_user']+ " 您好！");
+            if(data['status'] == 200)
+                $("#memberPanel .memHello").text(data['data']['m_user']+ " 您好！");
         });
 
     },

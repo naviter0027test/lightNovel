@@ -125,7 +125,8 @@ class Member {
             require_once("../srvLib/SmailMail.php");
         else
             require_once("srvLib/SmailMail.php");
-        $upActive = "http://". $_SERVER['HTTP_HOST']. $_SERVER['PHP_SELF']. "?instr=upActive&user=".
+        $lastSlash = strrpos($_SERVER['PHP_SELF'], '/', -1);
+        $upActive = "http://". $_SERVER['HTTP_HOST']. substr($_SERVER['PHP_SELF'], 0, $lastSlash) . "/verification.html?instr=upActive&user=".
             $user['user']. "&email=". md5($user['email'].$user['user']);
         $content = "歡迎加入樓誠文庫，<a target='_blank' href='$upActive'>啟用連結</a>";
         sendMail($user['email'], "[樓誠]啟用信件（系統發信，請勿回覆）", $content);

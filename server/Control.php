@@ -118,8 +118,8 @@ function register() {
 function upActive() {
     require_once("Member/Member.php");
     $member = new Member();
-    $user = $_GET['user'];
-    $activeCode = $_GET['email'];
+    $user = $_POST['user'];
+    $activeCode = $_POST['email'];
     $member->authenticate($user, $activeCode);
     $reData = Array();
     $reData['status'] = 200;
