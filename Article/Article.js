@@ -3,9 +3,6 @@ Article = Backbone.View.extend({
     initialize : function() {
         var self = this;
         this.template = _.template($("#contentTem").html());
-        this.model.on("change:data", function() {
-            self.render();
-        });
     },
 
     el : '',
@@ -54,7 +51,7 @@ PostArticleForm = Backbone.View.extend({
         postData['title'] = $("input[name=title]").val();
         postData['articleType'] = $("input[name=articleType]").val();
         postData['level'] = $("select[name=level]").val();
-        console.log($("input[name='cp1[]']"));
+        //console.log($("input[name='cp1[]']"));
         postData['cp1'] = [];
         for(var i = 0;i < $("input[name='cp1[]']").length;++i) {
             var cpInput = $("input[name='cp1[]']")[i];
@@ -100,10 +97,20 @@ PostArticleForm = Backbone.View.extend({
         if($("input[name=aTitle]").val() != "") 
             postData['aTitle'] = $("input[name=aTitle]").val();
 
+        postData['aMemo'] = $("input[name=aMemo]").val();
+
         if(CKEDITOR.instances.editor1.getData() != "") 
             postData['content'] = CKEDITOR.instances.editor1.getData();
 
-        console.log(postData);
+        $.post("instr.php", postData, function(data) {
+            //console.log(data);
+            data = JSON.parse(data);
+            //console.log(data);
+            if(data['status'] == 200) {
+                alert("發文成功!");
+                location.href = "index.html#/1";
+            }
+        });
         return false;
     }
 });
@@ -122,7 +129,7 @@ ArticleModel = Backbone.Model.extend({
         $.post("instr.php", postData, function(data) {
             //console.log(data);
             data = JSON.parse(data);
-            console.log(data);
+            //console.log(data);
             self.set("myLastArticles", data);
         });
     },
@@ -135,7 +142,7 @@ ArticleModel = Backbone.Model.extend({
         $.post("instr.php", postData, function(data) {
             //console.log(data);
             data = JSON.parse(data);
-            console.log(data);
+            //console.log(data);
             self.set("data", data);
         });
     },
@@ -148,7 +155,7 @@ ArticleModel = Backbone.Model.extend({
         $.post("instr.php", postData, function(data) {
             //console.log(data);
             data = JSON.parse(data);
-            console.log(data);
+            //console.log(data);
             self.set("data", data);
         });
     }

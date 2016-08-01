@@ -52,8 +52,21 @@ class Message {
         $limit = Array();
         $limit['offset'] = ($nowPage -1) * 10;
         $limit['amount'] = 10;
-        $dbAdm->selectData($tablename, $columns, $conditionArr, $order, $limit);
+        //$dbAdm->selectData($tablename, $columns, $conditionArr, $order, $limit);
+        $dbAdm->sqlSet("select ms.*, m.m_user from Message ms inner join Member m on ms.m_id = m.m_id where ms.a_id = $aid order by ms_crtime desc limit ". $limit['offset']. ", ". $limit['amount']);
         $dbAdm->execSQL();
+        return $dbAdm->getAll();
+    }
+
+    public function myList($aids, $nowPage, $mid) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $nowPage = ($nowPage-1) *10;
+        $aidsStr = implode(",", $aids);
+        $dbAdm->sqlSet("select ms.*, m.m_user from Message ms inner join Member m on m.m_id = ms.m_id where ms.a_id in ($aidsStr) order by ms.ms_crtime desc limit $nowPage, 10");
+        $dbAdm->execSQL();
+
         return $dbAdm->getAll();
     }
 }

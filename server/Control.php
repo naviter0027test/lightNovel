@@ -225,7 +225,8 @@ function postArticle() {
     $article['cp1'] = implode(";", $article['cp1']);
     if(is_array($article['cp2'] ))
         $article['cp2'] = implode(";", $article['cp2']);
-    $article['subCp'] = $article['viceCp'];
+    if(isset($article['viceCp']))
+        $article['subCp'] = $article['viceCp'];
     $article['tag'] = implode(";", $article['tag']);
     $article['alert'] = implode(";", $article['alert']);
     //$article['aChapter'] = implode(";", $article['aChapter']);
@@ -372,6 +373,7 @@ function articleList() {
     $reData['status'] = 200;
     $reData['msg'] = "articleList success";
     $reData['data'] = $Lists;
+    $reData['amount'] = $articleAdm->listAmount()['amount'];
     return $reData;
 }
 
@@ -406,6 +408,31 @@ function msgList() {
     require_once("Article/Message.php");
     $msg = new Message();
     $data = $msg->getList($_POST['aid'], $_POST['nowPage']);
+    foreach($data as $i => $item) {
+        if(file_exists("imgs/tmp/". $item['m_user']))
+            $data[$i]['headImg'] = "imgs/tmp/". $item['m_user'];
+        else
+            $data[$i]['headImg'] = "imgs/80x80.png";
+    }
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "msgList success";
+    $reData['data'] = $data;
+    return $reData;
+}
+
+function msgMyList() {
+    require_once("Article/Message.php");
+    require_once("Article/Article.php");
+    $msg = new Message();
+    $articleAdm = new Article();
+    $articleList = $articleAdm->lastList($_SESSION['mid']);
+    $aids = Array();
+    foreach($articleList as $article) {
+        $aids[] = $article['a_id'];
+    }
+    $data = $msg->myList($aids, $_POST['nowPage'], $_SESSION['mid']);
 
     $reData = Array();
     $reData['status'] = 200;

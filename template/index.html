@@ -1,13 +1,21 @@
 <script id="contentTem" type="text/template">
     <% _.each(data, function(item) { %>
     <div class="articleItem">
-        <h3><a href="article.html"><%=item['a_title']%></a>（系列名稱）By作者名稱</h3>
+        <h3><a href="article.html#article/<%=item['a_id']%>"><%=item['a_title']%></a>（系列名稱）By作者名稱</h3>
         分級：<label><%=item['a_level']%></label> 
-        屬性：<label><%=(item['a_attr']=="article"?"文":"推文")%></label> 更新日期：<label>2016/05/24</label> <br />
-        <h4>主CP：</h4>
-        <h4>副CP：</h4>
-        <h4>警告：</h4>
-        <h4>標籤：</h4>
+        屬性：<label><%=(item['a_attr']=="article"?"文":"推文")%></label> 更新日期：<label><%=item['a_crtime']%></label> <br />
+        <% if(item['a_mainCp'] != "") { %>
+        <h4>主CP：<%=item['a_mainCp']%></h4>
+        <% } %>
+        <% if(item['a_mainCp2'] != "") { %>
+        <h4>副CP：<%=item['a_mainCp2']%></h4>
+        <% } %>
+        <% if(item['a_alert'] != "") { %>
+        <h4>警告：<%=item['a_alert']%></h4>
+        <% } %>
+        <% if(item['a_tag'] != "") { %>
+        <h4>標籤：<%=item['a_tag']%></h4>
+        <% } %>
         <span class="col-xs-6">章節：<label>3/?</label> <!--讚：<label></label> 點擊數：<label></label> --></span><br />
     </div>
     <% }); %>
@@ -24,3 +32,15 @@
     -->
 </script>
 
+<script id="pagerTem" type="text/template">
+    <a class="right-arrow" href="#">&rsaquo;</a>
+    <% pageSum = Math.ceil(amount / pageLimit); %>
+    <% for(idx = pageSum; idx >= 1;--idx) { %>
+        <% if(idx == nowPage) { %>
+        <label><%=idx%></label>
+        <% } else { %>
+        <a href="#/<%=idx%>"><%=idx%></a>
+        <% } %>
+    <% } %>
+    <a class="left-arrow" href="#">&lsaquo;</a>
+</script>
