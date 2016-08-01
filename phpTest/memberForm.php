@@ -7,6 +7,7 @@ session_start();
         <meta charset="utf-8" />
     </head>
     <body>
+        <label><?=$_SESSION['mid']?></label>
         <form action="../instr.php" method="post">
             <input type="hidden" name="instr" value="test" />
             <button>test</button>
@@ -193,6 +194,12 @@ session_start();
                 </div>
                 <button class="col-xs-3 check">確定</button>
             <button>post article</button>
+        </form>
+        <form action="../instr.php" method="post">
+            <input type="hidden" name="instr" value="addMessage" />
+            aid : <input type="text" name="aid" /><br />
+            message : <textarea name="message"></textarea><br />
+            <button>leave message</button>
         </form>
     </body>
 </html>

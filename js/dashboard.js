@@ -6,9 +6,56 @@ $(document).ready(function() {
 
 DashboardRout = Backbone.Router.extend({
     routes : {
+        "addSeries" : "addSeries",
+        "articleEdit/:aid" : "articleEdit",
+        "articleDel/:aid" : "articleDel",
         "changePage/:page" : "changePage",
         "changePage/:page/:nowPage/:pageLimit" : "changePage"
     },
+
+    addSeries : function() {
+        console.log("add series");
+        var self = dashboard;
+        var loadPage = "template/addSeries.html";
+        $("#contentTem").load(loadPage, function() {
+            self.template = _.template($("#addSeriesTem").html());
+            self.render()
+            $("#addSeriesForm").submit(function() {
+                var postData = $(this).serialize();
+                console.log(postData);
+                $.post("instr.php", postData, function(data) {
+                    console.log(data);
+                    data = JSON.parse(data);
+                    console.log(data);
+                    if(data['status'] == 200) {
+                        alert("新增成功");
+                        history.go(-1);
+                    }
+                });
+                return false;
+            });
+        });
+    },
+
+    articleEdit : function(aid) {
+        console.log(aid);
+    },
+
+    articleDel : function(aid) {
+        var postData = {};
+        postData['instr'] = "articleDel";
+        postData['aid'] = aid;
+        $.post("instr.php", postData, function(data) {
+            //console.log(data);
+            data = JSON.parse(data);
+            console.log(data);
+            if(data['status'] == 200) {
+                alert("刪除成功");
+                history.go(-1);
+            }
+        });
+    },
+
     changePage : function(page, nowPage, pageLimit) {
         //console.log(page);
         //console.log("template/"+$(evt.target).attr("href"));
@@ -16,6 +63,7 @@ DashboardRout = Backbone.Router.extend({
         var memModel = new MemberModel();
         var articleModel = new ArticleModel();
         var self = dashboard;
+        var myArticle = new MyArticle();
         var loadPage = "template/"+ page+ ".html";
         var clickBtn = $("#dashboard a[temid="+page+"]");
 
@@ -41,10 +89,16 @@ DashboardRout = Backbone.Router.extend({
             pager.render(nowPage, pageLimit);
         });
 
+        //文章取得時切換html
+        articleModel.on("change:myLastArticles", function() {
+            myArticle.render(articleModel.get("myLastArticles"));
+        });
+
         $("#pager").html('');
         $("#contentTem").load(loadPage, function() {
             var idname = $(clickBtn).attr("temid");
             self.template = _.template($("#"+idname).html());
+            myArticle.template = _.template($("#"+idname).html());
 
             if(idname == "personal") {
                 memModel.getMyData();

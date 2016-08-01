@@ -67,5 +67,18 @@
             <br />
             <button>member series pages</button>
         </form>
+
+        <form action="../instr.php" method="post">
+            <input type="hidden" name="instr" value="articleList" />
+            <input type="text" name="nowPage" value="1" /><br />
+            <input type="text" name="pageLimit" value="25" /><br />
+            <button>article list</button>
+        </form>
+
+        <form action="../instr.php" method="post">
+            <input type="hidden" name="instr" value="articleGet" />
+            aid : <input type="text" name="aid" /><br />
+            <button>article show</button>
+        </form>
     </body>
 </html>

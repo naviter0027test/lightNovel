@@ -23,7 +23,7 @@ class Control {
 	    $this->instr = $_POST['instr'];
     }
     public function execInstr() {
-        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "postArticle", "myData", "mySeriesList", "myLastArticle", "memSrsPages", "personalImg", "personalUpd", "passReset");
+        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "postArticle", "myData", "mySeriesList", "myLastArticle", "articleDel", "memSrsPages", "personalImg", "personalUpd", "passReset", "addMessage");
 	try {
 	    if(!function_exists($this->instr))
 		throw new Exception("instr not defined");
@@ -170,7 +170,7 @@ function captchaRegister() {
 function seriesAdd() {
     require_once("Article/Series.php");
     $series = new Series();
-    $series->serAdd($_POST['mId'], $_POST['seriesName']);
+    $series->serAdd($_SESSION['mid'], $_POST['seriesName']);
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "series add success";
@@ -221,13 +221,15 @@ function postArticle() {
     foreach($_POST as $key => $val) {
         $article[$key] = $val;
     }
-    $article['cp1'] = implode(",", $article['cp1']);
+    $article['mId'] = $_SESSION['mid'];
+    $article['cp1'] = implode(";", $article['cp1']);
     if(is_array($article['cp2'] ))
-        $article['cp2'] = implode(",", $article['cp2']);
+        $article['cp2'] = implode(";", $article['cp2']);
     $article['subCp'] = $article['viceCp'];
-    $article['tag'] = implode(",", $article['tag']);
-    $article['alert'] = implode(",", $article['alert']);
-    $article['aChapter'] = implode(",", $article['aChapter']);
+    $article['tag'] = implode(";", $article['tag']);
+    $article['alert'] = implode(";", $article['alert']);
+    //$article['aChapter'] = implode(";", $article['aChapter']);
+    $article['aChapter'] = "";
     $articleAdm->articleAdd($article);
     $reData = Array();
     $reData['status'] = 200;
@@ -343,6 +345,72 @@ function memArticleList() {
     $reData['status'] = 200;
     $reData['msg'] = "memArticleList success";
     $reData['data'] = $articleList;
+    return $reData;
+}
+
+function articleDel() {
+    require_once("Article/Article.php");
+    $articleAdm = new Article();
+    $articleAdm->articleDel($_POST['aid']);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "articleDel success";
+    return $reData;
+}
+
+function articleList() {
+    require_once("Article/Article.php");
+    $limit = Array();
+    $limit['nowPage'] = $_POST['nowPage'];
+    if(isset($_POST['pageLimit']))
+        $limit['pageLimit'] = $_POST['pageLimit'];
+    $articleAdm = new Article();
+    $Lists = $articleAdm->articleList($limit);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "articleList success";
+    $reData['data'] = $Lists;
+    return $reData;
+}
+
+function articleGet() {
+    require_once("Article/Article.php");
+    $articleAdm = new Article();
+    $data = $articleAdm->get($_POST['aid']);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "articleGet success";
+    $reData['data'] = $data;
+    return $reData;
+}
+
+function addMessage() {
+    require_once("Member/Member.php");
+    $member = new Member();
+    $para = Array();
+    $para['mid'] = $_SESSION['mid'];
+    $para['aid'] = $_POST['aid'];
+    $para['message'] = $_POST['message'];
+    $member->addMsg($para);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "addMessage success";
+    return $reData;
+}
+
+function msgList() {
+    require_once("Article/Message.php");
+    $msg = new Message();
+    $data = $msg->getList($_POST['aid'], $_POST['nowPage']);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "msgList success";
+    $reData['data'] = $data;
     return $reData;
 }
 

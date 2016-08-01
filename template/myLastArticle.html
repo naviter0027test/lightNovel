@@ -4,6 +4,11 @@
         <li><a href="#">Dashboard</a></li>
         <li class="active">最新文章</li>
     </ol>
+    <div class="operating">
+        <a href="postArticle.html">
+            <button class="col-xs-2 add">發文</button>
+        </a>
+    </div>
     <table class="table table-condensed">
         <thead>
             <tr>
@@ -15,6 +20,19 @@
             </tr>
         </thead>
         <tbody>
+            <% _.each(data, function(item) { %>
+            <tr>
+                <td><%=item['a_title']%></td>
+                <td><%=item['a_level']%></td>
+                <td><%=item['as_id']%></td>
+                <td><%=item['a_crtime']%></td>
+                <td>
+                    <a class="glyphicon glyphicon-edit" href="#articleEdit/<%=item['a_id']%>"></a>
+                    <a class="glyphicon glyphicon-trash" href="#articleDel/<%=item['a_id']%>"></a>
+                </td>
+            </tr>
+            <% }); %>
+            <!--
             <tr>
                 <td>東少發威，咆嘯震天</td>
                 <td>Gen</td>
@@ -25,46 +43,7 @@
                     <a class="glyphicon glyphicon-trash" href="#"></a>
                 </td>
             </tr>
-            <tr>
-                <td>東少發威，咆嘯震天</td>
-                <td>Gen</td>
-                <td>東卯</td>
-                <td>2016-01-03 12:13:54</td>
-                <td>
-                    <a class="glyphicon glyphicon-edit" href="#"></a>
-                    <a class="glyphicon glyphicon-trash" href="#"></a>
-                </td>
-            </tr>
-            <tr>
-                <td>東少發威，咆嘯震天</td>
-                <td>Gen</td>
-                <td>東卯</td>
-                <td>2016-01-03 12:13:54</td>
-                <td>
-                    <a class="glyphicon glyphicon-edit" href="#"></a>
-                    <a class="glyphicon glyphicon-trash" href="#"></a>
-                </td>
-            </tr>
-            <tr>
-                <td>東少發威，咆嘯震天</td>
-                <td>Gen</td>
-                <td>東卯</td>
-                <td>2016-01-03 12:13:54</td>
-                <td>
-                    <a class="glyphicon glyphicon-edit" href="#"></a>
-                    <a class="glyphicon glyphicon-trash" href="#"></a>
-                </td>
-            </tr>
-            <tr>
-                <td>東少發威，咆嘯震天</td>
-                <td>Gen</td>
-                <td>東卯</td>
-                <td>2016-01-03 12:13:54</td>
-                <td>
-                    <a class="glyphicon glyphicon-edit" href="#"></a>
-                    <a class="glyphicon glyphicon-trash" href="#"></a>
-                </td>
-            </tr>
+            -->
         </tbody>
     </table>
 </script>
