@@ -1,0 +1,23 @@
+.useBtn {
+    padding : 3px;
+    margin-bottom : 15px;
+
+    text-align : center;
+    color : #333333;
+    border : 1px solid #dddddd;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.iAgree:hover {
+    color : black;
+    background : #f6d1ac;
+    text-decoration : none;
+}
+
+.iExit:hover {
+    color : white;
+    background : #ff8080;
+    text-decoration : none;
+}
