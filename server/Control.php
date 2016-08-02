@@ -242,8 +242,6 @@ function postArticle() {
         $article['subCp'] = $article['viceCp'];
     $article['tag'] = implode(";", $article['tag']);
     $article['alert'] = implode(";", $article['alert']);
-    //$article['aChapter'] = implode(";", $article['aChapter']);
-    $article['aChapter'] = "";
     $articleAdm->articleAdd($article);
     $reData = Array();
     $reData['status'] = 200;

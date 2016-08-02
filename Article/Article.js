@@ -99,13 +99,16 @@ PostArticleForm = Backbone.View.extend({
         if($("input[name=aTitle]").val() != "") 
             postData['aTitle'] = $("input[name=aTitle]").val();
 
+        if($("input[name=aChapter]").val() != "")
+            postData['aChapter'] = $("input[name=aChapter]").val();
+
         postData['aMemo'] = $("input[name=aMemo]").val();
 
         if(CKEDITOR.instances.editor1.getData() != "") 
             postData['content'] = CKEDITOR.instances.editor1.getData();
 
         $.post("instr.php", postData, function(data) {
-            //console.log(data);
+            console.log(data);
             data = JSON.parse(data);
             //console.log(data);
             if(data['status'] == 200) {

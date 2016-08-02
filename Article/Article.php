@@ -54,7 +54,8 @@ class Article {
         $insData['m_id'] = $article['mId'];    
         $insData['a_tag'] = $article['tag'];
         $insData['a_aTitle'] = $article['aTitle'];
-        $insData['a_chapter'] = $article['aChapter'];
+        if(isset($article['aChapter']))
+            $insData['a_chapter'] = $article['aChapter'];
         if(isset($article['aMemo']))
             $insData['a_memo'] = $article['aMemo']  ;
         $insData['a_content'] = $article['content'];
