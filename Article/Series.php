@@ -43,6 +43,7 @@ class Series {
         $insData = Array();
         $insData['m_id'] = $mid;
         $insData['as_name'] = $name;
+        $insData['as_crtime'] = date("Y-m-d H:i:s");
 
         $dbAdm->insertData($table, $insData);
         $dbAdm->execSQL();
@@ -122,5 +123,27 @@ class Series {
 	$dbAdm->selectData($tablename, $columns, $conditionArr);
 	$dbAdm->execSQL();
 	return $dbAdm->getAll()[0];
+    }
+
+    public function getLastOneId($mid) {
+        $dbAdm = $this->dbAdm;
+        $tablename = $this->table;
+
+	$columns = Array();
+        $columns[0] = "*";
+
+        $conditionArr = Array();
+        $conditionArr['m_id'] = $mid;
+
+        $order = Array();
+        $order['col'] = "as_crtime";
+        $order['order'] = "desc";
+
+        $limit = Array();
+        $limit['offset'] = 0;
+        $limit['amount'] = 1;
+        $dbAdm->selectData($tablename, $columns, $conditionArr, $order, $limit);
+	$dbAdm->execSQL();
+	return $dbAdm->getAll()[0]['as_id'];
     }
 }

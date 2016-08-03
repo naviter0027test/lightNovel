@@ -228,7 +228,10 @@ function seriesGet() {
 
 function postArticle() {
     //require_once("Member/Member.php");
+    require_once("Article/Series.php");
     require_once("Article/Article.php");
+    $series = new Series();
+
     $articleAdm = new Article();
     $article = Array();
     foreach($_POST as $key => $val) {
@@ -242,6 +245,12 @@ function postArticle() {
         $article['subCp'] = $article['viceCp'];
     $article['tag'] = implode(";", $article['tag']);
     $article['alert'] = implode(";", $article['alert']);
+
+    if(isset($article['newSeries'])) {
+        $series->serAdd($_SESSION['mid'], $article['newSeries']);
+        $article['series'] = $series->getLastOneId($_SESSION['mid']);
+    }
+
     $articleAdm->articleAdd($article);
     $reData = Array();
     $reData['status'] = 200;
