@@ -16,7 +16,11 @@
         <% if(item['a_tag'] != "") { %>
         <h4>標籤：<%=item['a_tag']%></h4>
         <% } %>
-        <span class="col-xs-6">章節：<label>3/?</label> <!--讚：<label></label> 點擊數：<label></label> --></span><br />
+        <span class="col-xs-6">
+        <% if(item['as_finally'] != null) { %>
+            章節：<label><%=item['a_chapter']%>/<%=item['as_finally']%></label> 
+        <% } %>
+                <!--讚：<label></label> 點擊數：<label></label> --></span><br />
     </div>
     <% }); %>
     <!--

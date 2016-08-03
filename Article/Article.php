@@ -150,7 +150,13 @@ class Article {
         $order['col'] = "a_crtime";
         $order['order'] = "desc";
 
-        $dbAdm->selectData($tablename, $column, null, $order, $limit);
+        //$dbAdm->selectData($tablename, $column, null, $order, $limit);
+        $dbAdm->sqlSet("
+            select case when (ass.as_finally = 0) then '?' else ass.as_finally end as as_finally, a.* 
+            from `Article` a
+            left join ArticleSeries ass on a.as_id = ass.as_id
+            order by ". $order['col']. " ". $order['order'].
+            " limit ". $limit['offset']. ", ". $limit['amount']);
         $dbAdm->execSQL();
 
         return $dbAdm->getAll();
