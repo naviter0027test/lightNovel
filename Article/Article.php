@@ -172,7 +172,12 @@ class Article {
         $conditionArr = Array();
         $conditionArr['a_id'] = $aid;
 
-        $dbAdm->selectData($tablename, $column, $conditionArr, null, null);
+        //$dbAdm->selectData($tablename, $column, $conditionArr, null, null);
+        $dbAdm->sqlSet("select 
+            case when (ss.as_finally = 0) then '?' 
+            else ss.as_finally end as as_finally ,a.*
+            from `Article` a left join ArticleSeries ss on ss.as_id = a.as_id
+            where a.a_id = ". $aid);
         $dbAdm->execSQL();
 
         return $dbAdm->getAll()[0];

@@ -20,7 +20,9 @@
         <h4>警告：<%=data['a_alert']%></h4>
         <h4>標籤：<%=data['a_tag']%></h4>
         <span class="col-xs-6">
-            章節：<label>3/?</label> 
+        <% if(data['as_finally'] != null) { %>
+            章節：<label><%=data['a_chapter']%>/<%=data['as_finally']%></label> 
+        <% } %>
             讚：<label></label> 點擊數：<label></label> 
         </span><br />
     </div>
