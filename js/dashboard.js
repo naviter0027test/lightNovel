@@ -8,7 +8,7 @@ $(document).ready(function() {
 DashboardRout = Backbone.Router.extend({
     routes : {
         "addSeries" : "addSeries",
-        "editSeries/:sid" : "editMySeries",
+        "editSeries/:sid/:nowPage" : "editMySeries",
         "articleEdit/:aid" : "articleEdit",
         "articleDel/:aid" : "articleDel",
         "changePage/:page" : "changePage",
@@ -38,27 +38,48 @@ DashboardRout = Backbone.Router.extend({
         });
     },
 
-    editMySeries : function(sid) {
+    editMySeries : function(sid, nowPage) {
         var self = dashboard;
         var loadPage = "template/editMySeries.html";
         $("#contentTem").load(loadPage, function() {
             var postData = {};
             postData['instr'] = "seriesGet";
             postData['sid'] = sid;
+            postData['nowPage'] = nowPage;
             $.post("instr.php", postData, function(data) {
                 //console.log(data);
                 data = JSON.parse(data);
-                console.log(data);
+                //console.log(data);
                 self.template = _.template($("#editMySeriesTem").html());
                 self.render(data)
+
+                $("#content input[name=chapterNum]").on("change", function() {
+                    var postData = {};
+                    postData['instr'] = "changeArticleChapter";
+                    postData['aid'] = $(this).attr("aid");
+                    postData['chapter'] = $(this).val();
+                    console.log(postData);
+                    $.post("instr.php", postData, function(data) {
+                        //console.log(data);
+                        data = JSON.parse(data);
+                        console.log(data);
+                        if(data['status'] == 200) {
+                            alert("修改完成");
+                            location.reload();
+                        }
+                        else {
+                            alert("修改失敗");
+                        }
+                    });
+                });
 
                 $("#seriesEditForm").submit(function() {
                     if(!$(this).validationEngine("validate"))
                         return false;
                     $(this).ajaxSubmit(function(result) {
-                        console.log(result);
+                        //console.log(result);
                         result = JSON.parse(result);
-                        console.log(result);
+                        //console.log(result);
                         if(result['status'] == 200) {
                             alert("編輯成功");
                             history.go(-1);

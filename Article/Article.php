@@ -194,4 +194,63 @@ class Article {
 	$dbAdm->execSQL();
 	return $dbAdm->getAll()[0];
     }
+
+    public function articleBySeries($para) {
+        $dbAdm = $this->dbAdm;
+        $tablename = $this->table;
+
+	$columns = Array();
+	$columns[0] = "*";
+
+        $conditionArr = Array();
+        $conditionArr['as_id'] = $para['asid'];
+        $conditionArr['m_id'] = $para['mid'];
+
+        $order = Array();
+        $order['col'] = "a_chapter";
+        $order['order'] = "asc";
+
+        $limit = Array();
+        $limit['offset'] = 0;
+        $limit['amount'] = 10;
+        if(isset($page['nowPage']))
+            $limit['offset'] = ($para['nowPage'] -1) * 10;
+
+	$dbAdm->selectData($tablename, $columns, $conditionArr, $order, $limit);
+	$dbAdm->execSQL();
+	return $dbAdm->getAll();
+    }
+
+    public function articleAmountBySeries($seriesId) {
+        $dbAdm = $this->dbAdm;
+        $tablename = $this->table;
+
+	$columns = Array();
+	$columns[0] = "count(*) as amount";
+
+        $conditionArr = Array();
+        $conditionArr['as_id'] = $seriesId;
+
+        $order = Array();
+        $order['col'] = "a_chapter";
+        $order['order'] = "asc";
+
+	$dbAdm->selectData($tablename, $columns, $conditionArr, $order);
+	$dbAdm->execSQL();
+	return $dbAdm->getAll()[0]['amount'];
+    }
+
+    public function changeCh($aid, $chapter) {
+        $dbAdm = $this->dbAdm;
+        $tablename = $this->table;
+
+        $colData = Array();
+        $colData['a_chapter'] = $chapter;
+
+        $conditionArr = Array();
+        $conditionArr['a_id'] = $aid;
+
+        $dbAdm->updateData($tablename, $colData, $conditionArr);
+	$dbAdm->execSQL();
+    }
 }

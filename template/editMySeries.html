@@ -14,9 +14,31 @@
         </div>
         <div class="col-xs-12">
             <label class="col-xs-2">最後篇章</label>
-            <input type="text" class="col-xs-2 validate[custom[onlyNumberSp]]" name="finallyCh" value="<%=data['as_finally']%>" /> <p class="text-danger col-xs-4 "> 0為沒決定最後篇章，以'?'顯示</p>
+            <input type="text" class="col-xs-2 validate[custom[onlyNumberSp]]" name="finallyCh" value="<%=data['as_finally']%>" /> <p class="text-danger col-xs-4 "> 0为没决定最后篇章，以'?'显示</p>
         </div>
         <button class="col-xs-3">修改</button>
     </form>
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <td>文章标题</td>
+                <td>分级</td>
+                <td>章节</td>
+                <td>修改时间</td>
+            </tr>
+        </thead>
+        <tbody>
+            <% _.each(articles, function(item) { %>
+            <tr>
+                <td><%=item['a_title']%></td>
+                <td><%=item['a_level']%></td>
+                <td class="col-xs-1">
+                    <input class="col-xs-12" type="text" name="chapterNum" value="<%=item['a_chapter']%>" aid="<%=item['a_id']%>" />
+                </td>
+                <td><%=item['a_crtime']%></td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
 </script>
 

@@ -23,7 +23,7 @@ class Control {
 	    $this->instr = $_POST['instr'];
     }
     public function execInstr() {
-        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "seriesGet", "postArticle", "myData", "mySeriesList", "myLastArticle", "articleDel", "memSrsPages", "personalImg", "personalUpd", "passReset", "addMessage", "pressPraise", "articleEdit");
+        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "seriesGet", "postArticle", "myData", "mySeriesList", "myLastArticle", "articleDel", "memSrsPages", "personalImg", "personalUpd", "passReset", "addMessage", "pressPraise", "articleEdit", "articleBySid", "changeArticleChapter");
 	try {
 	    if(!function_exists($this->instr))
 		throw new Exception("instr not defined");
@@ -216,12 +216,22 @@ function seriesDel() {
 
 function seriesGet() {
     require_once("Article/Series.php");
+    require_once("Article/Article.php");
     $series = new Series();
+    $articleAdm = new Article();
+    $para = Array();
+    $para['asid'] = $_POST['sid'];
+    $para['nowPage'] = $_POST['nowPage'];
+    $para['mid'] = $_SESSION['mid'];
+
     $data = $series->getOne($_POST['sid']);
+    $articlesList = $articleAdm->articleBySeries($para);
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "seriesGet success";
     $reData['data'] = $data;
+    $reData['articles'] = $articlesList;
+    $reData['articleAmount'] = $articleAdm->articleAmountBySeries($_POST['sid']);
 
     return $reData;
 }
@@ -500,6 +510,45 @@ function pressPraise() {
     }
 
     $reData['msg'] = $msg;
+    return $reData;
+}
+
+function articleBySid() {
+    require_once("Article/Article.php");
+    $articleAdm = new Article();
+    $para = Array();
+    $para['asid'] = $_POST['seriesId'];
+    $para['nowPage'] = $_POST['nowPage'];
+    $para['mid'] = $_SESSION['mid'];
+    $articlesList = $articleAdm->articleBySeries($para);
+    //print_r($articlesList);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "articleBySid success";
+    $reData['data'] = $articlesList;
+    return $reData;
+}
+
+function articleAmountBySid() {
+    require_once("Article/Article.php");
+    $articleAdm = new Article();
+    $articlesList = $articleAdm->articleBySeries($_POST['seriesId']);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "articleAmountBySid success";
+    return $reData;
+}
+
+function changeArticleChapter() {
+    require_once("Article/Article.php");
+    $articleAdm = new Article();
+    $articleAdm->changeCh($_POST['aid'], $_POST['chapter']);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "changeArticleChapter success";
     return $reData;
 }
 
