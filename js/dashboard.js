@@ -52,6 +52,9 @@ DashboardRout = Backbone.Router.extend({
                 //console.log(data);
                 self.template = _.template($("#editMySeriesTem").html());
                 self.render(data)
+                if(pager==null) 
+                    pager = new Pager({'el' : '#pager'});
+                pager.render3(nowPage, 10, data['articleAmount'], sid);
 
                 $("#content input[name=chapterNum]").on("change", function() {
                     var postData = {};

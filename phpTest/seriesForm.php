@@ -51,6 +51,12 @@
             <button>show article</button>
         </form>
         <form action="../instr.php" method="post">
+            <input type="hidden" name="instr" value="allArticleBySid" />
+            series id :
+            <input type="text" name="seriesId" /><br />
+            <button>show all article</button>
+        </form>
+        <form action="../instr.php" method="post">
             <input type="hidden" name="instr" value="changeArticleChapter" />
             aid : <input type="text" name="aid" /><br />
             chapter : <input type="text" name="chapter" /><br />

@@ -433,11 +433,13 @@ function articleGet() {
     require_once("Article/Article.php");
     $articleAdm = new Article();
     $data = $articleAdm->get($_POST['aid']);
+    $articlesList = $articleAdm->allArticleBySeries($data['as_id']);
 
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "articleGet success";
     $reData['data'] = $data;
+    $reData['articles'] = $articlesList;
     return $reData;
 }
 
@@ -479,7 +481,7 @@ function msgMyList() {
     require_once("Article/Article.php");
     $msg = new Message();
     $articleAdm = new Article();
-    $articleList = $articleAdm->lastList($_SESSION['mid']);
+    $articleList = $articleAdm->myAllList($_SESSION['mid']);
     $aids = Array();
     foreach($articleList as $article) {
         $aids[] = $article['a_id'];
@@ -521,6 +523,20 @@ function articleBySid() {
     $para['nowPage'] = $_POST['nowPage'];
     $para['mid'] = $_SESSION['mid'];
     $articlesList = $articleAdm->articleBySeries($para);
+    //print_r($articlesList);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "articleBySid success";
+    $reData['data'] = $articlesList;
+    return $reData;
+}
+
+function allArticleBySid() {
+    require_once("Article/Article.php");
+    $articleAdm = new Article();
+    $para = Array();
+    $articlesList = $articleAdm->allArticleBySeries($_POST['seriesId']);
     //print_r($articlesList);
 
     $reData = Array();

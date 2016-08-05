@@ -107,6 +107,26 @@ class Article {
         $dbAdm->execSQL();
     }
 
+    public function myAllList($mid) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $column = Array();
+        $column[0] = "*";
+
+        $conditionArr = Array();
+        $conditionArr['m_id'] = $mid;
+
+        $order = Array();
+        $order['col'] = "a_crtime";
+        $order['order'] = "desc";
+
+        $dbAdm->selectData($tablename, $column, $conditionArr, $order);
+        $dbAdm->execSQL();
+
+        return $dbAdm->getAll();
+    }
+
     public function lastList($mid) {
         $tablename = $this->table;
         $dbAdm = $this->dbAdm;
@@ -126,6 +146,7 @@ class Article {
         $limit['amount'] = 5;
 
         $dbAdm->selectData($tablename, $column, $conditionArr, $order, $limit);
+        $dbAdm->sqlSet("select a.*, ss.as_name from $tablename a left join ArticleSeries ss on a.as_id = ss.as_id where a.m_id = $mid order by a_crtime desc limit 0, 5;");
         $dbAdm->execSQL();
 
         return $dbAdm->getAll();
@@ -213,10 +234,29 @@ class Article {
         $limit = Array();
         $limit['offset'] = 0;
         $limit['amount'] = 10;
-        if(isset($page['nowPage']))
+        if(isset($para['nowPage']))
             $limit['offset'] = ($para['nowPage'] -1) * 10;
 
 	$dbAdm->selectData($tablename, $columns, $conditionArr, $order, $limit);
+	$dbAdm->execSQL();
+	return $dbAdm->getAll();
+    }
+
+    public function allArticleBySeries($seriesId) {
+        $dbAdm = $this->dbAdm;
+        $tablename = $this->table;
+
+	$columns = Array();
+	$columns[0] = "*";
+
+        $conditionArr = Array();
+        $conditionArr['as_id'] = $seriesId;
+
+        $order = Array();
+        $order['col'] = "a_chapter";
+        $order['order'] = "asc";
+
+	$dbAdm->selectData($tablename, $columns, $conditionArr, $order);
 	$dbAdm->execSQL();
 	return $dbAdm->getAll();
     }
