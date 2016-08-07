@@ -1,0 +1,45 @@
+<script id="mySeries" type="text/template">
+    <ol class="breadcrumb">
+        <li><a href="#">首頁</a></li>
+        <li><a href="#">Dashboard</a></li>
+        <li class="active">我的系列</li>
+    </ol>
+    <div class="operating">
+        <button>新增系列</button>
+    </div>
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <td>系列名稱</td>
+                <td>含有篇數</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <% _.each(data, function(item) { %>
+            <tr>
+                <td><%=item['as_name']%></td>
+                <td>XX</td>
+                <td>
+                    <a class="glyphicon glyphicon-edit" href="#"></a>
+                    <a class="glyphicon glyphicon-trash" href="#"></a>
+                </td>
+            </tr>
+            <% }); %>
+            <!--
+            <tr>
+                <td>常歌</td>
+                <td>8</td>
+                <td>
+                    <a class="glyphicon glyphicon-edit" href="#"></a>
+                    <a class="glyphicon glyphicon-trash" href="#"></a>
+                </td>
+            </tr>
+            -->
+        </tbody>
+    </table>
+</script>
+<script id="pagerTem" type="text/template">
+    <a class="left-arrow" href="#">&lsaquo;</a>
+    <a class="right-arrow" href="#">&rsaquo;</a>
+</script>
