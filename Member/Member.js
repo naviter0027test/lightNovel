@@ -99,8 +99,10 @@ MemberModel = Backbone.Model.extend({
         $.post("instr.php", loginData, function(data) {
             //console.log(data);
             data = JSON.parse(data);
-            if(data['status'] == 200) 
+            if(data['status'] == 200) {
                 self.set("isLogin", true);
+                alert("登入成功");
+            }
             else {
                 if(data['msg'] == "captcha error") 
                     alert("驗證碼錯誤");

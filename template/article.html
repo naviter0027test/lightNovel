@@ -8,12 +8,13 @@
         nextCh['chapter'] = 9999999;
         nextCh['aid'] = 0;
         %>
-        <select class="col-sm-2">
+        <select class="col-sm-2" name="selectCh">
             <option>選擇章節</option>
         <% _.each(articles, function(item) { 
-            if(prevCh['chapter'] < data['a_chapter']+1) {
+            if(prevCh['chapter'] < parseInt(data['a_chapter']) - 1
+            && prevCh['chapter'] < item['a_chapter']) {
                 prevCh['aid'] = item['a_id'];
-                prevCh['chapter'] = item['a_chapter'];
+                prevCh['chapter'] = parseInt(item['a_chapter']);
             }
         %>
             <option value="<%=item['a_id']%>"><%=item['a_aTitle']%></option>
@@ -25,14 +26,15 @@
         </select>
         <% 
         for(var i = articles.length-1;i >= 0;--i) {
-            if(nextCh['chapter'] > data['a_chapter']-1) {
+            if(nextCh['chapter'] > parseInt(data['a_chapter']) +1
+            && nextCh['chapter'] > articles[i]['a_chapter']) {
                 nextCh['aid'] = articles[i]['a_id'];
-                nextCh['chapter'] = articles[i]['a_chapter'];
+                nextCh['chapter'] = parseInt(articles[i]['a_chapter']);
             }
         }
         %>
-        <a class="col-sm-2" href="#<%=(prevCh['aid']!=0?'article/'+prevCh['aid']:'')%>">後一章節</a>
-        <a class="col-sm-2" href="#<%=(nextCh['aid']!=0?'article/'+nextCh['aid']:'')%>">前一章節</a>
+        <a class="col-sm-2" href="#article/<%=nextCh['aid']%>">後一章節</a>
+        <a class="col-sm-2" href="#article/<%=(prevCh['aid']!=0?prevCh['aid']:data['a_id'])%>">前一章節</a>
         <a class="col-sm-2" href="#">全文顯示</a>
         <a class="col-sm-1" href="#pressPraise/<%=data['a_id']%>">點讚</a>
     </div>
@@ -61,14 +63,41 @@
         </div>
     </div>
     <div class="operPanel col-xs-12">
-        <select class="col-sm-2">
+        <% 
+        var prevCh = {};
+        prevCh['chapter'] = 0;
+        prevCh['aid'] = 0;
+        var nextCh = {};
+        nextCh['chapter'] = 9999999;
+        nextCh['aid'] = 0;
+        %>
+        <select class="col-sm-2" name="selectCh">
             <option>選擇章節</option>
-            <option>Ch3 章節標題</option>
+        <% _.each(articles, function(item) { 
+            if(prevCh['chapter'] < parseInt(data['a_chapter']) - 1
+            && prevCh['chapter'] < item['a_chapter']) {
+                prevCh['aid'] = item['a_id'];
+                prevCh['chapter'] = parseInt(item['a_chapter']);
+            }
+        %>
+            <option value="<%=item['a_id']%>"><%=item['a_aTitle']%></option>
+        <% }); %>
+            <!--
             <option>Ch4 章節標題</option>
             <option>Ch5 章節標題</option>
+            -->
         </select>
-        <a class="col-sm-2" href="#">後一章節</a>
-        <a class="col-sm-2" href="#">前一章節</a>
+        <% 
+        for(var i = articles.length-1;i >= 0;--i) {
+            if(nextCh['chapter'] > parseInt(data['a_chapter']) +1
+            && nextCh['chapter'] > articles[i]['a_chapter']) {
+                nextCh['aid'] = articles[i]['a_id'];
+                nextCh['chapter'] = parseInt(articles[i]['a_chapter']);
+            }
+        }
+        %>
+        <a class="col-sm-2" href="#article/<%=nextCh['aid']%>">後一章節</a>
+        <a class="col-sm-2" href="#article/<%=(prevCh['aid']!=0?prevCh['aid']:data['a_id'])%>">前一章節</a>
         <a class="col-sm-2" href="#">全文顯示</a>
         <a class="col-sm-1" href="#pressPraise/<%=data['a_id']%>">點讚</a>
     </div>
