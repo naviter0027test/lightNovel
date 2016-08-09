@@ -18,7 +18,7 @@ Pager = Backbone.View.extend({
         var data = {};
         data['nowPage'] = nowPage;
         data['pageLimit'] = pageLimit;
-        console.log(this.model.get("data"));
+        //console.log(this.model.get("data"));
         data['amount'] = this.model.get("data")['amount'];
         $("#pager").html(this.template(data));
     },

@@ -173,9 +173,11 @@ class Article {
 
         //$dbAdm->selectData($tablename, $column, null, $order, $limit);
         $dbAdm->sqlSet("
-            select case when (ass.as_finally = 0) then '?' else ass.as_finally end as as_finally, a.* 
+            select count(p.p_id) praiseAmount ,
+            case when (ass.as_finally = 0) then '?' else ass.as_finally end as as_finally, a.* 
             from `Article` a
             left join ArticleSeries ass on a.as_id = ass.as_id
+            left join Praise p on a.a_id = p.a_id group by a.a_id
             order by ". $order['col']. " ". $order['order'].
             " limit ". $limit['offset']. ", ". $limit['amount']);
         $dbAdm->execSQL();
@@ -194,11 +196,13 @@ class Article {
         $conditionArr['a_id'] = $aid;
 
         //$dbAdm->selectData($tablename, $column, $conditionArr, null, null);
-        $dbAdm->sqlSet("select 
+        $dbAdm->sqlSet("select count(p.m_id) praiseAmount,
             case when (ss.as_finally = 0) then '?' 
             else ss.as_finally end as as_finally ,a.*
-            from `Article` a left join ArticleSeries ss on ss.as_id = a.as_id
-            where a.a_id = ". $aid);
+                from `Article` a 
+                left join ArticleSeries ss on ss.as_id = a.as_id
+                left join Praise p on p.a_id = a.a_id
+            where a.a_id = ". $aid. " group by p.a_id");
         $dbAdm->execSQL();
 
         return $dbAdm->getAll()[0];
