@@ -3,7 +3,7 @@
     <div class="articleItem">
         <h3><a href="article.html#article/<%=item['a_id']%>"><%=item['a_title']%></a>（系列名稱）By作者名稱</h3>
         分級：<label><%=item['a_level']%></label> 
-        屬性：<label><%=(item['a_attr']=="article"?"文":"推文")%></label> 更新日期：<label><%=item['a_crtime']%></label> <br />
+        属性：<label><%=(item['a_attr']=="article"?"文":"推文")%></label> 更新日期：<label><%=item['a_crtime']%></label> <br />
         <% if(item['a_mainCp'] != "") { %>
         <h4>主CP：<%=item['a_mainCp']%></h4>
         <% } %>
@@ -14,13 +14,13 @@
         <h4>警告：<%=item['a_alert']%></h4>
         <% } %>
         <% if(item['a_tag'] != "") { %>
-        <h4>標籤：<%=item['a_tag']%></h4>
+        <h4>标签：<%=item['a_tag']%></h4>
         <% } %>
         <span class="col-xs-6">
         <% if(item['as_finally'] != null) { %>
-            章節：<label><%=item['a_chapter']%>/<%=item['as_finally']%></label> 
+            章节：<label><%=item['a_chapter']%>/<%=item['as_finally']%></label> 
         <% } %>
-        <label>讚：</label><%=item['praiseAmount']%> <label>點擊數：</label>功能尚未開放 </span><br />
+        <label>赞：</label><%=item['praiseAmount']%> <label>点击数：</label>功能尚未开放 </span><br />
     </div>
     <% }); %>
     <!--
