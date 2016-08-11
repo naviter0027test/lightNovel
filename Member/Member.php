@@ -133,6 +133,32 @@ class Member {
         sendMail($user['email'], "[樓誠]啟用信件（系統發信，請勿回覆）", $content);
     }
 
+    public function newPass($num = 8) {
+        $chars = "1qaz2wsx3edc4rfv5tgb6yhn7ujm8ik9ol0p";
+        $newPassword = "";
+        for($i = 0;$i < $num;++$i) {
+            $pos = rand(0, strlen($chars)-1);
+            $newPassword .= $chars[$pos];
+        }
+        return $newPassword;
+    }
+
+    public function forget($user) {
+        if(file_exists("../srvLib/SmailMail.php")) 
+            require_once("../srvLib/SmailMail.php");
+        else
+            require_once("srvLib/SmailMail.php");
+        $dbAdm = $this->dbAdm;
+        $tablename = $this->table;
+        $mem = $this->getOne($user);
+        $newPassword = $this->newPass(8);
+        $colData = Array();
+        $colData['m_pass'] = md5($newPassword);
+        $this->dataUpdate($colData, $mem['m_id']);
+        $content = "忘记密码信件，您的新密码：". $newPassword;
+        sendMail($mem['m_email'], "[楼诚]忘记密码信件（系统发信，请勿回覆）", $content);
+    }
+
     public function authenticate($user, $authCode) {
         $dbAdm = $this->dbAdm;
         $tablename = $this->table;
