@@ -7,6 +7,15 @@
     <body>
         <h1> mid : <?=$_SESSION['mid']?></h1>
         <form action="../instr.php" method="post">
+            <input type="hidden" name="instr" value="memArticleList" />
+            now page : 
+            <input type="text" name="nowPage" /><br />
+            page limit : 
+            <input type="text" name="pageLimit" /><br />
+            <button>my list</button>
+        </form>
+
+        <form action="../instr.php" method="post">
             <input type="hidden" name="instr" value="articleList" />
             now page : 
             <input type="text" name="nowPage" /><br />
@@ -51,6 +60,12 @@
             <input type="text" name="pageLimit" />
             <br />
             <button>my last article list</button>
+        </form>
+
+        <form action="../instr.php" method="post">
+            <input type="hidden" name="instr" value="memSrsPages" />
+            <br />
+            <button>member series pages</button>
         </form>
     </body>
 </html>

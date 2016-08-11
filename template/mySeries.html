@@ -40,6 +40,19 @@
     </table>
 </script>
 <script id="pagerTem" type="text/template">
-    <a class="left-arrow" href="#">&lsaquo;</a>
     <a class="right-arrow" href="#">&rsaquo;</a>
+    <% pageSum = Math.ceil(amount / pageLimit); %>
+    <% for(idx = pageSum; idx >= 1;--idx) { %>
+        <% if(idx == nowPage) { %>
+        <label><%=idx%></label>
+        <% } else { %>
+        <a href="#changePage/mySeries/<%=idx%>/<%=pageLimit%>"><%=idx%></a>
+        <% } %>
+    <% } %>
+    <!--
+    <label>1</label>
+    <a href="#changePage/mySeries/2/10/">2</a>
+    <a href="#changePage/mySeries/3/10/">3</a>
+    -->
+    <a class="left-arrow" href="#">&lsaquo;</a>
 </script>

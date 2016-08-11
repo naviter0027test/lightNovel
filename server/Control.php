@@ -23,7 +23,7 @@ class Control {
 	    $this->instr = $_POST['instr'];
     }
     public function execInstr() {
-        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "postArticle", "myData", "mySeriesList");
+        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "postArticle", "myData", "mySeriesList", "myLastArticle", "memSrsPages", "personalImg", "personalUpd", "passReset");
 	try {
 	    if(!function_exists($this->instr))
 		throw new Exception("instr not defined");
@@ -34,8 +34,13 @@ class Control {
             fwrite($logFile, $txt);
             fclose($logFile);
 
-            if(in_array($instr, $mustBeLogin) && !isset($_SESSION['mid']))
+            if(in_array($instr, $mustBeLogin) && !isset($_SESSION['mid'])) {
+                require_once("Admin/Admin.php");
+                $adm = new Admin();
+                if(!$adm->isOpen())
+                    throw new Exception("web not open");
                 throw new Exception("member not login");
+            }
 	    $reData = $instr();
 	    echo json_encode($reData);
 	}
@@ -113,8 +118,8 @@ function register() {
 function upActive() {
     require_once("Member/Member.php");
     $member = new Member();
-    $user = $_GET['user'];
-    $activeCode = $_GET['email'];
+    $user = $_POST['user'];
+    $activeCode = $_POST['email'];
     $member->authenticate($user, $activeCode);
     $reData = Array();
     $reData['status'] = 200;
@@ -235,6 +240,11 @@ function myData() {
     $member = new Member();
     $myData = $member->getOneById($_SESSION['mid']);
 
+    if(file_exists("imgs/tmp/". $myData['m_user']))
+        $myData['headImg'] = "imgs/tmp/". $myData['m_user'];
+    else
+        $myData['headImg'] = "imgs/80x80.png";
+
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "myData success";
@@ -261,6 +271,78 @@ function myLastArticle() {
     $reData['status'] = 200;
     $reData['msg'] = "myLastArticle success";
     //$reData['data'] = $Lists;
+    return $reData;
+}
+
+function memSrsPages() {
+    require_once("Article/Series.php");
+    $series = new Series();
+
+    $amount = $series->amount($_SESSION['mid']);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "memSrsPages success";
+    $reData['amount'] = $amount['amount'];
+    return $reData;
+}
+
+function personalUpd() {
+    require_once("Member/Member.php");
+    $member = new Member();
+    $colData = Array();
+    $colData['m_email'] = $_POST['email'];
+    $member->dataUpdate($colData, $_SESSION['mid']);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "personalUpd success";
+    return $reData;
+}
+
+function personalImg() {
+    require_once("upload/Upload.php");
+    require_once("Member/Member.php");
+    $member = new Member();
+    $upfile = new Upload();
+
+    $myData = $member->getOneById($_SESSION['mid']);
+    $upResult = $upfile->uploadFinish($myData['m_user']);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "personalImg success";
+    $reData['info'] = $upResult;
+    return $reData;
+}
+
+function passReset() {
+    require_once("Member/Member.php");
+    $member = new Member();
+    $pass = $member->getOnePassById($_SESSION['mid']);
+    if($pass == md5($_POST['oldPass'])) {
+        $colData = Array();
+        $colData['m_pass'] = md5($_POST['newPass']);
+        $member->dataUpdate($colData, $_SESSION['mid']);
+    }
+    else
+        throw new Exception("old pass error");
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "passReset success";
+    return $reData;
+}
+
+function memArticleList() {
+    require_once("Article/Article.php");
+    $articleAdm = new Article();
+    $articleList = $articleAdm->lastList($_SESSION['mid']);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "memArticleList success";
+    $reData['data'] = $articleList;
     return $reData;
 }
 

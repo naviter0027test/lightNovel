@@ -6,13 +6,15 @@ $(document).ready(function() {
 
 DashboardRout = Backbone.Router.extend({
     routes : {
-        "changePage/:page" : "changePage"
+        "changePage/:page" : "changePage",
+        "changePage/:page/:nowPage/:pageLimit" : "changePage"
     },
-    changePage : function(page) {
-        console.log(page);
+    changePage : function(page, nowPage, pageLimit) {
+        //console.log(page);
         //console.log("template/"+$(evt.target).attr("href"));
         //console.log(evt.target);
         var memModel = new MemberModel();
+        var articleModel = new ArticleModel();
         var self = dashboard;
         var loadPage = "template/"+ page+ ".html";
         var clickBtn = $("#dashboard a[temid="+page+"]");
@@ -22,14 +24,24 @@ DashboardRout = Backbone.Router.extend({
         $(allLi).removeClass("nowChoose");
         $(clickBtn).parent().addClass("nowChoose");
 
+        pager = null;
+
         //設定資料修改的瞬間進行render
         memModel.on("change:myData", function() {
             self.render(memModel.get("myData"));
+            $.getScript("Member/Personal.js", function() {
+                personal = new Personal({'el' : "#personalForm"});
+                personalimg = new PersonalImg({'el' : "#personalImg"});
+            });
         });
         memModel.on("change:seriesList", function() {
             self.render(memModel.get("seriesList"));
         });
+        memModel.on("change:seriesAmount", function() {
+            pager.render(nowPage, pageLimit);
+        });
 
+        $("#pager").html('');
         $("#contentTem").load(loadPage, function() {
             var idname = $(clickBtn).attr("temid");
             self.template = _.template($("#"+idname).html());
@@ -39,9 +51,21 @@ DashboardRout = Backbone.Router.extend({
             }
             else if(idname == "mySeries") {
                 var para = {};
-                para['nowPage'] = 1;
-                para['pageLimit'] = 10;
+                para['nowPage'] = nowPage;
+                para['pageLimit'] = pageLimit;
                 memModel.getMySeriesList(para);
+
+                pager = new Pager({'el' : '#pager', 'model' : memModel});
+                memModel.getMySerieses();
+            }
+            else if(idname == "myLastArticle") {
+                articleModel.myLastArticles();
+            }
+            else if(idname == "resetPass") {
+                self.render();
+                $.getScript("Member/Personal.js", function() {
+                    personal = new PassForm({'el' : "#passUpdForm"});
+                });
             }
             else
                 self.render();

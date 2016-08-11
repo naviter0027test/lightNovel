@@ -4,9 +4,11 @@
         <meta charset="utf-8" />
 	<link href='lib/bootstrap/dist/css/bootstrap.min.css' rel='stylesheet' />
 	<link href='lib/bootstrap/dist/css/bootstrap-theme.min.css' rel='stylesheet' />
+	<link rel="stylesheet" href="lib/validationengine/css/validationEngine.jquery.css" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="css/header.css" />
 	<link rel="stylesheet" type="text/css" href="css/dashboard.css" />
 	<link rel="stylesheet" type="text/css" href="css/userContent.css" />
+	<link rel="stylesheet" type="text/css" href="css/pager.css" />
     </head>
     <body>
         <div id="header">
@@ -37,11 +39,11 @@
         <div id="dashboard" class="col-sm-3">
             <ul>
                 <h3>Dashboard</h3>
-                <li class="nowChoose"><a temid="personal" href="#changePage/personal">修改个人资料</a><div class="right-arrow"></div></li>
-                <li><a temid="resetPass" href="#changePage/resetPass">重设密码</a><div class="right-arrow"></div></li>
-                <li><a temid="mySeries" href="#changePage/mySeries">我的系列</a><div class="right-arrow"></div></li>
-                <li><a temid="myLastArticle" href="#changePage/myLastArticle">我的最新文章</a><div class="right-arrow"></div></li>
-                <li><a temid="getMessage" href="#changePage/getMessage">收到的留言</a><div class="right-arrow"></div></li>
+                <li class="nowChoose"><a temid="personal" href="#changePage/personal">修改个人资料</a></li>
+                <li><a temid="resetPass" href="#changePage/resetPass">重设密码</a></li>
+                <li><a temid="mySeries" href="#changePage/mySeries/1/10">我的系列</a></li>
+                <li><a temid="myLastArticle" href="#changePage/myLastArticle">我的最新文章</a></li>
+                <li><a temid="getMessage" href="#changePage/getMessage">收到的留言</a></li>
             </ul>
         </div>
         <div id="content" class="col-sm-9 userContent">
@@ -65,7 +67,7 @@
                 <!-- <label>我的文章數量 : </label><span> 22 </span><br /> -->
             </form>
         </div>
-        <div id="pager">
+        <div id="pager" class="col-xs-12">
         </div>
         <div id="contentTem">
         </div>
@@ -74,10 +76,15 @@
     </body>
     <script src="lib/jquery-2.1.4.min.js"></script>
     <script src='lib/bootstrap/dist/js/bootstrap.min.js'></script>
+    <script src="lib/validationengine/js/languages/jquery.validationEngine-zh_TW.js"></script>
+    <script src="lib/validationengine/js/jquery.validationEngine.js"></script>
     <script src="lib/underscore.js"></script>
     <script src="lib/backbone.js"></script>
+    <script src="lib/jquery.form.js"></script>
     <script src="Member/Member.js"></script>
     <script src="js/header.js"></script>
+    <script src="js/Pager.js"></script>
     <script src="Article/Dashboard.js"></script>
+    <script src="Article/Article.js"></script>
     <script src="js/dashboard.js"></script>
 </html>

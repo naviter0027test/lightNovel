@@ -106,4 +106,18 @@ class Series {
 	$dbAdm->execSQL();
 	return $dbAdm->getAll()[0];
     }
+
+    public function amount($mid) {
+        $dbAdm = $this->dbAdm;
+        $tablename = $this->table;
+
+	$columns = Array();
+	$columns[0] = "count(*) amount";
+	$conditionArr = Array();
+        $conditionArr['m_id'] = $mid;
+
+	$dbAdm->selectData($tablename, $columns, $conditionArr);
+	$dbAdm->execSQL();
+	return $dbAdm->getAll()[0];
+    }
 }

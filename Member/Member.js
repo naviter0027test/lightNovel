@@ -17,7 +17,8 @@ HeadPanel = Backbone.View.extend({
 
         this.model.on("change:myData", function() {
             var data = this.get("myData");
-            $("#memberPanel .memHello").text(data['data']['m_user']+ " 您好！");
+            if(data['status'] == 200)
+                $("#memberPanel .memHello").text(data['data']['m_user']+ " 您好！");
         });
 
     },
@@ -79,7 +80,7 @@ MemberModel = Backbone.Model.extend({
 	'data' : null,
         'myData' : null,
         'seriesList' : null,
-        'seriesListPages' : null,
+        'seriesAmount' : null,
         'orderDetail' : null,
         'isLogin' : null
     },
@@ -119,6 +120,7 @@ MemberModel = Backbone.Model.extend({
         var postData = {};
         postData['instr'] = "isLogin";
         $.post("instr.php", postData, function(data) {
+            //console.log(data);
             data = JSON.parse(data);
             //console.log(data);
             if(data['status'] == 200) 
@@ -143,8 +145,19 @@ MemberModel = Backbone.Model.extend({
         $.post("instr.php", postData, function(data) {
             //console.log(data);
             data = JSON.parse(data);
-            console.log(data);
+            //console.log(data);
             self.set("seriesList", data);
+        });
+    },
+    getMySerieses : function() {
+        var self = this;
+        postData = {};
+        postData['instr'] = "memSrsPages";
+        $.post("instr.php", postData, function(data) {
+            //console.log(data);
+            data = JSON.parse(data);
+            //console.log(data);
+            self.set("seriesAmount", data['amount']);
         });
     }
 });
