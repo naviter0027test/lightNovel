@@ -57,15 +57,17 @@ class Series {
 	    $nowPage = $listPara['nowPage'];
         $pageLimit = $listPara['pageLimit'];
 
-	$columns = Array();
-	$columns[0] = "*";
-	$conditionArr = Array();
-        $conditionArr['m_id'] = $mid;
+	//$columns = Array();
+	//$columns[0] = "*";
+	//$conditionArr = Array();
+        //$conditionArr['m_id'] = $mid;
 
         $limit = Array();
         $limit['offset'] = ($nowPage - 1) * $pageLimit;
         $limit['amount'] = $pageLimit;
-	$dbAdm->selectData($tablename, $columns, $conditionArr, null, $limit);
+	//$dbAdm->selectData($tablename, $columns, $conditionArr, null, $limit);
+
+        $dbAdm->sqlSet("select s.*, case when isnull(ss.articleCount) then 0 else ss.articleCount end as articleCount from ArticleSeries s left join (SELECT s.*, count(a.a_id) articleCount FROM `ArticleSeries` s inner join Article a on a.as_id = s.as_id where s.m_id = $mid group by a.as_id) ss on s.as_id = ss.as_id where s.m_id = $mid limit ". $limit['offset']. ", ". $limit['amount']);
 	$dbAdm->execSQL();
 	return $dbAdm->getAll();
     }
@@ -76,6 +78,7 @@ class Series {
 
         $upData = Array();
         $upData['as_name'] = $data['as_name'];
+        $upData['as_finally'] = $data['as_finally'];
 
         $conditionArr = Array();
         $conditionArr['as_id'] = $data['as_id'];

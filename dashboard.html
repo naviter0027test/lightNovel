@@ -6,6 +6,7 @@
 	<link href='lib/bootstrap/dist/css/bootstrap-theme.min.css' rel='stylesheet' />
 	<link rel="stylesheet" href="lib/validationengine/css/validationEngine.jquery.css" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="css/header.css" />
+	<link rel="stylesheet" type="text/css" href="css/postArticle.css" />
 	<link rel="stylesheet" type="text/css" href="css/dashboard.css" />
 	<link rel="stylesheet" type="text/css" href="css/userContent.css" />
 	<link rel="stylesheet" type="text/css" href="css/pager.css" />
@@ -38,34 +39,38 @@
         </div>
         <div id="dashboard" class="col-sm-3">
             <ul>
-                <h3>Dashboard</h3>
-                <li class="nowChoose"><a temid="personal" href="#changePage/personal">修改个人资料</a></li>
+                <h3 class="nowChoose">Dashboard</h3>
+                <li><a temid="personal" href="#changePage/personal">修改个人资料</a></li>
                 <li><a temid="resetPass" href="#changePage/resetPass">重设密码</a></li>
-                <li><a temid="mySeries" href="#changePage/mySeries/1/10">我的系列</a></li>
+                <li><a temid="mySeries" href="#changePage/mySeries/1/10">我的系列</a><div class="right-arrow"></div></li>
                 <li><a temid="myLastArticle" href="#changePage/myLastArticle">我的最新文章</a></li>
-                <li><a temid="getMessage" href="#changePage/getMessage">收到的留言</a></li>
+                <li><a temid="getMessage" href="#changePage/getMessage/1/10">收到的留言</a></li>
             </ul>
         </div>
         <div id="content" class="col-sm-9 userContent">
-            <form action="instr.php" method="post">
-                <div class="col-xs-12">
-                    <img src="http://fakeimg.pl/80/" />
-                    <h5 class="col-xs-6">使用者帳號</h5>
-                    <h5 class="col-xs-6">test123456</h5>
-                </div>
-                <div class="col-xs-12">
-                    <label class="col-xs-3">圖像上傳 : </label>
-                    <input class="col-xs-6" type="file" name="img[]" />
-                    <br />
-                </div>
-                <div class="col-xs-12">
-                    <label class="col-xs-3">email : </label>
-                    <input class="col-xs-6" type="text" name="email" />
-                    <br />
-                </div>
-                <button class="col-xs-3">修改</button>
-                <!-- <label>我的文章數量 : </label><span> 22 </span><br /> -->
-            </form>
+            <ol class="breadcrumb">
+                <li><a href="#">首頁</a></li>
+                <li class="active">Dashboard</li>
+            </ol>
+            <div class="col-xs-12">
+                <h2>歡迎登入</h2>
+            </div>
+            <hr />
+            <p>本站為耽美向同人發布網站。主題限電視劇&Lt;偽裝者&Gt; 中人物明樓與明誠、及兩位演員所飾演其他角色所組成的CP。如您不了解或不喜歡耽美、同人作品，或不喜歡相關CP，請勿進入。</p>
+            <p>本站恕不接受如下作品：</p>
+            <ol>
+                <li>拆CP作品或其他不符合本站主題的作品；</li>
+                <li>含有真人CP內容的作品；</li>
+                <li>描寫兒童色情內容的作品；</li>
+                <li>含有侮辱演員或上述角色內容的作品。</li>
+            </ol>
+            <p>使用本站請遵守如下規則：</p>
+            <ol>
+                <li>遵守同人禮儀，請勿在真人在場場合或微博等社交媒體提及本站；</li>
+                <li>理性交流、文明用語</li>
+            </ol>
+            <p>祝您使用愉快！</p>
+            <!-- <label>我的文章數量 : </label><span> 22 </span><br /> -->
         </div>
         <div id="pager" class="col-xs-12">
         </div>
@@ -75,6 +80,7 @@
         </div>
     </body>
     <script src="lib/jquery-2.1.4.min.js"></script>
+    <script src='lib/ckeditor/ckeditor.js'></script>
     <script src='lib/bootstrap/dist/js/bootstrap.min.js'></script>
     <script src="lib/validationengine/js/languages/jquery.validationEngine-zh_TW.js"></script>
     <script src="lib/validationengine/js/jquery.validationEngine.js"></script>
@@ -86,5 +92,6 @@
     <script src="js/Pager.js"></script>
     <script src="Article/Dashboard.js"></script>
     <script src="Article/Article.js"></script>
+    <script src="Article/Message.js"></script>
     <script src="js/dashboard.js"></script>
 </html>

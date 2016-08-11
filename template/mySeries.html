@@ -5,12 +5,15 @@
         <li class="active">我的系列</li>
     </ol>
     <div class="operating">
-        <button>新增系列</button>
+        <a href="#addSeries">
+            <button>新增系列</button>
+        </a>
     </div>
     <table class="table table-condensed">
         <thead>
             <tr>
                 <td>系列名稱</td>
+                <td>最後一章</td>
                 <td>含有篇數</td>
                 <td>操作</td>
             </tr>
@@ -19,9 +22,12 @@
             <% _.each(data, function(item) { %>
             <tr>
                 <td><%=item['as_name']%></td>
-                <td>XX</td>
                 <td>
-                    <a class="glyphicon glyphicon-edit" href="#"></a>
+                    <%=(item['as_finally'] != 0?item['as_finally']:"?")%>
+                </td>
+                <td><%=item['articleCount']%></td>
+                <td>
+                    <a class="glyphicon glyphicon-edit" href="#editSeries/<%=item['as_id']%>"></a>
                     <a class="glyphicon glyphicon-trash" href="#"></a>
                 </td>
             </tr>

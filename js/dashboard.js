@@ -1,3 +1,4 @@
+var articleEditForm = null;
 $(document).ready(function() {
     dashboard = new Dashboard({'el' : '#dashboard'});
     new DashboardRout();
@@ -6,9 +7,109 @@ $(document).ready(function() {
 
 DashboardRout = Backbone.Router.extend({
     routes : {
+        "addSeries" : "addSeries",
+        "editSeries/:sid" : "editMySeries",
+        "articleEdit/:aid" : "articleEdit",
+        "articleDel/:aid" : "articleDel",
         "changePage/:page" : "changePage",
         "changePage/:page/:nowPage/:pageLimit" : "changePage"
     },
+
+    addSeries : function() {
+        var self = dashboard;
+        var loadPage = "template/addSeries.html";
+        $("#contentTem").load(loadPage, function() {
+            self.template = _.template($("#addSeriesTem").html());
+            self.render()
+            $("#addSeriesForm").submit(function() {
+                var postData = $(this).serialize();
+                console.log(postData);
+                $.post("instr.php", postData, function(data) {
+                    console.log(data);
+                    data = JSON.parse(data);
+                    console.log(data);
+                    if(data['status'] == 200) {
+                        alert("新增成功");
+                        history.go(-1);
+                    }
+                });
+                return false;
+            });
+        });
+    },
+
+    editMySeries : function(sid) {
+        var self = dashboard;
+        var loadPage = "template/editMySeries.html";
+        $("#contentTem").load(loadPage, function() {
+            var postData = {};
+            postData['instr'] = "seriesGet";
+            postData['sid'] = sid;
+            $.post("instr.php", postData, function(data) {
+                //console.log(data);
+                data = JSON.parse(data);
+                console.log(data);
+                self.template = _.template($("#editMySeriesTem").html());
+                self.render(data)
+                $("#seriesEditForm").submit(function() {
+                    if(!$(this).validationEngine("validate"))
+                        return false;
+                    $(this).ajaxSubmit(function(result) {
+                        console.log(result);
+                        result = JSON.parse(result);
+                        console.log(result);
+                        if(result['status'] == 200) {
+                            alert("編輯成功");
+                            history.go(-1);
+                        }
+                        else {
+                            console.log(result);
+                        }
+                    });
+                    return false;
+                });
+            });
+        });
+    },
+
+    articleEdit : function(aid) {
+        //console.log(aid);
+        $("#contentTem").load("template/articleEdit.html", function() {
+            var postData = {};
+            postData['instr'] = "articleGet";
+            postData['aid'] = aid;
+            $.post("instr.php", postData, function(data) {
+                //console.log(data);
+                data = JSON.parse(data);
+                data['data']['a_mainCp'] = data['data']['a_mainCp'].split(";");
+                data['data']['a_mainCp2'] = data['data']['a_mainCp2'].split(";");
+                //console.log(data);
+                if(data['status'] == 200) {
+                    templateEdit = _.template($("#articleEdit").html());
+                    $("#content").html(templateEdit(data));
+                    var articleEditForm = new PostArticleForm({'el' : '#postArticleForm'});
+                    CKEDITOR.replace("editor1");
+                    CKEDITOR.instances.editor1.setData(data['data']['a_content']);
+                }
+            });
+        });
+    },
+
+    articleDel : function(aid) {
+        var postData = {};
+        postData['instr'] = "articleDel";
+        postData['aid'] = aid;
+        $.post("instr.php", postData, function(data) {
+            //console.log(data);
+            data = JSON.parse(data);
+            console.log(data);
+            if(data['status'] == 200) {
+                alert("刪除成功");
+                history.go(-1);
+            }
+        });
+    },
+
     changePage : function(page, nowPage, pageLimit) {
         //console.log(page);
         //console.log("template/"+$(evt.target).attr("href"));
@@ -16,6 +117,8 @@ DashboardRout = Backbone.Router.extend({
         var memModel = new MemberModel();
         var articleModel = new ArticleModel();
         var self = dashboard;
+        var myArticle = new MyArticle();
+        var message = new MyMessage({"el" : "#content", "model" : new MsgModel()});
         var loadPage = "template/"+ page+ ".html";
         var clickBtn = $("#dashboard a[temid="+page+"]");
 
@@ -40,11 +143,20 @@ DashboardRout = Backbone.Router.extend({
         memModel.on("change:seriesAmount", function() {
             pager.render(nowPage, pageLimit);
         });
+        message.model.on("change:data", function() {
+            message.render();
+        });
+
+        //文章取得時切換html
+        articleModel.on("change:myLastArticles", function() {
+            myArticle.render(articleModel.get("myLastArticles"));
+        });
 
         $("#pager").html('');
         $("#contentTem").load(loadPage, function() {
             var idname = $(clickBtn).attr("temid");
             self.template = _.template($("#"+idname).html());
+            myArticle.template = _.template($("#"+idname).html());
 
             if(idname == "personal") {
                 memModel.getMyData();
@@ -66,6 +178,15 @@ DashboardRout = Backbone.Router.extend({
                 $.getScript("Member/Personal.js", function() {
                     personal = new PassForm({'el' : "#passUpdForm"});
                 });
+            }
+            else if(idname == "getMessage") {
+                function isNumeric(n) {
+                    return !isNaN(parseFloat(n)) && isFinite(n);
+                }
+                if(isNumeric(nowPage))
+                    message.model.set("nowPage", nowPage);
+                message.template = _.template($("#getMessage").html());
+                message.model.myList();;
             }
             else
                 self.render();
