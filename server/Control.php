@@ -23,7 +23,7 @@ class Control {
 	    $this->instr = $_POST['instr'];
     }
     public function execInstr() {
-        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "seriesGet", "postArticle", "myData", "mySeriesList", "myLastArticle", "articleDel", "memSrsPages", "personalImg", "personalUpd", "passReset", "addMessage", "pressPraise");
+        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "seriesGet", "postArticle", "myData", "mySeriesList", "myLastArticle", "articleDel", "memSrsPages", "personalImg", "personalUpd", "passReset", "addMessage", "pressPraise", "articleEdit");
 	try {
 	    if(!function_exists($this->instr))
 		throw new Exception("instr not defined");
@@ -246,6 +246,28 @@ function postArticle() {
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "post article success";
+    return $reData;
+}
+
+function articleEdit() {
+    require_once("Article/Article.php");
+    $articleAdm = new Article();
+    $article = Array();
+    foreach($_POST as $key => $val) {
+        $article[$key] = $val;
+    }
+    $article['mId'] = $_SESSION['mid'];
+    $article['cp1'] = implode(";", $article['cp1']);
+    if(is_array($article['cp2'] ))
+        $article['cp2'] = implode(";", $article['cp2']);
+    if(isset($article['viceCp']))
+        $article['subCp'] = $article['viceCp'];
+    $article['tag'] = implode(";", $article['tag']);
+    $article['alert'] = implode(";", $article['alert']);
+    $articleAdm->articleUpd($article);
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "articleEdit success";
     return $reData;
 }
 

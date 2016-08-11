@@ -75,6 +75,38 @@ class Article {
         $dbAdm->execSQL();
     }
 
+    public function articleUpd($article) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $updData = Array();
+        $updData['a_title'] = $article['title'];
+        $updData['a_attr'] = $article['articleType'];
+        $updData['a_level'] = $article['level'];
+        if(isset($article['series']))
+            $updData['as_id'] = $article['series'];
+        $updData['a_mainCp'] = $article['cp1'];
+        $updData['a_mainCp2'] = $article['cp2'];
+        if(isset($article['subCp']))
+            $updData['a_subCp'] = $article['subCp']; 
+        $updData['a_alert'] = $article['alert']; 
+        $updData['m_id'] = $article['mId'];    
+        $updData['a_tag'] = $article['tag'];
+        $updData['a_aTitle'] = $article['aTitle'];
+        if(isset($article['aChapter']))
+            $updData['a_chapter'] = $article['aChapter'];
+        if(isset($article['aMemo']))
+            $updData['a_memo'] = $article['aMemo']  ;
+        $updData['a_content'] = $article['content'];
+        $updData['a_crtime'] = date('Y-m-d H:i:s');
+
+        $conditionArr = Array();
+        $conditionArr['a_id'] = $article['aid'];
+
+        $dbAdm->updateData($tablename, $updData, $conditionArr);
+        $dbAdm->execSQL();
+    }
+
     public function lastList($mid) {
         $tablename = $this->table;
         $dbAdm = $this->dbAdm;
