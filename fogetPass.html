@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <title>樓誠文庫</title>
+        <meta charset="utf-8" />
+	<link href='lib/bootstrap/dist/css/bootstrap.min.css' rel='stylesheet' />
+	<link href='lib/bootstrap/dist/css/bootstrap-theme.min.css' rel='stylesheet' />
+	<link rel="stylesheet" href="lib/validationengine/css/validationEngine.jquery.css" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="css/header.css" />
+    </head>
+    <body>
+        <div id="header">
+            <img src="imgs/LogoTemplate.png" />
+            <div class="nav col-xs-12">
+                <a class=""  href="index.html">文章浏览</a>
+                <a class=""  href="useExplan.html">使用说明</a>
+                <a class="rightNav login" href="#">登入</a>
+            </div>
+        </div>
+        <div id="content" class="col-xs-12">
+            <form id="forgetContent" action="instr.php" method="post">
+                <input type="hidden" name="instr" value="forgetPass" />
+                <h3 class="col-xs-12">忘记密码</h3>
+                <span class="col-xs-3">帐号</span>
+                <input class="col-xs-7 input validate[required]" type="text" name="user" placeholder="请填写新帐号，新密码会寄送到之前填写的Email" />
+                <span class="col-xs-3">验证码 &nbsp;&nbsp;&nbsp;<img name="captcha" src="instr.php?instr=captchaRegister"/></span>
+                <input class="col-xs-7 input validate[required]" type="text" name="captcha" placeholder="请填写验证码" />
+                <label class="col-xs-1">&nbsp;</label>
+                <button class="col-xs-3">送出</button>
+                <label class="col-xs-6">&nbsp;</label>
+            </form>
+        </div>
+        <div id="forgetScript" style="display: none;">
+        </div>
+    </body>
+    <script src="lib/jquery-2.1.4.min.js"></script>
+    <script src="lib/jquery.form.js"></script>
+    <script src='lib/bootstrap/dist/js/bootstrap.min.js'></script>
+    <script src="lib/validationengine/js/languages/jquery.validationEngine-zh_TW.js"></script>
+    <script src="lib/validationengine/js/jquery.validationEngine.js"></script>
+    <script src="lib/underscore.js"></script>
+    <script src="lib/backbone.js"></script>
+    <script src="lib/jquery.form.js"></script>
+    <script src="Member/Member.js"></script>
+    <script src="js/header.js"></script>
+</html>

@@ -70,6 +70,11 @@ HeadPanel = Backbone.View.extend({
 
     login : function() {
         var loginData = $("#loginPanel").formSerialize();
+
+        //有記住我的情況下，再次開啟瀏覽器即可登入
+        if($("input[name=rememberMe]:checked").length == 1) 
+            setCookie("PHPSESSID", getCookie("PHPSESSID"), 3);
+
         //console.log(loginData);
         this.model.login(loginData);
         return false;
