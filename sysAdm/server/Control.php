@@ -45,30 +45,23 @@ function test() {
     return $reData;
 }
 
-function pageShow() {
-    require_once("pageAdm/Page.php");
-    $page = new Page();
-    $p_page = $_POST['page'];
-
+function articleList() {
+    require_once("Article/Article.php");
+    $article = new Article();
     $reData = Array();
     $reData['status'] = 200;
-    $reData['msg'] = "page show success";
-    $reData['data'] = $page->show($p_page);
+    $reData['msg'] = "articleList success";
+    $reData['data'] = $article->articleList($_POST['nowPage']);
     return $reData;
 }
 
-function pageEdit() {
-    require_once("pageAdm/Page.php");
-    $page = new Page();
-    $p_page = $_POST['page'];
-    $pageData = Array();
-    $pageData['title'] = $_POST['p_title'];
-    $pageData['content'] = $_POST['p_content'];
-    $page->edit($p_page, $pageData);
-
+function memberList() {
+    require_once("Member/Member.php");
+    $memAdm = new Member();
     $reData = Array();
     $reData['status'] = 200;
-    $reData['msg'] = "page edit success";
+    $reData['msg'] = "memberList success";
+    $reData['data'] = $memAdm->memberList($_POST['nowPage']);
     return $reData;
 }
 
