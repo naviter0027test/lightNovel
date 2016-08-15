@@ -167,6 +167,29 @@ function captchaRegister() {
     $captcha = new Captcha($_SESSION['register']['captcha']);
 }
 
+function captchaForget() {
+    require_once("srvLib/Captcha.php");
+    $_SESSION['forget']['captcha'] = rand(1000, 9999);
+    $captcha = new Captcha($_SESSION['forget']['captcha']);
+}
+
+function forgetPass() {
+    require_once("Member/Member.php");
+    if(!isset($_SESSION['forget']['captcha']))
+	throw new Exception("captcha error");
+    $captcha = $_SESSION['forget']['captcha'];
+    if($captcha != $_POST['captcha']) {
+        unset($_SESSION['forget']['captcha']);
+	throw new Exception("captcha error");
+    }
+    $member = new Member();
+    $member->forget($_POST['user']);
+    unset($_SESSION['forget']['captcha']);
+    $reData['status'] = 200;
+    $reData['msg'] = "forgetPass success";
+    return $reData;
+}
+
 function seriesAdd() {
     require_once("Article/Series.php");
     $series = new Series();

@@ -267,9 +267,15 @@ DashboardRout = Backbone.Router.extend({
                 articleModel.myLastArticles();
             }
             else if(idname == "resetPass") {
-                self.render();
-                $.getScript("Member/Personal.js", function() {
-                    personal = new PassForm({'el' : "#passUpdForm"});
+                var postData = {};
+                postData['instr'] = "myData";
+                $.post("instr.php", postData, function(data) {
+                    //console.log(data);
+                    data = JSON.parse(data);
+                    self.render(data);
+                    $.getScript("Member/Personal.js", function() {
+                        personal = new PassForm({'el' : "#passUpdForm"});
+                    });
                 });
             }
             else if(idname == "getMessage") {
