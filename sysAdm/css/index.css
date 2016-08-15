@@ -1,0 +1,50 @@
+body {
+    background : #ccebff;
+}
+
+h2 {
+    margin : 5px 0px 10px 0px;
+    padding : 10px 0px 5px 0px;
+
+    font-size : 22px;
+    text-align : center;
+    border-left : 5px solid #002e4d;
+    border-right : 5px solid #002e4d;
+}
+
+form {
+    margin-top : 20%;
+    padding : 10px;
+
+    background : white;
+    box-shadow : 0px 0px 10px 0px #007acc;
+}
+
+form span {
+    margin-bottom : 15px;
+}
+
+form label {
+}
+
+form input {
+    padding : 5px;
+    background : #eeeeee;
+    border : 0px solid transparent;
+    box-shadow : 0px 0px 3px 0px #cccccc inset;
+}
+
+form button {
+    padding : 5px;
+
+    color : white;
+    background : #004d80;
+    border : 1px solid #004d80;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+form button:hover {
+    opacity : .7
+}
