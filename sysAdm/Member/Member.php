@@ -54,5 +54,30 @@ class Member {
 
         return $dbAdm->getAll();
     }
+
+    public function activeUpd($mid, $active) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $colData = Array();
+        $colData['m_active'] = $active;
+
+        $conditionArr = Array();
+        $conditionArr['m_id'] = $mid;
+
+        $dbAdm->updateData($tablename, $colData, $conditionArr);
+        $dbAdm->execSQL();
+    }
+
+    public function del($mid) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $conditionArr = Array();
+        $conditionArr['m_id'] = $mid;
+
+        $dbAdm->deleteData($tablename, $conditionArr);
+        $dbAdm->execSQL();
+    }
 }
 

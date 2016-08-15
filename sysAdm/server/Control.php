@@ -65,4 +65,24 @@ function memberList() {
     return $reData;
 }
 
+function memberActive() {
+    require_once("Member/Member.php");
+    $memAdm = new Member();
+    $memAdm->activeUpd($_POST['mid'], $_POST['active']);
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "memberActive success";
+    return $reData;
+}
+
+function memberDel() {
+    require_once("Member/Member.php");
+    $memAdm = new Member();
+    $memAdm->del($_POST['mid']);
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "memberDel success";
+    return $reData;
+}
+
 ?>
