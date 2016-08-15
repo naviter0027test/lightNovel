@@ -1,0 +1,11 @@
+.searchForm button {
+    margin-left : 3px;
+    padding : 3px;
+
+    color : white;
+    background : #3399ff;
+    border : 1px solid transparent;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}

@@ -7,15 +7,22 @@
 	<link rel="stylesheet" type="text/css" href="css/index.css" />
     </head>
     <body>
-        <h2>管理員登入</h2>
-        <label class="col-xs-3">&nbsp;</label>
-        <form action="instr.php" method="post" class="col-xs-6">
-            <label class="col-xs-4">帳號</label>
-            <input type="text" name="user" class="col-xs-8" />
-            <label class="col-xs-4">密碼</label>
-            <input type="text" name="pass" class="col-xs-8" />
-            <label class="col-xs-4">驗證碼 <img src="" /></label>
-            <input type="text" name="captcha" class="col-xs-8" />
+        <label class="col-xs-2">&nbsp;</label>
+        <form action="instr.php" method="post" class="col-xs-8">
+            <input type="hidden" name="instr" value="login" />
+            <h2>管理員登入</h2>
+            <span class="col-xs-12">
+                <label class="col-xs-12 col-sm-3">帳號</label>
+                <input type="text" name="user" class="col-xs-12 col-sm-9" />
+            </span>
+            <span class="col-xs-12">
+                <label class="col-xs-12 col-sm-3">密碼</label>
+                <input type="password" name="pass" class="col-xs-12 col-sm-9" />
+            </span>
+            <span class="col-xs-12">
+                <label class="col-xs-4">驗證碼 <img src="" /></label>
+                <input type="text" name="captcha" class="col-xs-8" />
+            </span>
             <button class="col-xs-12">確定</button>
         </form>
     </body>
