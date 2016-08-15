@@ -8,7 +8,7 @@
     </head>
     <body>
         <label class="col-xs-2">&nbsp;</label>
-        <form action="instr.php" method="post" class="col-xs-8">
+        <form id="loginForm" action="instr.php" method="post" class="col-xs-8">
             <input type="hidden" name="instr" value="login" />
             <h2>管理員登入</h2>
             <span class="col-xs-12">
@@ -20,7 +20,7 @@
                 <input type="password" name="pass" class="col-xs-12 col-sm-9" />
             </span>
             <span class="col-xs-12">
-                <label class="col-xs-4">驗證碼 <img src="" /></label>
+                <label class="col-xs-4">驗證碼 <img src="instr.php?instr=captchaLogin" /></label>
                 <input type="text" name="captcha" class="col-xs-8" />
             </span>
             <button class="col-xs-12">確定</button>
@@ -28,4 +28,9 @@
     </body>
     <script src="../lib/jquery-2.1.4.min.js"></script>
     <script src='../lib/bootstrap/dist/js/bootstrap.min.js'></script>
+    <script src="../lib/jquery.form.js"></script>
+    <script src="../lib/underscore.js"></script>
+    <script src="../lib/backbone.js"></script>
+    <script src="Admin/Admin.js"></script>
+    <script src="js/index.js"></script>
 </html>
