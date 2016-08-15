@@ -17,6 +17,8 @@ class Control {
     public function __construct() {
 	date_default_timezone_set('Asia/Taipei');
 
+        if(isset($_GET['instr']))
+	    $this->instr = $_GET['instr'];
 	if(isset($_POST['instr']))
 	    $this->instr = $_POST['instr'];
     }
@@ -43,6 +45,12 @@ function test() {
     $reData['status'] = 200;
     $reData['msg'] = "test success";
     return $reData;
+}
+
+function captchaLogin() {
+    require_once("../srvLib/Captcha.php");
+    $_SESSION['login']['captcha'] = rand(1000, 9999);
+    $captcha = new Captcha($_SESSION['login']['captcha']);
 }
 
 function articleList() {
@@ -82,6 +90,53 @@ function memberDel() {
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "memberDel success";
+    return $reData;
+}
+
+function isLogin() {
+    $reData = Array();
+    if(isset($_SESSION['adm'])) {
+        $reData['status'] = 200;
+        $reData['msg'] = "login already";
+    }
+    else {
+        $reData['status'] = 500;
+        $reData['msg'] = "not login";
+    }
+    return $reData;
+}
+
+function login() {
+    require_once("Admin/Admin.php");
+    if(!isset($_SESSION['login']['captcha']))
+	throw new Exception("captcha error");
+    $captcha = $_SESSION['login']['captcha'];
+    if($captcha != $_POST['captcha']) {
+        unset($_SESSION['login']['captcha']);
+	throw new Exception("captcha error");
+    }
+    unset($_SESSION['login']['captcha']);
+    $admin = new Admin();
+    $reData = Array();
+    if($admin->login($_POST['user'], $_POST['pass'])) {
+        $_SESSION['adm'] = true;
+        $reData['status'] = 200;
+        $reData['msg'] = "login success";
+    }
+    else {
+        $reData['status'] = 500;
+        $reData['msg'] = "login failed";
+    }
+    return $reData;
+}
+
+function logout() {
+    if(isset($_SESSION['adm']))
+        unset($_SESSION['adm']);
+    else
+        throw new Exception("you are not login");
+    $reData['status'] = 200;
+    $reData['msg'] = "logout success";
     return $reData;
 }
 
