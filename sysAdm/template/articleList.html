@@ -5,7 +5,9 @@
             <li class="active">會員列表</li>
         </ol>
     </div>
-    <form class="col-xs-12 searchForm">
+    <form action="instr.php" method="post" class="col-xs-12 searchForm">
+        <input type="hidden" name="instr" value="articleSearch" />
+        <input type="hidden" name="nowPage" value="1" />
         <h4>文章搜尋</h4>
         <label class="col-xs-2">使用者帳號:</label><input class="col-xs-7" type="text" name="search" />
         <button class="col-xs-2">搜尋</button>

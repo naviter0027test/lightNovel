@@ -36,7 +36,7 @@ class Article {
         $this->dbAdm->execSQL();
     }
 
-    public function articleList($nowPage) {
+    public function articleList($nowPage, $search = "") {
         $tablename = $this->table;
         $dbAdm = $this->dbAdm;
 
@@ -58,7 +58,7 @@ class Article {
             select m.m_user, count(p.p_id) praiseAmount ,
             case when (ass.as_finally = 0) then '?' else ass.as_finally end as as_finally, a.* 
             from `Article` a
-            inner join Member m on a.m_id = m.m_id
+            inner join Member m on a.m_id = m.m_id and m.m_user like '%$search%'
             left join ArticleSeries ass on a.as_id = ass.as_id
             left join Praise p on a.a_id = p.a_id group by a.a_id
             order by ". $order['col']. " ". $order['order'].

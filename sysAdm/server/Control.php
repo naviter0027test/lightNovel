@@ -59,7 +59,7 @@ function articleList() {
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "articleList success";
-    $reData['data'] = $article->articleList($_POST['nowPage']);
+    $reData['data'] = $article->articleList($_POST['nowPage'], $_POST['search']);
     return $reData;
 }
 

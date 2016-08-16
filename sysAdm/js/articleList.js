@@ -12,7 +12,8 @@ $(document).ready(function() {
 
 ArticleRout = Backbone.Router.extend({
     routes : {
-        "list/:nowPage" : "list"
+        "list/:nowPage" : "list",
+        "search/:nowPage" : "search"
     },
 
     list : function(nowPage) {
@@ -20,4 +21,10 @@ ArticleRout = Backbone.Router.extend({
             articlesView.model.list(nowPage);
         }, 200);
     },
+
+    search : function(nowPage) {
+        setTimeout(function() {
+            articlesView.model.list(nowPage);
+        }, 200);
+    }
 });
