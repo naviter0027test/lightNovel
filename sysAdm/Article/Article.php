@@ -47,7 +47,7 @@ class Article {
         $limit['offset'] = 0;
         $limit['amount'] = 20;
         if(isset($nowPage))
-            $limit['offset'] = ($nowPage -1) * 20;
+            $limit['offset'] = ($nowPage -1) * $limit['amount'];
 
         $order = Array();
         $order['col'] = "a_crtime";
@@ -55,9 +55,10 @@ class Article {
 
         //$dbAdm->selectData($tablename, $column, null, $order, $limit);
         $dbAdm->sqlSet("
-            select count(p.p_id) praiseAmount ,
+            select m.m_user, count(p.p_id) praiseAmount ,
             case when (ass.as_finally = 0) then '?' else ass.as_finally end as as_finally, a.* 
             from `Article` a
+            inner join Member m on a.m_id = m.m_id
             left join ArticleSeries ass on a.as_id = ass.as_id
             left join Praise p on a.a_id = p.a_id group by a.a_id
             order by ". $order['col']. " ". $order['order'].

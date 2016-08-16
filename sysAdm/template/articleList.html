@@ -1,0 +1,49 @@
+<script id="articleListTem" type="text/template">
+    <div id="operatingPanel">
+        <ol class="breadcrumb">
+            <li><a href="#">首頁</a></li>
+            <li class="active">會員列表</li>
+        </ol>
+    </div>
+    <form class="col-xs-12 searchForm">
+        <h4>文章搜尋</h4>
+        <label class="col-xs-2">使用者帳號:</label><input class="col-xs-7" type="text" name="search" />
+        <button class="col-xs-2">搜尋</button>
+    </form>
+    <table class="table">
+        <thead>
+            <tr>
+                <td>文章名稱</td>
+                <td>發表會員</td>
+                <!--
+                <td>狀態</td>
+                -->
+                <td>建立日期</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <%
+            _.each(data, function(item) {
+            %>
+            <tr>
+                <td><%=item['a_title']%></td>
+                <td><%=item['m_user']%></td>
+                <!--
+                <td>
+                    <select>
+                        <option>啟用</option>
+                        <option>禁用</option>
+                    </select>
+                </td>
+                -->
+                <td><%=item['a_crtime']%></td>
+                <td>
+                    <a href="#del/<%=item['a_id']%>" class="glyphicon glyphicon-trash"></a>
+                </td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</script>
+
