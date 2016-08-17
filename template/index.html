@@ -37,8 +37,8 @@
 </script>
 
 <script id="pagerTem" type="text/template">
-    <a class="right-arrow" href="#">&rsaquo;</a>
     <% pageSum = Math.ceil(amount / pageLimit); %>
+    <a class="right-arrow" href="#/<%=(parseInt(nowPage)+1 <= pageSum ?parseInt(nowPage)+1: nowPage)%>">&rsaquo;</a>
     <% for(idx = pageSum; idx >= 1;--idx) { %>
         <% if(idx == nowPage) { %>
         <label><%=idx%></label>
@@ -46,5 +46,5 @@
         <a href="#/<%=idx%>"><%=idx%></a>
         <% } %>
     <% } %>
-    <a class="left-arrow" href="#">&lsaquo;</a>
+    <a class="left-arrow" href="#/<%=(nowPage-1 > 0 ?nowPage-1: nowPage)%>">&lsaquo;</a>
 </script>

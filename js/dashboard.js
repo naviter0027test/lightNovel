@@ -238,6 +238,7 @@ DashboardRout = Backbone.Router.extend({
         });
         message.model.on("change:data", function() {
             message.render();
+            pager.render2(nowPage, pageLimit);
         });
 
         //文章取得時切換html
@@ -284,6 +285,7 @@ DashboardRout = Backbone.Router.extend({
                 }
                 if(isNumeric(nowPage))
                     message.model.set("nowPage", nowPage);
+                pager = new Pager({'el' : '#pager', 'model' : message.model});
                 message.template = _.template($("#getMessage").html());
                 message.model.myList();;
             }

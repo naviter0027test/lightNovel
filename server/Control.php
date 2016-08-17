@@ -518,6 +518,7 @@ function msgMyList() {
     $reData['status'] = 200;
     $reData['msg'] = "msgList success";
     $reData['data'] = $data;
+    $reData['amount'] = $msg->myListAmount($aids, $_SESSION['mid']);
     return $reData;
 }
 
