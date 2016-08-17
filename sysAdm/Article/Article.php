@@ -67,4 +67,18 @@ class Article {
 
         return $dbAdm->getAll();
     }
+
+    public function amount($search = "") {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $column = Array();
+        $column[0] = "count(*)";
+        $dbAdm->selectData($tablename, $column);
+        $dbAdm->sqlSet("select count(*) as amount from `Article` a 
+            inner join Member m on a.m_id = m.m_id and m.m_user like '%$search%' ");
+        $dbAdm->execSQL();
+
+        return $dbAdm->getAll()[0]['amount'];
+    }
 }
