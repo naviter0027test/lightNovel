@@ -318,8 +318,8 @@ function myData() {
     $member = new Member();
     $myData = $member->getOneById($_SESSION['mid']);
 
-    if(file_exists("imgs/tmp/". $myData['m_user']))
-        $myData['headImg'] = "imgs/tmp/". $myData['m_user'];
+    if($myData['m_headImg'] != "")
+        $myData['headImg'] = "imgs/tmp/". $myData['m_headImg'];
     else
         $myData['headImg'] = "imgs/80x80.png";
 
@@ -386,6 +386,9 @@ function personalImg() {
 
     $myData = $member->getOneById($_SESSION['mid']);
     $upResult = $upfile->uploadFinish($myData['m_user']);
+    $colData = Array();
+    $colData['m_headImg'] = $upResult[0]['newName'];
+    $member->dataUpdate($colData, $_SESSION['mid']);
 
     $reData = Array();
     $reData['status'] = 200;

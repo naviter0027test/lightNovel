@@ -42,7 +42,15 @@ class Upload {
 		    $data['success'][$sussCount]['name'] = $_FILES['file']['name'][$count];
 		    $data['success'][$sussCount]['type'] = $_FILES['file']['type'][$count];
 		    $data['success'][$sussCount]['size'] = $_FILES['file']['size'][$count];
-		    move_uploaded_file($_FILES['file']['tmp_name'][$count], "imgs/tmp/$newFileName"); //. $_FILES['file']['name'][$count]);
+                    $type = $data['success'][$sussCount]['type'];
+                    $exts = Array();
+                    $exts["image/jpeg"] = ".jpg";
+                    $exts["image/jpg"] = ".jpg";
+                    $exts["image/png"] = ".png";
+                    $exts["image/gif"] = ".gif";
+                    $exts["image/bmp"] = ".bmp";
+		    move_uploaded_file($_FILES['file']['tmp_name'][$count], "imgs/tmp/$newFileName". $exts[$type]); //. $_FILES['file']['name'][$count]);
+		    $data['success'][$sussCount]['newName'] = $newFileName. $exts[$type];
 		    ++$sussCount;
 		}
 	}
