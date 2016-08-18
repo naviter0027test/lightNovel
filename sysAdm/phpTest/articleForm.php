@@ -14,5 +14,11 @@
             nowPage : <input type="text" name="nowPage" /> <br />
             <button>article list</button>
         </form>
+
+        <form action="../instr.php" method="post">
+            <input type="hidden" name="instr" value="articleDel" />
+            aid : <input type="text" name="aid" /> <br />
+            <button>article del</button>
+        </form>
     </body>
 </html>

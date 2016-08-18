@@ -104,15 +104,20 @@ MemberModel = Backbone.Model.extend({
         $.post("instr.php", loginData, function(data) {
             //console.log(data);
             data = JSON.parse(data);
+            //console.log(data);
             if(data['status'] == 200) {
                 self.set("isLogin", true);
                 alert("登入成功");
             }
             else {
                 if(data['msg'] == "captcha error") 
-                    alert("驗證碼錯誤");
+                    alert("验证码错误");
                 else if(data['msg'] == "not find member")
-                    alert("帳密錯誤");
+                    alert("帐密错误");
+                else if(data['msg'] == "member not active")
+                    alert("该会员未启用");
+                else if(data['msg'] == "member is disable")
+                    alert("该会员遭停用");
                 $("#loginPanel img").attr("src", "instr.php?instr=captchaLogin&math="+Math.random);
             }
         });

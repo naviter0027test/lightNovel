@@ -1,0 +1,62 @@
+<script id="myArticlesTem" type="text/template">
+    <ol class="breadcrumb">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li class="active">我的文章</li>
+    </ol>
+    <div class="operating">
+        <a href="postArticle.html">
+            <button class="col-xs-2 add">發文</button>
+        </a>
+    </div>
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <td>文章标题</td>
+                <td>分級</td>
+                <td>系列</td>
+                <td>修改時間</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <% _.each(data, function(item) { %>
+            <tr>
+                <td><%=item['a_title']%></td>
+                <td><%=item['a_level']%></td>
+                <td><%=item['as_name']%></td>
+                <td><%=item['a_crtime']%></td>
+                <td>
+                    <a class="glyphicon glyphicon-edit" href="#articleEdit/<%=item['a_id']%>"></a>
+                    <a class="glyphicon glyphicon-trash" href="#articleDel/<%=item['a_id']%>"></a>
+                </td>
+            </tr>
+            <% }); %>
+            <!--
+            <tr>
+                <td>東少發威，咆嘯震天</td>
+                <td>Gen</td>
+                <td>東卯</td>
+                <td>2016-01-03 12:13:54</td>
+                <td>
+                    <a class="glyphicon glyphicon-edit" href="#"></a>
+                    <a class="glyphicon glyphicon-trash" href="#"></a>
+                </td>
+            </tr>
+            -->
+        </tbody>
+    </table>
+</script>
+
+<script id="pagerTem" type="text/template">
+    <% pageSum = Math.ceil(amount / pageLimit); %>
+    <a class="right-arrow" href="#myArticles/<%=(parseInt(nowPage)+1 <= pageSum ?parseInt(nowPage)+1: nowPage)%>">&rsaquo;</a>
+    <% for(idx = pageSum; idx >= 1;--idx) { %>
+        <% if(idx == nowPage) { %>
+        <label><%=idx%></label>
+        <% } else { %>
+        <a href="#myArticles/<%=idx%>"><%=idx%></a>
+        <% } %>
+    <% } %>
+    <a class="left-arrow" href="#myArticles/<%=(nowPage-1 > 0 ?nowPage-1: nowPage)%>">&lsaquo;</a>
+</script>

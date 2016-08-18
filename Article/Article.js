@@ -173,5 +173,19 @@ ArticleModel = Backbone.Model.extend({
             //console.log(data);
             self.set("data", data);
         });
+    },
+
+    myArticles : function(nowPage) {
+        var self = this;
+        var postData = {};
+        postData['instr'] = "myArticleList";
+        postData['nowPage'] = nowPage;
+        //console.log(postData);
+        $.post("instr.php", postData, function(data) {
+            //console.log(data);
+            data = JSON.parse(data);
+            console.log(data);
+            self.set("data", data);
+        });
     }
 });

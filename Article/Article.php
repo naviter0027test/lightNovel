@@ -152,6 +152,31 @@ class Article {
         return $dbAdm->getAll();
     }
 
+    public function myArticles($mid, $nowPage) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $column = Array();
+        $column[0] = "*";
+
+        $conditionArr = Array();
+        $conditionArr['m_id'] = $mid;
+
+        $order = Array();
+        $order['col'] = "a_crtime";
+        $order['order'] = "desc";
+
+        $limit = Array();
+        $limit['offset'] = ($nowPage - 1) * 25;
+        $limit['amount'] = 25;
+
+        //$dbAdm->selectData($tablename, $column, $conditionArr, $order, $limit);
+        $dbAdm->sqlSet("select a.*, ss.as_name from $tablename a left join ArticleSeries ss on a.as_id = ss.as_id where a.m_id = $mid order by a_crtime desc limit ". $limit['offset']. ", ". $limit['amount']);
+        $dbAdm->execSQL();
+
+        return $dbAdm->getAll();
+    }
+
     public function articleList($page) {
         $tablename = $this->table;
         $dbAdm = $this->dbAdm;
@@ -278,6 +303,25 @@ class Article {
         $order = Array();
         $order['col'] = "a_chapter";
         $order['order'] = "asc";
+
+	$dbAdm->selectData($tablename, $columns, $conditionArr, $order);
+	$dbAdm->execSQL();
+	return $dbAdm->getAll()[0]['amount'];
+    }
+
+    public function articleAmountByMem($mid) {
+        $dbAdm = $this->dbAdm;
+        $tablename = $this->table;
+
+	$columns = Array();
+	$columns[0] = "count(*) as amount";
+
+        $conditionArr = Array();
+        $conditionArr['m_id'] = $mid;
+
+        $order = Array();
+        $order['col'] = "a_crtime";
+        $order['order'] = "desc";
 
 	$dbAdm->selectData($tablename, $columns, $conditionArr, $order);
 	$dbAdm->execSQL();

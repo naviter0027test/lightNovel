@@ -23,10 +23,18 @@ class Control {
 	    $this->instr = $_POST['instr'];
     }
     public function execInstr() {
+        $mustBeLogin = Array("articleList", "articleDel", "memberList", "memberActive", "memberDel", "logout");
 	try {
 	    if(!isset($this->instr))
 		throw new Exception("instr not defined");
+
 	    $instr = $this->instr;
+
+            //檢查管理員有無登入，才可使用
+            if(in_array($instr, $mustBeLogin) && !isset($_SESSION['adm'])) {
+                throw new Exception("admin not login");
+            }
+
 	    $reData = $instr();
 	    echo json_encode($reData);
 	}
@@ -61,6 +69,16 @@ function articleList() {
     $reData['msg'] = "articleList success";
     $reData['data'] = $article->articleList($_POST['nowPage'], $_POST['search']);
     $reData['amount'] = $article->amount();
+    return $reData;
+}
+
+function articleDel() {
+    require_once("Article/Article.php");
+    $article = new Article();
+    $article->del($_POST['aid']);
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "articleDel success";
     return $reData;
 }
 

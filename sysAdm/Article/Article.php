@@ -81,4 +81,15 @@ class Article {
 
         return $dbAdm->getAll()[0]['amount'];
     }
+
+    public function del($aid) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $conditionArr = Array();
+        $conditionArr['a_id'] = $aid;
+
+        $dbAdm->deleteData($tablename, $conditionArr);
+        $dbAdm->execSQL();
+    }
 }

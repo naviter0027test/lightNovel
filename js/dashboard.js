@@ -1,6 +1,9 @@
 var articleEditForm = null;
+var myArticleList = null;
+var pgr = null;
 $(document).ready(function() {
     dashboard = new Dashboard({'el' : '#dashboard'});
+    myArticleList = new MyArticle({'el' : '#content', 'model' : new ArticleModel()});
     new DashboardRout();
     Backbone.history.start();
 });
@@ -11,6 +14,7 @@ DashboardRout = Backbone.Router.extend({
         "editSeries/:sid/:nowPage" : "editMySeries",
         "articleEdit/:aid" : "articleEdit",
         "articleDel/:aid" : "articleDel",
+        "myArticles/:nowPage" : "myArticles",
         "changePage/:page" : "changePage",
         "changePage/:page/:nowPage/:pageLimit" : "changePage"
     },
@@ -200,6 +204,32 @@ DashboardRout = Backbone.Router.extend({
                 alert("刪除成功");
                 history.go(-1);
             }
+        });
+    },
+
+    myArticles : function(nowPage) {
+        var clickBtn = $("#dashboard a[temid=myArticles]");
+
+        //變換按鈕顏色
+        var allLi = $("#dashboard").find("li");
+        $(allLi).removeClass("nowChoose");
+        $(clickBtn).parent().addClass("nowChoose");
+        $("#contentTem").load("template/myArticles.html", function() {
+            myArticleList.template = _.template($("#myArticlesTem").html());
+            pgr = new Pager({'el' : "#pager"});
+            pgr.model = myArticleList.model;
+            myArticleList.model.on("change:data", function() {
+                var data = this.get("data");
+                //console.log(data);
+                myArticleList.render(data);
+                pgr.render2(nowPage, 25);
+            });
+            var datalist = myArticleList.model.get("data");
+            if(datalist != null) {
+                myArticleList.render(datalist);
+                pgr.render2(nowPage, 25);
+            }
+            myArticleList.model.myArticles(nowPage);
         });
     },
 

@@ -455,6 +455,18 @@ function articleList() {
     return $reData;
 }
 
+function myArticleList() {
+    require_once("Article/Article.php");
+    $articleAdm = new Article();
+    $articleList = $articleAdm->myArticles($_SESSION['mid'], $_POST['nowPage']);
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "myArticleList success";
+    $reData['data'] = $articleList;
+    $reData['amount'] = $articleAdm->articleAmountByMem($_SESSION['mid']);
+    return $reData;
+}
+
 function articleGet() {
     require_once("Article/Article.php");
     $articleAdm = new Article();

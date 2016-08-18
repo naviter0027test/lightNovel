@@ -16,8 +16,31 @@ $(document).ready(function() {
 
 ArticleRout = Backbone.Router.extend({
     routes : {
+        "del/:aid" : "delArticle",
         "list/:nowPage" : "list",
         "search/:nowPage" : "search"
+    },
+
+    delArticle : function(aid) {
+        var postData = {};
+        postData['instr'] = "articleDel";
+        postData['aid'] = aid;
+        console.log(postData);
+        if(confirm("是否刪除?")) 
+            $.post("instr.php", postData, function(data) {
+                console.log(data);
+                data = JSON.parse(data);
+                console.log(data);
+                if(data['status'] == 200) {
+                    alert("刪除成功");
+                }
+                else {
+                    alert("刪除失敗");
+                }
+                history.go(-1);
+            });
+        else
+            history.go(-1);
     },
 
     list : function(nowPage) {

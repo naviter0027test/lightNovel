@@ -50,13 +50,17 @@ class Member {
         $conditionArr = Array();
         $conditionArr['m_user'] = $user;
         $conditionArr['m_pass'] = md5($pass);
-        $conditionArr['m_active'] = "Y";
+        //$conditionArr['m_active'] = "Y";
         $dbAdm->selectData($table, $columns, $conditionArr);
         $dbAdm->execSQL();
         $mems = $dbAdm->getAll();
         if(count($mems) < 1)
             throw new Exception("not find member");
         $mem = $mems[0];
+        if($mem['m_active'] == "N")
+            throw new Exception("member not active");
+        else if($mem['m_active'] == "D")
+            throw new Exception("member is disable");
         return $mem['m_id'];
     }
 
