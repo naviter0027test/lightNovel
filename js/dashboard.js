@@ -12,6 +12,7 @@ DashboardRout = Backbone.Router.extend({
     routes : {
         "addSeries" : "addSeries",
         "editSeries/:sid/:nowPage" : "editMySeries",
+        "delSeries/:sid" : "delSeries",
         "delArticleFromSeries/:aid" : "delArtFromSrs",
         "articleEdit/:aid" : "articleEdit",
         "articleDel/:aid" : "articleDel",
@@ -103,16 +104,36 @@ DashboardRout = Backbone.Router.extend({
         });
     },
 
+    delSeries : function(sid) {
+        var postData = {};
+        postData['instr'] = "seriesDel";
+        postData['seriesId'] = sid;
+        if(confirm("確定刪除?")) 
+            $.post("instr.php", postData, function(data) {
+                //console.log(data);
+                data = JSON.parse(data);
+                //console.log(data);
+                if(data['status'] == 200) {
+                    alert("刪除成功");
+                }
+                else {
+                    alert("刪除失敗");
+                    console.log(data);
+                }
+                history.go(-1);
+            });
+    },
+
     delArtFromSrs : function(aid) {
-        console.log("delete article(" + aid+ ")");
+        //console.log("delete article(" + aid+ ")");
         var postData = {};
         postData['instr'] = "delArticleFromSeries";
         postData['aid'] = aid;
         if(confirm("是否將該篇文章從此系列剔除?")) 
             $.post("instr.php", postData, function(data) {
-                console.log(data);
+                //console.log(data);
                 data = JSON.parse(data);
-                console.log(data);
+                //console.log(data);
                 if(data['status'] == 200) {
                     alert("剔除成功");
                 }
