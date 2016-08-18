@@ -23,7 +23,7 @@ class Control {
 	    $this->instr = $_POST['instr'];
     }
     public function execInstr() {
-        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "seriesGet", "postArticle", "myData", "mySeriesList", "myLastArticle", "articleDel", "memSrsPages", "personalImg", "personalUpd", "passReset", "addMessage", "pressPraise", "articleEdit", "articleBySid", "changeArticleChapter");
+        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "seriesGet", "postArticle", "myData", "mySeriesList", "myLastArticle", "articleDel", "memSrsPages", "personalImg", "personalUpd", "passReset", "addMessage", "pressPraise", "articleEdit", "articleBySid", "changeArticleChapter", "myArticleList", "delArticleFromSeries");
 	try {
 	    if(!function_exists($this->instr))
 		throw new Exception("instr not defined");
@@ -256,6 +256,17 @@ function seriesGet() {
     $reData['articles'] = $articlesList;
     $reData['articleAmount'] = $articleAdm->articleAmountBySeries($_POST['sid']);
 
+    return $reData;
+}
+
+//將文章從指定系列中惕除，不是刪除文章
+function delArticleFromSeries() {
+    require_once("Article/Article.php");
+    $articleAdm = new Article();
+    $articleAdm->deleteFromSeries($_POST['aid']);
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "delArticleFromSeries success";
     return $reData;
 }
 

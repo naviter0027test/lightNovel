@@ -12,6 +12,7 @@ DashboardRout = Backbone.Router.extend({
     routes : {
         "addSeries" : "addSeries",
         "editSeries/:sid/:nowPage" : "editMySeries",
+        "delArticleFromSeries/:aid" : "delArtFromSrs",
         "articleEdit/:aid" : "articleEdit",
         "articleDel/:aid" : "articleDel",
         "myArticles/:nowPage" : "myArticles",
@@ -56,6 +57,7 @@ DashboardRout = Backbone.Router.extend({
                 //console.log(data);
                 self.template = _.template($("#editMySeriesTem").html());
                 self.render(data)
+                var pager = null;
                 if(pager==null) 
                     pager = new Pager({'el' : '#pager'});
                 pager.render3(nowPage, 10, data['articleAmount'], sid);
@@ -99,6 +101,25 @@ DashboardRout = Backbone.Router.extend({
                 });
             });
         });
+    },
+
+    delArtFromSrs : function(aid) {
+        console.log("delete article(" + aid+ ")");
+        var postData = {};
+        postData['instr'] = "delArticleFromSeries";
+        postData['aid'] = aid;
+        if(confirm("是否將該篇文章從此系列剔除?")) 
+            $.post("instr.php", postData, function(data) {
+                console.log(data);
+                data = JSON.parse(data);
+                console.log(data);
+                if(data['status'] == 200) {
+                    alert("剔除成功");
+                }
+                else 
+                    alert("剔除失敗");
+                history.go(-1);
+            });
     },
 
     articleEdit : function(aid) {
