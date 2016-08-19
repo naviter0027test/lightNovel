@@ -1,27 +1,56 @@
 <script id="contentTem" type="text/template">
     <div class="operPanel col-xs-12">
-        <select class="col-sm-2">
-            <option>選擇章節</option>
-            <option>Ch3 章節標題</option>
+        <% 
+        var prevCh = {};
+        prevCh['chapter'] = 0;
+        prevCh['aid'] = 0;
+        var nextCh = {};
+        nextCh['chapter'] = 9999999;
+        nextCh['aid'] = 0;
+        %>
+        <select class="col-sm-2" name="selectCh">
+            <option>选择章节</option>
+        <% _.each(articles, function(item) { 
+            if(prevCh['chapter'] < parseInt(data['a_chapter']) - 1
+            && prevCh['chapter'] < item['a_chapter']) {
+                prevCh['aid'] = item['a_id'];
+                prevCh['chapter'] = parseInt(item['a_chapter']);
+            }
+        %>
+            <option value="<%=item['a_id']%>"><%=item['a_aTitle']%></option>
+        <% }); %>
+            <!--
             <option>Ch4 章節標題</option>
             <option>Ch5 章節標題</option>
+            -->
         </select>
-        <a class="col-sm-2" href="#">後一章節</a>
-        <a class="col-sm-2" href="#">前一章節</a>
-        <a class="col-sm-2" href="#">全文顯示</a>
-        <a class="col-sm-1" href="#pressPraise/<%=data['a_id']%>">點讚</a>
+        <% 
+        for(var i = articles.length-1;i >= 0;--i) {
+            if(nextCh['chapter'] > parseInt(data['a_chapter']) +1
+            && nextCh['chapter'] > articles[i]['a_chapter']) {
+                nextCh['aid'] = articles[i]['a_id'];
+                nextCh['chapter'] = parseInt(articles[i]['a_chapter']);
+            }
+        }
+        %>
+        <a class="col-sm-2" href="#article/<%=nextCh['aid']%>">後一章节</a>
+        <a class="col-sm-2" href="#article/<%=(prevCh['aid']!=0?prevCh['aid']:data['a_id'])%>">前一章节</a>
+        <a class="col-sm-2" href="#">全文显示</a>
+        <a class="col-sm-1" href="#pressPraise/<%=data['a_id']%>">点赞</a>
     </div>
     <div class="articleItem">
         分級：<label><%=data['a_level']%></label> 
-        屬性：<label><%=(data['a_attr']=="article"?"文":"推文")%></label> 
+        属性：<label><%=(data['a_attr']=="article"?"文":"推文")%></label> 
         更新日期：<label><%=data['a_crtime']%></label> <br />
         <h4>主CP：<%=data['a_mainCp']%></h4>
         <h4>副CP：<%=data['a_mainCp2']%></h4>
         <h4>警告：<%=data['a_alert']%></h4>
-        <h4>標籤：<%=data['a_tag']%></h4>
+        <h4>标签：<%=data['a_tag']%></h4>
         <span class="col-xs-6">
-            章節：<label>3/?</label> 
-            讚：<label></label> 點擊數：<label></label> 
+        <% if(data['as_finally'] != null) { %>
+            章节：<label><%=data['a_chapter']%>/<%=data['as_finally']%></label> 
+        <% } %>
+        赞：<label><%=data['praiseAmount']%></label> 点击数：<label></label> 
         </span><br />
     </div>
     <div class="articleData">
@@ -34,16 +63,43 @@
         </div>
     </div>
     <div class="operPanel col-xs-12">
-        <select class="col-sm-2">
-            <option>選擇章節</option>
-            <option>Ch3 章節標題</option>
+        <% 
+        var prevCh = {};
+        prevCh['chapter'] = 0;
+        prevCh['aid'] = 0;
+        var nextCh = {};
+        nextCh['chapter'] = 9999999;
+        nextCh['aid'] = 0;
+        %>
+        <select class="col-sm-2" name="selectCh">
+            <option>选择章节</option>
+        <% _.each(articles, function(item) { 
+            if(prevCh['chapter'] < parseInt(data['a_chapter']) - 1
+            && prevCh['chapter'] < item['a_chapter']) {
+                prevCh['aid'] = item['a_id'];
+                prevCh['chapter'] = parseInt(item['a_chapter']);
+            }
+        %>
+            <option value="<%=item['a_id']%>"><%=item['a_aTitle']%></option>
+        <% }); %>
+            <!--
             <option>Ch4 章節標題</option>
             <option>Ch5 章節標題</option>
+            -->
         </select>
-        <a class="col-sm-2" href="#">後一章節</a>
-        <a class="col-sm-2" href="#">前一章節</a>
-        <a class="col-sm-2" href="#">全文顯示</a>
-        <a class="col-sm-1" href="#pressPraise/<%=data['a_id']%>">點讚</a>
+        <% 
+        for(var i = articles.length-1;i >= 0;--i) {
+            if(nextCh['chapter'] > parseInt(data['a_chapter']) +1
+            && nextCh['chapter'] > articles[i]['a_chapter']) {
+                nextCh['aid'] = articles[i]['a_id'];
+                nextCh['chapter'] = parseInt(articles[i]['a_chapter']);
+            }
+        }
+        %>
+        <a class="col-sm-2" href="#article/<%=nextCh['aid']%>">後一章节</a>
+        <a class="col-sm-2" href="#article/<%=(prevCh['aid']!=0?prevCh['aid']:data['a_id'])%>">前一章节</a>
+        <a class="col-sm-2" href="#">全文显示</a>
+        <a class="col-sm-1" href="#pressPraise/<%=data['a_id']%>">点赞</a>
     </div>
 </script>
 <script id="msgListTem" type="text/template">

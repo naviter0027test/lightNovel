@@ -69,5 +69,15 @@ class Message {
 
         return $dbAdm->getAll();
     }
+
+    public function myListAmount($aids, $mid) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+        $aidsStr = implode(",", $aids);
+        $dbAdm->sqlSet("select count(ms.ms_id) as amount from Message ms inner join Member m on m.m_id = ms.m_id where ms.a_id in ($aidsStr) ");
+        $dbAdm->execSQL();
+
+        return $dbAdm->getAll()[0]['amount'];
+    }
 }
 ?>

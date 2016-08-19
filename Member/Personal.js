@@ -34,12 +34,15 @@ PassForm = Backbone.View.extend({
         if(!this.$el.validationEngine('validate')) 
             return false;
 
+        var self = this;
         this.$el.ajaxSubmit(function(data) {
             //console.log(data);
             data = JSON.parse(data);
             //console.log(data);
-            if(data['status'] == 200)
+            if(data['status'] == 200) {
                 alert("修改成功");
+                self.$el.clearForm();
+            }
             else {
                 if(data['msg'] == "old pass error")
                     alert("舊密碼輸入錯誤");

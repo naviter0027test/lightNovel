@@ -1,7 +1,7 @@
 <script id="mySeries" type="text/template">
     <ol class="breadcrumb">
-        <li><a href="#">首頁</a></li>
-        <li><a href="#">Dashboard</a></li>
+        <li><a href="index.html">首页</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
         <li class="active">我的系列</li>
     </ol>
     <div class="operating">
@@ -12,9 +12,9 @@
     <table class="table table-condensed">
         <thead>
             <tr>
-                <td>系列名稱</td>
+                <td>系列名称</td>
                 <td>最後一章</td>
-                <td>含有篇數</td>
+                <td>含有篇数</td>
                 <td>操作</td>
             </tr>
         </thead>
@@ -27,7 +27,7 @@
                 </td>
                 <td><%=item['articleCount']%></td>
                 <td>
-                    <a class="glyphicon glyphicon-edit" href="#editSeries/<%=item['as_id']%>"></a>
+                    <a class="glyphicon glyphicon-edit" href="#editSeries/<%=item['as_id']%>/1"></a>
                     <a class="glyphicon glyphicon-trash" href="#"></a>
                 </td>
             </tr>
@@ -46,8 +46,8 @@
     </table>
 </script>
 <script id="pagerTem" type="text/template">
-    <a class="right-arrow" href="#">&rsaquo;</a>
     <% pageSum = Math.ceil(amount / pageLimit); %>
+    <a class="right-arrow" href="#changePage/mySeries/<%=(parseInt(nowPage)+1 <= pageSum ?parseInt(nowPage)+1: nowPage)%>/<%=pageLimit%>">&rsaquo;</a>
     <% for(idx = pageSum; idx >= 1;--idx) { %>
         <% if(idx == nowPage) { %>
         <label><%=idx%></label>
@@ -60,5 +60,5 @@
     <a href="#changePage/mySeries/2/10/">2</a>
     <a href="#changePage/mySeries/3/10/">3</a>
     -->
-    <a class="left-arrow" href="#">&lsaquo;</a>
+    <a class="left-arrow" href="#changePage/mySeries/<%=(nowPage-1 > 0 ?nowPage-1: nowPage)%>/<%=pageLimit%>">&lsaquo;</a>
 </script>

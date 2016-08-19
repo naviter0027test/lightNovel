@@ -27,10 +27,12 @@ $(document).ready(function() {
             $("input[name=chapterSum]").val(as_finally);
         }
 
+        /*
         if($(this).val() != "")
             $("input[name=aChapter]").addClass("validate[required]");
         else
             $("input[name=aChapter]").removeClass("validate[required]");
+            */
     });
 
     var mySerPost = {};

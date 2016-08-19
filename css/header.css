@@ -173,3 +173,14 @@
     color : white;
     background : #f6d1ac;
 }
+
+#header .floatPanel a.forget {
+    display : inline-block;
+    padding : 3px;
+    color : #444444;
+}
+
+#header .floatPanel a.forget:hover {
+    color : #222222;
+    text-decoration : underline;
+}

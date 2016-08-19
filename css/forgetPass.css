@@ -1,0 +1,40 @@
+#forgetContent h3 {
+    padding : 10px;
+    border-left : 5px solid #F6D1AC;
+    border-bottom : 1px solid #dddddd;
+}
+
+#forgetContent span {
+    margin : 5px 0px 5px 5%;
+    padding : 5px;
+}
+
+#forgetContent input {
+    margin : 5px 0px 5px 0px;
+    padding : 5px;
+
+    border : 1px solid #dddddd;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+#forgetContent input:focus {
+    box-shadow : 0px 0px 3px 0px #cc8800;
+}
+
+#forgetContent button {
+    padding : 5px 15px 5px 15px;
+    margin-top : 5px;
+
+    border : 1px solid #DDDDDD;
+    background : white;
+    -webkit-border-radius: 1px;
+    -moz-border-radius: 1px;
+    border-radius: 1px;
+}
+
+#forgetContent button:hover {
+    background : #F6D1AC;
+}
+

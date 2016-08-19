@@ -25,7 +25,7 @@
             <div id="sidebar" class="col-sm-2 sidebar">
                 <ul>
                     <li><a href="#" class="choosed">會員列表</a></li>
-                    <li><a href="articleList.html">文章列表</a></li>
+                    <li><a href="articleList.html#list/1">文章列表</a></li>
                 </ul>
             </div>
             <div id="memberList" class="col-sm-10">
@@ -39,7 +39,7 @@
                     <thead>
                         <tr>
                             <td>帳號</td>
-                            <td>會員姓名</td>
+                            <td>Email</td>
                             <td>狀態</td>
                             <td>建立日期</td>
                             <td>操作</td>
@@ -47,8 +47,8 @@
                     </thead>
                     <tbody>
                         <tr>
+                            <td>apple1256</td>
                             <td>apple1256@test.com.tw</td>
-                            <td>趙山右</td>
                             <td>
                                 <select>
                                     <option>啟用</option>
@@ -62,8 +62,9 @@
                             </td>
                         </tr>
                         <tr>
+                            <!--
+                            <td>test2561</td>
                             <td>test2561@test.com.tw</td>
-                            <td>郾愈新</td>
                             <td>
                                 <select>
                                     <option>不啟用</option>
@@ -76,70 +77,23 @@
                                 <a href="#" class="glyphicon glyphicon-trash"></a>
                             </td>
                         </tr>
-                        <tr>
-                            <td>jack02321@test.com.tw</td>
-                            <td>無名氏</td>
-                            <td>
-                                <select>
-                                    <option>啟用</option>
-                                    <option>不啟用</option>
-                                </select>
-                            </td>
-                            <td>2015-01-26 02:19:17</td>
-                            <td>
-                                <a href="#" class="glyphicon glyphicon-file"></a>
-                                <a href="#" class="glyphicon glyphicon-trash"></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>try5829@test.com.tw</td>
-                            <td>梅亭過</td>
-                            <td>
-                                <select>
-                                    <option>啟用</option>
-                                    <option>不啟用</option>
-                                </select>
-                            </td>
-                            <td>2015-03-28 08:09:48</td>
-                            <td>
-                                <a href="#" class="glyphicon glyphicon-file"></a>
-                                <a href="#" class="glyphicon glyphicon-trash"></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>catch216@test.com.tw</td>
-                            <td>膼鈽稻</td>
-                            <td>
-                                <select>
-                                    <option>不啟用</option>
-                                    <option>啟用</option>
-                                </select>
-                            </td>
-                            <td>2015-04-27 05:59:48</td>
-                            <td>
-                                <a href="#" class="glyphicon glyphicon-file"></a>
-                                <a href="#" class="glyphicon glyphicon-trash"></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>on20-8523@test.com.tw</td>
-                            <td>安院士</td>
-                            <td>
-                                <select>
-                                    <option>啟用</option>
-                                    <option>不啟用</option>
-                                </select>
-                            </td>
-                            <td>2015-09-17 15:37:58</td>
-                            <td>
-                                <a href="#" class="glyphicon glyphicon-file"></a>
-                                <a href="#" class="glyphicon glyphicon-trash"></a>
-                            </td>
-                        </tr>
+                        -->
                     </tbody>
                 </table>
             </div>
+            <div id="pager">
+            </div>
+            <div id="memberListScript" style="display : none;">
+            </div>
         </div>
     </body>
-    <script src='../../lib/jquery-2.1.4.min.js'></script>
+    <script src='../lib/jquery-2.1.4.min.js'></script>
+    <script src='../lib/bootstrap/dist/js/bootstrap.min.js'></script>
+    <script src="../lib/jquery.form.js"></script>
+    <script src="../lib/underscore.js"></script>
+    <script src="../lib/backbone.js"></script>
+    <script src="Member/Member.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/memberList.js"></script>
 </html>

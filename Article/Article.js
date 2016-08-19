@@ -43,6 +43,11 @@ PostArticleForm = Backbone.View.extend({
     render : function() {
     },
     postArt : function() {
+        if($("select[name=series]").val() != "" || $("input[name=newSeries]").val() != "") {
+            $("input[name=aChapter]").addClass("validate[required]");
+        }
+        else
+            $("input[name=aChapter]").removeClass("validate[required]");
         if(!this.$el.validationEngine("validate"))
             return false;
         this.$el.validationEngine("hideAll");
@@ -71,6 +76,8 @@ PostArticleForm = Backbone.View.extend({
 
         if($("select[name=series]").val() != "") 
             postData['series'] = $("select[name=series]").val();
+        else if($("input[name=newSeries]").val() != "")
+            postData['newSeries'] = $("input[name=newSeries]").val();
 
         if($("input[name=newSeries]").val() != "") 
             postData['newSeries'] = $("input[name=newSeries]").val();
@@ -164,6 +171,20 @@ ArticleModel = Backbone.Model.extend({
             //console.log(data);
             data = JSON.parse(data);
             //console.log(data);
+            self.set("data", data);
+        });
+    },
+
+    myArticles : function(nowPage) {
+        var self = this;
+        var postData = {};
+        postData['instr'] = "myArticleList";
+        postData['nowPage'] = nowPage;
+        //console.log(postData);
+        $.post("instr.php", postData, function(data) {
+            //console.log(data);
+            data = JSON.parse(data);
+            console.log(data);
             self.set("data", data);
         });
     }

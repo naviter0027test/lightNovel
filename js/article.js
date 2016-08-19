@@ -7,6 +7,9 @@ $(document).ready(function() {
         article.model.on("change:data", function() {
             var data = this.get("data");
             article.$el.html(article.template(data));
+            $("select[name=selectCh]").on("change", function() {
+                location.href = "#article/"+ $(this).val();
+            });
         });
         msgArea = new Message({ 'el' : '#msgList', "model" : new MsgModel()});
         new ArticleRout();

@@ -1,4 +1,4 @@
-<div id="memberList" class="col-sm-10">
+<script id="memberListTem" type="text/template">
     <div id="operatingPanel">
         <ol class="breadcrumb">
             <li><a href="#">首頁</a></li>
@@ -9,28 +9,40 @@
         <thead>
             <tr>
                 <td>帳號</td>
-                <td>會員姓名</td>
+                <td>會員Email</td>
                 <td>狀態</td>
+                <!--
                 <td>建立日期</td>
+                -->
                 <td>操作</td>
             </tr>
         </thead>
         <tbody>
+            <% 
+            _.each(data, function(item) { 
+            %>
             <tr>
-                <td>apple1256@test.com.tw</td>
-                <td>趙山右</td>
+                <td><%=item['m_user']%></td>
+                <td><%=item['m_email']%></td>
                 <td>
-                    <select>
-                        <option>啟用</option>
-                        <option>不啟用</option>
+                    <select name="active" mid="<%=item['m_id']%>">
+                        <option <%=(item['m_active'] == "Y" ? "selected" : "")%> value="Y">啟用</option>
+                        <option <%=(item['m_active'] == "N" ? "selected" : "")%> value="N">不啟用</option>
+                        <option <%=(item['m_active'] == "D" ? "selected" : "")%> value="D">禁用</option>
                     </select>
                 </td>
-                <td>2014-02-24 12:03:33</td>
+                <!--
+                <td></td>
+                -->
                 <td>
+<!--
                     <a href="#" class="glyphicon glyphicon-file"></a>
-                    <a href="#" class="glyphicon glyphicon-trash"></a>
+-->
+                    <a href="#del/<%=item['m_id']%>" class="glyphicon glyphicon-trash"></a>
                 </td>
             </tr>
+            <% }); %>
+<!--
             <tr>
                 <td>test2561@test.com.tw</td>
                 <td>郾愈新</td>
@@ -46,67 +58,8 @@
                     <a href="#" class="glyphicon glyphicon-trash"></a>
                 </td>
             </tr>
-            <tr>
-                <td>jack02321@test.com.tw</td>
-                <td>無名氏</td>
-                <td>
-                    <select>
-                        <option>啟用</option>
-                        <option>不啟用</option>
-                    </select>
-                </td>
-                <td>2015-01-26 02:19:17</td>
-                <td>
-                    <a href="#" class="glyphicon glyphicon-file"></a>
-                    <a href="#" class="glyphicon glyphicon-trash"></a>
-                </td>
-            </tr>
-            <tr>
-                <td>try5829@test.com.tw</td>
-                <td>梅亭過</td>
-                <td>
-                    <select>
-                        <option>啟用</option>
-                        <option>不啟用</option>
-                    </select>
-                </td>
-                <td>2015-03-28 08:09:48</td>
-                <td>
-                    <a href="#" class="glyphicon glyphicon-file"></a>
-                    <a href="#" class="glyphicon glyphicon-trash"></a>
-                </td>
-            </tr>
-            <tr>
-                <td>catch216@test.com.tw</td>
-                <td>膼鈽稻</td>
-                <td>
-                    <select>
-                        <option>不啟用</option>
-                        <option>啟用</option>
-                    </select>
-                </td>
-                <td>2015-04-27 05:59:48</td>
-                <td>
-                    <a href="#" class="glyphicon glyphicon-file"></a>
-                    <a href="#" class="glyphicon glyphicon-trash"></a>
-                </td>
-            </tr>
-            <tr>
-                <td>on20-8523@test.com.tw</td>
-                <td>安院士</td>
-                <td>
-                    <select>
-                        <option>啟用</option>
-                        <option>不啟用</option>
-                    </select>
-                </td>
-                <td>2015-09-17 15:37:58</td>
-                <td>
-                    <a href="#" class="glyphicon glyphicon-file"></a>
-                    <a href="#" class="glyphicon glyphicon-trash"></a>
-                </td>
-            </tr>
+-->
         </tbody>
     </table>
-</div>
+</script>
 

@@ -5,12 +5,12 @@
             <input type="hidden" name="instr" value="articleEdit" />
             <input type="hidden" name="aid" value="<%=data['a_id']%>" />
             <span class="col-xs-12">
-                <label class="col-xs-2">標題</label> 
+                <label class="col-xs-2">标题</label> 
                 <input class="col-xs-6 validate[required]" type="text" name="title" value="<%=data['a_title']%>"/> 
             </span>
             <br />
             <span class="col-xs-12">
-                <label class="col-xs-2">屬性</label> 
+                <label class="col-xs-2">属性</label> 
                 <input type="radio" name="articleType" class="validate[required]" value="article" <%=(data['a_attr']=="article"?"checked":"")%> />文 
                 <input type="radio" name="articleType" class="validate[required]" value="postArticle" <%=(data['a_attr']=="article"?"":"checked")%> />推文 
                 <br />
@@ -66,17 +66,17 @@
                 %>
                 <input type="checkbox" name="alert[]" value="血腥暴力" <%=isCheck%>/>血腥暴力
                 <% isCheck = "";
-                if(data['a_alert'].search("性轉") != -1)
+                if(data['a_alert'].search("性转") != -1)
                     isCheck = "checked";
                 %>
-                <input type="checkbox" name="alert[]" value="性轉" <%=isCheck%>/>性轉
+                <input type="checkbox" name="alert[]" value="性转" <%=isCheck%>/>性轉
                 <br />
                 <input type="checkbox" name="alert[]" value="other" />其他
                 <input type="text" name="alert[]" placeholder="自訂，以分號分隔" />
             </span>
             <br />
             <span class="col-xs-12">
-                <label class="col-xs-2">標籤</label>
+                <label class="col-xs-2">标签</label>
                 <% isCheck = "";
                 if(data['a_tag'].search("ABO") != -1)
                     isCheck = "checked";
@@ -108,15 +108,15 @@
             </span>
             <br />
             <span class="col-xs-12">
-                <label class="col-xs-2">章節標題</label> <input type="text" class="validate[required]" name="aTitle" value="<%=data['a_aTitle']%>" />
+                <label class="col-xs-2">章节标题</label> <input type="text" class="validate[required]" name="aTitle" value="<%=data['a_aTitle']%>" />
             </span>
             <br />
             <span class="col-xs-12">
-                <label class="col-xs-2">章節</label> <input class="smInput" type="text" name="aChapter" value="<%=data['a_chapter']%>" /> / <input class="smInput" type="text" />
+                <label class="col-xs-2">章节</label> <input class="smInput" type="text" name="aChapter" value="<%=data['a_chapter']%>" /> / <input class="smInput" type="text" />
             </span>
             <br />
             <span class="col-xs-12">
-                <label class="col-xs-2">章節備註</label> <textarea name="aMemo" class="col-xs-8" placeholder="最多輸入300字，顯示於文章開頭"> </textarea>
+                <label class="col-xs-2">章节备注</label> <textarea name="aMemo" class="col-xs-8" placeholder="最多输入300字，显示于文章开头"> </textarea>
             </span>
             <br />
             <span class="col-xs-12">
@@ -185,7 +185,7 @@
                 <input type="radio" name="cpClassChoose" value="黄克功" />黄克功
                 <input type="radio" name="cpClassChoose" value="史路威" />史路威
             </div>
-            <button class="col-xs-3 check">確定</button>
+            <button class="col-xs-3 check">确定</button>
             <button class="col-xs-3">取消</button>
         </form>
     </div>

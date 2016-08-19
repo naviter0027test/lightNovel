@@ -1,6 +1,9 @@
 var articleEditForm = null;
+var myArticleList = null;
+var pgr = null;
 $(document).ready(function() {
     dashboard = new Dashboard({'el' : '#dashboard'});
+    myArticleList = new MyArticle({'el' : '#content', 'model' : new ArticleModel()});
     new DashboardRout();
     Backbone.history.start();
 });
@@ -8,9 +11,10 @@ $(document).ready(function() {
 DashboardRout = Backbone.Router.extend({
     routes : {
         "addSeries" : "addSeries",
-        "editSeries/:sid" : "editMySeries",
+        "editSeries/:sid/:nowPage" : "editMySeries",
         "articleEdit/:aid" : "articleEdit",
         "articleDel/:aid" : "articleDel",
+        "myArticles/:nowPage" : "myArticles",
         "changePage/:page" : "changePage",
         "changePage/:page/:nowPage/:pageLimit" : "changePage"
     },
@@ -38,27 +42,51 @@ DashboardRout = Backbone.Router.extend({
         });
     },
 
-    editMySeries : function(sid) {
+    editMySeries : function(sid, nowPage) {
         var self = dashboard;
         var loadPage = "template/editMySeries.html";
         $("#contentTem").load(loadPage, function() {
             var postData = {};
             postData['instr'] = "seriesGet";
             postData['sid'] = sid;
+            postData['nowPage'] = nowPage;
             $.post("instr.php", postData, function(data) {
                 //console.log(data);
                 data = JSON.parse(data);
-                console.log(data);
+                //console.log(data);
                 self.template = _.template($("#editMySeriesTem").html());
                 self.render(data)
+                if(pager==null) 
+                    pager = new Pager({'el' : '#pager'});
+                pager.render3(nowPage, 10, data['articleAmount'], sid);
+
+                $("#content input[name=chapterNum]").on("change", function() {
+                    var postData = {};
+                    postData['instr'] = "changeArticleChapter";
+                    postData['aid'] = $(this).attr("aid");
+                    postData['chapter'] = $(this).val();
+                    console.log(postData);
+                    $.post("instr.php", postData, function(data) {
+                        //console.log(data);
+                        data = JSON.parse(data);
+                        console.log(data);
+                        if(data['status'] == 200) {
+                            alert("修改完成");
+                            location.reload();
+                        }
+                        else {
+                            alert("修改失敗");
+                        }
+                    });
+                });
 
                 $("#seriesEditForm").submit(function() {
                     if(!$(this).validationEngine("validate"))
                         return false;
                     $(this).ajaxSubmit(function(result) {
-                        console.log(result);
+                        //console.log(result);
                         result = JSON.parse(result);
-                        console.log(result);
+                        //console.log(result);
                         if(result['status'] == 200) {
                             alert("編輯成功");
                             history.go(-1);
@@ -179,6 +207,32 @@ DashboardRout = Backbone.Router.extend({
         });
     },
 
+    myArticles : function(nowPage) {
+        var clickBtn = $("#dashboard a[temid=myArticles]");
+
+        //變換按鈕顏色
+        var allLi = $("#dashboard").find("li");
+        $(allLi).removeClass("nowChoose");
+        $(clickBtn).parent().addClass("nowChoose");
+        $("#contentTem").load("template/myArticles.html", function() {
+            myArticleList.template = _.template($("#myArticlesTem").html());
+            pgr = new Pager({'el' : "#pager"});
+            pgr.model = myArticleList.model;
+            myArticleList.model.on("change:data", function() {
+                var data = this.get("data");
+                //console.log(data);
+                myArticleList.render(data);
+                pgr.render2(nowPage, 25);
+            });
+            var datalist = myArticleList.model.get("data");
+            if(datalist != null) {
+                myArticleList.render(datalist);
+                pgr.render2(nowPage, 25);
+            }
+            myArticleList.model.myArticles(nowPage);
+        });
+    },
+
     changePage : function(page, nowPage, pageLimit) {
         //console.log(page);
         //console.log("template/"+$(evt.target).attr("href"));
@@ -214,6 +268,7 @@ DashboardRout = Backbone.Router.extend({
         });
         message.model.on("change:data", function() {
             message.render();
+            pager.render2(nowPage, pageLimit);
         });
 
         //文章取得時切換html
@@ -243,9 +298,15 @@ DashboardRout = Backbone.Router.extend({
                 articleModel.myLastArticles();
             }
             else if(idname == "resetPass") {
-                self.render();
-                $.getScript("Member/Personal.js", function() {
-                    personal = new PassForm({'el' : "#passUpdForm"});
+                var postData = {};
+                postData['instr'] = "myData";
+                $.post("instr.php", postData, function(data) {
+                    //console.log(data);
+                    data = JSON.parse(data);
+                    self.render(data);
+                    $.getScript("Member/Personal.js", function() {
+                        personal = new PassForm({'el' : "#passUpdForm"});
+                    });
                 });
             }
             else if(idname == "getMessage") {
@@ -254,6 +315,7 @@ DashboardRout = Backbone.Router.extend({
                 }
                 if(isNumeric(nowPage))
                     message.model.set("nowPage", nowPage);
+                pager = new Pager({'el' : '#pager', 'model' : message.model});
                 message.template = _.template($("#getMessage").html());
                 message.model.myList();;
             }

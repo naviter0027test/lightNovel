@@ -1,20 +1,20 @@
 $(document).ready(function() {
-    initialShow();
-    $("#sidebar").load("template/sidebar.html", function() {
-        $("#sidebar a").on("click", function() {
-            $("#header a").removeClass("choosed");
-            $("#sidebar a").removeClass("choosed");
-            $(this).addClass("choosed");
+    $("#loginForm").submit(function() {
+        var self = this;
+        $(this).ajaxSubmit(function(data) {
+            console.log(data);
+            data = JSON.parse(data);
+            console.log(data);
+            if(data['status'] == 200){
+                alert("登入成功");
+                location.href = "admin.html";
+            }
+            else {
+                alert("登入失敗");
+                $(self).clearForm();
+            }
         });
+        return false;
     });
-    $("#header").load("template/header.html", function() {
-        $("#header a").on("click", function() {
-            $("#header a").removeClass("choosed");
-            $("#sidebar a").removeClass("choosed");
-            $(this).addClass("choosed");
-            $("#content").load("template/"+$(this).attr("href"));
-            return false;
-        });
-    });
-    $("#content").load("template/index.html");
+    isLogin();
 });

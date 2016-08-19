@@ -8,6 +8,8 @@
 	<link href='css/header.css' rel='stylesheet' />
 	<link href='css/sidebar.css' rel='stylesheet' />
 	<link href='css/content.css' rel='stylesheet' />
+	<link href='css/articleList.css' rel='stylesheet' />
+	<link href='css/pager.css' rel='stylesheet' />
     </head>
     <body>
         <div id="header" class="col-sm-12">
@@ -24,19 +26,19 @@
         <div id="content" class="col-sm-12">
             <div id="sidebar" class="col-sm-2 sidebar">
                 <ul>
-                    <li><a href="member.html">會員列表</a></li>
-                    <li><a href="articleList.html" class="choosed">文章列表</a></li>
+                    <li><a href="memberList.html#list/1">會員列表</a></li>
+                    <li><a href="articleList.html#list/1" class="choosed">文章列表</a></li>
                 </ul>
             </div>
-            <div id="memberList" class="col-sm-10">
+            <div id="articleList" class="col-sm-10">
                 <div id="operatingPanel">
                     <ol class="breadcrumb">
                         <li><a href="#">首頁</a></li>
                         <li class="active">文章列表</li>
                     </ol>
-                    <form class="col-xs-12">
+                    <form class="col-xs-12 searchForm">
                         <h4>文章搜尋</h4>
-                        <label class="col-xs-2">使用者帳號:</label><input class="col-xs-8" type="text" name="search" />
+                        <label class="col-xs-2">使用者帳號:</label><input class="col-xs-7" type="text" name="search" />
                         <button class="col-xs-2">搜尋</button>
                     </form>
                 </div>
@@ -51,6 +53,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                                <!--
                         <tr>
                             <td>文以載道程生重陽</td>
                             <td>test005</td>
@@ -111,11 +114,25 @@
                                 <a href="#" class="glyphicon glyphicon-trash"></a>
                             </td>
                         </tr>
+                                -->
                     </tbody>
                 </table>
             </div>
+            <div id="pager">
+            </div>
+            <div id="articleListScript">
+            </div>
         </div>
     </body>
-    <script src='../../lib/jquery-2.1.4.min.js'></script>
+    <script src='../lib/jquery-2.1.4.min.js'></script>
+    <script src='../lib/bootstrap/dist/js/bootstrap.min.js'></script>
+    <script src="../lib/jquery.form.js"></script>
+    <script src="../lib/underscore.js"></script>
+    <script src="../lib/backbone.js"></script>
+    <script src="Article/Article.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/Pager.js"></script>
+    <script src="js/articleList.js"></script>
 </html>
 

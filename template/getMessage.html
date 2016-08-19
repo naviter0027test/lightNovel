@@ -1,13 +1,13 @@
 <script id="getMessage" type="text/template">
     <ol class="breadcrumb">
-        <li><a href="#">首頁</a></li>
-        <li><a href="#">Dashboard</a></li>
+        <li><a href="index.html">首页</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
         <li class="active">收到的留言</li>
     </ol>
     <table class="table table-condensed">
         <thead>
             <tr>
-                <td>留言名稱</td>
+                <td>留言名称</td>
                 <td>留言內容</td>
                 <td>留言時間</td>
             </tr>
@@ -22,4 +22,17 @@
             <% }); %>
         </tbody>
     </table>
+</script>
+
+<script id="pagerTem" type="text/template">
+    <% pageSum = Math.ceil(amount / pageLimit); %>
+    <a class="right-arrow" href="#changePage/getMessage/<%=(parseInt(nowPage)+1 <= pageSum ?parseInt(nowPage)+1: nowPage)%>/<%=pageLimit%>">&rsaquo;</a>
+    <% for(idx = pageSum; idx >= 1;--idx) { %>
+        <% if(idx == nowPage) { %>
+        <label><%=idx%></label>
+        <% } else { %>
+        <a href="#changePage/mySeries/<%=idx%>/<%=pageLimit%>"><%=idx%></a>
+        <% } %>
+    <% } %>
+    <a class="left-arrow" href="#changePage/getMessage/<%=(nowPage-1 > 0 ?nowPage-1: nowPage)%>/<%=pageLimit%>">&lsaquo;</a>
 </script>

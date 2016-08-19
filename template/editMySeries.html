@@ -1,7 +1,7 @@
 <script id="editMySeriesTem" type="text/template">
     <ol class="breadcrumb">
-        <li><a href="#">首頁</a></li>
-        <li><a href="#">Dashboard</a></li>
+        <li><a href="index.html">首页</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
         <li class="active">我的系列</li>
     </ol>
     <h3>系列修改</h3>
@@ -9,14 +9,53 @@
         <input type="hidden" name="instr" value="seriesUpd" />
         <input type="hidden" name="asId" value="<%=data['as_id']%>" />
         <div class="col-xs-12">
-            <label class="col-xs-2">系列名稱</label>
+            <label class="col-xs-2">系列名称</label>
             <input type="text" class="col-xs-5 validate[required]" name="seriesName" value="<%=data['as_name']%>" />
         </div>
         <div class="col-xs-12">
             <label class="col-xs-2">最後篇章</label>
-            <input type="text" class="col-xs-2 validate[custom[onlyNumberSp]]" name="finallyCh" value="<%=data['as_finally']%>" /> <p class="text-danger col-xs-4 "> 0為沒決定最後篇章，以'?'顯示</p>
+            <input type="text" class="col-xs-2 validate[custom[onlyNumberSp]]" name="finallyCh" value="<%=data['as_finally']%>" /> <p class="text-danger col-xs-4 "> 0为没决定最后篇章，以'?'显示</p>
         </div>
         <button class="col-xs-3">修改</button>
     </form>
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <td>文章标题</td>
+                <td>分级</td>
+                <td>章节</td>
+                <td>修改时间</td>
+            </tr>
+        </thead>
+        <tbody>
+            <% _.each(articles, function(item) { %>
+            <tr>
+                <td><%=item['a_title']%></td>
+                <td><%=item['a_level']%></td>
+                <td class="col-xs-1">
+                    <input class="col-xs-12" type="text" name="chapterNum" value="<%=item['a_chapter']%>" aid="<%=item['a_id']%>" />
+                </td>
+                <td><%=item['a_crtime']%></td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
 </script>
 
+<script id="pagerTem" type="text/template">
+    <a class="right-arrow" href="#">&rsaquo;</a>
+    <% pageSum = Math.ceil(amount / pageLimit); %>
+    <% for(idx = pageSum; idx >= 1;--idx) { %>
+        <% if(idx == nowPage) { %>
+        <label><%=idx%></label>
+        <% } else { %>
+        <a href="#editSeries/<%=sid%>/<%=idx%>"><%=idx%></a>
+        <% } %>
+    <% } %>
+    <!--
+    <label>1</label>
+    <a href="#changePage/mySeries/2/10/">2</a>
+    <a href="#changePage/mySeries/3/10/">3</a>
+    -->
+    <a class="left-arrow" href="#">&lsaquo;</a>
+</script>

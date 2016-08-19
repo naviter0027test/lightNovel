@@ -23,7 +23,7 @@ class Control {
 	    $this->instr = $_POST['instr'];
     }
     public function execInstr() {
-        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "seriesGet", "postArticle", "myData", "mySeriesList", "myLastArticle", "articleDel", "memSrsPages", "personalImg", "personalUpd", "passReset", "addMessage", "pressPraise", "articleEdit");
+        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "seriesGet", "postArticle", "myData", "mySeriesList", "myLastArticle", "articleDel", "memSrsPages", "personalImg", "personalUpd", "passReset", "addMessage", "pressPraise", "articleEdit", "articleBySid", "changeArticleChapter");
 	try {
 	    if(!function_exists($this->instr))
 		throw new Exception("instr not defined");
@@ -167,6 +167,29 @@ function captchaRegister() {
     $captcha = new Captcha($_SESSION['register']['captcha']);
 }
 
+function captchaForget() {
+    require_once("srvLib/Captcha.php");
+    $_SESSION['forget']['captcha'] = rand(1000, 9999);
+    $captcha = new Captcha($_SESSION['forget']['captcha']);
+}
+
+function forgetPass() {
+    require_once("Member/Member.php");
+    if(!isset($_SESSION['forget']['captcha']))
+	throw new Exception("captcha error");
+    $captcha = $_SESSION['forget']['captcha'];
+    if($captcha != $_POST['captcha']) {
+        unset($_SESSION['forget']['captcha']);
+	throw new Exception("captcha error");
+    }
+    $member = new Member();
+    $member->forget($_POST['user']);
+    unset($_SESSION['forget']['captcha']);
+    $reData['status'] = 200;
+    $reData['msg'] = "forgetPass success";
+    return $reData;
+}
+
 function seriesAdd() {
     require_once("Article/Series.php");
     $series = new Series();
@@ -216,19 +239,32 @@ function seriesDel() {
 
 function seriesGet() {
     require_once("Article/Series.php");
+    require_once("Article/Article.php");
     $series = new Series();
+    $articleAdm = new Article();
+    $para = Array();
+    $para['asid'] = $_POST['sid'];
+    $para['nowPage'] = $_POST['nowPage'];
+    $para['mid'] = $_SESSION['mid'];
+
     $data = $series->getOne($_POST['sid']);
+    $articlesList = $articleAdm->articleBySeries($para);
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "seriesGet success";
     $reData['data'] = $data;
+    $reData['articles'] = $articlesList;
+    $reData['articleAmount'] = $articleAdm->articleAmountBySeries($_POST['sid']);
 
     return $reData;
 }
 
 function postArticle() {
     //require_once("Member/Member.php");
+    require_once("Article/Series.php");
     require_once("Article/Article.php");
+    $series = new Series();
+
     $articleAdm = new Article();
     $article = Array();
     foreach($_POST as $key => $val) {
@@ -242,6 +278,12 @@ function postArticle() {
         $article['subCp'] = $article['viceCp'];
     $article['tag'] = implode(";", $article['tag']);
     $article['alert'] = implode(";", $article['alert']);
+
+    if(isset($article['newSeries'])) {
+        $series->serAdd($_SESSION['mid'], $article['newSeries']);
+        $article['series'] = $series->getLastOneId($_SESSION['mid']);
+    }
+
     $articleAdm->articleAdd($article);
     $reData = Array();
     $reData['status'] = 200;
@@ -276,8 +318,8 @@ function myData() {
     $member = new Member();
     $myData = $member->getOneById($_SESSION['mid']);
 
-    if(file_exists("imgs/tmp/". $myData['m_user']))
-        $myData['headImg'] = "imgs/tmp/". $myData['m_user'];
+    if($myData['m_headImg'] != "")
+        $myData['headImg'] = "imgs/tmp/". $myData['m_headImg'];
     else
         $myData['headImg'] = "imgs/80x80.png";
 
@@ -344,6 +386,9 @@ function personalImg() {
 
     $myData = $member->getOneById($_SESSION['mid']);
     $upResult = $upfile->uploadFinish($myData['m_user']);
+    $colData = Array();
+    $colData['m_headImg'] = $upResult[0]['newName'];
+    $member->dataUpdate($colData, $_SESSION['mid']);
 
     $reData = Array();
     $reData['status'] = 200;
@@ -410,15 +455,29 @@ function articleList() {
     return $reData;
 }
 
+function myArticleList() {
+    require_once("Article/Article.php");
+    $articleAdm = new Article();
+    $articleList = $articleAdm->myArticles($_SESSION['mid'], $_POST['nowPage']);
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "myArticleList success";
+    $reData['data'] = $articleList;
+    $reData['amount'] = $articleAdm->articleAmountByMem($_SESSION['mid']);
+    return $reData;
+}
+
 function articleGet() {
     require_once("Article/Article.php");
     $articleAdm = new Article();
     $data = $articleAdm->get($_POST['aid']);
+    $articlesList = $articleAdm->allArticleBySeries($data['as_id']);
 
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "articleGet success";
     $reData['data'] = $data;
+    $reData['articles'] = $articlesList;
     return $reData;
 }
 
@@ -460,7 +519,7 @@ function msgMyList() {
     require_once("Article/Article.php");
     $msg = new Message();
     $articleAdm = new Article();
-    $articleList = $articleAdm->lastList($_SESSION['mid']);
+    $articleList = $articleAdm->myAllList($_SESSION['mid']);
     $aids = Array();
     foreach($articleList as $article) {
         $aids[] = $article['a_id'];
@@ -471,6 +530,7 @@ function msgMyList() {
     $reData['status'] = 200;
     $reData['msg'] = "msgList success";
     $reData['data'] = $data;
+    $reData['amount'] = $msg->myListAmount($aids, $_SESSION['mid']);
     return $reData;
 }
 
@@ -491,6 +551,59 @@ function pressPraise() {
     }
 
     $reData['msg'] = $msg;
+    return $reData;
+}
+
+function articleBySid() {
+    require_once("Article/Article.php");
+    $articleAdm = new Article();
+    $para = Array();
+    $para['asid'] = $_POST['seriesId'];
+    $para['nowPage'] = $_POST['nowPage'];
+    $para['mid'] = $_SESSION['mid'];
+    $articlesList = $articleAdm->articleBySeries($para);
+    //print_r($articlesList);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "articleBySid success";
+    $reData['data'] = $articlesList;
+    return $reData;
+}
+
+function allArticleBySid() {
+    require_once("Article/Article.php");
+    $articleAdm = new Article();
+    $para = Array();
+    $articlesList = $articleAdm->allArticleBySeries($_POST['seriesId']);
+    //print_r($articlesList);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "articleBySid success";
+    $reData['data'] = $articlesList;
+    return $reData;
+}
+
+function articleAmountBySid() {
+    require_once("Article/Article.php");
+    $articleAdm = new Article();
+    $articlesList = $articleAdm->articleBySeries($_POST['seriesId']);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "articleAmountBySid success";
+    return $reData;
+}
+
+function changeArticleChapter() {
+    require_once("Article/Article.php");
+    $articleAdm = new Article();
+    $articleAdm->changeCh($_POST['aid'], $_POST['chapter']);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "changeArticleChapter success";
     return $reData;
 }
 
