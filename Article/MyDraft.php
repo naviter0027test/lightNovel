@@ -120,7 +120,7 @@ class MyDraft {
         $order['col'] = "a_crtime";
         $order['order'] = "desc";
 
-        $dbAdm->selectData($tablename, $column, null, $order, $limit);
+        $dbAdm->selectData($tablename, $column, $conditionArr, $order, $limit);
         /*
         $dbAdm->sqlSet("
             select count(p.p_id) praiseAmount ,
@@ -134,5 +134,14 @@ class MyDraft {
         $dbAdm->execSQL();
 
         return $dbAdm->getAll();
+    }
+
+    public function myDraftDel($mid, $mdid) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+        $conditionArr = Array();
+        $conditionArr['md_id'] = $mdid;
+        $dbAdm->deleteData($tablename, $conditionArr);
+        $dbAdm->execSQL();
     }
 }

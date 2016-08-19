@@ -23,7 +23,7 @@ class Control {
 	    $this->instr = $_POST['instr'];
     }
     public function execInstr() {
-        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "seriesGet", "postArticle", "myData", "mySeriesList", "myLastArticle", "articleDel", "memSrsPages", "personalImg", "personalUpd", "passReset", "addMessage", "pressPraise", "articleEdit", "articleBySid", "changeArticleChapter", "myArticleList", "delArticleFromSeries", "storeDraft");
+        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "seriesGet", "postArticle", "myData", "mySeriesList", "myLastArticle", "articleDel", "memSrsPages", "personalImg", "personalUpd", "passReset", "addMessage", "pressPraise", "articleEdit", "articleBySid", "changeArticleChapter", "myArticleList", "delArticleFromSeries", "storeDraft", "myDraftDel");
 	try {
 	    if(!function_exists($this->instr))
 		throw new Exception("instr not defined");
@@ -528,6 +528,16 @@ function myDraftList() {
     $reData['status'] = 200;
     $reData['msg'] = "myDraftList success";
     $reData['data'] = $myDraftList;
+    return $reData;
+}
+
+function myDraftDel() {
+    require_once("Article/MyDraft.php");
+    $myDraftAdm = new MyDraft();
+    $myDraftAdm->myDraftDel($_SESSION['mid'], $_POST['md_id']);
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "myDraftDel success";
     return $reData;
 }
 

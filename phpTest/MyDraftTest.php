@@ -102,10 +102,10 @@ class MyDraftTest extends UnitTestCase {
         require_once("../Article/MyDraft.php");
         $myDraft = new MyDraft();
         $nowPage = 1;
-        $draftList = $myDraft->myDraftList($nowPage);
+        $draftList = $myDraft->myDraftList(1, $nowPage);
+        //print_r($draftList);
         $this->assertTrue($draftList[0]['md_id']);
         $this->assertTrue($draftList[1]['md_id']);
         $this->assertTrue($draftList[2]['md_id']);
-        $this->assertTrue($draftList[3]['md_id']);
     }
 }

@@ -162,5 +162,12 @@
             <input type="text" name="nowPage" /><br />
             <button>my draft list</button>
         </form>
+
+        <form action="../instr.php" method="post">
+            <input type="hidden" name="instr" value="myDraftDel" />
+            md id : <input type="text" name="md_id" />
+            <br />
+            <button>my draft delete</button>
+        </form>
     </body>
 </html>
