@@ -100,12 +100,15 @@ class MyDraft {
 	$dbAdm->execSQL();
     }
 
-    public function myDraftList($nowPage) {
+    public function myDraftList($mid, $nowPage) {
         $tablename = $this->table;
         $dbAdm = $this->dbAdm;
 
         $column = Array();
         $column[0] = "*";
+
+        $conditionArr = Array();
+        $conditionArr['m_id'] = $mid;
 
         $limit = Array();
         $limit['offset'] = 0;

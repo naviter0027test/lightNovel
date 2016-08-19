@@ -23,7 +23,7 @@ class Control {
 	    $this->instr = $_POST['instr'];
     }
     public function execInstr() {
-        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "seriesGet", "postArticle", "myData", "mySeriesList", "myLastArticle", "articleDel", "memSrsPages", "personalImg", "personalUpd", "passReset", "addMessage", "pressPraise", "articleEdit", "articleBySid", "changeArticleChapter", "myArticleList", "delArticleFromSeries");
+        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "seriesGet", "postArticle", "myData", "mySeriesList", "myLastArticle", "articleDel", "memSrsPages", "personalImg", "personalUpd", "passReset", "addMessage", "pressPraise", "articleEdit", "articleBySid", "changeArticleChapter", "myArticleList", "delArticleFromSeries", "storeDraft");
 	try {
 	    if(!function_exists($this->instr))
 		throw new Exception("instr not defined");
@@ -489,6 +489,45 @@ function articleGet() {
     $reData['msg'] = "articleGet success";
     $reData['data'] = $data;
     $reData['articles'] = $articlesList;
+    return $reData;
+}
+
+function storeDraft() {
+    require_once("Article/MyDraft.php");
+    $myDraftAdm = new MyDraft();
+    $article = Array();
+    foreach($_POST as $key => $val) {
+        $article[$key] = $val;
+    }
+    $article['mId'] = $_SESSION['mid'];
+    $article['cp1'] = implode(";", $article['cp1']);
+    if(is_array($article['cp2'] ))
+        $article['cp2'] = implode(";", $article['cp2']);
+    if(isset($article['viceCp']))
+        $article['subCp'] = $article['viceCp'];
+    $article['tag'] = implode(";", $article['tag']);
+    $article['alert'] = implode(";", $article['alert']);
+
+    if(isset($article['newSeries'])) {
+        $series->serAdd($_SESSION['mid'], $article['newSeries']);
+        $article['series'] = $series->getLastOneId($_SESSION['mid']);
+    }
+
+    $myDraftAdm->draftAdd($article);
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "storeDraft success";
+    return $reData;
+}
+
+function myDraftList() {
+    require_once("Article/MyDraft.php");
+    $myDraftAdm = new MyDraft();
+    $myDraftList = $myDraftAdm->myDraftList($_SESSION['mid'], $_POST['nowPage']);
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "myDraftList success";
+    $reData['data'] = $myDraftList;
     return $reData;
 }
 
