@@ -1,0 +1,194 @@
+<script id="draftEdit" type="text/template">
+    <div class="postArticle">
+        <h4 class="col-xs-6">文章修改</h4>
+        <form id="postArticleForm" action="instr.php" method="post">
+            <input type="hidden" name="instr" value="editDraft" />
+            <input type="hidden" name="mdid" value="<%=data['md_id']%>" />
+            <span class="col-xs-12">
+                <label class="col-xs-2">标题</label> 
+                <input class="col-xs-6 validate[required]" type="text" name="title" value="<%=data['a_title']%>"/> 
+            </span>
+            <br />
+            <span class="col-xs-12">
+                <label class="col-xs-2">属性</label> 
+                <input type="radio" name="articleType" class="validate[required]" value="article" <%=(data['a_attr']=="article"?"checked":"")%> />文 
+                <input type="radio" name="articleType" class="validate[required]" value="postArticle" <%=(data['a_attr']=="article"?"":"checked")%> />推文 
+                <br />
+            </span>
+            <span class="col-xs-12">
+                <label class="col-xs-2">分級</label>
+                <select name="level" class="validate[required]">
+                    <option value="Gen" <%=(data['a_level']=="Gen"?"selected":"")%>>Gen</option>
+                    <option value="PG" <%=(data['a_level']=="PG"?"selected":"")%>>PG</option>
+                    <option value="NC17" <%=(data['a_level']=="NC17"?"selected":"")%>>NC17</option>
+                </select>
+            </span>
+            <br />
+            <span class="col-xs-12">
+                <label class="col-xs-2">主CP1</label>
+                <input type="text" class="smInput validate[required]" name="cp1[]" placeholder="點我" readonly value="<%=data['a_mainCp'][0]%>"/> /
+                <input type="text" class="smInput validate[required]" name="cp1[]" placeholder="點我" readonly value="<%=data['a_mainCp'][1]%>" />
+            </span>
+            <br />
+            <span class="col-xs-12">
+                <label class="col-xs-2">主CP2</label>
+                <input type="text" class="smInput validate[required]" name="cp2[]" placeholder="點我" readonly value="<%=data['a_mainCp2'][0]%>"/> /
+                <input type="text" class="smInput validate[required]" name="cp2[]" placeholder="點我" readonly value="<%=data['a_mainCp2'][1]%>"/>
+            </span>
+            <br />
+            <span class="col-xs-12">
+                <label class="col-xs-2">副CP</label>
+                <input type="text" name="viceCp" placeholder="以分號隔開" value="<%=data['a_subCp']%>" />
+            </span>
+            <br />
+            <span class="col-xs-12">
+                <label class="col-xs-2">系列</label>
+                <select name="series">
+                    <option value="">請選擇</option>
+                    <option value="7">开声</option>
+                    <option value="8">山兵</option>
+                    <option value="9">光凌</option>
+                    <option value="10">徐魁</option>
+                </select>
+                或新系列 <input type="text" name="newSeries" />
+            </span>
+            <br />
+            <span class="col-xs-12">
+                <label class="col-xs-2">警告</label>
+                <% isCheck = "";
+                if(data['a_alert'].search("主要角色死亡") != -1)
+                    isCheck = "checked";
+                %>
+                <input type="checkbox" name="alert[]" value="主要角色死亡" <%=isCheck%> />主要角色死亡 
+                <% isCheck = "";
+                if(data['a_alert'].search("血腥暴力") != -1)
+                    isCheck = "checked";
+                %>
+                <input type="checkbox" name="alert[]" value="血腥暴力" <%=isCheck%>/>血腥暴力
+                <% isCheck = "";
+                if(data['a_alert'].search("性轉") != -1)
+                    isCheck = "checked";
+                %>
+                <input type="checkbox" name="alert[]" value="性轉" <%=isCheck%>/>性转
+                <br />
+                <input type="checkbox" name="alert[]" value="other" />其他
+                <input type="text" name="alert[]" placeholder="自訂，以分號分隔" />
+            </span>
+            <br />
+            <span class="col-xs-12">
+                <label class="col-xs-2">标签</label>
+                <% isCheck = "";
+                if(data['a_tag'].search("ABO") != -1)
+                    isCheck = "checked";
+                %>
+                <input type="checkbox" name="tag[]" value="ABO" <%=isCheck%>/>ABO 
+                <% isCheck = "";
+                if(data['a_tag'].search("PWP") != -1)
+                    isCheck = "checked";
+                %>
+                <input type="checkbox" name="tag[]" value="PWP" <%=isCheck%>/>PWP
+                <% isCheck = "";
+                if(data['a_tag'].search("AU") != -1)
+                    isCheck = "checked";
+                %>
+                <input type="checkbox" name="tag[]" value="AU" <%=isCheck%>/>AU
+                <% isCheck = "";
+                if(data['a_tag'].search("哨兵向导") != -1)
+                    isCheck = "checked";
+                %>
+                <input type="checkbox" name="tag[]" value="哨兵向导" <%=isCheck%>/>哨兵向导
+                <% isCheck = "";
+                if(data['a_tag'].search("互攻") != -1)
+                    isCheck = "checked";
+                %>
+                <input type="checkbox" name="tag[]" value="互攻" <%=isCheck%>/>互攻
+                <br />
+                <input type="checkbox" name="tag[]" value="other" />其他
+                <input type="text" name="tag[]" placeholder="自訂，以分號分隔" />
+            </span>
+            <br />
+            <span class="col-xs-12">
+                <label class="col-xs-2">章节标题</label> <input type="text" class="validate[required]" name="aTitle" value="<%=data['a_aTitle']%>" />
+            </span>
+            <br />
+            <span class="col-xs-12">
+                <label class="col-xs-2">章节</label> <input class="smInput" type="text" name="aChapter" value="<%=data['a_chapter']%>" /> / <input class="smInput" type="text" />
+            </span>
+            <br />
+            <span class="col-xs-12">
+                <label class="col-xs-2">章节备注</label> <textarea name="aMemo" class="col-xs-8" placeholder="最多输入300字，显示于文章开头"> </textarea>
+            </span>
+            <br />
+            <span class="col-xs-12">
+                <h4>文章撰寫</h4>
+                <textarea id="editor1"  class="ckeditor col-xs-12 validate[required]" name="content"></textarea>
+            </span>
+            <span class="col-xs-12">
+                <button class="col-xs-3 postBtn">發送文章</button>
+                <button class="col-xs-3 storeBtn">儲存草稿</button>
+            </span>
+        </form>
+        <form class="cpPanel">
+            <a class="col-xs-5 nowChoose" href="#cpAclass">明楼及衍生</a>
+            <a class="col-xs-5" href="#cpBclass">明诚及衍生</a>
+            <div class="col-xs-12" id="cpAclass">
+                <input type="radio" name="cpClassChoose" value="明楼" />明楼
+                <input type="radio" name="cpClassChoose" value="蔺晨" />蔺晨
+                <input type="radio" name="cpClassChoose" value="谭宗明" />谭宗明
+                <input type="radio" name="cpClassChoose" value="凌远" />凌远
+                <input type="radio" name="cpClassChoose" value="荣石" />荣石
+                <input type="radio" name="cpClassChoose" value="黄志雄" />黄志雄
+                <input type="radio" name="cpClassChoose" value="胡八一" />胡八一
+                <input type="radio" name="cpClassChoose" value="杜见锋" />杜见锋
+                <input type="radio" name="cpClassChoose" value="沈剑秋" />沈剑秋
+                <input type="radio" name="cpClassChoose" value="李川奇" />李川奇
+                <input type="radio" name="cpClassChoose" value="何鸣" />何鸣
+                <input type="radio" name="cpClassChoose" value="徐安" />徐安
+                <input type="radio" name="cpClassChoose" value="刘彻" />刘彻
+                <input type="radio" name="cpClassChoose" value="岳振声" />岳振声
+                <input type="radio" name="cpClassChoose" value="牧良逢" />牧良逢
+                <input type="radio" name="cpClassChoose" value="秦玄策" />秦玄策
+                <input type="radio" name="cpClassChoose" value="周永嘉" />周永嘉
+                <input type="radio" name="cpClassChoose" value="陈近南" />陈近南
+                <input type="radio" name="cpClassChoose" value="刘华盛" />刘华盛
+                <input type="radio" name="cpClassChoose" value="李天北" />李天北
+                <input type="radio" name="cpClassChoose" value="徐世平" />徐世平
+                <input type="radio" name="cpClassChoose" value="董警官" />董警官
+                <input type="radio" name="cpClassChoose" value="刘一魁" />刘一魁
+                <input type="radio" name="cpClassChoose" value="马少飞" />马少飞
+                <input type="radio" name="cpClassChoose" value="刘凯强" />刘凯强
+                <input type="radio" name="cpClassChoose" value="张红兵" />张红兵
+                <input type="radio" name="cpClassChoose" value="王开复" />王开复
+                <input type="radio" name="cpClassChoose" value="重光葵" />重光葵
+                <input type="radio" name="cpClassChoose" value="龟田一郎" />龟田一郎
+            </div>
+            <div class="col-xs-12" id="cpBclass">
+                <input type="radio" name="cpClassChoose" value="明诚" />明诚
+                <input type="radio" name="cpClassChoose" value="萧景琰" />萧景琰
+                <input type="radio" name="cpClassChoose" value="赵启平" />赵启平
+                <input type="radio" name="cpClassChoose" value="方孟韦" />方孟韦
+                <input type="radio" name="cpClassChoose" value="李熏然" />李熏然
+                <input type="radio" name="cpClassChoose" value="石太璞" />石太璞
+                <input type="radio" name="cpClassChoose" value="季白" />季白
+                <input type="radio" name="cpClassChoose" value="陈亦度" />陈亦度
+                <input type="radio" name="cpClassChoose" value="曲和" />曲和
+                <input type="radio" name="cpClassChoose" value="戴刀" />戴刀
+                <input type="radio" name="cpClassChoose" value="靳以" />靳以
+                <input type="radio" name="cpClassChoose" value="齐勇" />齐勇
+                <input type="radio" name="cpClassChoose" value="郝晨" />郝晨
+                <input type="radio" name="cpClassChoose" value="王瑞" />王瑞
+                <input type="radio" name="cpClassChoose" value="许一霖" />许一霖
+                <input type="radio" name="cpClassChoose" value="公孙泽" />公孙泽
+                <input type="radio" name="cpClassChoose" value="刘承志" />刘承志
+                <input type="radio" name="cpClassChoose" value="陈家明" />陈家明
+                <input type="radio" name="cpClassChoose" value="吴大维" />吴大维
+                <input type="radio" name="cpClassChoose" value="黄元尚" />黄元尚
+                <input type="radio" name="cpClassChoose" value="黄克功" />黄克功
+                <input type="radio" name="cpClassChoose" value="史路威" />史路威
+            </div>
+            <button class="col-xs-3 check">确定</button>
+            <button class="col-xs-3">取消</button>
+        </form>
+    </div>
+</script>
+

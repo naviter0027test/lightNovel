@@ -1,9 +1,15 @@
 var articleEditForm = null;
 var myArticleList = null;
 var pgr = null;
+var myDraftList = null;
 $(document).ready(function() {
     dashboard = new Dashboard({'el' : '#dashboard'});
     myArticleList = new MyArticle({'el' : '#content', 'model' : new ArticleModel()});
+    myDraftList = new MyDraftList({'el' : '#content', 'model' : new MyDraftModel()});
+    myDraftList.model.on("change:data", function() {
+        var data = this.get("data");
+        myDraftList.render(data);
+    });
     new DashboardRout();
     Backbone.history.start();
 });
@@ -14,6 +20,8 @@ DashboardRout = Backbone.Router.extend({
         "editSeries/:sid/:nowPage" : "editMySeries",
         "delSeries/:sid" : "delSeries",
         "delArticleFromSeries/:aid" : "delArtFromSrs",
+        "myDraft/:nowPage" : "myDraftList",
+        "draftEdit/:mdid" : "draftEdit",
         "articleEdit/:aid" : "articleEdit",
         "articleDel/:aid" : "articleDel",
         "myArticles/:nowPage" : "myArticles",
@@ -143,6 +151,109 @@ DashboardRout = Backbone.Router.extend({
             });
     },
 
+    myDraftList : function(nowPage) {
+        $("#contentTem").load("template/myDraftList.html", function() {
+            myDraftList.template = _.template($("#myDraftListTem").html());
+            myDraftList.model.list(nowPage);
+            var data = myDraftList.model.get("data");
+            if(data != null)
+                myDraftList.render(data);
+        });
+    },
+
+    draftEdit : function(mdid) {
+        $("#contentTem").load("template/draftEdit.html", function() {
+            var postData = {};
+            postData['instr'] = "draftGet";
+            postData['mdid'] = mdid;
+            $.post("instr.php", postData, function(data) {
+                //console.log(data);
+                data = JSON.parse(data);
+                data['data']['a_mainCp'] = data['data']['a_mainCp'].split(";");
+                data['data']['a_mainCp2'] = data['data']['a_mainCp2'].split(";");
+
+                //console.log(data);
+                if(data['status'] == 200) {
+                    templateEdit = _.template($("#draftEdit").html());
+                    $("#content").html(templateEdit(data));
+                    var articleEditForm = new PostArticleForm({'el' : '#postArticleForm'});
+                    CKEDITOR.replace("editor1");
+                    CKEDITOR.instances.editor1.setData(data['data']['a_content']);
+
+                    //文章修改的前置
+                    var postForm = new PostArticleForm({'el' : "#postArticleForm"});
+                    var memModel = new MemberModel();
+                    var draftSeries = data['data']['as_id'];
+
+                    memModel.on("change:seriesList", function() {
+                        var data = this.get("seriesList");
+                        if(data['status'] == 200) {
+                            data = data['data'];
+                            $("select[name=series]").html("<option num='X' value=''>請選擇</option>");
+                            for(var i in data) {
+                                var option = document.createElement("option");
+                                $(option).attr("num", i);
+                                if(draftSeries == data[i]['as_id'])
+                                    $(option).attr("selected", true);
+                                $(option).val(data[i]['as_id']);
+                                $(option).text(data[i]['as_name']);
+                                $("select[name=series]").append(option);
+                            }
+                        }
+                    });
+
+                    $("select[name=series]").on("change", function() {
+                        var data = memModel.get("seriesList")['data'];
+                        var num = $("select[name=series] option:selected").attr("num");
+                        if(num != "X") {
+                            var as_finally = data[num]['as_finally'];
+                            if(as_finally == 0)
+                                as_finally = "?";
+                            $("input[name=chapterSum]").val(as_finally);
+                        }
+
+                        if($(this).val() != "")
+                            $("input[name=aChapter]").addClass("validate[required]");
+                        else
+                            $("input[name=aChapter]").removeClass("validate[required]");
+                    });
+
+                    var mySerPost = {};
+                    mySerPost['nowPage'] = 1;
+                    mySerPost['pageLimit'] = 9999;
+                    memModel.getMySeriesList(mySerPost);
+
+                    $(".cpPanel a").on("click", function() {
+                        $(".cpPanel a").removeClass("nowChoose");
+                        $(this).addClass("nowChoose");
+                        $(".cpPanel div").hide();
+                        $($(this).attr("href")).show();
+                        return false;
+                    });
+                    $(".cpPanel button").on("click", function() {
+                        $(".cpPanel").fadeOut();
+                        return false;
+                    });
+
+                    var cpInput = null;
+
+                    $(".cpPanel button.check").on("click", function() {
+                        var cpDiv = $(".cpPanel a.nowChoose").attr("href");
+                        var radioChoose = $(cpDiv).find("input:checked");
+                        //console.log($(radioChoose).val());
+                        $(cpInput).val($(radioChoose).val());
+                        cpInput = null;
+                    });
+
+                    $("[name='cp1[]'],[name='cp2[]']").on("focus", function() {
+                        cpInput = this;
+                        $(".cpPanel").fadeIn();
+                    });
+                }
+            });
+        });
+    },
+
     articleEdit : function(aid) {
         //console.log(aid);
         $("#contentTem").load("template/articleEdit.html", function() {
@@ -166,6 +277,7 @@ DashboardRout = Backbone.Router.extend({
                     //文章修改的前置
                     var postForm = new PostArticleForm({'el' : "#postArticleForm"});
                     var memModel = new MemberModel();
+                    var draftSeries = data['data']['as_id'];
 
                     memModel.on("change:seriesList", function() {
                         var data = this.get("seriesList");
@@ -175,6 +287,8 @@ DashboardRout = Backbone.Router.extend({
                             for(var i in data) {
                                 var option = document.createElement("option");
                                 $(option).attr("num", i);
+                                if(draftSeries == data[i]['as_id'])
+                                    $(option).attr("selected", true);
                                 $(option).val(data[i]['as_id']);
                                 $(option).text(data[i]['as_name']);
                                 $("select[name=series]").append(option);
