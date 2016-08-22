@@ -163,6 +163,7 @@ DashboardRout = Backbone.Router.extend({
 
     draftEdit : function(mdid) {
         $("#contentTem").load("template/draftEdit.html", function() {
+            $("#pager").html('');
             var postData = {};
             postData['instr'] = "draftGet";
             postData['mdid'] = mdid;

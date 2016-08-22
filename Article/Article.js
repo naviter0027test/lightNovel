@@ -54,8 +54,10 @@ PostArticleForm = Backbone.View.extend({
         this.$el.validationEngine("hideAll");
         var postData = {};
         postData['instr'] = $("input[name=instr]").val();
-        if(postData['instr'] == "editDraft")
+        if($("input[name=instr]").attr("draftcls") == "editDraft") {
             postData['mdid'] = $("input[name=mdid]").val();
+            postData['instr'] = "editDraft";
+        }
         else
             postData['instr'] = "storeDraft";
         postData['title'] = $("input[name=title]").val();
@@ -131,6 +133,7 @@ PostArticleForm = Backbone.View.extend({
         });
         return false;
     },
+
     postArt : function() {
         if($("select[name=series]").val() != "" || $("input[name=newSeries]").val() != "") {
             $("input[name=aChapter]").addClass("validate[required]");
@@ -204,7 +207,7 @@ PostArticleForm = Backbone.View.extend({
             postData['content'] = CKEDITOR.instances.editor1.getData();
 
         $.post("instr.php", postData, function(data) {
-            //console.log(data);
+            console.log(data);
             data = JSON.parse(data);
             //console.log(data);
             if(data['status'] == 200) {
