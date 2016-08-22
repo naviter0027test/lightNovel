@@ -89,15 +89,35 @@ class MyDraft {
         return $dbAdm->getAll()[0];
     }
 
-    public function upd($colData, $md_id) {
-        $dbAdm = $this->dbAdm;
+    public function upd($article) {
         $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $updData = Array();
+        $updData['a_title'] = $article['title'];
+        $updData['a_attr'] = $article['articleType'];
+        $updData['a_level'] = $article['level'];
+        if(isset($article['series']))
+            $updData['as_id'] = $article['series'];
+        $updData['a_mainCp'] = $article['cp1'];
+        $updData['a_mainCp2'] = $article['cp2'];
+        if(isset($article['subCp']))
+            $updData['a_subCp'] = $article['subCp']; 
+        $updData['a_alert'] = $article['alert']; 
+        $updData['a_tag'] = $article['tag'];
+        $updData['a_aTitle'] = $article['aTitle'];
+        if(isset($article['aChapter']))
+            $updData['a_chapter'] = $article['aChapter'];
+        if(isset($article['aMemo']))
+            $updData['a_memo'] = $article['aMemo']  ;
+        $updData['a_content'] = $article['content'];
+        $updData['a_crtime'] = date('Y-m-d H:i:s');
 
         $conditionArr = Array();
-        $conditionArr['md_id'] = $md_id;
+        $conditionArr['md_id'] = $article['mdid'];
 
-        $dbAdm->updateData($tablename, $colData, $conditionArr);
-	$dbAdm->execSQL();
+        $dbAdm->updateData($tablename, $updData, $conditionArr);
+        $dbAdm->execSQL();
     }
 
     public function myDraftList($mid, $nowPage) {

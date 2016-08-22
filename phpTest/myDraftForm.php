@@ -169,5 +169,97 @@
             <br />
             <button>my draft delete</button>
         </form>
+
+        <form action="../instr.php" method="post">
+            <h2>修改草稿</h2>
+            <input type="hidden" name="instr" value="editDraft" />
+            md id: <input type="text" name="mdid" /><br />
+            <span class="col-xs-12">
+                <label class="col-xs-2">標題</label> 
+                <input class="col-xs-6" name="title" type="text" /> 
+            </span>
+            <br />
+            <span class="col-xs-12">
+                <label class="col-xs-2">屬性</label> 
+                <input type="radio" name="articleType" value="article" />文 
+                <input type="radio" name="articleType" value="postArticle" />推文 
+                <br />
+            </span>
+            <span class="col-xs-12">
+                <label class="col-xs-2">分級</label>
+                <select name="level">
+                    <option value="Gen">Gen</option>
+                    <option value="PG">PG</option>
+                    <option value="NC17">NC17</option>
+                </select>
+            </span>
+            <br />
+            <span class="col-xs-12">
+                <label class="col-xs-2">主CP1</label>
+                <input type="text" class="smInput" name="cp1[]" placeholder="點我" /> /
+                <input type="text" class="smInput" name="cp1[]" placeholder="點我" />
+            </span>
+            <br />
+            <span class="col-xs-12">
+                <label class="col-xs-2">主CP2</label>
+                <input type="text" class="smInput" name="cp2[]" placeholder="點我" /> /
+                <input type="text" class="smInput" name="cp2[]" placeholder="點我" />
+            </span>
+            <br />
+            <span class="col-xs-12">
+                <label class="col-xs-2">副CP</label>
+                <input type="text" name="viceCp" placeholder="以分號隔開" />
+            </span>
+            <br />
+            <span class="col-xs-12">
+                <label class="col-xs-2">系列</label>
+                <select name="series">
+                    <option value="">請選擇</option>
+                </select>
+            或新系列 
+            </span>
+            <br />
+            <span class="col-xs-12">
+                <label class="col-xs-2">警告</label>
+                <input type="checkbox" name="alert[]" value="主要角色死亡" />主要角色死亡 
+                <input type="checkbox" name="alert[]" value="血腥暴力" />血腥暴力
+                <input type="checkbox" name="alert[]" value="性轉" />性轉
+                <br />
+                <input type="checkbox" name="alert[]" value="other" />其他
+                <input type="text" name="alert[]" placeholder="自訂，以分號分隔" />
+            </span>
+            <br />
+            <span class="col-xs-12">
+                <label class="col-xs-2">標籤</label>
+                <input type="checkbox" name="tag[]" value="ABO" />ABO 
+                <input type="checkbox" name="tag[]" value="PWP" />PWP
+                <input type="checkbox" name="tag[]" value="AU" />AU
+                <input type="checkbox" name="tag[]" value="哨兵向导" />哨兵向导
+                <input type="checkbox" name="tag[]" value="互攻" />互攻
+                <br />
+                <input type="checkbox" name="tag[]" value="other" />其他
+                <input type="text" name="tag[]" placeholder="自訂，以分號分隔" />
+            </span>
+            <br />
+            <span class="col-xs-12">
+                <label class="col-xs-2">章節標題</label> <input type="text" name="aTitle"/>
+            </span>
+            <br />
+            <span class="col-xs-12">
+                <label class="col-xs-2">章節</label> <input name="aChapter" class="smInput" type="text" /> / <input name="chapterSum" class="smInput" type="text" />
+            </span>
+            <br />
+            <span class="col-xs-12">
+                <label class="col-xs-2">章節備註</label> <textarea name="aMemo" class="col-xs-8" placeholder="最多輸入300字，顯示於文章開頭"> </textarea>
+            </span>
+            <br />
+            <span class="col-xs-12">
+                <h4>文章撰寫</h4>
+                <textarea id="editor1"  class="ckeditor col-xs-12" name="content"></textarea>
+            </span>
+            <span class="col-xs-12">
+                <button class="col-xs-3 postBtn">儲存草稿</button>
+            </span>
+        </form>
     </body>
 </html>

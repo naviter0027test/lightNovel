@@ -494,6 +494,7 @@ function articleGet() {
 
 function storeDraft() {
     require_once("Article/MyDraft.php");
+    require_once("Article/Series.php");
     $myDraftAdm = new MyDraft();
     $article = Array();
     foreach($_POST as $key => $val) {
@@ -517,6 +518,39 @@ function storeDraft() {
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "storeDraft success";
+    return $reData;
+}
+
+function editDraft() {
+    require_once("Article/MyDraft.php");
+    require_once("Article/Series.php");
+    $series = new Series();
+
+    $myDraftAdm = new MyDraft();
+    $article = Array();
+    foreach($_POST as $key => $val) {
+        $article[$key] = $val;
+    }
+    //$article['mId'] = $_SESSION['mid'];
+    $article['cp1'] = implode(";", $article['cp1']);
+    if(is_array($article['cp2'] ))
+        $article['cp2'] = implode(";", $article['cp2']);
+    if(isset($article['viceCp']))
+        $article['subCp'] = $article['viceCp'];
+    $article['tag'] = implode(";", $article['tag']);
+    $article['alert'] = implode(";", $article['alert']);
+
+    /*
+    if(isset($article['newSeries'])) {
+        $series->serAdd($_SESSION['mid'], $article['newSeries']);
+        $article['series'] = $series->getLastOneId($_SESSION['mid']);
+    }
+     */
+
+    $myDraftAdm->upd($article);
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "editDraft success";
     return $reData;
 }
 
