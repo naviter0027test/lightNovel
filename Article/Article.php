@@ -52,6 +52,8 @@ class Article {
             $insData['a_subCp'] = $article['subCp']; 
         $insData['a_alert'] = $article['alert']; 
         $insData['m_id'] = $article['mId'];    
+        if(isset($article['sendUser']))
+            $insData['g_sendMid'] = $article['sendUser'];
         $insData['a_tag'] = $article['tag'];
         $insData['a_aTitle'] = $article['aTitle'];
         if(isset($article['aChapter']))

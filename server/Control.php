@@ -23,7 +23,7 @@ class Control {
 	    $this->instr = $_POST['instr'];
     }
     public function execInstr() {
-        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "seriesGet", "postArticle", "myData", "mySeriesList", "myLastArticle", "articleDel", "memSrsPages", "personalImg", "personalUpd", "passReset", "addMessage", "pressPraise", "articleEdit", "articleBySid", "changeArticleChapter", "myArticleList", "delArticleFromSeries", "storeDraft", "myDraftDel", "editDraft", "myDraftList");
+        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "seriesGet", "postArticle", "myData", "mySeriesList", "myLastArticle", "articleDel", "memSrsPages", "personalImg", "personalUpd", "passReset", "addMessage", "pressPraise", "articleEdit", "articleBySid", "changeArticleChapter", "myArticleList", "delArticleFromSeries", "storeDraft", "myDraftDel", "editDraft", "myDraftList", "findMem");
 	try {
 	    if(!function_exists($this->instr))
 		throw new Exception("instr not defined");
@@ -293,6 +293,13 @@ function postArticle() {
     if(isset($article['newSeries'])) {
         $series->serAdd($_SESSION['mid'], $article['newSeries']);
         $article['series'] = $series->getLastOneId($_SESSION['mid']);
+    }
+
+    if(isset($article['sendUser'])) {
+        require_once("Member/Member.php");
+        $memAdm = new Member();
+        $mem = $memAdm->find($article['sendUser']);
+        $article['sendUser'] = $mem['m_id'];
     }
 
     $articleAdm->articleAdd($article);
