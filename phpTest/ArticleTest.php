@@ -62,7 +62,7 @@ class ArticleTest extends UnitTestCase {
         $article['subCp'] = $cpAArr[rand(0, count($cpAArr)-1)]. ";". $cpBArr[rand(0, count($cpBArr)-1)]; 
         $article['series'] = $series->getOne(2)['as_id'];
 
-        $alertArr = Array("主要角色死亡", "血腥暴力", "性轉");
+        $alertArr = Array("主要角色死亡", "血腥暴力", "性转");
         $article['alert'] = $alertArr[rand(0, count($alertArr)-1)];
         $tagArr = Array("ABO", "PWP", "AU", "哨兵向导", "互攻");
         $article['tag'] = $tagArr[rand(0, count($tagArr)-1)];

@@ -341,6 +341,17 @@ function myData() {
     return $reData;
 }
 
+function findMem() {
+    require_once("Member/Member.php");
+    $memAdm = new Member();
+    $mem = $memAdm->find($_POST['user']);
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "findMem success";
+    $reData['data'] = $mem;
+    return $reData;
+}
+
 function mySeriesList() {
     require_once("Article/Series.php");
     $series = new Series();
