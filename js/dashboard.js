@@ -22,6 +22,7 @@ DashboardRout = Backbone.Router.extend({
         "delArticleFromSeries/:aid" : "delArtFromSrs",
         "myDraft/:nowPage" : "myDraftList",
         "draftEdit/:mdid" : "draftEdit",
+        "draftDel/:mdid" : "draftDel",
         "articleEdit/:aid" : "articleEdit",
         "articleDel/:aid" : "articleDel",
         "myArticles/:nowPage" : "myArticles",
@@ -253,6 +254,26 @@ DashboardRout = Backbone.Router.extend({
                 }
             });
         });
+    },
+
+    draftDel : function(mdid) {
+        var postData = {};
+        postData['instr'] = "myDraftDel";
+        postData['md_id'] = mdid;
+        if(confirm("確定刪除?")) 
+            $.post("instr.php", postData, function(data) {
+                //console.log(data);
+                data = JSON.parse(data);
+                //console.log(data);
+                if(data['status'] == 200) {
+                    alert("刪除成功");
+                }
+                else {
+                    alert("刪除失敗");
+                    console.log(data);
+                }
+                history.go(-1);
+            });
     },
 
     articleEdit : function(aid) {
