@@ -121,7 +121,7 @@ class Member {
         $insData['m_user'] = $user['user'];
         $insData['m_pass'] = md5($user['pass']);
         $insData['m_email'] = $user['email'];
-        $insData['m_active'] = "Y";
+        $insData['m_active'] = "N";
         $dbAdm->insertData("Member", $insData);
         $dbAdm->execSQL();
         $this->upActiveMail($user);

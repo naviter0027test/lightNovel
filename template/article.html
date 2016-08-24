@@ -8,6 +8,9 @@
         nextCh['chapter'] = 9999999;
         nextCh['aid'] = 0;
         %>
+        <% if(typeof(articles) == "undefined") { 
+            } else {
+        %>
         <select class="col-sm-2" name="selectCh">
             <option>选择章节</option>
         <% _.each(articles, function(item) { 
@@ -36,6 +39,7 @@
         <a class="col-sm-2" href="#article/<%=nextCh['aid']%>">後一章节</a>
         <a class="col-sm-2" href="#article/<%=(prevCh['aid']!=0?prevCh['aid']:data['a_id'])%>">前一章节</a>
         <a class="col-sm-2" href="#">全文显示</a>
+        <% } %>
         <a class="col-sm-1" href="#pressPraise/<%=data['a_id']%>">点赞</a>
     </div>
     <div class="articleItem">
@@ -71,6 +75,9 @@
         nextCh['chapter'] = 9999999;
         nextCh['aid'] = 0;
         %>
+        <% if(typeof(articles) == "undefined") { 
+            } else {
+        %>
         <select class="col-sm-2" name="selectCh">
             <option>选择章节</option>
         <% _.each(articles, function(item) { 
@@ -99,6 +106,7 @@
         <a class="col-sm-2" href="#article/<%=nextCh['aid']%>">後一章节</a>
         <a class="col-sm-2" href="#article/<%=(prevCh['aid']!=0?prevCh['aid']:data['a_id'])%>">前一章节</a>
         <a class="col-sm-2" href="#">全文显示</a>
+        <% } %>
         <a class="col-sm-1" href="#pressPraise/<%=data['a_id']%>">点赞</a>
     </div>
 </script>

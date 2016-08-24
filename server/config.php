@@ -20,8 +20,8 @@ class Config {
     public function __construct() {
         date_default_timezone_set("Asia/Taipei");
 
-        $this->dbName = "Novel";
-        $this->user = "novel";
+        $this->dbName = "walnu10_Novel";
+        $this->user = "walnu10_novel";
         $this->pass = "n,4n8kkvn";
         $this->host = "localhost";
     }
