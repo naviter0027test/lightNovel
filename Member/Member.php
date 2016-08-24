@@ -57,9 +57,11 @@ class Member {
         if(count($mems) < 1)
             throw new Exception("not find member");
         $mem = $mems[0];
+        /*
         if($mem['m_active'] == "N")
             throw new Exception("member not active");
-        else if($mem['m_active'] == "D")
+         */
+        if($mem['m_active'] == "D")
             throw new Exception("member is disable");
         return $mem['m_id'];
     }

@@ -341,4 +341,18 @@ class Article {
         $dbAdm->updateData($tablename, $colData, $conditionArr);
 	$dbAdm->execSQL();
     }
+
+    public function deleteFromSeries($aid) {
+        $dbAdm = $this->dbAdm;
+        $tablename = $this->table;
+
+        $colData = Array();
+        $colData['as_id'] = 0;
+
+        $conditionArr = Array();
+        $conditionArr['a_id'] = $aid;
+
+        $dbAdm->updateData($tablename, $colData, $conditionArr);
+	$dbAdm->execSQL();
+    }
 }
