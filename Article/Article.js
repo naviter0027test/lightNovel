@@ -108,6 +108,9 @@ PostArticleForm = Backbone.View.extend({
             postData['tag'].push($(tagInput).val());
         }
 
+        if($("input[name=sendUser]").val() != "") 
+            postData['sendUser'] = $("input[name=sendUser]").val();
+
         if($("input[name=aTitle]").val() != "") 
             postData['aTitle'] = $("input[name=aTitle]").val();
 
@@ -194,6 +197,9 @@ PostArticleForm = Backbone.View.extend({
             }
             postData['tag'].push($(tagInput).val());
         }
+
+        if($("input[name=sendUser]").val() != "") 
+            postData['sendUser'] = $("input[name=sendUser]").val();
 
         if($("input[name=aTitle]").val() != "") 
             postData['aTitle'] = $("input[name=aTitle]").val();
