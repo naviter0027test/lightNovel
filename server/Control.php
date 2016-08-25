@@ -482,13 +482,15 @@ function articleGet() {
     require_once("Article/Article.php");
     $articleAdm = new Article();
     $data = $articleAdm->get($_POST['aid']);
-    $articlesList = $articleAdm->allArticleBySeries($data['as_id']);
+    if($data['as_id'] > 0)
+        $articlesList = $articleAdm->allArticleBySeries($data['as_id']);
 
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "articleGet success";
     $reData['data'] = $data;
-    $reData['articles'] = $articlesList;
+    if($data['as_id'] > 0)
+        $reData['articles'] = $articlesList;
     return $reData;
 }
 
