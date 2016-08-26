@@ -2,6 +2,7 @@ var articleEditForm = null;
 var myArticleList = null;
 var pgr = null;
 var myDraftList = null;
+var mySubScrt = null;
 $(document).ready(function() {
     dashboard = new Dashboard({'el' : '#dashboard'});
     myArticleList = new MyArticle({'el' : '#content', 'model' : new ArticleModel()});
@@ -9,6 +10,10 @@ $(document).ready(function() {
     myDraftList.model.on("change:data", function() {
         var data = this.get("data");
         myDraftList.render(data);
+    });
+    mySubScrt = new SubScriptList({'el' : '#content', 'model' : new SubScriptModel() });
+    mySubScrt.model.on("change:data", function() {
+        mySubScrt.render();
     });
     new DashboardRout();
     Backbone.history.start();
@@ -26,6 +31,7 @@ DashboardRout = Backbone.Router.extend({
         "articleEdit/:aid" : "articleEdit",
         "articleDel/:aid" : "articleDel",
         "myArticles/:nowPage" : "myArticles",
+        "mySubscript/:cls/:nowPage" : "mySubScript",
         "changePage/:page" : "changePage",
         "changePage/:page/:nowPage/:pageLimit" : "changePage"
     },
@@ -408,6 +414,35 @@ DashboardRout = Backbone.Router.extend({
                 pgr.render2(nowPage, 25);
             }
             myArticleList.model.myArticles(nowPage);
+        });
+    },
+
+    mySubScript : function(cls, nowPage) {
+        var clickBtn = $("#dashboard a[temid=mySubscript]");
+
+        //變換按鈕顏色
+        var allLi = $("#dashboard").find("li");
+        $(allLi).removeClass("nowChoose");
+        $(clickBtn).parent().addClass("nowChoose");
+        $("#contentTem").load("template/mySubScript.html", function() {
+            if(cls == "none") {
+                mySubScrt.template = _.template($("#mySubScriptNone").html());
+                mySubScrt.render();
+            }
+            else if(cls == "all") {
+            }
+            else if(cls == "article") {
+                mySubScrt.template = _.template($("#mySubScriptArticle").html());
+            }
+            else if(cls == "series") {
+                mySubScrt.template = _.template($("#mySubScriptSeries").html());
+            }
+            else if(cls == "member") {
+                mySubScrt.template = _.template($("#mySubScriptMember").html());
+            }
+
+            if(cls != "none") 
+                mySubScrt.model.list(cls, nowPage);
         });
     },
 

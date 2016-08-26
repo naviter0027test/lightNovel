@@ -72,7 +72,7 @@ class SubScript {
         $sql = "select * from $tablename where 1 = 1 ";
         if($chooseCls != null)
             $sql .= "and $chooseCls <> 0 ";
-        $sql .= " limit ". $limit['offset']. ", ". $limit['amount'];
+        $sql .= " and m_who = $who limit ". $limit['offset']. ", ". $limit['amount'];
         $dbAdm->sqlSet($sql);
         $dbAdm->execSQL();
         return $dbAdm->getAll();
