@@ -23,7 +23,7 @@ class Control {
 	    $this->instr = $_POST['instr'];
     }
     public function execInstr() {
-        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "seriesGet", "postArticle", "myData", "mySeriesList", "myLastArticle", "articleDel", "memSrsPages", "personalImg", "personalUpd", "passReset", "addMessage", "pressPraise", "articleEdit", "articleBySid", "changeArticleChapter", "myArticleList", "delArticleFromSeries", "storeDraft", "myDraftDel", "editDraft", "myDraftList", "findMem");
+        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "seriesGet", "postArticle", "myData", "mySeriesList", "myLastArticle", "articleDel", "memSrsPages", "personalImg", "personalUpd", "passReset", "addMessage", "pressPraise", "articleEdit", "articleBySid", "changeArticleChapter", "myArticleList", "delArticleFromSeries", "storeDraft", "myDraftDel", "editDraft", "myDraftList", "findMem", "subscript");
 	try {
 	    if(!function_exists($this->instr))
 		throw new Exception("instr not defined");
@@ -727,6 +727,65 @@ function changeArticleChapter() {
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "changeArticleChapter success";
+    return $reData;
+}
+
+//第三階段
+function subscript() {
+    require_once("Article/SubScript.php");
+    $ssAdm = new SubScript();
+
+    $subScriptItem = Array();
+    if(isset($_POST['mid']) && $_POST['mid'] != "")
+        $subScriptItem['m_id'] = $_POST['mid'];
+    else if(isset($_POST['asid']) && $_POST['asid'] != "")
+        $subScriptItem['as_id'] = $_POST['asid'];
+    else if(isset($_POST['aid']) && $_POST['aid'] != "")
+        $subScriptItem['a_id'] = $_POST['aid'];
+
+    $ssAdm->subscript($_SESSION['mid'], $subScriptItem);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "subscript success";
+    return $reData;
+}
+
+function subScriptList() {
+    require_once("Article/SubScript.php");
+    $ssAdm = new SubScript();
+
+    $chooseCls = Array();
+    if(isset($_POST['subCls']))
+        $chooseCls = $_POST['subCls'];
+    else
+        $chooseCls = null;
+
+    $data = $ssAdm->lists($_SESSION['mid'], $_POST['nowPage'], $chooseCls);
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "subScriptList success";
+    $reData['data'] = $data;
+    return $reData;
+}
+
+function subScriptDel() {
+    require_once("Article/SubScript.php");
+    $ssAdm = new SubScript();
+
+    $subScriptItem = Array();
+    if(isset($_POST['mid']) && $_POST['mid'] != "")
+        $subScriptItem['m_id'] = $_POST['mid'];
+    else if(isset($_POST['asid']) && $_POST['asid'] != "")
+        $subScriptItem['as_id'] = $_POST['asid'];
+    else if(isset($_POST['aid']) && $_POST['aid'] != "")
+        $subScriptItem['a_id'] = $_POST['aid'];
+
+    $ssAdm->cancel($_SESSION['mid'], $subScriptItem);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "subScriptDel success";
     return $reData;
 }
 
