@@ -85,11 +85,11 @@
         <tbody>
             <% _.each(data, function(item) { %>
             <tr>
-                <td><%=item['a_id']%></td>
+                <td><%=item['a_title']%></td>
                 <td><%=item['ss_updTime']%></td>
                 <td>
                     <a class="glyphicon glyphicon-eye-open" href="article.html#article/<%=item['a_id']%>"></a>
-                    <a class="glyphicon glyphicon-remove" href="#subscriptDel/<%=item['a_id']%>"></a>
+                    <a class="glyphicon glyphicon-remove" href="#subscriptDel/article/<%=item['a_id']%>"></a>
                 </td>
             </tr>
             <% }); %>
@@ -129,11 +129,11 @@
         <tbody>
             <% _.each(data, function(item) { %>
             <tr>
-                <td><%=item['as_id']%></td>
+                <td><%=item['as_name']%></td>
                 <td><%=item['ss_updTime']%></td>
                 <td>
                     <a class="glyphicon glyphicon-eye-open" href="#subScriptArticles/<%=item['as_id']%>/1"></a>
-                    <a class="glyphicon glyphicon-remove" href="#subscriptDel/<%=item['as_id']%>"></a>
+                    <a class="glyphicon glyphicon-remove" href="#subscriptDel/series/<%=item['as_id']%>"></a>
                 </td>
             </tr>
             <% }); %>
@@ -173,11 +173,11 @@
         <tbody>
             <% _.each(data, function(item) { %>
             <tr>
-                <td><%=item['m_id']%></td>
+                <td><%=item['m_user']%></td>
                 <td><%=item['ss_updTime']%></td>
                 <td>
                     <a class="glyphicon glyphicon-eye-open" href="#subSeries/<%=item['m_id']%>/1"></a>
-                    <a class="glyphicon glyphicon-remove" href="#subscriptDel/<%=item['m_id']%>"></a>
+                    <a class="glyphicon glyphicon-remove" href="#subscriptDel/member/<%=item['m_id']%>"></a>
                 </td>
             </tr>
             <% }); %>

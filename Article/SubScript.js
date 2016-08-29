@@ -75,5 +75,28 @@ SubScriptModel = Backbone.Model.extend({
                 self.set("data", data);
             }
         });
+    },
+
+    del : function(cls, id) {
+        var postData = {};
+        postData['instr'] = "subScriptDel";
+        if(cls == "member")
+            postData['mid'] = id;
+        else if(cls == "series")
+            postData['asid'] = id;
+        else if(cls == "article")
+            postData['aid'] = id;
+
+        $.post("instr.php", postData, function(data) {
+            console.log(data);
+            data = JSON.parse(data);
+            console.log(data);
+            if(data['status'] == 200) 
+                alert("取消訂閱成功");
+            else {
+                alert("取消訂閱失敗");
+            }
+            history.go(-1);
+        });
     }
 });

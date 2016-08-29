@@ -34,6 +34,7 @@ DashboardRout = Backbone.Router.extend({
         "mySubscript/:cls/:nowPage" : "mySubScript",
         "subSeries/:mid/:nowPage" : "subSeries",
         "subScriptArticles/:asid/:nowPage" : "subScriptArticles",
+        "subscriptDel/:cls/:id" : "subscriptDel",
         "changePage/:page" : "changePage",
         "changePage/:page/:nowPage/:pageLimit" : "changePage"
     },
@@ -460,6 +461,12 @@ DashboardRout = Backbone.Router.extend({
             mySubScrt.template = _.template($("#subscriptArticlesTem").html());
             mySubScrt.model.articleListBySeries(asid, nowPage);
         });
+    },
+
+    subscriptDel : function(cls, id) {
+        if(confirm("確定取消訂閱?")) {
+            mySubScrt.model.del(cls, id);
+        }
     },
 
     changePage : function(page, nowPage, pageLimit) {

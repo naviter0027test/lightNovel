@@ -69,10 +69,16 @@ class SubScript {
         $limit['offset'] = ($nowPage - 1) * 25;
         $limit['amount'] = 25;
 
-        $sql = "select * from $tablename where 1 = 1 ";
+        $sql = "";
+        if($chooseCls == "m_id")
+            $sql = "select ss.*, m.m_user from $tablename ss, Member m where ss.m_id = m.m_id ";
+        else if($chooseCls == "as_id")
+            $sql = "select ss.*, `as`.as_name from $tablename ss, ArticleSeries `as` where ss.as_id = `as`.as_id ";
+        else if($chooseCls == "a_id")
+            $sql = "select ss.*, a.a_title from $tablename ss, Article a where ss.a_id = a.a_id ";
         if($chooseCls != null)
-            $sql .= "and $chooseCls <> 0 ";
-        $sql .= " and m_who = $who limit ". $limit['offset']. ", ". $limit['amount'];
+            $sql .= " and ss.$chooseCls <> 0 ";
+        $sql .= " and ss.m_who = $who limit ". $limit['offset']. ", ". $limit['amount'];
         $dbAdm->sqlSet($sql);
         $dbAdm->execSQL();
         return $dbAdm->getAll();
