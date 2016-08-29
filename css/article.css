@@ -7,6 +7,11 @@
     text-align : center;
 }
 
+.operPanel .scriptTitle {
+    padding : 10px 5px 10px 5px;
+    text-align : right;
+}
+
 .operPanel select {
     float : right;
     display : inline-block;
