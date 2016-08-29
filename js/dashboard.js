@@ -32,6 +32,8 @@ DashboardRout = Backbone.Router.extend({
         "articleDel/:aid" : "articleDel",
         "myArticles/:nowPage" : "myArticles",
         "mySubscript/:cls/:nowPage" : "mySubScript",
+        "subSeries/:mid/:nowPage" : "subSeries",
+        "subScriptArticles/:asid/:nowPage" : "subScriptArticles",
         "changePage/:page" : "changePage",
         "changePage/:page/:nowPage/:pageLimit" : "changePage"
     },
@@ -443,6 +445,20 @@ DashboardRout = Backbone.Router.extend({
 
             if(cls != "none") 
                 mySubScrt.model.list(cls, nowPage);
+        });
+    },
+
+    subSeries : function(mid, nowPage) {
+        $("#contentTem").load("template/mySubScript.html", function() {
+            mySubScrt.template = _.template($("#subscriptSeriesTem").html());
+            mySubScrt.model.seriesListByMem(mid, nowPage);
+        });
+    },
+
+    subScriptArticles : function(asid, nowPage) {
+        $("#contentTem").load("template/mySubScript.html", function() {
+            mySubScrt.template = _.template($("#subscriptArticlesTem").html());
+            mySubScrt.model.articleListBySeries(asid, nowPage);
         });
     },
 

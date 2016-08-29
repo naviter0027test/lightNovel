@@ -789,4 +789,19 @@ function subScriptDel() {
     return $reData;
 }
 
+function articleListBySubSrs() {
+    require_once("Article/Article.php");
+    $articleAdm = new Article();
+    $para = Array();
+    $para['asid'] = $_POST['asid'];
+    $para['nowPage'] = $_POST['nowPage'];
+    $articlesList = $articleAdm->articleBySubscriptSeries($para);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "articleBySid success";
+    $reData['data'] = $articlesList;
+    return $reData;
+}
+
 ?>

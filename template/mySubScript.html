@@ -132,7 +132,7 @@
                 <td><%=item['as_id']%></td>
                 <td><%=item['ss_updTime']%></td>
                 <td>
-                    <a class="glyphicon glyphicon-eye-open" href="#/<%=item['as_id']%>"></a>
+                    <a class="glyphicon glyphicon-eye-open" href="#subScriptArticles/<%=item['as_id']%>/1"></a>
                     <a class="glyphicon glyphicon-remove" href="#subscriptDel/<%=item['as_id']%>"></a>
                 </td>
             </tr>
@@ -176,8 +176,64 @@
                 <td><%=item['m_id']%></td>
                 <td><%=item['ss_updTime']%></td>
                 <td>
-                    <a class="glyphicon glyphicon-eye-open" href="#/<%=item['m_id']%>"></a>
+                    <a class="glyphicon glyphicon-eye-open" href="#subSeries/<%=item['m_id']%>/1"></a>
                     <a class="glyphicon glyphicon-remove" href="#subscriptDel/<%=item['m_id']%>"></a>
+                </td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</script>
+
+<script id="subscriptSeriesTem" type="text/template">
+    <ol class="breadcrumb">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li class="active">訂閱的系列</li>
+    </ol>
+    <div class="operating">
+    </div>
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <td>系列名称</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <% _.each(data, function(item) { %>
+            <tr>
+                <td><%=item['as_name']%></td>
+                <td>
+                    <a class="glyphicon glyphicon-eye-open" href="#subScriptArticles/<%=item['as_id']%>/1"></a>
+                </td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</script>
+
+<script id="subscriptArticlesTem" type="text/template">
+    <ol class="breadcrumb">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li class="active">訂閱的文章</li>
+    </ol>
+    <div class="operating">
+    </div>
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <td>文章名称</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <% _.each(data, function(item) { %>
+            <tr>
+                <td><%=item['a_title']%></td>
+                <td>
+                    <a class="glyphicon glyphicon-eye-open" href="article.html#article/<%=item['a_id']%>"></a>
                 </td>
             </tr>
             <% }); %>

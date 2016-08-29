@@ -357,4 +357,25 @@ class Article {
         $dbAdm->updateData($tablename, $colData, $conditionArr);
 	$dbAdm->execSQL();
     }
+
+    public function articleBySubscriptSeries($para) { 
+        $dbAdm = $this->dbAdm;
+        $tablename = $this->table;
+
+	$columns = Array();
+	$columns[0] = "*";
+
+        $conditionArr = Array();
+        $conditionArr['as_id'] = $para['asid'];
+
+        $limit = Array();
+        $limit['offset'] = 0;
+        $limit['amount'] = 10;
+        if(isset($para['nowPage']))
+            $limit['offset'] = ($para['nowPage'] -1) * 10;
+
+	$dbAdm->selectData($tablename, $columns, $conditionArr, null, $limit);
+	$dbAdm->execSQL();
+	return $dbAdm->getAll();
+    }
 }

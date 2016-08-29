@@ -41,5 +41,39 @@ SubScriptModel = Backbone.Model.extend({
             //console.log(data);
             self.set("data", data);
         });
+    },
+
+    seriesListByMem : function(mid, nowPage) {
+        var self = this;
+        var postData = {};
+        postData['instr'] = "seriesList";
+        postData['mId'] = mid;
+        postData['nowPage'] = nowPage;
+        postData['pageLimit'] = 25;
+        $.post("instr.php", postData, function(data) {
+            console.log(data);
+            data = JSON.parse(data);
+            console.log(data);
+            if(data['status'] == 200) {
+                self.set("data", data);
+            }
+        });
+    },
+
+    articleListBySeries : function(asid, nowPage) {
+        var self = this;
+        var postData = {};
+        postData['instr'] = "articleListBySubSrs";
+        postData['asid'] = asid;
+        postData['nowPage'] = nowPage;
+        postData['pageLimit'] = 25;
+        $.post("instr.php", postData, function(data) {
+            console.log(data);
+            data = JSON.parse(data);
+            console.log(data);
+            if(data['status'] == 200) {
+                self.set("data", data);
+            }
+        });
     }
 });

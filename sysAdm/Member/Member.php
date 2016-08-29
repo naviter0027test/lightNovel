@@ -49,7 +49,7 @@ class Member {
         if(isset($nowPage))
             $limit['offset'] = ($nowPage -1) * 20;
 
-        $dbAdm->selectData($tablename, $column, null, $order, $limit);
+        $dbAdm->selectData($tablename, $column, null, null, $limit);
         $dbAdm->execSQL();
 
         return $dbAdm->getAll();
