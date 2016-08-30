@@ -47,7 +47,8 @@ class Article {
         if(isset($article['series']))
             $insData['as_id'] = $article['series'];
         $insData['a_mainCp'] = $article['cp1'];
-        $insData['a_mainCp2'] = $article['cp2'];
+        if(isset($article['cp2']))
+            $insData['a_mainCp2'] = $article['cp2'];
         if(isset($article['subCp']))
             $insData['a_subCp'] = $article['subCp']; 
         $insData['a_alert'] = $article['alert']; 
@@ -198,10 +199,11 @@ class Article {
 
         //$dbAdm->selectData($tablename, $column, null, $order, $limit);
         $dbAdm->sqlSet("
-            select count(p.p_id) praiseAmount ,
+            select count(p.p_id) praiseAmount , ass.as_name, m.m_user,
             case when (ass.as_finally = 0) then '?' else ass.as_finally end as as_finally, a.* 
             from `Article` a
             left join ArticleSeries ass on a.as_id = ass.as_id
+            inner join Member m on m.m_id = a.m_id
             left join Praise p on a.a_id = p.a_id group by a.a_id
             order by ". $order['col']. " ". $order['order'].
             " limit ". $limit['offset']. ", ". $limit['amount']);

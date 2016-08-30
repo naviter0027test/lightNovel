@@ -135,8 +135,28 @@ class Member {
         $lastSlash = strrpos($_SERVER['PHP_SELF'], '/', -1);
         $upActive = "http://". $_SERVER['HTTP_HOST']. substr($_SERVER['PHP_SELF'], 0, $lastSlash) . "/verification.html?instr=upActive&user=".
             $user['user']. "&email=". md5($user['email'].$user['user']);
-        $content = "歡迎加入樓誠文庫，<a target='_blank' href='$upActive'>啟用連結</a>";
-        sendMail($user['email'], "[樓誠]啟用信件（系統發信，請勿回覆）", $content);
+        //$content = "歡迎加入樓誠文庫，<a target='_blank' href='$upActive'>啟用連結</a>";
+        $content = "歡迎加入核桃文庫，<a target='_blank' href='$upActive'>啟用連結</a>
+            <br /> <br />
+            欢迎注册本站。
+            <br /> <br />
+            本站为耽美向同人文库网站。主题限电视剧《伪装者》中人物明楼与明诚、及两位演员所饰演其他角色所组成的CP。如您不了解或不喜欢耽美、同人作品，或不喜欢相关CP,请勿进入。
+            <br /> <br />
+            本站不接受如下作品：
+            1. 拆CP作品或其他不符合本站主题的作品；
+            2. 含有真人CP内容的作品；
+            3. 描写儿童色情内容的作品；
+            4. 含有侮辱演员或上述角色内容的作品。
+            <br /> <br />
+            使用本站请遵守如下规则：
+            1. 遵守同人礼仪，请勿在真人在场场合或微博等社交媒体提及本站；
+            2. 理性交流、文明用语。
+            3. 如需投诉发布有误的文章，或任何需求及建议，请联系管理组（walnutfics@163.com）或shijinhetao.lofter.com
+            <br /> <br />
+            祝您使用愉快！
+            <br /> <br />
+            核桃文库管理组（walnutfics@163.com）";
+        sendMail($user['email'], "[核桃文庫]啟用信件（系統發信，請勿回覆）", $content);
     }
 
     public function newPass($num = 8) {
