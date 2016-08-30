@@ -47,7 +47,8 @@ class Article {
         if(isset($article['series']))
             $insData['as_id'] = $article['series'];
         $insData['a_mainCp'] = $article['cp1'];
-        $insData['a_mainCp2'] = $article['cp2'];
+        if(isset($article['cp2']))
+            $insData['a_mainCp2'] = $article['cp2'];
         if(isset($article['subCp']))
             $insData['a_subCp'] = $article['subCp']; 
         $insData['a_alert'] = $article['alert']; 

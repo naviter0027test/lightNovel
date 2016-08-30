@@ -64,10 +64,14 @@ PostArticleForm = Backbone.View.extend({
             var cpInput = $("input[name='cp1[]']")[i];
             postData['cp1'].push($(cpInput).val());
         }
-        postData['cp2'] = [];
-        for(var i = 0;i < $("input[name='cp2[]']").length;++i) {
-            var cpInput = $("input[name='cp2[]']")[i];
-            postData['cp2'].push($(cpInput).val());
+        var cp2_1 = $($("input[name='cp2[]']")[0]).val();
+        var cp2_2 = $($("input[name='cp2[]']")[1]).val();
+        if($.trim(cp2_1) != "" && $.trim(cp2_2) != "") {
+            postData['cp2'] = [];
+            for(var i = 0;i < $("input[name='cp2[]']").length;++i) {
+                var cpInput = $("input[name='cp2[]']")[i];
+                postData['cp2'].push($(cpInput).val());
+            }
         }
 
         if($("input[name=viceCp]").val() != "") {
