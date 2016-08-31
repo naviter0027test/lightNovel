@@ -9,20 +9,22 @@
         <div class="col-xs-12">
             <label class="col-xs-3">email : </label>
             <input class="col-xs-6" type="text" name="email" value="<%=data['m_email']%>" />
+            <button class="col-xs-2 personal">修改</button>
             <br />
         </div>
-        <button class="col-xs-3">修改</button>
     </form>
+    <!--
     <div class="col-xs-12">
         <label>我的文章数量 : </label><span> 尚未開放 </span><br />
     </div>
+    -->
     <form id="personalImg" action="instr.php" method="post">
         <input type="hidden" name="instr" value="personalImg" />
         <div class="col-xs-12">
             <label class="col-xs-3">图像上传 : </label>
             <input class="col-xs-6" type="file" name="file[]" />
+            <button class="col-xs-2 personal">上传</button>
             <br />
         </div>
-        <button class="col-xs-3">上传</button>
     </form>
 </script>

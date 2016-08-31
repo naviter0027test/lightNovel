@@ -14,7 +14,8 @@ HeadPanel = Backbone.View.extend({
                 //若是初次到訪會跳轉到 useExplan.html
                 if(isFirst == "" && (nowHref == "index.html" || nowHref == "")) {
                     setCookie("isFirst", "hasSee", 3);
-                    location.href = "useExplan.html";
+                    //location.href = "useExplan.html";
+                    location.href = "cover.html";
                 }
 
                 //因為這兩個網頁需要登入才能使用，否則強至跳到首頁

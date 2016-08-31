@@ -9,6 +9,13 @@ Article = Backbone.View.extend({
     template : null,
     render : function() {
         var data = this.model.get("data");
+        for(var idx in data['data']) {
+            data['data'][idx]['a_mainCp'] = data['data'][idx]['a_mainCp'].replace(";", "/");
+            if(data['data'][idx]['a_mainCp2'] != null) {
+                var cp2 = data['data'][idx]['a_mainCp2'];
+                data['data'][idx]['a_mainCp2'] = cp2.replace(";", "/");
+            }
+        }
         this.$el.html(this.template(data));
     }
 });
@@ -128,6 +135,10 @@ PostArticleForm = Backbone.View.extend({
                 else
                     alert("發文成功!");
                 location.href = "index.html#/1";
+            }
+            else {
+                if(data['msg'] == "series is repeat")
+                    alert("系列名重复");
             }
         });
         return false;

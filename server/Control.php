@@ -514,8 +514,8 @@ function msgList() {
     $msg = new Message();
     $data = $msg->getList($_POST['aid'], $_POST['nowPage']);
     foreach($data as $i => $item) {
-        if(file_exists("imgs/tmp/". $item['m_user']))
-            $data[$i]['headImg'] = "imgs/tmp/". $item['m_user'];
+        if(file_exists("imgs/tmp/". $item['m_headImg']))
+            $data[$i]['headImg'] = "imgs/tmp/". $item['m_headImg'];
         else
             $data[$i]['headImg'] = "imgs/80x80.png";
     }

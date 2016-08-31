@@ -40,6 +40,9 @@ class Series {
     public function serAdd($mid, $name) {
         $table = $this->table;
         $dbAdm = $this->dbAdm;
+
+        $this->isRepeat($name);
+
         $insData = Array();
         $insData['m_id'] = $mid;
         $insData['as_name'] = $name;
@@ -47,6 +50,23 @@ class Series {
 
         $dbAdm->insertData($table, $insData);
         $dbAdm->execSQL();
+    }
+
+    public function isRepeat($name) {
+        $table = $this->table;
+        $dbAdm = $this->dbAdm;
+        $columns = Array();
+        $columns[0] = "*";
+
+        $conditionArr = Array();
+        $conditionArr['as_name'] = $name;
+
+        $dbAdm->selectData($table, $columns, $conditionArr);
+        $dbAdm->execSQL();
+        $asList = $dbAdm->getAll();
+        if(count($asList) > 0)
+            throw new Exception("series is repeat");
+        return false;
     }
 
     public function serList($listPara, $mid) {
