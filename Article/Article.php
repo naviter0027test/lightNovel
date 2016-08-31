@@ -54,7 +54,8 @@ class Article {
         $insData['a_alert'] = $article['alert']; 
         $insData['m_id'] = $article['mId'];    
         $insData['a_tag'] = $article['tag'];
-        $insData['a_aTitle'] = $article['aTitle'];
+        if(isset($article['aTitle']))
+            $insData['a_aTitle'] = $article['aTitle'];
         if(isset($article['aChapter']))
             $insData['a_chapter'] = $article['aChapter'];
         if(isset($article['aMemo']))
@@ -63,6 +64,7 @@ class Article {
         $insData['a_crtime'] = date('Y-m-d H:i:s');
 
         $dbAdm->insertData($tablename, $insData);
+        //echo $dbAdm->echoSQL();
         $dbAdm->execSQL();
     }
 
@@ -87,7 +89,8 @@ class Article {
         if(isset($article['series']))
             $updData['as_id'] = $article['series'];
         $updData['a_mainCp'] = $article['cp1'];
-        $updData['a_mainCp2'] = $article['cp2'];
+        if(isset($article['cp2']))
+            $updData['a_mainCp2'] = $article['cp2'];
         if(isset($article['subCp']))
             $updData['a_subCp'] = $article['subCp']; 
         $updData['a_alert'] = $article['alert']; 
@@ -223,12 +226,13 @@ class Article {
         $conditionArr['a_id'] = $aid;
 
         //$dbAdm->selectData($tablename, $column, $conditionArr, null, null);
-        $dbAdm->sqlSet("select count(p.m_id) praiseAmount,
+        $dbAdm->sqlSet("select count(p.m_id) praiseAmount, m.m_user,
             case when (ss.as_finally = 0) then '?' 
             else ss.as_finally end as as_finally ,a.*
                 from `Article` a 
                 left join ArticleSeries ss on ss.as_id = a.as_id
                 left join Praise p on p.a_id = a.a_id
+                inner join Member m on m.m_id = a.m_id
             where a.a_id = ". $aid. " group by p.a_id");
         $dbAdm->execSQL();
 

@@ -153,7 +153,10 @@ DashboardRout = Backbone.Router.extend({
                 //console.log(data);
                 data = JSON.parse(data);
                 data['data']['a_mainCp'] = data['data']['a_mainCp'].split(";");
-                data['data']['a_mainCp2'] = data['data']['a_mainCp2'].split(";");
+                if(data['data']['a_mainCp2'] != null)
+                    data['data']['a_mainCp2'] = data['data']['a_mainCp2'].split(";");
+                else
+                    data['data']['a_mainCp2'] = ["", ""];
 
                 //console.log(data);
                 if(data['status'] == 200) {

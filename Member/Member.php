@@ -156,7 +156,7 @@ class Member {
             祝您使用愉快！
             <br /> <br />
             核桃文库管理组（walnutfics@163.com）";
-        sendMail($user['email'], "[核桃文庫]啟用信件（系統發信，請勿回覆）", $content);
+        sendMail($user['email'], "[核桃文库]启用信件（系统发信，请勿回覆）", $content);
     }
 
     public function newPass($num = 8) {

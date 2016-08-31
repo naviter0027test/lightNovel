@@ -56,11 +56,18 @@
         <% } %>
         赞：<label><%=data['praiseAmount']%></label> 点击数：<label></label> 
         </span><br />
+        <% if(data['a_memo'] != null) { %>
+        <hr />
+        <div class="memo">
+            <h5>章节备注</h5>
+            <%=data['a_memo']%>
+        </div>
+        <% } %>
     </div>
     <div class="articleData">
         <hr />
         <h2><%=data['a_title']%></h2>
-        <h3>作者名称</h3>
+        <h3><%=data['m_user']%><!--作者名称--></h3>
         <hr />
         <div class="articleContent">
             <%=data['a_content']%>

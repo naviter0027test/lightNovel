@@ -6,6 +6,7 @@ $(document).ready(function() {
         article = new Article({ 'el' : '#content', "model" : new ArticleModel()});
         article.model.on("change:data", function() {
             var data = this.get("data");
+            //console.log(data);
             article.$el.html(article.template(data));
             $("select[name=selectCh]").on("change", function() {
                 location.href = "#article/"+ $(this).val();
