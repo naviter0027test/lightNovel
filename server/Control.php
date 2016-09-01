@@ -805,10 +805,32 @@ function articleListBySubSrs() {
 }
 
 function searchPrev() {
+    require_once("Article/Article.php");
+    $articleAdm = new Article();
+    $condition = Array();
+    if($_POST['mainCp'] != "")
+        $condition['mainCp'] = "%". str_replace(";", "%", $_POST['mainCp']). "%";
+    if($_POST['nonMainCp'] != "")
+        $condition['nonMainCp'] = "%". str_replace(";", "%", $_POST['nonMainCp']). "%";
+    if($_POST['subCp'] != "")
+        $condition['subCp'] = "%". str_replace(";", "%", $_POST['subCp']). "%";
+    if($_POST['title'] != "")
+        $condition['title'] = "%". str_replace(";", "%", $_POST['title']). "%";
+    if($_POST['series'] != "")
+        $condition['series'] = "%". str_replace(";", "%", $_POST['series']). "%";
+    if($_POST['member'] != "")
+        $condition['member'] = "%". str_replace(";", "%", $_POST['member']). "%";
+    if(isset($_POST['level']))
+        $condition['level'] = "%". implode("%", $_POST['level']);
+    if(isset($_POST['alert']))
+        $condition['alert'] = "%". implode("%", $_POST['alert']);
+    if(isset($_POST['tag']))
+        $condition['tag'] = "%". implode("%", $_POST['tag']);
+
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "searchPrev success";
-    $reData['data'] = $_POST;
+    $reData['data'] = $condition;
     return $reData;
 }
 

@@ -378,4 +378,7 @@ class Article {
 	$dbAdm->execSQL();
 	return $dbAdm->getAll();
     }
+
+    public function search($nowPage, $conditionLike) {
+    }
 }

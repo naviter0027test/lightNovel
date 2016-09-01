@@ -2,9 +2,11 @@
     <head>
         <title>search form</title>
         <meta charset="utf-8" />
+	<link href='../lib/bootstrap/dist/css/bootstrap.min.css' rel='stylesheet' />
+	<link href='../lib/bootstrap/dist/css/bootstrap-theme.min.css' rel='stylesheet' />
     </head>
     <body>
-        <form id="searchPrev" action="instr.php" method="post" class="searchPrev">
+        <form id="searchPrev" action="../instr.php" method="post" class="searchPrev">
             <input type="hidden" name="instr" value="searchPrev" />
             <input type="text" name="mainCp" class="col-xs-12" placeholder="输入主CP搜寻，若有多个以分号分隔"/>
             <input type="text" name="nonMainCp" class="col-xs-12" placeholder="输入须排除主CP搜寻，若有多个以分号分隔" />
@@ -42,4 +44,6 @@
             <button class="col-xs-3">查詢</button>
         </form>
     </body>
+    <script src="../lib/jquery-2.1.4.min.js"></script>
+    <script src='../lib/bootstrap/dist/js/bootstrap.min.js'></script>
 </html>
