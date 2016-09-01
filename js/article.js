@@ -7,6 +7,11 @@ $(document).ready(function() {
         article.model.on("change:data", function() {
             var data = this.get("data");
             //console.log(data);
+            data['data']['a_mainCp'] = data['data']['a_mainCp'].replace(";", "/");
+            if(data['data']['a_mainCp2'] != null) {
+                var cp2 = data['data']['a_mainCp2'];
+                data['data']['a_mainCp2'] = cp2.replace(";", "/");
+            }
             article.$el.html(article.template(data));
             $("select[name=selectCh]").on("change", function() {
                 location.href = "#article/"+ $(this).val();

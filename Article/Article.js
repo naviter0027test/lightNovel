@@ -51,10 +51,10 @@ PostArticleForm = Backbone.View.extend({
     },
     postArt : function() {
         if($("select[name=series]").val() != "" || $("input[name=newSeries]").val() != "") {
-            $("input[name=aChapter]").addClass("validate[required]");
+            $("input[name=aChapter]").addClass("validate[required, custom[integer]]");
         }
         else
-            $("input[name=aChapter]").removeClass("validate[required]");
+            $("input[name=aChapter]").removeClass("validate[required, custom[integer]]");
         if(!this.$el.validationEngine("validate"))
             return false;
         this.$el.validationEngine("hideAll");
