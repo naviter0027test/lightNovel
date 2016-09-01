@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <title>search form</title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+        <form id="searchPrev" action="instr.php" method="post" class="searchPrev">
+            <input type="hidden" name="instr" value="searchPrev" />
+            <input type="text" name="mainCp" class="col-xs-12" placeholder="输入主CP搜寻，若有多个以分号分隔"/>
+            <input type="text" name="nonMainCp" class="col-xs-12" placeholder="输入须排除主CP搜寻，若有多个以分号分隔" />
+            <input type="text" name="subCp" class="col-xs-12" placeholder="输入副CP搜寻，若有多个以分号分隔" />
+            <input type="text" name="nonSubCp" class="col-xs-12" placeholder="输入须排除副CP搜寻，若有多个以分号分隔" />
+            <input type="text" name="title" class="col-xs-12" placeholder="输入标题名称搜寻" />
+            <input type="text" name="series" class="col-xs-12" placeholder="输入系列名称搜寻" />
+            <input type="text" name="member" class="col-xs-12" placeholder="输入作者名称搜寻" />
+            <span class="col-xs-12">
+                <label class="col-xs-2">分級</label>
+                <input type="checkbox" name="level[]" value="Gen" />Gen
+                <input type="checkbox" name="level[]" value="PG" />PG
+                <input type="checkbox" name="level[]" value="NC17" />NC17
+            </span>
+            <span class="col-xs-12">
+                <label class="col-xs-2">警告</label>
+                <input type="checkbox" name="alert[]" value="主要角色死亡" class="validate[required]"/>主要角色死亡
+                <input type="checkbox" name="alert[]" value="血腥暴力"  class="validate[required]"/>血腥暴力
+                <input type="checkbox" name="alert[]" value="性轉"  class="validate[required]"/>性转
+                <br />
+                <input type="checkbox" name="alert[]" value="other"  class="validate[required]"/>其他
+                <input type="text" name="alert[]" placeholder="自订，以分号分隔" />
+            </span>
+            <span class="col-xs-12">
+                <label class="col-xs-2">标签</label>
+                <input type="checkbox" name="tag[]" value="ABO"  class="validate[required]"/>ABO 
+                <input type="checkbox" name="tag[]" value="PWP"  class="validate[required]"/>PWP
+                <input type="checkbox" name="tag[]" value="AU"  class="validate[required]"/>AU
+                <input type="checkbox" name="tag[]" value="哨兵向导"  class="validate[required]"/>哨兵向导
+                <input type="checkbox" name="tag[]" value="互攻"  class="validate[required]"/>互攻
+                <br />
+                <input type="checkbox" name="tag[]" value="other"  class="validate[required]"/>其他
+                <input type="text" name="tag[]" placeholder="自订，以分号分隔" />
+            </span>
+            <button class="col-xs-3">查詢</button>
+        </form>
+    </body>
+</html>

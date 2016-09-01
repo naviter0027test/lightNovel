@@ -804,4 +804,12 @@ function articleListBySubSrs() {
     return $reData;
 }
 
+function searchPrev() {
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "searchPrev success";
+    $reData['data'] = $_POST;
+    return $reData;
+}
+
 ?>
