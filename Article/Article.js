@@ -126,7 +126,7 @@ PostArticleForm = Backbone.View.extend({
             postData['content'] = CKEDITOR.instances.editor1.getData();
 
         $.post("instr.php", postData, function(data) {
-            //console.log(data);
+            console.log(data);
             data = JSON.parse(data);
             //console.log(data);
             if(data['status'] == 200) {

@@ -84,7 +84,7 @@ class Article {
         $dbAdm = $this->dbAdm;
 
         $updData = Array();
-        $updData['a_title'] = $article['title'];
+        //$updData['a_title'] = $article['title'];
         $updData['a_attr'] = $article['articleType'];
         $updData['a_level'] = $article['level'];
         if(isset($article['series']))
@@ -97,18 +97,20 @@ class Article {
         $updData['a_alert'] = $article['alert']; 
         $updData['m_id'] = $article['mId'];    
         $updData['a_tag'] = $article['tag'];
-        $updData['a_aTitle'] = $article['aTitle'];
+        if(isset($article['aTitle']))
+            $updData['a_aTitle'] = $article['aTitle'];
         if(isset($article['aChapter']))
             $updData['a_chapter'] = $article['aChapter'];
         if(isset($article['aMemo']))
             $updData['a_memo'] = $article['aMemo']  ;
         $updData['a_content'] = $article['content'];
-        $updData['a_crtime'] = date('Y-m-d H:i:s');
+        //$updData['a_crtime'] = date('Y-m-d H:i:s');
 
         $conditionArr = Array();
         $conditionArr['a_id'] = $article['aid'];
 
         $dbAdm->updateData($tablename, $updData, $conditionArr);
+        //echo $dbAdm->echoSQL();
         $dbAdm->execSQL();
     }
 
@@ -300,6 +302,25 @@ class Article {
 
         $conditionArr = Array();
         $conditionArr['as_id'] = $seriesId;
+
+        $order = Array();
+        $order['col'] = "a_chapter";
+        $order['order'] = "asc";
+
+	$dbAdm->selectData($tablename, $columns, $conditionArr, $order);
+	$dbAdm->execSQL();
+	return $dbAdm->getAll();
+    }
+
+    public function articlesByArtTitle($atid) {
+        $dbAdm = $this->dbAdm;
+        $tablename = $this->table;
+
+	$columns = Array();
+	$columns[0] = "*";
+
+        $conditionArr = Array();
+        $conditionArr['at_id'] = $atid;
 
         $order = Array();
         $order['col'] = "a_chapter";

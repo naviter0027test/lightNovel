@@ -20,7 +20,7 @@
                 prevCh['chapter'] = parseInt(item['a_chapter']);
             }
         %>
-            <option value="<%=item['a_id']%>"><%=item['a_aTitle']%></option>
+            <option value="<%=item['a_id']%>">Ch<%=item['a_chapter']%> <%=item['a_aTitle']%></option>
         <% }); %>
             <!--
             <option>Ch4 章節標題</option>
@@ -59,7 +59,7 @@
     </div>
     <div class="articleData">
         <hr />
-        <h2><%=data['a_title']%></h2>
+        <h2><%=data['at_title']%></h2>
         <h3><%=data['m_user']%><!--作者名称--></h3>
         <% if(data['a_memo'] != null) { %>
         <hr />
