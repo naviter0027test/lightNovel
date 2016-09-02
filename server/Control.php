@@ -274,7 +274,9 @@ function postArticle() {
     //require_once("Member/Member.php");
     require_once("Article/Series.php");
     require_once("Article/Article.php");
+    require_once("Article/ArticleTitle.php");
     $series = new Series();
+    $articleTitleAdm = new ArticleTitle();
 
     $articleAdm = new Article();
     $article = Array();
@@ -293,6 +295,21 @@ function postArticle() {
     if(isset($article['newSeries'])) {
         $series->serAdd($_SESSION['mid'], $article['newSeries']);
         $article['series'] = $series->getLastOneId($_SESSION['mid']);
+    }
+
+    if(!$articleTitleAdm->isRepeat($article['title'])) {
+        $insData = Array();
+        $insData['title'] = $article['title'];
+        $insData['mid'] = $_SESSION['mid'];
+        $insData['asid'] = $seriesId;
+        $articleTitleAdm->adds($insData);
+    }
+    $artTitle = $articleTitleAdm->get($article['title']);
+    $article['atid'] = $artTitle['at_id'];
+
+    if(isset($article['series'])) {
+        $articleTitleAdm->updasid($artTitle['at_id'], $article['series']);
+        unset($article['series']);
     }
 
     $articleAdm->articleAdd($article);

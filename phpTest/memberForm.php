@@ -82,21 +82,21 @@ session_start();
                 <br />
                 <span class="col-xs-12">
                     <label class="col-xs-2">系列</label>
+<!--
                     <select name="series">
                         <option value="">請選擇</option>
                         <option value="1">東卯</option>
                         <option value="2">常歌</option>
                     </select>
                 或新系列 
+-->
                 </span>
                 <br />
                 <span class="col-xs-12">
                     <label class="col-xs-2">警告</label>
-                    <input type="checkbox" name="alert[]" value="OMC" />OMC 
-                    <input type="checkbox" name="alert[]" value="OFC" />OFC
-                    <input type="checkbox" name="alert[]" value="DEATH" />DEATH
-                    <input type="checkbox" name="alert[]" value="NON-CON" />NON-CON
-                    <input type="checkbox" name="alert[]" value="BG" />BF
+                    <input type="checkbox" name="alert[]" value="主要角色死亡" class="validate[required]"/>主要角色死亡
+                    <input type="checkbox" name="alert[]" value="血腥暴力"  class="validate[required]"/>血腥暴力
+                    <input type="checkbox" name="alert[]" value="性轉"  class="validate[required]"/>性转
                     <br />
                     <input type="checkbox" name="alert[]" value="other" />其他
                     <input type="text" name="alert[]" placeholder="自訂，以分號分隔" />
@@ -104,11 +104,11 @@ session_start();
                 <br />
                 <span class="col-xs-12">
                     <label class="col-xs-2">標籤</label>
-                    <input type="checkbox" name="tag[]" value="ABO" />ABO 
-                    <input type="checkbox" name="tag[]" value="PWP" />PWP
-                    <input type="checkbox" name="tag[]" value="AU" />AU
-                    <input type="checkbox" name="tag[]" value="domsub" />domsub
-                    <input type="checkbox" name="tag[]" value="crossover" />corssover
+                    <input type="checkbox" name="tag[]" value="ABO"  class="validate[required]"/>ABO 
+                    <input type="checkbox" name="tag[]" value="PWP"  class="validate[required]"/>PWP
+                    <input type="checkbox" name="tag[]" value="AU"  class="validate[required]"/>AU
+                    <input type="checkbox" name="tag[]" value="哨兵向导"  class="validate[required]"/>哨兵向导
+                    <input type="checkbox" name="tag[]" value="互攻"  class="validate[required]"/>互攻
                     <br />
                     <input type="checkbox" name="tag[]" value="other" />其他
                     <input type="text" name="tag[]" placeholder="自訂，以分號分隔" />
@@ -119,7 +119,7 @@ session_start();
                 </span>
                 <br />
                 <span class="col-xs-12">
-                    <label class="col-xs-2">章節</label> <input name="aChapter[]" class="smInput" type="text" /> / <input name="aChapter[]" class="smInput" type="text" />
+                    <label class="col-xs-2">章节</label> <input class="smInput" name="aChapter" type="text" /> / <input class="smInput" name="chapterSum" type="text" readonly />
                 </span>
                 <br />
                 <span class="col-xs-12">
