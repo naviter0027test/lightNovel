@@ -151,7 +151,11 @@ class Article {
         $limit['amount'] = 5;
 
         $dbAdm->selectData($tablename, $column, $conditionArr, $order, $limit);
-        $dbAdm->sqlSet("select a.*, ss.as_name from $tablename a left join ArticleSeries ss on a.as_id = ss.as_id where a.m_id = $mid order by a_crtime desc limit 0, 5;");
+        $dbAdm->sqlSet("select a.*, ss.as_name, att.at_title
+            from $tablename a 
+            inner join ArticleTitle att on att.at_id = a.at_id
+            left join ArticleSeries ss on att.as_id = ss.as_id 
+            where a.m_id = $mid order by a_crtime desc limit 0, 5;");
         $dbAdm->execSQL();
 
         return $dbAdm->getAll();
@@ -176,7 +180,11 @@ class Article {
         $limit['amount'] = 25;
 
         //$dbAdm->selectData($tablename, $column, $conditionArr, $order, $limit);
-        $dbAdm->sqlSet("select a.*, ss.as_name from $tablename a left join ArticleSeries ss on a.as_id = ss.as_id where a.m_id = $mid order by a_crtime desc limit ". $limit['offset']. ", ". $limit['amount']);
+        $dbAdm->sqlSet("select a.*, ss.as_name, att.at_title
+            from $tablename a 
+            inner join ArticleTitle att on att.at_id = a.at_id
+            left join ArticleSeries ss on att.as_id = ss.as_id 
+            where a.m_id = $mid order by a_crtime desc limit ". $limit['offset']. ", ". $limit['amount']);
         $dbAdm->execSQL();
 
         return $dbAdm->getAll();
@@ -231,10 +239,12 @@ class Article {
 
         //$dbAdm->selectData($tablename, $column, $conditionArr, null, null);
         $dbAdm->sqlSet("select count(p.m_id) praiseAmount, m.m_user,
-            case when (ss.as_finally = 0) then '?' 
-            else ss.as_finally end as as_finally ,a.*
+                case when (att.at_lastCh = 0) then '?' 
+                else att.at_lastCh end as at_lastCh, 
+                a.*, att.at_title, att.at_lastCh, att.as_id asid
                 from `Article` a 
-                left join ArticleSeries ss on ss.as_id = a.as_id
+                inner join ArticleTitle att on a.at_id = att.at_id
+                left join ArticleSeries ss on ss.as_id = att.as_id
                 left join Praise p on p.a_id = a.a_id
                 inner join Member m on m.m_id = a.m_id
             where a.a_id = ". $aid. " group by p.a_id");
