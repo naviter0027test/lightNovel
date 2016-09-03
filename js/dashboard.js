@@ -14,6 +14,7 @@ DashboardRout = Backbone.Router.extend({
         "editSeries/:sid/:nowPage" : "editMySeries",
         "delSeries/:sid" : "delSeries",
         "delArticleFromSeries/:aid" : "delArtFromSrs",
+        "articlePlus/:atTitle" : "articlePlus",
         "articleEdit/:aid" : "articleEdit",
         "articleDel/:aid" : "articleDel",
         "myArticles/:nowPage" : "myArticles",
@@ -141,6 +142,13 @@ DashboardRout = Backbone.Router.extend({
                     alert("剔除失敗");
                 history.go(-1);
             });
+    },
+
+    articlePlus : function(atTitle) {
+        $.getScript("lib/CookieAPI.js", function() {
+            setCookie("atTitle", atTitle, 1);
+            location.href = "postArticle.html";
+        });
     },
 
     articleEdit : function(aid) {
