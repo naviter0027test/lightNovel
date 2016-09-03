@@ -305,7 +305,7 @@ function postArticle() {
         $insData = Array();
         $insData['title'] = $article['title'];
         $insData['mid'] = $_SESSION['mid'];
-        $insData['asid'] = (isset($article['series'])?0:$article['series']);
+        $insData['asid'] = (isset($article['series'])?$article['series']:0);
         $articleTitleAdm->adds($insData);
     }
     $artTitle = $articleTitleAdm->get($article['title']);
