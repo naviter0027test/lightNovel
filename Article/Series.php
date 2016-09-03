@@ -87,9 +87,9 @@ class Series {
         $limit = Array();
         $limit['offset'] = ($nowPage - 1) * $pageLimit;
         $limit['amount'] = $pageLimit;
-	$dbAdm->selectData($tablename, $columns, $conditionArr, null, $limit);
+	//$dbAdm->selectData($tablename, $columns, $conditionArr, null, $limit);
 
-        //$dbAdm->sqlSet("select s.*, case when isnull(ss.articleCount) then 0 else ss.articleCount end as articleCount from ArticleSeries s left join (SELECT s.*, count(a.a_id) articleCount FROM `ArticleSeries` s inner join Article a on a.as_id = s.as_id where s.m_id = $mid group by a.as_id) ss on s.as_id = ss.as_id where s.m_id = $mid limit ". $limit['offset']. ", ". $limit['amount']);
+        $dbAdm->sqlSet("select s.*, case when isnull(ss.articleCount) then 0 else ss.articleCount end as articleCount from ArticleSeries s left join (SELECT s.*, count(att.at_id) articleCount FROM `ArticleSeries` s inner join ArticleTitle att on att.as_id = s.as_id where s.m_id = $mid group by att.as_id) ss on s.as_id = ss.as_id where s.m_id = $mid limit ". $limit['offset']. ", ". $limit['amount']);
 	$dbAdm->execSQL();
 	return $dbAdm->getAll();
     }

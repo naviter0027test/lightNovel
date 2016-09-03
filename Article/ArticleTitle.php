@@ -94,6 +94,31 @@ class ArticleTitle {
         return $datas[0];
     }
 
+    public function titleBySeries($para) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $column = Array();
+        $column[0] = "*";
+
+        $conditionArr = Array();
+        $conditionArr['as_id'] = $para['asid'];
+        $conditionArr['m_id'] = $para['mid'];
+
+        $limit = Array();
+        $limit['offset'] = $para['nowPage'] - 1;
+        $limit['amount'] = 25;
+
+        $dbAdm->selectData($tablename, $column, $conditionArr, null, $limit);
+        $dbAdm->execSQL();
+
+        $datas = $dbAdm->getAll();
+        if(count($datas) < 1) 
+            throw new Exception("not found the article title");
+
+        return $datas;
+    }
+
     public function adds($articletitle) {
         $tablename = $this->table;
         $dbAdm = $this->dbAdm;
@@ -102,8 +127,10 @@ class ArticleTitle {
         $insData['at_title'] = $articletitle['title'];
         $insData['m_id'] = $articletitle['mid'];
         $insData['as_id'] = $articletitle['asid'];
+        $insData['at_crtime'] = date("Y-m-d H:i:s");
 
         $dbAdm->insertData($tablename, $insData);
+        //echo $dbAdm->echoSQL();
         $dbAdm->execSQL();
     }
 

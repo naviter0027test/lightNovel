@@ -240,15 +240,19 @@ function seriesDel() {
 function seriesGet() {
     require_once("Article/Series.php");
     require_once("Article/Article.php");
+    require_once("Article/ArticleTitle.php");
     $series = new Series();
     $articleAdm = new Article();
+    $artTitleAdm = new ArticleTitle();
+
     $para = Array();
     $para['asid'] = $_POST['sid'];
     $para['nowPage'] = $_POST['nowPage'];
     $para['mid'] = $_SESSION['mid'];
 
     $data = $series->getOne($_POST['sid']);
-    $articlesList = $articleAdm->articleBySeries($para);
+    //$articlesList = $articleAdm->articleBySeries($para);
+    $articlesList = $artTitleAdm->titleBySeries($para);
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "seriesGet success";
@@ -301,7 +305,7 @@ function postArticle() {
         $insData = Array();
         $insData['title'] = $article['title'];
         $insData['mid'] = $_SESSION['mid'];
-        $insData['asid'] = $seriesId;
+        $insData['asid'] = $article['series'];
         $articleTitleAdm->adds($insData);
     }
     $artTitle = $articleTitleAdm->get($article['title']);
