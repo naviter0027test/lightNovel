@@ -240,15 +240,19 @@ function seriesDel() {
 function seriesGet() {
     require_once("Article/Series.php");
     require_once("Article/Article.php");
+    require_once("Article/ArticleTitle.php");
     $series = new Series();
     $articleAdm = new Article();
+    $artTitleAdm = new ArticleTitle();
+
     $para = Array();
     $para['asid'] = $_POST['sid'];
     $para['nowPage'] = $_POST['nowPage'];
     $para['mid'] = $_SESSION['mid'];
 
     $data = $series->getOne($_POST['sid']);
-    $articlesList = $articleAdm->articleBySeries($para);
+    //$articlesList = $articleAdm->articleBySeries($para);
+    $articlesList = $artTitleAdm->titleBySeries($para);
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "seriesGet success";
@@ -274,7 +278,9 @@ function postArticle() {
     //require_once("Member/Member.php");
     require_once("Article/Series.php");
     require_once("Article/Article.php");
+    require_once("Article/ArticleTitle.php");
     $series = new Series();
+    $articleTitleAdm = new ArticleTitle();
 
     $articleAdm = new Article();
     $article = Array();
@@ -295,6 +301,21 @@ function postArticle() {
         $article['series'] = $series->getLastOneId($_SESSION['mid']);
     }
 
+    if(!$articleTitleAdm->isRepeat($article['title'])) {
+        $insData = Array();
+        $insData['title'] = $article['title'];
+        $insData['mid'] = $_SESSION['mid'];
+        $insData['asid'] = $article['series'];
+        $articleTitleAdm->adds($insData);
+    }
+    $artTitle = $articleTitleAdm->get($article['title']);
+    $article['atid'] = $artTitle['at_id'];
+
+    if(isset($article['series'])) {
+        $articleTitleAdm->updasid($artTitle['at_id'], $article['series']);
+        unset($article['series']);
+    }
+
     $articleAdm->articleAdd($article);
     $reData = Array();
     $reData['status'] = 200;
@@ -303,8 +324,13 @@ function postArticle() {
 }
 
 function articleEdit() {
+    require_once("Article/Series.php");
     require_once("Article/Article.php");
+    require_once("Article/ArticleTitle.php");
+    $series = new Series();
+    $articleTitleAdm = new ArticleTitle();
     $articleAdm = new Article();
+
     $article = Array();
     foreach($_POST as $key => $val) {
         $article[$key] = $val;
@@ -317,6 +343,27 @@ function articleEdit() {
         $article['subCp'] = $article['viceCp'];
     $article['tag'] = implode(";", $article['tag']);
     $article['alert'] = implode(";", $article['alert']);
+
+    if(isset($article['newSeries'])) {
+        $series->serAdd($_SESSION['mid'], $article['newSeries']);
+        $article['series'] = $series->getLastOneId($_SESSION['mid']);
+    }
+
+    if(!$articleTitleAdm->isRepeat($article['title'])) {
+        $insData = Array();
+        $insData['title'] = $article['title'];
+        $insData['mid'] = $_SESSION['mid'];
+        $insData['asid'] = $seriesId;
+        $articleTitleAdm->adds($insData);
+    }
+    $artTitle = $articleTitleAdm->get($article['title']);
+    $article['atid'] = $artTitle['at_id'];
+
+    if(isset($article['series'])) {
+        $articleTitleAdm->updasid($artTitle['at_id'], $article['series']);
+        unset($article['series']);
+    }
+
     $articleAdm->articleUpd($article);
     $reData = Array();
     $reData['status'] = 200;
@@ -482,15 +529,15 @@ function articleGet() {
     require_once("Article/Article.php");
     $articleAdm = new Article();
     $data = $articleAdm->get($_POST['aid']);
-    if($data['as_id'] > 0)
-        $articlesList = $articleAdm->allArticleBySeries($data['as_id']);
+    //if($data['as_id'] > 0)
+        //$articlesList = $articleAdm->allArticleBySeries($data['as_id']);
+    $articlesList = $articleAdm->articlesByArtTitle($data['at_id']);
 
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "articleGet success";
     $reData['data'] = $data;
-    if($data['as_id'] > 0)
-        $reData['articles'] = $articlesList;
+    $reData['articles'] = $articlesList;
     return $reData;
 }
 
