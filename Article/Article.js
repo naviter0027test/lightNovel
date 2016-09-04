@@ -133,6 +133,8 @@ PostArticleForm = Backbone.View.extend({
                 else {
                     alert("發文成功!");
                     setCookie("atTitle", "", 1);
+                    setCookie("alert", "", 1);
+                    setCookie("tag", "", 1);
                 }
                 location.href = "index.html#/1";
             }
