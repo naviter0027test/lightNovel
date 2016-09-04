@@ -12,18 +12,22 @@
             <label class="col-xs-2">系列名称</label>
             <input type="text" class="col-xs-5 validate[required]" name="seriesName" value="<%=data['as_name']%>" />
         </div>
+        <!--
         <div class="col-xs-12">
-            <label class="col-xs-2">最後篇章</label>
+            <label class="col-xs-2">最后篇章</label>
             <input type="text" class="col-xs-2 validate[custom[onlyNumberSp]]" name="finallyCh" value="<%=data['as_finally']%>" /> <p class="text-danger col-xs-4 "> 0为没决定最后篇章，以'?'显示</p>
         </div>
+        -->
         <button class="col-xs-3">修改</button>
     </form>
     <table class="table table-condensed">
         <thead>
             <tr>
                 <td>文章标题</td>
+                <!--
                 <td>分级</td>
                 <td>章节</td>
+                -->
                 <td>修改时间</td>
                 <td>操作</td>
             </tr>
@@ -31,12 +35,14 @@
         <tbody>
             <% _.each(articles, function(item) { %>
             <tr>
-                <td><%=item['a_title']%></td>
+                <td><%=item['at_title']%></td>
+                <!--
                 <td><%=item['a_level']%></td>
                 <td class="col-xs-1">
                     <input class="col-xs-12" type="text" name="chapterNum" value="<%=item['a_chapter']%>" aid="<%=item['a_id']%>" />
                 </td>
-                <td><%=item['a_crtime']%></td>
+                -->
+                <td><%=item['at_crtime']%></td>
                 <td>
                     <a class="glyphicon glyphicon-trash" href="#delArticleFromSeries/<%=item['a_id']%>"></a>
                 </td>

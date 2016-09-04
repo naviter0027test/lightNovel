@@ -294,8 +294,12 @@ DashboardRout = Backbone.Router.extend({
             $.post("instr.php", postData, function(data) {
                 //console.log(data);
                 data = JSON.parse(data);
+                //console.log(data);
                 data['data']['a_mainCp'] = data['data']['a_mainCp'].split(";");
-                data['data']['a_mainCp2'] = data['data']['a_mainCp2'].split(";");
+                if(data['data']['a_mainCp2'] != null)
+                    data['data']['a_mainCp2'] = data['data']['a_mainCp2'].split(";");
+                else
+                    data['data']['a_mainCp2'] = ["", ""];
 
                 //console.log(data);
                 if(data['status'] == 200) {
@@ -311,30 +315,33 @@ DashboardRout = Backbone.Router.extend({
                     var draftSeries = data['data']['as_id'];
 
                     memModel.on("change:seriesList", function() {
-                        var data = this.get("seriesList");
+                        var serdata = this.get("seriesList");
+                        //console.log(data);
                         if(data['status'] == 200) {
-                            data = data['data'];
-                            $("select[name=series]").html("<option num='X' value=''>請選擇</option>");
-                            for(var i in data) {
+                            $("select[name=series]").html("<option num='X' value='0'>請選擇</option>");
+                            for(var i in serdata['data']) {
                                 var option = document.createElement("option");
                                 $(option).attr("num", i);
-                                if(draftSeries == data[i]['as_id'])
+                                if(draftSeries == serdata[i]['as_id'])
                                     $(option).attr("selected", true);
-                                $(option).val(data[i]['as_id']);
-                                $(option).text(data[i]['as_name']);
+                                $(option).val(serdata['data'][i]['as_id']);
+                                $(option).text(serdata['data'][i]['as_name']);
+                                if(data['data']['asid'] == serdata['data'][i]['as_id'])
+                                    $(option).attr("selected", true);
                                 $("select[name=series]").append(option);
                             }
                         }
                     });
 
+                    /*
                     $("select[name=series]").on("change", function() {
                         var data = memModel.get("seriesList")['data'];
                         var num = $("select[name=series] option:selected").attr("num");
                         if(num != "X") {
-                            var as_finally = data[num]['as_finally'];
-                            if(as_finally == 0)
-                                as_finally = "?";
-                            $("input[name=chapterSum]").val(as_finally);
+                            var at_lastCh = data[num]['at_lastCh'];
+                            if(at_lastCh == 0)
+                                at_lastCh = "?";
+                            $("input[name=chapterSum]").val(at_lastCh);
                         }
 
                         if($(this).val() != "")
@@ -342,6 +349,7 @@ DashboardRout = Backbone.Router.extend({
                         else
                             $("input[name=aChapter]").removeClass("validate[required]");
                     });
+                    */
 
                     var mySerPost = {};
                     mySerPost['nowPage'] = 1;

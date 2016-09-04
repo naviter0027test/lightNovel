@@ -41,13 +41,15 @@ class Article {
         $dbAdm = $this->dbAdm;
 
         $insData = Array();
-        $insData['a_title'] = $article['title'];
+        //$insData['a_title'] = $article['title'];
         $insData['a_attr'] = $article['articleType'];
         $insData['a_level'] = $article['level'];
         if(isset($article['series']))
             $insData['as_id'] = $article['series'];
+        $insData['at_id'] = $article['atid'];
         $insData['a_mainCp'] = $article['cp1'];
-        $insData['a_mainCp2'] = $article['cp2'];
+        if(isset($article['cp2']))
+            $insData['a_mainCp2'] = $article['cp2'];
         if(isset($article['subCp']))
             $insData['a_subCp'] = $article['subCp']; 
         $insData['a_alert'] = $article['alert']; 
@@ -55,7 +57,8 @@ class Article {
         if(isset($article['sendUser']))
             $insData['g_sendMid'] = $article['sendUser'];
         $insData['a_tag'] = $article['tag'];
-        $insData['a_aTitle'] = $article['aTitle'];
+        if(isset($article['aTitle']))
+            $insData['a_aTitle'] = $article['aTitle'];
         if(isset($article['aChapter']))
             $insData['a_chapter'] = $article['aChapter'];
         if(isset($article['aMemo']))
@@ -64,6 +67,7 @@ class Article {
         $insData['a_crtime'] = date('Y-m-d H:i:s');
 
         $dbAdm->insertData($tablename, $insData);
+        //echo $dbAdm->echoSQL();
         $dbAdm->execSQL();
     }
 
@@ -82,30 +86,33 @@ class Article {
         $dbAdm = $this->dbAdm;
 
         $updData = Array();
-        $updData['a_title'] = $article['title'];
+        //$updData['a_title'] = $article['title'];
         $updData['a_attr'] = $article['articleType'];
         $updData['a_level'] = $article['level'];
         if(isset($article['series']))
             $updData['as_id'] = $article['series'];
         $updData['a_mainCp'] = $article['cp1'];
-        $updData['a_mainCp2'] = $article['cp2'];
+        if(isset($article['cp2']))
+            $updData['a_mainCp2'] = $article['cp2'];
         if(isset($article['subCp']))
             $updData['a_subCp'] = $article['subCp']; 
         $updData['a_alert'] = $article['alert']; 
         $updData['m_id'] = $article['mId'];    
         $updData['a_tag'] = $article['tag'];
-        $updData['a_aTitle'] = $article['aTitle'];
+        if(isset($article['aTitle']))
+            $updData['a_aTitle'] = $article['aTitle'];
         if(isset($article['aChapter']))
             $updData['a_chapter'] = $article['aChapter'];
         if(isset($article['aMemo']))
             $updData['a_memo'] = $article['aMemo']  ;
         $updData['a_content'] = $article['content'];
-        $updData['a_crtime'] = date('Y-m-d H:i:s');
+        //$updData['a_crtime'] = date('Y-m-d H:i:s');
 
         $conditionArr = Array();
         $conditionArr['a_id'] = $article['aid'];
 
         $dbAdm->updateData($tablename, $updData, $conditionArr);
+        //echo $dbAdm->echoSQL();
         $dbAdm->execSQL();
     }
 
@@ -148,7 +155,11 @@ class Article {
         $limit['amount'] = 5;
 
         $dbAdm->selectData($tablename, $column, $conditionArr, $order, $limit);
-        $dbAdm->sqlSet("select a.*, ss.as_name from $tablename a left join ArticleSeries ss on a.as_id = ss.as_id where a.m_id = $mid order by a_crtime desc limit 0, 5;");
+        $dbAdm->sqlSet("select a.*, ss.as_name, att.at_title
+            from $tablename a 
+            inner join ArticleTitle att on att.at_id = a.at_id
+            left join ArticleSeries ss on att.as_id = ss.as_id 
+            where a.m_id = $mid order by a_crtime desc limit 0, 5;");
         $dbAdm->execSQL();
 
         return $dbAdm->getAll();
@@ -173,7 +184,11 @@ class Article {
         $limit['amount'] = 25;
 
         //$dbAdm->selectData($tablename, $column, $conditionArr, $order, $limit);
-        $dbAdm->sqlSet("select a.*, ss.as_name from $tablename a left join ArticleSeries ss on a.as_id = ss.as_id where a.m_id = $mid order by a_crtime desc limit ". $limit['offset']. ", ". $limit['amount']);
+        $dbAdm->sqlSet("select a.*, ss.as_name, att.at_title
+            from $tablename a 
+            inner join ArticleTitle att on att.at_id = a.at_id
+            left join ArticleSeries ss on att.as_id = ss.as_id 
+            where a.m_id = $mid order by a_crtime desc limit ". $limit['offset']. ", ". $limit['amount']);
         $dbAdm->execSQL();
 
         return $dbAdm->getAll();
@@ -200,13 +215,17 @@ class Article {
 
         //$dbAdm->selectData($tablename, $column, null, $order, $limit);
         $dbAdm->sqlSet("
-            select count(p.p_id) praiseAmount ,
-            case when (ass.as_finally = 0) then '?' else ass.as_finally end as as_finally, a.* 
+            select count(p.p_id) praiseAmount , ass.as_name, m.m_user,
+            case when (att.at_lastCh = 0) then '?' else att.at_lastCh end as at_lastCh, 
+            a.*, att.at_title
             from `Article` a
             left join ArticleSeries ass on a.as_id = ass.as_id
+            inner join Member m on m.m_id = a.m_id
+            inner join ArticleTitle att on a.at_id = att.at_id
             left join Praise p on a.a_id = p.a_id group by a.a_id
             order by ". $order['col']. " ". $order['order'].
             " limit ". $limit['offset']. ", ". $limit['amount']);
+        //echo $dbAdm->echoSQL();
         $dbAdm->execSQL();
 
         return $dbAdm->getAll();
@@ -223,12 +242,15 @@ class Article {
         $conditionArr['a_id'] = $aid;
 
         //$dbAdm->selectData($tablename, $column, $conditionArr, null, null);
-        $dbAdm->sqlSet("select count(p.m_id) praiseAmount,
-            case when (ss.as_finally = 0) then '?' 
-            else ss.as_finally end as as_finally ,a.*
+        $dbAdm->sqlSet("select count(p.m_id) praiseAmount, m.m_user,
+                case when (att.at_lastCh = 0) then '?' 
+                else att.at_lastCh end as at_lastCh, 
+                a.*, att.at_title, att.at_lastCh, att.as_id asid
                 from `Article` a 
-                left join ArticleSeries ss on ss.as_id = a.as_id
+                inner join ArticleTitle att on a.at_id = att.at_id
+                left join ArticleSeries ss on ss.as_id = att.as_id
                 left join Praise p on p.a_id = a.a_id
+                inner join Member m on m.m_id = a.m_id
             where a.a_id = ". $aid. " group by p.a_id");
         $dbAdm->execSQL();
 
@@ -282,6 +304,25 @@ class Article {
 
         $conditionArr = Array();
         $conditionArr['as_id'] = $seriesId;
+
+        $order = Array();
+        $order['col'] = "a_chapter";
+        $order['order'] = "asc";
+
+	$dbAdm->selectData($tablename, $columns, $conditionArr, $order);
+	$dbAdm->execSQL();
+	return $dbAdm->getAll();
+    }
+
+    public function articlesByArtTitle($atid) {
+        $dbAdm = $this->dbAdm;
+        $tablename = $this->table;
+
+	$columns = Array();
+	$columns[0] = "*";
+
+        $conditionArr = Array();
+        $conditionArr['at_id'] = $atid;
 
         $order = Array();
         $order['col'] = "a_chapter";

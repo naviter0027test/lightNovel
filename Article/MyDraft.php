@@ -52,7 +52,8 @@ class MyDraft {
         $insData['a_alert'] = $article['alert']; 
         $insData['m_id'] = $article['mId'];    
         $insData['a_tag'] = $article['tag'];
-        $insData['a_aTitle'] = $article['aTitle'];
+        if(isset($article['aTitle']))
+            $insData['a_aTitle'] = $article['aTitle'];
         if(isset($article['aChapter']))
             $insData['a_chapter'] = $article['aChapter'];
         if(isset($article['aMemo']))
@@ -61,6 +62,7 @@ class MyDraft {
         $insData['a_crtime'] = date('Y-m-d H:i:s');
 
         $dbAdm->insertData($tablename, $insData);
+        //echo $dbAdm->echoSQL();
         $dbAdm->execSQL();
     }
     

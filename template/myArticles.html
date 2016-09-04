@@ -6,7 +6,7 @@
     </ol>
     <div class="operating">
         <a href="postArticle.html">
-            <button class="col-xs-2 add">發文</button>
+            <button class="col-xs-2 add">发文</button>
         </a>
     </div>
     <table class="table table-condensed">
@@ -15,14 +15,14 @@
                 <td>文章标题</td>
                 <td>分級</td>
                 <td>系列</td>
-                <td>修改時間</td>
+                <td>修改时间</td>
                 <td>操作</td>
             </tr>
         </thead>
         <tbody>
             <% _.each(data, function(item) { %>
             <tr>
-                <td><%=item['a_title']%></td>
+                <td><%=item['at_title']%></td>
                 <td><%=item['a_level']%></td>
                 <td><%=item['as_name']%></td>
                 <td><%=item['a_crtime']%></td>

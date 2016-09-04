@@ -9,6 +9,13 @@ Article = Backbone.View.extend({
     template : null,
     render : function() {
         var data = this.model.get("data");
+        for(var idx in data['data']) {
+            data['data'][idx]['a_mainCp'] = data['data'][idx]['a_mainCp'].replace(";", "/");
+            if(data['data'][idx]['a_mainCp2'] != null) {
+                var cp2 = data['data'][idx]['a_mainCp2'];
+                data['data'][idx]['a_mainCp2'] = cp2.replace(";", "/");
+            }
+        }
         this.$el.html(this.template(data));
     }
 });
@@ -123,7 +130,7 @@ PostArticleForm = Backbone.View.extend({
             postData['content'] = CKEDITOR.instances.editor1.getData();
 
         $.post("instr.php", postData, function(data) {
-            //console.log(data);
+            console.log(data);
             data = JSON.parse(data);
             //console.log(data);
             if(data['status'] == 200) {
@@ -139,10 +146,10 @@ PostArticleForm = Backbone.View.extend({
 
     postArt : function() {
         if($("select[name=series]").val() != "" || $("input[name=newSeries]").val() != "") {
-            $("input[name=aChapter]").addClass("validate[required]");
+            $("input[name=aChapter]").addClass("validate[required, custom[integer]]");
         }
         else
-            $("input[name=aChapter]").removeClass("validate[required]");
+            $("input[name=aChapter]").removeClass("validate[required, custom[integer]]");
         if(!this.$el.validationEngine("validate"))
             return false;
         this.$el.validationEngine("hideAll");
@@ -159,10 +166,14 @@ PostArticleForm = Backbone.View.extend({
             var cpInput = $("input[name='cp1[]']")[i];
             postData['cp1'].push($(cpInput).val());
         }
-        postData['cp2'] = [];
-        for(var i = 0;i < $("input[name='cp2[]']").length;++i) {
-            var cpInput = $("input[name='cp2[]']")[i];
-            postData['cp2'].push($(cpInput).val());
+        var cp2_1 = $($("input[name='cp2[]']")[0]).val();
+        var cp2_2 = $($("input[name='cp2[]']")[1]).val();
+        if($.trim(cp2_1) != "" && $.trim(cp2_2) != "") {
+            postData['cp2'] = [];
+            for(var i = 0;i < $("input[name='cp2[]']").length;++i) {
+                var cpInput = $("input[name='cp2[]']")[i];
+                postData['cp2'].push($(cpInput).val());
+            }
         }
 
         if($("input[name=viceCp]").val() != "") {
@@ -222,6 +233,10 @@ PostArticleForm = Backbone.View.extend({
                 else
                     alert("發文成功!");
                 location.href = "index.html#/1";
+            }
+            else {
+                if(data['msg'] == "series is repeat")
+                    alert("系列名重复");
             }
         });
         return false;

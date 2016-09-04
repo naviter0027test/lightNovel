@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>樓誠文庫</title>
+        <title>核桃文库</title>
         <meta charset="utf-8" />
 	<link href='lib/bootstrap/dist/css/bootstrap.min.css' rel='stylesheet' />
 	<link href='lib/bootstrap/dist/css/bootstrap-theme.min.css' rel='stylesheet' />
@@ -60,16 +60,26 @@
             <form id="registerContent" action="instr.php" method="post">
                 <input type="hidden" name="instr" value="register" />
                 <h3 class="col-xs-12">注册</h3>
-                <span class="col-xs-3">帐号</span>
-                <input class="col-xs-7 input validate[required]" type="text" name="user" placeholder="请填写新帐号" />
+                <div class="col-xs-12"> 
+                    <span class="col-xs-3">帐号</span>
+                    <input class="col-xs-7 input validate[required]" type="text" name="user" placeholder="请填写新帐号" />
+                </div>
+                <div class="col-xs-12"> 
                 <span class="col-xs-3">密码</span>
                 <input class="col-xs-7 input validate[required, minSize[6]]" type="password" id="pass" name="pass" placeholder="请填写新密码" />
+                </div>
+                <div class="col-xs-12"> 
                 <span class="col-xs-3">密码確認</span>
                 <input class="col-xs-7 input validate[required, equals[pass]]" type="password" name="passCheck" placeholder="请再次填写新密码"/>
+                </div>
+                <div class="col-xs-12"> 
                 <span class="col-xs-3">Email</span>
-                <input class="col-xs-7 input validate[required, custom[email]]" type="text" name="email" placeholder="请再次填写，用于寄送认证信"/>
+                <input class="col-xs-7 input validate[required, custom[email]]" type="text" name="email" placeholder="请填写邮箱，用于寄送认证信"/>
+                </div>
+                <div class="col-xs-12"> 
                 <span class="col-xs-3">验证码 &nbsp;&nbsp;&nbsp;<img name="captcha" src="instr.php?instr=captchaRegister"/></span>
                 <input class="col-xs-7 input validate[required]" type="text" name="captcha" placeholder="请填写验证码" />
+                </div>
                 <label class="col-xs-1">&nbsp;</label>
                 <button class="col-xs-3">注册</button>
                 <label class="col-xs-6">&nbsp;</label>
