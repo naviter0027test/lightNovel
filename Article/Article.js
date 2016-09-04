@@ -130,8 +130,10 @@ PostArticleForm = Backbone.View.extend({
             if(data['status'] == 200) {
                 if(postData['instr'] == "articleEdit")
                     alert("編輯成功");
-                else
+                else {
                     alert("發文成功!");
+                    setCookie("atTitle", "", 1);
+                }
                 location.href = "index.html#/1";
             }
             else {
