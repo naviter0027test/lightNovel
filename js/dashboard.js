@@ -158,8 +158,8 @@ DashboardRout = Backbone.Router.extend({
                 setCookie("alert", article['a_alert'].replace(";", ","), 1);
                 setCookie("tag", article['a_tag'].replace(";", ","), 1);
                 setCookie("asid", article['asid'].replace(";", ","), 1);
+                location.href = "postArticle.html";
             });
-            location.href = "postArticle.html";
         });
     },
 
