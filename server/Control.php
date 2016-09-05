@@ -863,6 +863,8 @@ function search() {
         $condition['nonMainCp'] = "%". str_replace(";", "%", $_POST['nonMainCp']). "%";
     if($_POST['subCp'] != "")
         $condition['subCp'] = "%". str_replace(";", "%", $_POST['subCp']). "%";
+    if($_POST['nonSubCp'] != "")
+        $condition['nonSubCp'] = "%". str_replace(";", "%", $_POST['nonSubCp']). "%";
     if($_POST['title'] != "")
         $condition['title'] = "%". str_replace(";", "%", $_POST['title']). "%";
     if($_POST['series'] != "")
@@ -882,7 +884,7 @@ function search() {
 
     $reData = Array();
     $reData['status'] = 200;
-    $reData['msg'] = "searchPrev success";
+    $reData['msg'] = "search success";
     $reData['data'] = $articleList;
     return $reData;
 }
