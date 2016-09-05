@@ -432,8 +432,11 @@ class Article {
             $sql .= " and att.at_title like '". $conditionLike['title']. "' ";
         $sql .= " where 1 = 1 ";
         if(isset($conditionLike['mainCp']))
-            $sql .= " and a.a_mainCp like '". $conditionLike['mainCp']. "' ";
+            $sql .= " and a.a_mainCp like '". $conditionLike['mainCp']. "' or a.a_mainCp2 like '". $conditionLike['mainCp']. "' ";
+        if(isset($conditionLike['nonMainCp']))
+            $sql .= " and a.a_mainCp not like '". $conditionLike['nonMainCp']. "' and a.a_mainCp2 not like '". $conditionLike['nonMainCp']. "' ";
         $sql .= " limit $startNum, 25";
+        echo $sql;
         $dbAdm->sqlSet($sql);
 	$dbAdm->execSQL();
 	return $dbAdm->getAll();
