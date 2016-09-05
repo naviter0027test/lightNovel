@@ -853,7 +853,7 @@ function articleListBySubSrs() {
     return $reData;
 }
 
-function searchPrev() {
+function search() {
     require_once("Article/Article.php");
     $articleAdm = new Article();
     $condition = Array();
@@ -876,10 +876,12 @@ function searchPrev() {
     if(isset($_POST['tag']))
         $condition['tag'] = "%". implode("%", $_POST['tag']);
 
+    $articleList = $articleAdm->search($_POST['nowPage'], $condition);
+
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "searchPrev success";
-    $reData['data'] = $condition;
+    $reData['data'] = $articleList;
     return $reData;
 }
 

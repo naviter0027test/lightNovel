@@ -19,6 +19,8 @@
         </div>
         <div id="content" class="col-xs-12">
             <form id="searchPrev" action="instr.php" method="post" class="searchPrev">
+                <input type="hidden" name="instr" value="search" />
+                <input type="hidden" name="nowPage" value="1" />
                 <input type="text" name="mainCp" class="col-xs-12" placeholder="输入主CP搜寻，若有多个以分号分隔"/>
                 <input type="text" name="nonMainCp" class="col-xs-12" placeholder="输入须排除主CP搜寻，若有多个以分号分隔" />
                 <input type="text" name="subCp" class="col-xs-12" placeholder="输入副CP搜寻，若有多个以分号分隔" />

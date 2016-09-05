@@ -421,5 +421,21 @@ class Article {
     }
 
     public function search($nowPage, $conditionLike) {
+        $dbAdm = $this->dbAdm;
+        $tablename = $this->table;
+
+        $startNum = ($nowPage -1) * 25;
+
+        $sql = "select a.*, att.at_title from Article a 
+            inner join ArticleTitle att on att.at_id = a.at_id ";
+        if(isset($conditionLike['title']))
+            $sql .= " and att.at_title like '". $conditionLike['title']. "' ";
+        $sql .= " where 1 = 1 ";
+        if(isset($conditionLike['mainCp']))
+            $sql .= " and a.a_mainCp like '". $conditionLike['mainCp']. "' ";
+        $sql .= " limit $startNum, 25";
+        $dbAdm->sqlSet($sql);
+	$dbAdm->execSQL();
+	return $dbAdm->getAll();
     }
 }
