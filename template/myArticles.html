@@ -22,7 +22,11 @@
         <tbody>
             <% _.each(data, function(item) { %>
             <tr>
-                <td><%=item['at_title']%></td>
+                <td>
+                    <a href="article.html#article/<%=item['a_id']%>">
+                        <%=item['at_title']%>
+                    </a>
+                </td>
                 <td><%=item['a_level']%></td>
                 <td><%=item['as_name']%></td>
                 <td><%=item['a_crtime']%></td>

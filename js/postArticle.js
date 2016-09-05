@@ -35,7 +35,7 @@ $(document).ready(function() {
     });
     */
 
-    $.getScript("lib/CookieAPI.js", function() {
+    if(getQueryVariable("isChapter") == "Y") {
         atTitle = getCookie("atTitle");
         $("input[name=title]").val(atTitle);
 
@@ -52,7 +52,9 @@ $(document).ready(function() {
             if(tagstr.search($(tags[i]).val()) != -1) 
                 $(tags[i]).attr("checked", true);
         //console.log(tags);
-    });
+        $("input[name=aChapter]").val("");
+        $("input[name=aChapter]").attr("readonly", false);
+    }
 
     var mySerPost = {};
     mySerPost['nowPage'] = 1;
