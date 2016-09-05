@@ -8,7 +8,9 @@
             By <%=item['m_user']%>
         </h3>
         分級：<label><%=item['a_level']%></label> 
-        属性：<label><%=(item['a_attr']=="article"?"文":"推文")%></label> 更新日期：<label><%=item['a_crtime']%></label> <br />
+        属性：<label><%=(item['a_attr']=="article"?"文":"推文")%></label> 
+        章节数：<label><%=item['chapterSum']%></label>
+        更新日期：<label><%=item['a_crtime']%></label> <br />
         <% if(item['a_mainCp'] != "") { %>
         <h4>主CP：<%=item['a_mainCp']%></h4>
         <% } %>

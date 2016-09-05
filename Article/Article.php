@@ -226,7 +226,8 @@ class Article {
             " limit ". $limit['offset']. ", ". $limit['amount']);
          */
         $dbAdm->sqlSet("
-            SELECT pp.praiseAmount, ass.as_name, m.m_user, max(a.a_id) maxAid,
+            SELECT pp.praiseAmount, ass.as_name, m.m_user, 
+            max(a.a_id) maxAid, count(a.a_chapter) chapterSum,
             CASE WHEN (
                 att.at_lastCh =0
             )
