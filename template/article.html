@@ -49,9 +49,12 @@
         <a class="col-sm-1" href="#pressPraise/<%=data['a_id']%>">点赞</a>
     </div>
     <div class="articleItem">
+        <% if($.trim(data['as_name']) != "") { %>
+        系列：<label><%=data['as_name']%></label>
+        <% } %>
         分級：<label><%=data['a_level']%></label> 
         属性：<label><%=(data['a_attr']=="article"?"文":"推文")%></label> 
-        章節：<label><%=data['a_chapter']%> / <%=data['at_lastCh']!=0?data['at_lastCh']:"?"%></label>
+        章节：<label><%=data['a_chapter']%> / <%=data['at_lastCh']!=0?data['at_lastCh']:"?"%></label>
         更新日期：<label><%=data['a_crtime']%></label> <br />
         <h4>主CP：<%=data['a_mainCp']%></h4>
         <h4>主CP2：<%=data['a_mainCp2']%></h4>

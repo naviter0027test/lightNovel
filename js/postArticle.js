@@ -39,6 +39,24 @@ $(document).ready(function() {
         atTitle = getCookie("atTitle");
         $("input[name=title]").val(atTitle);
 
+        var mainCp = getCookie("mainCp").split(",");
+        mainInputs = $("input[name='cp1[]']");
+        $(mainInputs[0]).val(mainCp[0]);
+        $(mainInputs[1]).val(mainCp[1]);
+
+        var mainCp2 = getCookie("mainCp2");
+        if(mainCp2 != "") {
+            mainCp2 = mainCp2.split(",");
+            main2Inputs = $("input[name='cp2[]']");
+            $(main2Inputs[0]).val(mainCp2[0]);
+            $(main2Inputs[1]).val(mainCp2[1]);
+        }
+
+        var viceCp = getCookie("subCp");
+        if(viceCp != "") {
+            $("input[name=viceCp]").val(viceCp.replace(",", ";"));
+        }
+
         var alertstr = getCookie("alert");
         var alerts = $("input[name='alert[]']");
         for(var i = 0;i < alerts.length;++i) 

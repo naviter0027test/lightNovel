@@ -235,9 +235,9 @@ class Article {
             ELSE att.at_lastCh
             END AS at_lastCh, a.* , att.at_title
             FROM `Article` a
-            LEFT JOIN ArticleSeries ass ON a.as_id = ass.as_id
             INNER JOIN Member m ON m.m_id = a.m_id
             INNER JOIN ArticleTitle att ON a.at_id = att.at_id
+            LEFT JOIN ArticleSeries ass ON att.as_id = ass.as_id
             LEFT JOIN (
 
                 SELECT count( p.p_id ) praiseAmount, a.a_id
@@ -268,7 +268,8 @@ class Article {
         $dbAdm->sqlSet("select count(p.m_id) praiseAmount, m.m_user,
                 case when (att.at_lastCh = 0) then '?' 
                 else att.at_lastCh end as at_lastCh, 
-                a.*, att.at_title, att.at_lastCh, att.as_id asid
+                a.*, att.at_title, att.at_lastCh, att.as_id asid,
+                ss.as_name
                 from `Article` a 
                 inner join ArticleTitle att on a.at_id = att.at_id
                 left join ArticleSeries ss on ss.as_id = att.as_id
