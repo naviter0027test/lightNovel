@@ -128,10 +128,24 @@ class ArticleTitle {
         $insData['m_id'] = $articletitle['mid'];
         $insData['as_id'] = $articletitle['asid'];
         $insData['at_lastCh'] = $articletitle['lastCh'];
+        $insData['at_updtime'] = date("Y-m-d H:i:s");
         $insData['at_crtime'] = date("Y-m-d H:i:s");
 
         $dbAdm->insertData($tablename, $insData);
         //echo $dbAdm->echoSQL();
+        $dbAdm->execSQL();
+    }
+
+    public function updtime($atid) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $upData = Array();
+        $upData['at_updtime'] = date("Y-m-d H:i:s");
+
+        $conditionArr = Array();
+        $conditionArr['at_id'] = $atid;
+        $dbAdm->updateData($tablename, $upData, $conditionArr);
         $dbAdm->execSQL();
     }
 

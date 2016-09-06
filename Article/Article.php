@@ -62,6 +62,7 @@ class Article {
         if(isset($article['aMemo']))
             $insData['a_memo'] = $article['aMemo'];
         $insData['a_content'] = $article['content'];
+        $updData['a_updtime'] = date('Y-m-d H:i:s');
         $insData['a_crtime'] = date('Y-m-d H:i:s');
 
         $dbAdm->insertData($tablename, $insData);
@@ -104,7 +105,7 @@ class Article {
         if(isset($article['aMemo']))
             $updData['a_memo'] = $article['aMemo']  ;
         $updData['a_content'] = $article['content'];
-        //$updData['a_crtime'] = date('Y-m-d H:i:s');
+        $updData['a_updtime'] = date('Y-m-d H:i:s');
 
         $conditionArr = Array();
         $conditionArr['a_id'] = $article['aid'];
@@ -182,11 +183,12 @@ class Article {
         $limit['amount'] = 25;
 
         //$dbAdm->selectData($tablename, $column, $conditionArr, $order, $limit);
-        $dbAdm->sqlSet("select a.*, ss.as_name, att.at_title
+        $dbAdm->sqlSet("select a.*, ss.as_name, 
+            att.at_title, att.at_lastCh
             from $tablename a 
             inner join ArticleTitle att on att.at_id = a.at_id
             left join ArticleSeries ss on att.as_id = ss.as_id 
-            where a.m_id = $mid order by a_crtime desc limit ". $limit['offset']. ", ". $limit['amount']);
+            where a.m_id = $mid order by a_updtime desc limit ". $limit['offset']. ", ". $limit['amount']);
         $dbAdm->execSQL();
 
         return $dbAdm->getAll();
@@ -246,7 +248,7 @@ class Article {
                 GROUP BY a.a_id
             )pp ON pp.a_id = a.a_id
             GROUP BY a.at_id
-            order by ". $order['col']. " ". $order['order'].
+            order by att.at_updtime desc ".
             " limit ". $limit['offset']. ", ". $limit['amount']);
         //echo $dbAdm->echoSQL();
         $dbAdm->execSQL();

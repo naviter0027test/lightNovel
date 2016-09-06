@@ -30,7 +30,7 @@
                 </td>
                 <td><%=item['a_level']%></td>
                 <td><%=item['as_name']%></td>
-                <td><%=item['a_chapter']%></td>
+                <td><%=item['a_chapter']%>/<%=(item['at_lastCh']!=0?item['at_lastCh']:"?")%></td>
                 <td><%=item['a_crtime']%></td>
                 <td>
                     <a class="glyphicon glyphicon-plus" href="#articlePlus/<%=item['a_id']%>"></a>
