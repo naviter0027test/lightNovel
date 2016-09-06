@@ -10,7 +10,7 @@
         分級：<label><%=item['a_level']%></label> 
         属性：<label><%=(item['a_attr']=="article"?"文":"推文")%></label> 
         章节：<label><%=item['a_chapter']%>/<%=item['at']['at_lastCh']%></label>
-        更新日期：<label><%=item['a_crtime']%></label> <br />
+        更新日期：<label><%=item['at']['at_updtime']%></label> <br />
         <% if(item['a_mainCp'] != "") { %>
         <h4>主CP：<%=item['a_mainCp']%></h4>
         <% } %>
