@@ -250,6 +250,7 @@ class Article {
                 INNER JOIN Member m ON m.m_id = att.m_id
                 LEFT JOIN ArticleSeries ass ON att.as_id = ass.as_id
                 order by att.at_updtime desc
+                limit ". $limit['offset']. ", 25
             ");
         //echo $dbAdm->echoSQL();
         $dbAdm->execSQL();
@@ -315,7 +316,7 @@ class Article {
 
     public function listAmount() {
         $dbAdm = $this->dbAdm;
-        $tablename = $this->table;
+        $tablename = "ArticleTitle";
 
 	$columns = Array();
 	$columns[0] = "count(*) amount";
