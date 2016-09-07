@@ -20,16 +20,17 @@
                 <!--
                 <td>狀態</td>
                 -->
-                <td>建立日期</td>
+                <td>修改日期</td>
                 <td>操作</td>
             </tr>
         </thead>
         <tbody>
             <%
+            console.log(data);
             _.each(data, function(item) {
             %>
             <tr>
-                <td><%=item['a_title']%></td>
+                <td><%=item['at_title']%></td>
                 <td><%=item['m_user']%></td>
                 <!--
                 <td>
@@ -39,7 +40,7 @@
                     </select>
                 </td>
                 -->
-                <td><%=item['a_crtime']%></td>
+                <td><%=item['a_updtime']%></td>
                 <td>
                     <a href="#del/<%=item['a_id']%>" class="glyphicon glyphicon-trash"></a>
                 </td>
