@@ -10,7 +10,9 @@ Article = Backbone.View.extend({
     render : function() {
         var data = this.model.get("data");
         for(var idx in data['data']) {
-            data['data'][idx]['a_mainCp'] = data['data'][idx]['a_mainCp'].replace(";", "/");
+            if(data['data'][idx]['a_mainCp'] != null) {
+                data['data'][idx]['a_mainCp'] = data['data'][idx]['a_mainCp'].replace(";", "/");
+            }
             if(data['data'][idx]['a_mainCp2'] != null) {
                 var cp2 = data['data'][idx]['a_mainCp2'];
                 data['data'][idx]['a_mainCp2'] = cp2.replace(";", "/");
