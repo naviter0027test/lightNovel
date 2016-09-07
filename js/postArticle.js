@@ -7,9 +7,16 @@ $(document).ready(function() {
         if(data['status'] == 200) {
             data = data['data'];
             $("select[name=series]").html("<option num='X' value=''>請選擇</option>");
+
+            var asid = null;
+            if(getQueryVariable("isChapter") == "Y") 
+                 asid = getCookie("asid");
+            
             for(var i in data) {
                 var option = document.createElement("option");
                 $(option).attr("num", i);
+                if(asid == data[i]['as_id'])
+                    $(option).attr("selected", true);
                 $(option).val(data[i]['as_id']);
                 $(option).text(data[i]['as_name']);
                 $("select[name=series]").append(option);

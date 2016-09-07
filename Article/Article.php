@@ -268,7 +268,7 @@ class Article {
                     GROUP BY a.a_id
                 )pp ON pp.a_id = a.a_id
                 where a.at_id = ". $aTitle['at_id']."
-                order by a.a_updtime desc 
+                order by a.a_chapter desc 
                 limit 0, 1
             ");
             $dbAdm->execSQL();

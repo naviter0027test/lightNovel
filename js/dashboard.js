@@ -164,6 +164,11 @@ DashboardRout = Backbone.Router.extend({
                     setCookie("subCp", article['a_subCp'].replace(";", ","), 1);
                 else
                     setCookie("subCp", "", 1);
+
+                if(article['asid'] != null && article['asid'] != "")
+                    setCookie("asid", article['asid']);
+                else
+                    setCookie("asid", "");
                 setCookie("alert", article['a_alert'].replace(";", ","), 1);
                 setCookie("tag", article['a_tag'].replace(";", ","), 1);
                 setCookie("asid", article['asid'].replace(";", ","), 1);

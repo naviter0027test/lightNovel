@@ -58,3 +58,8 @@
     font-weight : bold;
     background : #f6d1ac;
 }
+
+#personalForm img {
+    width : 80px;
+    height : 80px;
+}
