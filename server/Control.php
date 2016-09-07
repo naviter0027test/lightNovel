@@ -871,11 +871,11 @@ function search() {
         $condition['series'] = str_replace(";", "','", $_POST['series']);
     if($_POST['member'] != "")
         $condition['member'] = "%". str_replace(";", "%", $_POST['member']). "%";
-    if(isset($_POST['level']))
-        $condition['level'] = "%". implode("%", $_POST['level']);
-    if(isset($_POST['alert']))
+    if(isset($_POST['level'][0]))
+        $condition['level'] = implode("','", $_POST['level']);
+    if(isset($_POST['alert'][0]))
         $condition['alert'] = "%". implode("%", $_POST['alert']);
-    if(isset($_POST['tag']))
+    if(isset($_POST['tag'][0]))
         $condition['tag'] = "%". implode("%", $_POST['tag']);
 
     print_r($condition);

@@ -450,6 +450,12 @@ class Article {
             $sql .= " and a.a_subCp like '". $conditionLike['subCp']. "' ";
         if(isset($conditionLike['nonSubCp']))
             $sql .= " and a.a_subCp not like '". $conditionLike['nonSubCp']. "' ";
+        if(isset($conditionLike['level']))
+            $sql .= " and a.a_level in ('". $conditionLike['level']. "') ";
+        if(isset($conditionLike['alert']))
+            $sql .= " and a.a_alert like '". $conditionLike['alert']. "' ";
+        if(isset($conditionLike['tag']))
+            $sql .= " and a.a_tag like '". $conditionLike['tag']. "' ";
         $sql .= " limit $startNum, 25";
         echo $sql;
         $dbAdm->sqlSet($sql);
