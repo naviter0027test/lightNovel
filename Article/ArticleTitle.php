@@ -35,7 +35,7 @@ class ArticleTitle {
         $this->dbAdm->execSQL();
     }
 
-    public function isRepeat($title) {
+    public function isRepeat($title, $mid) {
         $tablename = $this->table;
         $dbAdm = $this->dbAdm;
 
@@ -48,8 +48,12 @@ class ArticleTitle {
         $dbAdm->selectData($tablename, $column, $conditionArr);
         $dbAdm->execSQL();
 
-        if(count($dbAdm->getAll()) > 0) 
+        $data = $dbAdm->getAll();
+        if(count($data) > 0) {
+            if($data[0]['mid'] != $mid) 
+                throw new Exception("title is used");
             return true;
+        }
         else
             return false;
     }

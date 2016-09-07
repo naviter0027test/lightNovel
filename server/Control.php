@@ -301,7 +301,7 @@ function postArticle() {
         $article['series'] = $series->getLastOneId($_SESSION['mid']);
     }
 
-    if(!$articleTitleAdm->isRepeat($article['title'])) {
+    if(!$articleTitleAdm->isRepeat($article['title'], $_SESSION['mid'])) {
         $insData = Array();
         $insData['title'] = $article['title'];
         $insData['mid'] = $_SESSION['mid'];
