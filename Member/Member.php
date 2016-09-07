@@ -128,13 +128,14 @@ class Member {
     }
 
     public function upActiveMail($user) {
+        $mem = $this->getOne($user['user']);
         if(file_exists("../srvLib/SmailMail.php")) 
             require_once("../srvLib/SmailMail.php");
         else
             require_once("srvLib/SmailMail.php");
         $lastSlash = strrpos($_SERVER['PHP_SELF'], '/', -1);
         $upActive = "http://". $_SERVER['HTTP_HOST']. substr($_SERVER['PHP_SELF'], 0, $lastSlash) . "/verification.html?instr=upActive&user=".
-            $user['user']. "&email=". md5($user['email'].$user['user']);
+            $user['user']. "&email=". md5($user['email'].$mem['m_id']);
         //$content = "歡迎加入樓誠文庫，<a target='_blank' href='$upActive'>啟用連結</a>";
         $content = "歡迎加入核桃文庫，<a target='_blank' href='$upActive'>啟用連結</a>
             <br /> <br />
@@ -188,10 +189,10 @@ class Member {
     public function authenticate($user, $authCode) {
         $dbAdm = $this->dbAdm;
         $tablename = $this->table;
-        $mem = $this->getOne($user);
+        $mem = $this->getOne(urldecode($user));
         if(!isset($mem['m_id']))
             throw new Exception("member not found");
-        if($authCode == md5($mem['m_email'].$mem['m_user'])) {
+        if($authCode == md5($mem['m_email'].$mem['m_id'])) {
             $updata = Array();
             $updata['m_active'] = "Y";
             $conditionArr = Array();
