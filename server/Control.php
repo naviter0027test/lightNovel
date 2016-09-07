@@ -868,7 +868,7 @@ function search() {
     if($_POST['title'] != "")
         $condition['title'] = "%". str_replace(";", "%", $_POST['title']). "%";
     if($_POST['series'] != "")
-        $condition['series'] = "%". str_replace(";", "%", $_POST['series']). "%";
+        $condition['series'] = str_replace(";", "','", $_POST['series']);
     if($_POST['member'] != "")
         $condition['member'] = "%". str_replace(";", "%", $_POST['member']). "%";
     if(isset($_POST['level']))

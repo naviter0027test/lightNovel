@@ -430,6 +430,17 @@ class Article {
             inner join ArticleTitle att on att.at_id = a.at_id ";
         if(isset($conditionLike['title']))
             $sql .= " and att.at_title like '". $conditionLike['title']. "' ";
+
+        if(isset($conditionLike['series'])) {
+            $sql .= " inner join ArticleSeries ass on ass.as_id = att.as_id ";
+            $sql .= " and ass.as_name in ('". $conditionLike['series']. "') ";
+        }
+
+        $sql .= " inner join Member m on m.m_id = a.m_id ";
+        if(isset($conditionLike['member'])) {
+            $sql .= " and m.m_user like '". $conditionLike['member']. "' ";
+        }
+
         $sql .= " where 1 = 1 ";
         if(isset($conditionLike['mainCp']))
             $sql .= " and a.a_mainCp like '". $conditionLike['mainCp']. "' or a.a_mainCp2 like '". $conditionLike['mainCp']. "' ";
