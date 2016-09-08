@@ -596,6 +596,17 @@ function msgReply() {
     return $reData;
 }
 
+function msgDel() {
+    require_once("Article/Message.php");
+    $msg = new Message();
+    $msg->del($_POST['msid']);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "msgDel success";
+    return $reData;
+}
+
 function msgMyList() {
     require_once("Article/Message.php");
     require_once("Article/Article.php");

@@ -106,5 +106,15 @@ class Message {
         $dbAdm->updateData($tablename, $colData, $conditionArr);
         $dbAdm->execSQL();
     }
+
+    public function del($msid) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $conditionArr = Array();
+        $conditionArr['ms_id'] = $msid;
+        $dbAdm->deleteData($tablename, $conditionArr);
+        $dbAdm->execSQL();
+    }
 }
 ?>
