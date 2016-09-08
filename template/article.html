@@ -136,17 +136,34 @@
         <a class="col-sm-1" href="#pressPraise/<%=data['a_id']%>">点赞</a>
     </div>
 </script>
+
 <script id="msgListTem" type="text/template">
     <h2>我要留言</h2>
     <textarea id="msgInput" class="col-xs-12" placeholder="留言输入区，登入者才可留言，最多可输入5000字"></textarea>
     <br />
     <button id="msgSend">送出留言</button>
     <hr />
+    <% var msgCounter = 1; %>
     <% _.each(data, function(item) { %>
     <div class="userMsg col-xs-12">
+        <span class="col-xs-1"><%=msgCounter%>.</span>
         <img src="<%=item['headImg']%>" />
-        <h5 class="col-xs-6"><%=item['m_user']%></h5>
-        <div class="col-xs-6"><%=item['ms_text']%></div>
+        <h5 class="col-xs-5"><%=item['m_user']%></h5>
+        <div class="col-xs-5"><%=item['ms_text']%></div>
     </div>
+    <% ++msgCounter; %>
     <% }); %>
+</script>
+
+<script id="pagerTem" type="text/template">
+    <% pageSum = Math.ceil(amount / pageLimit); %>
+    <a class="right-arrow" href="<%=(parseInt(nowPage)+1 <= pageSum ?parseInt(nowPage)+1: nowPage)%>/<%=pageLimit%>">&rsaquo;</a>
+    <% for(idx = pageSum; idx >= 1;--idx) { %>
+        <% if(idx == nowPage) { %>
+        <label><%=idx%></label>
+        <% } else { %>
+        <a href="#changePage/mySeries/<%=idx%>/<%=pageLimit%>"><%=idx%></a>
+        <% } %>
+    <% } %>
+    <a class="left-arrow" href="<%=(nowPage-1 > 0 ?nowPage-1: nowPage)%>/<%=pageLimit%>">&lsaquo;</a>
 </script>

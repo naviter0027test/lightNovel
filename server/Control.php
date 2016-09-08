@@ -23,7 +23,7 @@ class Control {
 	    $this->instr = $_POST['instr'];
     }
     public function execInstr() {
-        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "seriesGet", "postArticle", "myData", "mySeriesList", "myLastArticle", "articleDel", "memSrsPages", "personalImg", "personalUpd", "passReset", "addMessage", "pressPraise", "articleEdit", "articleBySid", "changeArticleChapter", "myArticleList", "delArticleFromSeries");
+        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "seriesGet", "postArticle", "myData", "mySeriesList", "myLastArticle", "articleDel", "memSrsPages", "personalImg", "personalUpd", "passReset", "addMessage", "pressPraise", "articleEdit", "articleBySid", "changeArticleChapter", "myArticleList", "delArticleFromSeries", "msgReply");
 	try {
 	    if(!function_exists($this->instr))
 		throw new Exception("instr not defined");
@@ -579,6 +579,17 @@ function msgList() {
     $reData['status'] = 200;
     $reData['msg'] = "msgList success";
     $reData['data'] = $data;
+    return $reData;
+}
+
+function msgReply() {
+    require_once("Article/Message.php");
+    $msg = new Message();
+    $msg->reply($_POST['msid'], $_POST['replyText']);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "msgReply success";
     return $reData;
 }
 

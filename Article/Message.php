@@ -64,7 +64,12 @@ class Message {
 
         $nowPage = ($nowPage-1) *10;
         $aidsStr = implode(",", $aids);
-        $dbAdm->sqlSet("select ms.*, m.m_user from Message ms inner join Member m on m.m_id = ms.m_id where ms.a_id in ($aidsStr) order by ms.ms_crtime desc limit $nowPage, 10");
+        $dbAdm->sqlSet("select ms.*, m.m_user, a.a_chapter, att.at_lastCh, att.at_title
+            from Message ms 
+            inner join Member m on m.m_id = ms.m_id 
+            inner join Article a on a.a_id = ms.a_id 
+            inner join ArticleTitle att on att.at_id = a.at_id 
+            where ms.a_id in ($aidsStr) order by ms.ms_crtime desc limit $nowPage, 10");
         $dbAdm->execSQL();
 
         return $dbAdm->getAll();
@@ -78,6 +83,19 @@ class Message {
         $dbAdm->execSQL();
 
         return $dbAdm->getAll()[0]['amount'];
+    }
+
+    public function reply($msid, $text) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $colData = Array();
+        $colData['ms_reply'] = $text;
+
+        $conditionArr = Array();
+        $conditionArr['ms_id'] = $msid;
+        $dbAdm->updateData($tablename, $colData, $conditionArr);
+        $dbAdm->execSQL();
     }
 }
 ?>
