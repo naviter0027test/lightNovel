@@ -569,7 +569,9 @@ function msgList() {
     $msg = new Message();
     $data = $msg->getList($_POST['aid'], $_POST['nowPage']);
     foreach($data as $i => $item) {
-        if(file_exists("imgs/tmp/". $item['m_headImg']))
+        if($item['m_headImg'] == "")
+            $data[$i]['headImg'] = "imgs/80x80.png";
+        else if(file_exists("imgs/tmp/". $item['m_headImg']))
             $data[$i]['headImg'] = "imgs/tmp/". $item['m_headImg'];
         else
             $data[$i]['headImg'] = "imgs/80x80.png";
@@ -579,6 +581,7 @@ function msgList() {
     $reData['status'] = 200;
     $reData['msg'] = "msgList success";
     $reData['data'] = $data;
+    $reData['msgAmount'] = $msg->listAmount($_POST['aid']);
     return $reData;
 }
 

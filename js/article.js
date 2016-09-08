@@ -1,5 +1,6 @@
 var article = null;
 var msgArea = null;
+var msgPager = null;
 
 $(document).ready(function() {
     $("#scriptLoad").load("template/article.html", function() {
@@ -18,6 +19,15 @@ $(document).ready(function() {
             });
         });
         msgArea = new Message({ 'el' : '#msgList', "model" : new MsgModel()});
+        msgPager = new Pager({'el' : '#pager', "model" : msgArea.model});
+
+        msgArea.model.on("change:data", function() {
+            var amount = this.get("data")['msgAmount'];
+            var aid = this.get("aid");
+            msgArea.render();
+            msgPager.render4(this.get("nowPage"), 50, amount, aid);
+        });
+
         new ArticleRout();
         Backbone.history.start();
     });
@@ -26,6 +36,7 @@ $(document).ready(function() {
 ArticleRout = Backbone.Router.extend({
     routes : {
         "pressPraise/:aid" : "pressPraise",
+        "article/:aid/:nowPage" : "articleShow",
         "article/:aid" : "articleShow"
     },
 
@@ -53,10 +64,10 @@ ArticleRout = Backbone.Router.extend({
         });
     },
 
-    articleShow : function(aid) {
+    articleShow : function(aid, nowPage) {
         article.model.getOne(aid);
         msgArea.model.set("aid", aid);
-        msgArea.model.set("nowPage", 1);
+        msgArea.model.set("nowPage", nowPage);
         msgArea.model.list();
-    }
+    },
 });

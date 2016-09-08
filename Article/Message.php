@@ -50,12 +50,21 @@ class Message {
         $order['order'] = "desc";
 
         $limit = Array();
-        $limit['offset'] = ($nowPage -1) * 10;
-        $limit['amount'] = 10;
+        $limit['offset'] = ($nowPage -1) * 50;
+        $limit['amount'] = 50;
         //$dbAdm->selectData($tablename, $columns, $conditionArr, $order, $limit);
         $dbAdm->sqlSet("select ms.*, m.m_user, m.m_headImg from Message ms inner join Member m on ms.m_id = m.m_id where ms.a_id = $aid order by ms_crtime desc limit ". $limit['offset']. ", ". $limit['amount']);
         $dbAdm->execSQL();
         return $dbAdm->getAll();
+    }
+
+    public function listAmount($aid) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+        $dbAdm->sqlSet("select count(ms.ms_id) amount from Message ms where ms.a_id = $aid ");
+        $dbAdm->execSQL();
+
+        return $dbAdm->getAll()[0]['amount'];
     }
 
     public function myList($aids, $nowPage, $mid) {
