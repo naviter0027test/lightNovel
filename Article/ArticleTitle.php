@@ -44,14 +44,17 @@ class ArticleTitle {
 
         $conditionArr = Array();
         $conditionArr['at_title'] = $title;
+        $conditionArr['m_id'] = $mid;
 
         $dbAdm->selectData($tablename, $column, $conditionArr);
         $dbAdm->execSQL();
 
         $data = $dbAdm->getAll();
         if(count($data) > 0) {
-            if($data[0]['mid'] != $mid) 
+            /*
+            if($data[0]['m_id'] != $mid) 
                 throw new Exception("title is used");
+             */
             return true;
         }
         else

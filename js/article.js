@@ -15,7 +15,7 @@ $(document).ready(function() {
             }
             article.$el.html(article.template(data));
             $("select[name=selectCh]").on("change", function() {
-                location.href = "#article/"+ $(this).val();
+                location.href = "#article/"+ $(this).val()+"/1";
             });
         });
         msgArea = new Message({ 'el' : '#msgList', "model" : new MsgModel()});
