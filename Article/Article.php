@@ -457,7 +457,7 @@ class Article {
         if(isset($conditionLike['tag']))
             $sql .= " and a.a_tag like '". $conditionLike['tag']. "' ";
         $sql .= " limit $startNum, 25";
-        echo $sql;
+        //echo $sql;
         $dbAdm->sqlSet($sql);
 	$dbAdm->execSQL();
 	return $dbAdm->getAll();

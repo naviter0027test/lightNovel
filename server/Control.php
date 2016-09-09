@@ -878,7 +878,7 @@ function search() {
     if(isset($_POST['tag'][0]))
         $condition['tag'] = "%". implode("%", $_POST['tag']);
 
-    print_r($condition);
+    //print_r($condition);
 
     $articleList = $articleAdm->search($_POST['nowPage'], $condition);
 
