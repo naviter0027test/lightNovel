@@ -21,6 +21,17 @@ SearchPanel = Backbone.View.extend({
     }
 });
 
+SearchResult = Backbone.View.extend({
+    initialize : function() {
+    },
+    el : '',
+    template : null,
+    render : function() {
+        var data = this.model.get("data");
+        this.$el.html(this.template(data));
+    }
+});
+
 SearchModel = Backbone.Model.extend({
     initialize : function() {
     },
