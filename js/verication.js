@@ -9,7 +9,7 @@ $(document).ready(function() {
         console.log(data);
 
         if(data['status'] == 200) {
-            $(".result").append("<p class='col-xs-12'>注册成功，您可以开始发布文章，给别人点赞，一起愉快的玩耍</p>");
+            $(".result").append("<p class='col-xs-12'>注册成功，您可以开始发布文章，给别人点赞，一起愉快的玩耍。</p>");
         }
         else {
             $(".result").append("<p class='col-xs-12'>验证错误，错误如下</p>");

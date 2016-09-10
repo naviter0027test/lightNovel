@@ -115,8 +115,8 @@ class Member {
 
     public function register($user) {
         $dbAdm = $this->dbAdm;
-        if($this->isRegister($user['user']))
-            throw new Exception("member repeat");
+        if($this->isRegister($user['user']) || $this->isMailRepeat($user['email']))
+            throw new Exception("member or email repeat");
         $insData = Array();
         $insData['m_user'] = $user['user'];
         $insData['m_pass'] = md5($user['pass']);
@@ -210,6 +210,21 @@ class Member {
         $columns[0] = "*";
         $conditionArr = Array();
         $conditionArr['m_user'] = $account;
+        $dbAdm->selectData("Member", $columns, $conditionArr);
+        $dbAdm->execSQL();
+        $memAmount = count($dbAdm->getAll());
+        if($memAmount != 0)
+            return true;
+        return false;
+    }
+
+    public function isMailRepeat($email) {
+        $dbAdm = $this->dbAdm;
+        $columns = Array();
+        $columns[0] = "*";
+        $conditionArr = Array();
+        $conditionArr['m_email'] = $email;
+        $conditionArr['m_active'] = "Y";
         $dbAdm->selectData("Member", $columns, $conditionArr);
         $dbAdm->execSQL();
         $memAmount = count($dbAdm->getAll());

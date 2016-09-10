@@ -75,7 +75,7 @@
         <% if(data['a_memo'] != null) { %>
         <hr />
         <div class="memo">
-            <h3><%=data['a_aTitle']%></h4>
+            <h3><%=data['a_aTitle']%>&nbsp;&nbsp; [第<%=data['a_chapter']%>章]</h3>
             <h5>章节备注</h5>
             <%=data['a_memo']%>
         </div>
@@ -151,7 +151,7 @@
         <div class="col-xs-10"><%=item['ms_text']%></div>
         <% if(item['ms_reply'] != "") { %>
         <div class="reply col-xs-12">
-            <label>回覆:</label>
+            <label>作者回覆:</label>
             <%=item['ms_reply']%>
         </div>
         <% } %>

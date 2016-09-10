@@ -24,7 +24,9 @@
                 <td><%=item['a_chapter']%>/<%=(item['at_lastCh']==0?"?":item['at_lastCh'])%></td>
                 <td><%=item['ms_crtime']%></td>
                 <td>
+                    <% if(item['ms_reply'] == "") { %>
                     <a class="glyphicon glyphicon-share-alt" href="#msgReply/<%=item['ms_id']%>" alt="回复"></a>
+                    <% } %>
                     <a class="glyphicon glyphicon-trash" href="#msgDel/<%=item['ms_id']%>" alt="删除"></a>
                 </td>
             </tr>
