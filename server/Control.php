@@ -818,6 +818,18 @@ function subScriptList() {
     return $reData;
 }
 
+function subScriptAll() {
+    require_once("Article/SubScript.php");
+    $ssAdm = new SubScript();
+
+    $data = $ssAdm->all($_SESSION['mid'], $_POST['nowPage']);
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "subScriptAll success";
+    $reData['data'] = $data;
+    return $reData;
+}
+
 function subScriptDel() {
     require_once("Article/SubScript.php");
     $ssAdm = new SubScript();

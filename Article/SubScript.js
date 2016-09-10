@@ -34,6 +34,9 @@ SubScriptModel = Backbone.Model.extend({
         else if(cls == "article") {
             postData['subCls'] = "a_id";
         }
+        else if(cls == "all") {
+            postData['instr'] = "subScriptAll";
+        }
         postData['nowPage'] = nowPage;
         $.post("instr.php", postData, function(data) {
             //console.log(data);

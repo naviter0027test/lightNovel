@@ -441,6 +441,7 @@ DashboardRout = Backbone.Router.extend({
                 mySubScrt.render();
             }
             else if(cls == "all") {
+                mySubScrt.template = _.template($("#mySubScriptArticle").html());
             }
             else if(cls == "article") {
                 mySubScrt.template = _.template($("#mySubScriptArticle").html());

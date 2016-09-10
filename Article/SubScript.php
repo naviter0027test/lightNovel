@@ -84,6 +84,23 @@ class SubScript {
         return $dbAdm->getAll();
     }
 
+    public function all($mid, $nowPage) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $column = Array();
+        $column[0] = "*";
+
+        $limit = Array();
+        $limit['offset'] = ($nowPage - 1) * 25;
+        $limit['amount'] = 25;
+
+        $sql = "select * from $tablename 
+            where m_who = $mid limit ". $limit['offset']. ", ". $limit['amount'];
+        $dbAdm->sqlSet($sql);
+        return $dbAdm->getAll();
+    }
+
     public function cancel($who, $conditionArr) {
         $tablename = $this->table;
         $dbAdm = $this->dbAdm;
