@@ -95,10 +95,27 @@ class SubScript {
         $limit['offset'] = ($nowPage - 1) * 25;
         $limit['amount'] = 25;
 
-        $sql = "select * from $tablename 
-            where m_who = $mid limit ". $limit['offset']. ", ". $limit['amount'];
+        $sql = "select ss.*, att.at_title, m.m_user, s.as_name from $tablename ss
+            left join Article a on a.a_id = ss.a_id
+            left join Member m on m.m_id = ss.m_id
+            left join ArticleSeries s on s.as_id = ss.as_id
+            left join ArticleTitle att on att.at_id = a.at_id
+            where ss.m_who = $mid 
+            order by ss_updTime desc
+            limit ". $limit['offset']. ", ". $limit['amount'];
+        //echo $sql;
         $dbAdm->sqlSet($sql);
-        return $dbAdm->getAll();
+        $dbAdm->execSQL();
+        $data = $dbAdm->getAll();
+        foreach($data as $idx => $item) {
+            if($item['a_id'] != 0)
+                $data[$idx]['cls'] = "article";
+            else if($item['as_id'] != 0)
+                $data[$idx]['cls'] = "series";
+            else if($item['m_id'] != 0)
+                $data[$idx]['cls'] = "member";
+        }
+        return $data;
     }
 
     public function cancel($who, $conditionArr) {

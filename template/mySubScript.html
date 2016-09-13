@@ -46,10 +46,40 @@
         <thead>
             <tr>
                 <td>标题</td>
+                <td>分類</td>
                 <td>更新時間</td>
                 <td>操作</td>
             </tr>
+            <% _.each(data, function(item) { %>
+            <tr>
+                <% if(item['cls'] == "article") { %>
+                <td><%=item['at_title']%></td>
+                <% } else if(item['cls'] == "member") { %>
+                <td><%=item['m_user']%></td>
+                <% } else if(item['cls'] == "series") { %>
+                <td><%=item['as_name']%></td>
+                <% } else { %>
+                <td></td>
+                <% } %>
+                <% if(item['cls'] == "article") { %>
+                <td>文章</td>
+                <% } else if(item['cls'] == "member") { %>
+                <td>作者</td>
+                <% } else if(item['cls'] == "series") { %>
+                <td>系列</td>
+                <% } else { %>
+                <td></td>
+                <% } %>
+                <td><%=item['ss_updTime']%></td>
+                <td>
+                    <a class="glyphicon glyphicon-eye-open" href="article.html#article/<%=item['a_id']%>"></a>
+                    <a class="glyphicon glyphicon-remove" href="#subscriptDel/article/<%=item['a_id']%>"></a>
+                </td>
+            </tr>
+            <% }); %>
         </thead>
+        <tbody>
+        </tbody>
     </table>
 </script>
 
