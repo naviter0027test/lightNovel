@@ -72,8 +72,23 @@
                 <% } %>
                 <td><%=item['ss_updTime']%></td>
                 <td>
-                    <a class="glyphicon glyphicon-eye-open" href="article.html#article/<%=item['a_id']%>"></a>
-                    <a class="glyphicon glyphicon-remove" href="#subscriptDel/article/<%=item['a_id']%>"></a>
+                <% 
+                var eyeHref = "";
+                var delHref = "";
+                if(item['cls'] == "article") { 
+                    eyeHref = "article.html#article/"+item['a_id'];
+                    delHref = "#subscriptDel/article/"+item['a_id'];
+                } else if(item['cls'] == "member") { 
+                    eyeHref = "#subSeries/"+item['m_id']+"/1";
+                    delHref = "#subscriptDel/member/"+item['m_id'];
+                } else if(item['cls'] == "series") { 
+                    eyeHref = "#subScriptArticles/"+item['as_id']+"/1";
+                    delHref = "#subscriptDel/series/"+item['as_id'];
+                } else { 
+                } 
+                %>
+                    <a class="glyphicon glyphicon-eye-open" href="<%=eyeHref%>"></a>
+                    <a class="glyphicon glyphicon-remove" href="<%=delHref%>"></a>
                 </td>
             </tr>
             <% }); %>
