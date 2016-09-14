@@ -23,7 +23,7 @@ class Control {
 	    $this->instr = $_POST['instr'];
     }
     public function execInstr() {
-        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "seriesGet", "postArticle", "myData", "mySeriesList", "myLastArticle", "articleDel", "memSrsPages", "personalImg", "personalUpd", "passReset", "addMessage", "pressPraise", "articleEdit", "articleBySid", "changeArticleChapter", "myArticleList", "delArticleFromSeries", "storeDraft", "myDraftDel", "editDraft", "myDraftList", "findMem", "subscript", "subScriptAll");
+        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "seriesGet", "postArticle", "myData", "mySeriesList", "myLastArticle", "articleDel", "memSrsPages", "personalImg", "personalUpd", "passReset", "addMessage", "pressPraise", "articleEdit", "articleBySid", "changeArticleChapter", "myArticleList", "delArticleFromSeries", "storeDraft", "myDraftDel", "editDraft", "myDraftList", "findMem", "subscript", "subScriptAll", "bookmark", "bookmarkCancel", "bookmarkList");
 	try {
 	    if(!function_exists($this->instr))
 		throw new Exception("instr not defined");
@@ -898,6 +898,44 @@ function search() {
     $reData['status'] = 200;
     $reData['msg'] = "search success";
     $reData['data'] = $articleList;
+    return $reData;
+}
+
+function bookmark() {
+    require_once("Article/Bookmark.php");
+    $bookmarkAdm = new Bookmark();
+
+    if($bookmarkAdm->isBook($_SESSION['mid'], $_POST['bookId']))
+        throw new Exception("book id repeat");
+    else
+        $bookmarkAdm->adds($_SESSION['mid'], $_POST['bookId']);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "bookmark success";
+    return $reData;
+}
+
+function bookmarkCancel() {
+    require_once("Article/Bookmark.php");
+    $bookmarkAdm = new Bookmark();
+
+    $bookmarkAdm->cancel($_SESSION['mid'], $_POST['bookId']);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "bookmarkCancel success";
+    return $reData;
+}
+
+function bookmarkList() {
+    require_once("Article/Bookmark.php");
+    $bookmarkAdm = new Bookmark();
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "bookmarkList success";
+    $reData['data'] = $bookmarkAdm->lists($_SESSION['mid'], $_POST['nowPage']);
     return $reData;
 }
 
