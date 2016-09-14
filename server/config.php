@@ -25,6 +25,8 @@ class Config {
         $this->pass = "n,4n8kkvn";
         if($_SERVER['HTTP_HOST'] == "www.walnutfics.com")
             $this->host = "216.97.238.71";
+        else if($_SERVER['HTTP_HOST'] == "walnutfics.com")
+            $this->host = "216.97.238.71";
         else
             $this->host = "localhost";
     }
