@@ -495,7 +495,14 @@ function memArticleList() {
 
 function articleDel() {
     require_once("Article/Article.php");
+    require_once("Article/ArticleTitle.php");
     $articleAdm = new Article();
+    $artTitleAdm = new ArticleTitle();
+
+    $article = $articleAdm->get($_POST['aid']);
+    $articles = $articleAdm->articlesByArtTitle($article['at_id']);
+    if(count($articles) <= 1)
+        $artTitleAdm->del($article['at_id'], $_SESSION['mid']);
     $articleAdm->articleDel($_POST['aid']);
 
     $reData = Array();
