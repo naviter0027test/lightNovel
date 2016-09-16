@@ -43,15 +43,15 @@ $(document).ready(function() {
     */
 
     if(getQueryVariable("isChapter") == "Y") {
-        atTitle = getCookie("atTitle");
+        atTitle = decodeURIComponent(getCookie("atTitle"));
         $("input[name=title]").val(atTitle);
 
-        var mainCp = getCookie("mainCp").split(",");
+        var mainCp = decodeURIComponent(getCookie("mainCp")).split(",");
         mainInputs = $("input[name='cp1[]']");
         $(mainInputs[0]).val(mainCp[0]);
         $(mainInputs[1]).val(mainCp[1]);
 
-        var mainCp2 = getCookie("mainCp2");
+        var mainCp2 = decodeURIComponent(getCookie("mainCp2"));
         if(mainCp2 != "") {
             mainCp2 = mainCp2.split(",");
             main2Inputs = $("input[name='cp2[]']");
@@ -59,19 +59,19 @@ $(document).ready(function() {
             $(main2Inputs[1]).val(mainCp2[1]);
         }
 
-        var viceCp = getCookie("subCp");
+        var viceCp = decodeURIComponent(getCookie("subCp"));
         if(viceCp != "") {
             $("input[name=viceCp]").val(viceCp.replace(",", ";"));
         }
 
-        var alertstr = getCookie("alert");
+        var alertstr = decodeURIComponent(getCookie("alert"));
         var alerts = $("input[name='alert[]']");
         for(var i = 0;i < alerts.length;++i) 
             if(alertstr.search($(alerts[i]).val()) != -1) 
                 $(alerts[i]).attr("checked", true);
         //console.log(alerts);
 
-        var tagstr = getCookie("tag");
+        var tagstr = decodeURIComponent(getCookie("tag"));
         var tags = $("input[name='tag[]']")
         for(var i = 0;i < tags.length;++i)
             if(tagstr.search($(tags[i]).val()) != -1) 
