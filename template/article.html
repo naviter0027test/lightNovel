@@ -81,10 +81,10 @@
         <hr />
         <h2><%=data['at_title']%></h2>
         <h3><%=data['m_user']%><!--作者名称--></h3>
+        <label class="chapterShow col-xs-12">第<%=data['a_chapter']%>章&nbsp;&nbsp;&nbsp;&nbsp;<%=data['a_aTitle']%> </label>
         <% if(data['a_memo'] != null) { %>
-        <hr />
         <div class="memo">
-            <h3><%=data['a_aTitle']%>&nbsp;&nbsp; [第<%=data['a_chapter']%>章]</h3>
+            <hr />
             <h5>章节备注</h5>
             <%=data['a_memo']%>
         </div>

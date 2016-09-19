@@ -1,3 +1,7 @@
+body {
+    font-family : Microsoft JhengHei;
+}
+
 #header .nav {
     background : #fff7e8;
     border-top : 1px solid #DDDDDD;

@@ -23,7 +23,10 @@ class Config {
         $this->dbName = "walnu10_Novel";
         $this->user = "walnu10_novel";
         $this->pass = "n,4n8kkvn";
-        $this->host = "localhost";
+        if($_SERVER['HTTP_HOST'] == "www.walnutfics.com")
+            $this->host = "216.97.238.71";
+        else
+            $this->host = "localhost";
     }
 
     public function getDB() {
