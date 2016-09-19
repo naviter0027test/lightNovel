@@ -179,4 +179,16 @@ class ArticleTitle {
         $dbAdm->updateData($tablename, $upData, $conditionArr);
         $dbAdm->execSQL();
     }
+
+    public function del($atid, $mid) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $conditionArr = Array();
+        $conditionArr['at_id'] = $atid;
+        $conditionArr['m_id'] = $mid;
+
+        $dbAdm->deleteData($tablename, $conditionArr);
+        $dbAdm->execSQL();
+    }
 }
