@@ -50,3 +50,11 @@
     width : 80px;
     height : 80px;
 }
+
+.userMsg .msCrTime {
+    float : right;
+}
+
+.userMsg .reply {
+    margin-top : 10px;
+}

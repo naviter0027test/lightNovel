@@ -42,8 +42,8 @@
             }
         }
         %>
-        <a class="col-sm-2" href="#article/<%=nextCh['aid']%>">後一章节</a>
-        <a class="col-sm-2" href="#article/<%=(prevCh['aid']!=0?prevCh['aid']:data['a_id'])%>">前一章节</a>
+        <a class="col-sm-2" href="#article/<%=nextCh['aid']%>/1">後一章节</a>
+        <a class="col-sm-2" href="#article/<%=(prevCh['aid']!=0?prevCh['aid']:data['a_id'])%>/1">前一章节</a>
         <!-- <a class="col-sm-2" href="#">全文显示</a> -->
         <% } %>
         <a class="col-sm-1" href="#pressPraise/<%=data['a_id']%>">点赞</a>
@@ -84,13 +84,13 @@
         <% if(data['a_memo'] != null) { %>
         <hr />
         <div class="memo">
+            <h3><%=data['a_aTitle']%>&nbsp;&nbsp; [第<%=data['a_chapter']%>章]</h3>
             <h5>章节备注</h5>
             <%=data['a_memo']%>
         </div>
         <% } %>
         <hr />
         <div class="articleContent">
-            <h3><%=data['a_aTitle']%></h4>
             <%=data['a_content']%>
         </div>
     </div>
@@ -138,8 +138,8 @@
             }
         }
         %>
-        <a class="col-sm-2" href="#article/<%=nextCh['aid']%>">後一章节</a>
-        <a class="col-sm-2" href="#article/<%=(prevCh['aid']!=0?prevCh['aid']:data['a_id'])%>">前一章节</a>
+        <a class="col-sm-2" href="#article/<%=nextCh['aid']%>/1">後一章节</a>
+        <a class="col-sm-2" href="#article/<%=(prevCh['aid']!=0?prevCh['aid']:data['a_id'])%>/1">前一章节</a>
         <!-- <a class="col-sm-2" href="#">全文显示</a> -->
         <% } %>
         <a class="col-sm-1" href="#pressPraise/<%=data['a_id']%>">点赞</a>
@@ -164,10 +164,15 @@
     <% var msgCounter = 1; %>
     <% _.each(data, function(item) { %>
     <div class="userMsg col-xs-12">
-        <span class="col-xs-1"><%=msgCounter%>.</span>
         <img src="<%=item['headImg']%>" />
-        <h5 class="col-xs-5"><%=item['m_user']%></h5>
-        <div class="col-xs-5"><%=item['ms_text']%></div>
+        <h5 class="col-xs-10"><%=item['m_user']%><label class="msCrTime"><%=item['ms_crtime']%></label></h5>
+        <div class="col-xs-10"><%=item['ms_text']%></div>
+        <% if(item['ms_reply'] != "") { %>
+        <div class="reply col-xs-12">
+            <label>作者回覆:</label>
+            <%=item['ms_reply']%>
+        </div>
+        <% } %>
     </div>
     <% ++msgCounter; %>
     <% }); %>
