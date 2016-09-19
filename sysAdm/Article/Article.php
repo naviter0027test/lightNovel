@@ -56,7 +56,7 @@ class Article {
         //$dbAdm->selectData($tablename, $column, null, $order, $limit);
         $dbAdm->sqlSet("
             select m.m_user, count(p.p_id) praiseAmount , att.at_title,
-            case when (ass.as_finally = 0) then '?' else ass.as_finally end as as_finally, a.* 
+            case when (att.at_lastCh = 0) then '?' else att.at_lastCh end as at_lastCh, a.* 
             from `Article` a
             inner join Member m on a.m_id = m.m_id and m.m_user like '%$search%'
             left join ArticleSeries ass on a.as_id = ass.as_id

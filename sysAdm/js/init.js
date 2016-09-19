@@ -2,13 +2,13 @@ function initialShow() {
         $("#sidebarMenu").on("click", function() {
             $("#sidebar").fadeToggle("fast", "linear");
         });
-        browserResize();
+        //browserResize();
 }
 
 if (window.addEventListener) {              
-    window.addEventListener("resize", browserResize);
+    //window.addEventListener("resize", browserResize);
 } else if (window.attachEvent) {                 
-    window.attachEvent("onresize", browserResize);
+    //window.attachEvent("onresize", browserResize);
 }
 var xbeforeResize = window.innerWidth;
 var ybeforeResize = window.innerWidth;
