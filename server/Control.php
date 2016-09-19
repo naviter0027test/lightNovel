@@ -308,7 +308,7 @@ function postArticle() {
         $article['sendUser'] = $mem['m_id'];
     }
 
-    if(!$articleTitleAdm->isRepeat($article['title'])) {
+    if(!$articleTitleAdm->isRepeat($article['title'], $_SESSION['mid'])) {
         $insData = Array();
         $insData['title'] = $article['title'];
         $insData['mid'] = $_SESSION['mid'];

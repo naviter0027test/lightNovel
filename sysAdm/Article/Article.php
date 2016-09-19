@@ -50,16 +50,17 @@ class Article {
             $limit['offset'] = ($nowPage -1) * $limit['amount'];
 
         $order = Array();
-        $order['col'] = "a_crtime";
+        $order['col'] = "a_updtime";
         $order['order'] = "desc";
 
         //$dbAdm->selectData($tablename, $column, null, $order, $limit);
         $dbAdm->sqlSet("
-            select m.m_user, count(p.p_id) praiseAmount ,
+            select m.m_user, count(p.p_id) praiseAmount , att.at_title,
             case when (ass.as_finally = 0) then '?' else ass.as_finally end as as_finally, a.* 
             from `Article` a
             inner join Member m on a.m_id = m.m_id and m.m_user like '%$search%'
             left join ArticleSeries ass on a.as_id = ass.as_id
+            inner join ArticleTitle att on att.at_id = a.at_id
             left join Praise p on a.a_id = p.a_id group by a.a_id
             order by ". $order['col']. " ". $order['order'].
             " limit ". $limit['offset']. ", ". $limit['amount']);

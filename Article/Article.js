@@ -10,7 +10,9 @@ Article = Backbone.View.extend({
     render : function() {
         var data = this.model.get("data");
         for(var idx in data['data']) {
-            data['data'][idx]['a_mainCp'] = data['data'][idx]['a_mainCp'].replace(";", "/");
+            if(data['data'][idx]['a_mainCp'] != null) {
+                data['data'][idx]['a_mainCp'] = data['data'][idx]['a_mainCp'].replace(";", "/");
+            }
             if(data['data'][idx]['a_mainCp2'] != null) {
                 var cp2 = data['data'][idx]['a_mainCp2'];
                 data['data'][idx]['a_mainCp2'] = cp2.replace(";", "/");
@@ -222,7 +224,7 @@ PostArticleForm = Backbone.View.extend({
             postData['content'] = CKEDITOR.instances.editor1.getData();
 
         $.post("instr.php", postData, function(data) {
-            console.log(data);
+            //console.log(data);
             data = JSON.parse(data);
             //console.log(data);
             if(data['status'] == 200) {
@@ -230,15 +232,15 @@ PostArticleForm = Backbone.View.extend({
                     alert("編輯成功");
                 else {
                     alert("發文成功!");
-                    setCookie("atTitle", "", 1);
-                    setCookie("alert", "", 1);
-                    setCookie("tag", "", 1);
                 }
                 location.href = "index.html#/1";
             }
             else {
+                console.log(data);
                 if(data['msg'] == "series is repeat")
                     alert("系列名重复");
+                else if(data['msg'] == "title is used")
+                    alert("已有人用過此標題");
             }
         });
         return false;
