@@ -215,6 +215,7 @@ class Article {
         $order['col'] = "a_crtime";
         $order['order'] = "desc";
 
+        /*
         $dbAdm->sqlSet("
             SELECT pp.praiseAmount, ass.as_name, m.m_user, 
             max(a.a_id) maxAid, count(a.a_chapter) chapterSum,
@@ -238,8 +239,9 @@ class Article {
             GROUP BY a.at_id
             order by att.at_updtime desc ".
             " limit ". $limit['offset']. ", ". $limit['amount']);
+         */
         $dbAdm->sqlSet("select att.at_id, att.at_title, 
-                ass.as_name, m.m_user,
+                ass.as_name, m.m_user, att.at_updtime,
                 CASE WHEN (
                     att.at_lastCh =0
                 )
@@ -249,6 +251,7 @@ class Article {
                 from ArticleTitle att
                 INNER JOIN Member m ON m.m_id = att.m_id
                 LEFT JOIN ArticleSeries ass ON att.as_id = ass.as_id
+                order by att.at_updtime desc
             ");
         //echo $dbAdm->echoSQL();
         $dbAdm->execSQL();
@@ -267,7 +270,7 @@ class Article {
                     GROUP BY a.a_id
                 )pp ON pp.a_id = a.a_id
                 where a.at_id = ". $aTitle['at_id']."
-                order by a.a_updtime desc 
+                order by a.a_chapter desc 
                 limit 0, 1
             ");
             $dbAdm->execSQL();
@@ -278,6 +281,7 @@ class Article {
             $articleArray[$counter]['at']['as_name'] = $aTitle['as_name'];
             $articleArray[$counter]['at']['m_user'] = $aTitle['m_user'];
             $articleArray[$counter]['at']['at_lastCh'] = $aTitle['at_lastCh'];
+            $articleArray[$counter]['at']['at_updtime'] = $aTitle['at_updtime'];
             ++$counter;
         }
 
