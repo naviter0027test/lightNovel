@@ -312,7 +312,8 @@ function postArticle() {
         $insData = Array();
         $insData['title'] = $article['title'];
         $insData['mid'] = $_SESSION['mid'];
-        $insData['asid'] = $article['series'];
+        $insData['asid'] = (isset($article['series'])?$article['series']:0);
+        $insData['lastCh'] = ($article['chapterSum'] != '?'?$article['chapterSum']:0);
         $articleTitleAdm->adds($insData);
     }
     $artTitle = $articleTitleAdm->get($article['title']);
@@ -321,6 +322,11 @@ function postArticle() {
     if(isset($article['series'])) {
         $articleTitleAdm->updasid($artTitle['at_id'], $article['series']);
         unset($article['series']);
+    }
+
+    if(isset($article['chapterSum'])) {
+        $articleTitleAdm->updLastCh($artTitle['at_id'], ($article['chapterSum'] != '?'?$article['chapterSum']:0));
+        unset($article['chapterSum']);
     }
 
     $articleAdm->articleAdd($article);

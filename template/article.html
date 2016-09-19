@@ -10,6 +10,7 @@
         %>
         <% if(typeof(articles) == "undefined") { 
             } else {
+            var counter = 1;
         %>
         <select class="col-sm-2" name="selectCh">
             <option>选择章节</option>
@@ -20,7 +21,7 @@
                 prevCh['chapter'] = parseInt(item['a_chapter']);
             }
         %>
-            <option value="<%=item['a_id']%>">Ch<%=item['a_chapter']%> <%=item['a_aTitle']%></option>
+            <option value="<%=item['a_id']%>">Ch<%=counter++%> <%=item['a_aTitle']%></option>
         <% }); %>
             <!--
             <option>Ch4 章節標題</option>

@@ -62,7 +62,7 @@ class Article {
         if(isset($article['aChapter']))
             $insData['a_chapter'] = $article['aChapter'];
         if(isset($article['aMemo']))
-            $insData['a_memo'] = $article['aMemo']  ;
+            $insData['a_memo'] = $article['aMemo'];
         $insData['a_content'] = $article['content'];
         $insData['a_crtime'] = date('Y-m-d H:i:s');
 

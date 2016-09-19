@@ -89,6 +89,7 @@
                 <br />
                 <span class="col-xs-12">
                     <label class="col-xs-2">警告</label>
+                    <input type="checkbox" name="alert[]" value="无" class="validate[required]"/>无
                     <input type="checkbox" name="alert[]" value="主要角色死亡" class="validate[required]"/>主要角色死亡
                     <input type="checkbox" name="alert[]" value="血腥暴力"  class="validate[required]"/>血腥暴力
                     <input type="checkbox" name="alert[]" value="性轉"  class="validate[required]"/>性转
@@ -99,6 +100,7 @@
                 <br />
                 <span class="col-xs-12">
                     <label class="col-xs-2">标签</label>
+                    <input type="checkbox" name="tag[]" value="无" class="validate[required]"/>无
                     <input type="checkbox" name="tag[]" value="ABO"  class="validate[required]"/>ABO 
                     <input type="checkbox" name="tag[]" value="PWP"  class="validate[required]"/>PWP
                     <input type="checkbox" name="tag[]" value="AU"  class="validate[required]"/>AU
@@ -118,7 +120,7 @@
                 </span>
                 <br />
                 <span class="col-xs-12">
-                    <label class="col-xs-2">章节</label> <input class="smInput" name="aChapter" type="text" /> / <input class="smInput" name="chapterSum" type="text" readonly />
+                    <label class="col-xs-2">章节</label> <input class="smInput validate[required, custom[integer]]" name="aChapter" type="text" /> / <input class="smInput" name="chapterSum" type="text" value="?" />
                 </span>
                 <br />
                 <span class="col-xs-12">
@@ -206,6 +208,7 @@
     <script src="lib/validationengine/js/jquery.validationEngine.js"></script>
     <script src="lib/underscore.js"></script>
     <script src="lib/backbone.js"></script>
+    <script src="lib/CookieAPI.js"></script>
     <script src="Member/Member.js"></script>
     <script src="Article/Article.js"></script>
     <script src="js/header.js"></script>

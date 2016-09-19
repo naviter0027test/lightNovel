@@ -28,6 +28,7 @@ DashboardRout = Backbone.Router.extend({
         "myDraft/:nowPage" : "myDraftList",
         "draftEdit/:mdid" : "draftEdit",
         "draftDel/:mdid" : "draftDel",
+        "articlePlus/:atTitle" : "articlePlus",
         "articleEdit/:aid" : "articleEdit",
         "articleDel/:aid" : "articleDel",
         "myArticles/:nowPage" : "myArticles",
@@ -283,6 +284,13 @@ DashboardRout = Backbone.Router.extend({
                 }
                 history.go(-1);
             });
+    },
+
+    articlePlus : function(atTitle) {
+        $.getScript("lib/CookieAPI.js", function() {
+            setCookie("atTitle", atTitle, 1);
+            location.href = "postArticle.html";
+        });
     },
 
     articleEdit : function(aid) {

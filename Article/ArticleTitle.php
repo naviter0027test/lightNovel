@@ -127,6 +127,7 @@ class ArticleTitle {
         $insData['at_title'] = $articletitle['title'];
         $insData['m_id'] = $articletitle['mid'];
         $insData['as_id'] = $articletitle['asid'];
+        $insData['at_lastCh'] = $articletitle['lastCh'];
         $insData['at_crtime'] = date("Y-m-d H:i:s");
 
         $dbAdm->insertData($tablename, $insData);
@@ -140,6 +141,19 @@ class ArticleTitle {
 
         $upData = Array();
         $upData['as_id'] = $asid;
+
+        $conditionArr = Array();
+        $conditionArr['at_id'] = $atid;
+        $dbAdm->updateData($tablename, $upData, $conditionArr);
+        $dbAdm->execSQL();
+    }
+
+    public function updLastCh($atid, $lastCh) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $upData = Array();
+        $upData['at_lastCh'] = $lastCh;
 
         $conditionArr = Array();
         $conditionArr['at_id'] = $atid;

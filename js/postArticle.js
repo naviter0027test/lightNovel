@@ -17,6 +17,7 @@ $(document).ready(function() {
         }
     });
 
+    /*
     $("select[name=series]").on("change", function() {
         var data = memModel.get("seriesList")['data'];
         var num = $("select[name=series] option:selected").attr("num");
@@ -27,12 +28,16 @@ $(document).ready(function() {
             $("input[name=chapterSum]").val(as_finally);
         }
 
-        /*
         if($(this).val() != "")
             $("input[name=aChapter]").addClass("validate[required]");
         else
             $("input[name=aChapter]").removeClass("validate[required]");
-            */
+    });
+    */
+
+    $.getScript("lib/CookieAPI.js", function() {
+        atTitle = getCookie("atTitle");
+        $("input[name=title]").val(atTitle);
     });
 
     var mySerPost = {};

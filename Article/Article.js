@@ -145,11 +145,6 @@ PostArticleForm = Backbone.View.extend({
     },
 
     postArt : function() {
-        if($("select[name=series]").val() != "" || $("input[name=newSeries]").val() != "") {
-            $("input[name=aChapter]").addClass("validate[required, custom[integer]]");
-        }
-        else
-            $("input[name=aChapter]").removeClass("validate[required, custom[integer]]");
         if(!this.$el.validationEngine("validate"))
             return false;
         this.$el.validationEngine("hideAll");
@@ -218,7 +213,10 @@ PostArticleForm = Backbone.View.extend({
         if($("input[name=aChapter]").val() != "")
             postData['aChapter'] = $("input[name=aChapter]").val();
 
-        postData['aMemo'] = $("input[name=aMemo]").val();
+        if($("input[name=chapterSum]").val() != "")
+            postData['chapterSum'] = $("input[name=chapterSum]").val();
+
+        postData['aMemo'] = $("textarea[name=aMemo]").val();
 
         if(CKEDITOR.instances.editor1.getData() != "") 
             postData['content'] = CKEDITOR.instances.editor1.getData();
@@ -230,8 +228,10 @@ PostArticleForm = Backbone.View.extend({
             if(data['status'] == 200) {
                 if(postData['instr'] == "articleEdit")
                     alert("編輯成功");
-                else
+                else {
                     alert("發文成功!");
+                    setCookie("atTitle", "", 1);
+                }
                 location.href = "index.html#/1";
             }
             else {
