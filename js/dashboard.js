@@ -294,9 +294,18 @@ DashboardRout = Backbone.Router.extend({
             $.post("instr.php", postData, function(data) {
                 //console.log(data);
                 data = JSON.parse(data);
-                //console.log(data);
+                console.log(data);
                 var article = data['data'];
                 setCookie("atTitle", article['at_title'].replace(";", ","), 1);
+                setCookie("mainCp", article['a_mainCp'].replace(";", ","), 1);
+                if(article['a_mainCp2'] != null && article['a_mainCp2'] != "")
+                    setCookie("mainCp2", article['a_mainCp2'].replace(";", ","), 1);
+                else
+                    setCookie("mainCp2", "", 1);
+                if(article['a_subCp'] != null && article['a_subCp'] != "")
+                    setCookie("subCp", article['a_subCp'].replace(";", ","), 1);
+                else
+                    setCookie("subCp", "", 1);
                 setCookie("alert", article['a_alert'].replace(";", ","), 1);
                 setCookie("tag", article['a_tag'].replace(";", ","), 1);
                 setCookie("asid", article['asid'].replace(";", ","), 1);

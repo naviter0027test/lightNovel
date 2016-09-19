@@ -2,10 +2,8 @@
     <div class="operPanel col-xs-12">
         <% 
         var prevCh = {};
-        prevCh['chapter'] = 0;
         prevCh['aid'] = 0;
         var nextCh = {};
-        nextCh['chapter'] = 9999999;
         nextCh['aid'] = 0;
         %>
         <% if(typeof(articles) == "undefined") { 
@@ -14,13 +12,7 @@
         %>
         <select class="col-sm-2" name="selectCh">
             <option>选择章节</option>
-        <% _.each(articles, function(item) { 
-            if(prevCh['chapter'] < parseInt(data['a_chapter']) - 1
-            && prevCh['chapter'] < item['a_chapter']) {
-                prevCh['aid'] = item['a_id'];
-                prevCh['chapter'] = parseInt(item['a_chapter']);
-            }
-        %>
+        <% _.each(articles, function(item) { %>
             <option value="<%=item['a_id']%>">Ch<%=counter++%> <%=item['a_aTitle']%></option>
         <% }); %>
             <!--
@@ -29,11 +21,24 @@
             -->
         </select>
         <% 
-        for(var i = articles.length-1;i >= 0;--i) {
-            if(nextCh['chapter'] > parseInt(data['a_chapter']) +1
-            && nextCh['chapter'] > articles[i]['a_chapter']) {
+        for(var i = 0; i < articles.length-1;++i) {
+            if(articles[i]['a_id'] == data['a_id'] && i == 0) {
+                prevCh['aid'] = articles[i]['a_id'];
+                break;
+            }
+            else if(articles[i+1]['a_id'] == data['a_id']) {
+                prevCh['aid'] = articles[i]['a_id'];
+                break;
+            }
+        }
+        for(var i = articles.length-1;i > 0;--i) {
+            if(articles[i]['a_id'] == data['a_id'] && i == articles.length-1) {
                 nextCh['aid'] = articles[i]['a_id'];
-                nextCh['chapter'] = parseInt(articles[i]['a_chapter']);
+                break;
+            }
+            else if(articles[i-1]['a_id'] == data['a_id']) {
+                nextCh['aid'] = articles[i]['a_id'];
+                break;
             }
         }
         %>
@@ -53,11 +58,16 @@
         </span>
     </div>
     <div class="articleItem">
+        <% if($.trim(data['as_name']) != "") { %>
+        系列：<label><%=data['as_name']%></label>
+        <% } %>
         分級：<label><%=data['a_level']%></label> 
         属性：<label><%=(data['a_attr']=="article"?"文":"推文")%></label> 
+        章节：<label><%=data['a_chapter']%> / <%=data['at_lastCh']!=0?data['at_lastCh']:"?"%></label>
         更新日期：<label><%=data['a_crtime']%></label> <br />
         <h4>主CP：<%=data['a_mainCp']%></h4>
-        <h4>副CP：<%=data['a_mainCp2']%></h4>
+        <h4>主CP2：<%=data['a_mainCp2']%></h4>
+        <h4>副CP：<%=data['a_subCp']%></h4>
         <h4>警告：<%=data['a_alert']%></h4>
         <h4>标签：<%=data['a_tag']%></h4>
         <span class="col-xs-6">
@@ -97,13 +107,7 @@
         %>
         <select class="col-sm-2" name="selectCh">
             <option>选择章节</option>
-        <% _.each(articles, function(item) { 
-            if(prevCh['chapter'] < parseInt(data['a_chapter']) - 1
-            && prevCh['chapter'] < item['a_chapter']) {
-                prevCh['aid'] = item['a_id'];
-                prevCh['chapter'] = parseInt(item['a_chapter']);
-            }
-        %>
+        <% _.each(articles, function(item) { %>
             <option value="<%=item['a_id']%>"><%=item['a_aTitle']%></option>
         <% }); %>
             <!--
@@ -112,11 +116,24 @@
             -->
         </select>
         <% 
-        for(var i = articles.length-1;i >= 0;--i) {
-            if(nextCh['chapter'] > parseInt(data['a_chapter']) +1
-            && nextCh['chapter'] > articles[i]['a_chapter']) {
+        for(var i = 0; i < articles.length-1;++i) {
+            if(articles[i]['a_id'] == data['a_id'] && i == 0) {
+                prevCh['aid'] = articles[i]['a_id'];
+                break;
+            }
+            else if(articles[i+1]['a_id'] == data['a_id']) {
+                prevCh['aid'] = articles[i]['a_id'];
+                break;
+            }
+        }
+        for(var i = articles.length-1;i > 0;--i) {
+            if(articles[i]['a_id'] == data['a_id'] && i == articles.length-1) {
                 nextCh['aid'] = articles[i]['a_id'];
-                nextCh['chapter'] = parseInt(articles[i]['a_chapter']);
+                break;
+            }
+            else if(articles[i-1]['a_id'] == data['a_id']) {
+                nextCh['aid'] = articles[i]['a_id'];
+                break;
             }
         }
         %>

@@ -370,6 +370,7 @@ function articleEdit() {
         $articleTitleAdm->adds($insData);
     }
     $artTitle = $articleTitleAdm->get($article['title']);
+    $articleTitleAdm->updtime($artTitle['at_id']);
     $article['atid'] = $artTitle['at_id'];
 
     if(isset($article['series'])) {

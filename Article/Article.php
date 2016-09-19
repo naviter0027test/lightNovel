@@ -64,6 +64,7 @@ class Article {
         if(isset($article['aMemo']))
             $insData['a_memo'] = $article['aMemo'];
         $insData['a_content'] = $article['content'];
+        $updData['a_updtime'] = date('Y-m-d H:i:s');
         $insData['a_crtime'] = date('Y-m-d H:i:s');
 
         $dbAdm->insertData($tablename, $insData);
@@ -106,7 +107,7 @@ class Article {
         if(isset($article['aMemo']))
             $updData['a_memo'] = $article['aMemo']  ;
         $updData['a_content'] = $article['content'];
-        //$updData['a_crtime'] = date('Y-m-d H:i:s');
+        $updData['a_updtime'] = date('Y-m-d H:i:s');
 
         $conditionArr = Array();
         $conditionArr['a_id'] = $article['aid'];
@@ -184,11 +185,12 @@ class Article {
         $limit['amount'] = 25;
 
         //$dbAdm->selectData($tablename, $column, $conditionArr, $order, $limit);
-        $dbAdm->sqlSet("select a.*, ss.as_name, att.at_title
+        $dbAdm->sqlSet("select a.*, ss.as_name, 
+            att.at_title, att.at_lastCh
             from $tablename a 
             inner join ArticleTitle att on att.at_id = a.at_id
             left join ArticleSeries ss on att.as_id = ss.as_id 
-            where a.m_id = $mid order by a_crtime desc limit ". $limit['offset']. ", ". $limit['amount']);
+            where a.m_id = $mid order by a_updtime desc limit ". $limit['offset']. ", ". $limit['amount']);
         $dbAdm->execSQL();
 
         return $dbAdm->getAll();
@@ -213,22 +215,9 @@ class Article {
         $order['col'] = "a_crtime";
         $order['order'] = "desc";
 
-        //$dbAdm->selectData($tablename, $column, null, $order, $limit);
-        /*
         $dbAdm->sqlSet("
-            select count(p.p_id) praiseAmount , ass.as_name, m.m_user,
-            case when (att.at_lastCh = 0) then '?' else att.at_lastCh end as at_lastCh, 
-            a.*, att.at_title
-            from `Article` a
-            left join ArticleSeries ass on a.as_id = ass.as_id
-            inner join Member m on m.m_id = a.m_id
-            inner join ArticleTitle att on a.at_id = att.at_id
-            left join Praise p on a.a_id = p.a_id group by a.a_id
-            order by ". $order['col']. " ". $order['order'].
-            " limit ". $limit['offset']. ", ". $limit['amount']);
-         */
-        $dbAdm->sqlSet("
-            SELECT pp.praiseAmount, ass.as_name, m.m_user, max(a.a_id) maxAid,
+            SELECT pp.praiseAmount, ass.as_name, m.m_user, 
+            max(a.a_id) maxAid, count(a.a_chapter) chapterSum,
             CASE WHEN (
                 att.at_lastCh =0
             )
@@ -236,9 +225,9 @@ class Article {
             ELSE att.at_lastCh
             END AS at_lastCh, a.* , att.at_title
             FROM `Article` a
-            LEFT JOIN ArticleSeries ass ON a.as_id = ass.as_id
             INNER JOIN Member m ON m.m_id = a.m_id
             INNER JOIN ArticleTitle att ON a.at_id = att.at_id
+            LEFT JOIN ArticleSeries ass ON att.as_id = ass.as_id
             LEFT JOIN (
 
                 SELECT count( p.p_id ) praiseAmount, a.a_id
@@ -247,12 +236,52 @@ class Article {
                 GROUP BY a.a_id
             )pp ON pp.a_id = a.a_id
             GROUP BY a.at_id
-            order by ". $order['col']. " ". $order['order'].
+            order by att.at_updtime desc ".
             " limit ". $limit['offset']. ", ". $limit['amount']);
+        $dbAdm->sqlSet("select att.at_id, att.at_title, 
+                ass.as_name, m.m_user,
+                CASE WHEN (
+                    att.at_lastCh =0
+                )
+                THEN '?'
+                ELSE att.at_lastCh
+                END AS at_lastCh
+                from ArticleTitle att
+                INNER JOIN Member m ON m.m_id = att.m_id
+                LEFT JOIN ArticleSeries ass ON att.as_id = ass.as_id
+            ");
         //echo $dbAdm->echoSQL();
         $dbAdm->execSQL();
 
-        return $dbAdm->getAll();
+        $aTitleList = $dbAdm->getAll();
+        $articleArray = Array();
+        $counter = 0;
+        foreach($aTitleList as $aTitle) {
+            $dbAdm->sqlSet("
+                select pp.praiseAmount, a.* 
+                FROM `Article` a
+                LEFT JOIN (
+                    SELECT count( p.p_id ) praiseAmount, a.a_id
+                    FROM Praise p, Article a
+                    WHERE a.a_id = p.a_id
+                    GROUP BY a.a_id
+                )pp ON pp.a_id = a.a_id
+                where a.at_id = ". $aTitle['at_id']."
+                order by a.a_updtime desc 
+                limit 0, 1
+            ");
+            $dbAdm->execSQL();
+            $articleArray[$counter] = $dbAdm->getAll()[0];
+            $articleArray[$counter]['at'] = Array();
+            $articleArray[$counter]['at']['at_id'] = $aTitle['at_id'];
+            $articleArray[$counter]['at']['at_title'] = $aTitle['at_title'];
+            $articleArray[$counter]['at']['as_name'] = $aTitle['as_name'];
+            $articleArray[$counter]['at']['m_user'] = $aTitle['m_user'];
+            $articleArray[$counter]['at']['at_lastCh'] = $aTitle['at_lastCh'];
+            ++$counter;
+        }
+
+        return $articleArray;
     }
 
     public function get($aid) {
@@ -269,7 +298,8 @@ class Article {
         $dbAdm->sqlSet("select count(p.m_id) praiseAmount, m.m_user,
                 case when (att.at_lastCh = 0) then '?' 
                 else att.at_lastCh end as at_lastCh, 
-                a.*, att.at_title, att.at_lastCh, att.as_id asid
+                a.*, att.at_title, att.at_lastCh, att.as_id asid,
+                ss.as_name
                 from `Article` a 
                 inner join ArticleTitle att on a.at_id = att.at_id
                 left join ArticleSeries ss on ss.as_id = att.as_id
