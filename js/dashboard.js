@@ -286,10 +286,22 @@ DashboardRout = Backbone.Router.extend({
             });
     },
 
-    articlePlus : function(atTitle) {
+    articlePlus : function(aid) {
         $.getScript("lib/CookieAPI.js", function() {
-            setCookie("atTitle", atTitle, 1);
-            location.href = "postArticle.html";
+            var postData = {};
+            postData['instr'] = "articleGet";
+            postData['aid'] = aid;
+            $.post("instr.php", postData, function(data) {
+                //console.log(data);
+                data = JSON.parse(data);
+                //console.log(data);
+                var article = data['data'];
+                setCookie("atTitle", article['at_title'].replace(";", ","), 1);
+                setCookie("alert", article['a_alert'].replace(";", ","), 1);
+                setCookie("tag", article['a_tag'].replace(";", ","), 1);
+                setCookie("asid", article['asid'].replace(";", ","), 1);
+                location.href = "postArticle.html?isChapter=Y";
+            });
         });
     },
 

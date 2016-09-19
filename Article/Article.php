@@ -214,6 +214,7 @@ class Article {
         $order['order'] = "desc";
 
         //$dbAdm->selectData($tablename, $column, null, $order, $limit);
+        /*
         $dbAdm->sqlSet("
             select count(p.p_id) praiseAmount , ass.as_name, m.m_user,
             case when (att.at_lastCh = 0) then '?' else att.at_lastCh end as at_lastCh, 
@@ -223,6 +224,29 @@ class Article {
             inner join Member m on m.m_id = a.m_id
             inner join ArticleTitle att on a.at_id = att.at_id
             left join Praise p on a.a_id = p.a_id group by a.a_id
+            order by ". $order['col']. " ". $order['order'].
+            " limit ". $limit['offset']. ", ". $limit['amount']);
+         */
+        $dbAdm->sqlSet("
+            SELECT pp.praiseAmount, ass.as_name, m.m_user, max(a.a_id) maxAid,
+            CASE WHEN (
+                att.at_lastCh =0
+            )
+            THEN '?'
+            ELSE att.at_lastCh
+            END AS at_lastCh, a.* , att.at_title
+            FROM `Article` a
+            LEFT JOIN ArticleSeries ass ON a.as_id = ass.as_id
+            INNER JOIN Member m ON m.m_id = a.m_id
+            INNER JOIN ArticleTitle att ON a.at_id = att.at_id
+            LEFT JOIN (
+
+                SELECT count( p.p_id ) praiseAmount, a.a_id
+                FROM Praise p, Article a
+                WHERE a.a_id = p.a_id
+                GROUP BY a.a_id
+            )pp ON pp.a_id = a.a_id
+            GROUP BY a.at_id
             order by ". $order['col']. " ". $order['order'].
             " limit ". $limit['offset']. ", ". $limit['amount']);
         //echo $dbAdm->echoSQL();

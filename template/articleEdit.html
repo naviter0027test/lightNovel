@@ -56,20 +56,25 @@
             <span class="col-xs-12">
                 <label class="col-xs-2">警告</label>
                 <% isCheck = "";
+                if(data['a_alert'].search("无") != -1)
+                    isCheck = "checked";
+                %>
+                <input type="checkbox" name="alert[]" value="无" <%=isCheck%> class="validate[required]"/>无
+                <% isCheck = "";
                 if(data['a_alert'].search("主要角色死亡") != -1)
                     isCheck = "checked";
                 %>
-                <input type="checkbox" name="alert[]" value="主要角色死亡" <%=isCheck%> />主要角色死亡 
+                <input type="checkbox" name="alert[]" value="主要角色死亡" <%=isCheck%> class="validate[required]" />主要角色死亡 
                 <% isCheck = "";
                 if(data['a_alert'].search("血腥暴力") != -1)
                     isCheck = "checked";
                 %>
-                <input type="checkbox" name="alert[]" value="血腥暴力" <%=isCheck%>/>血腥暴力
+                <input type="checkbox" name="alert[]" value="血腥暴力" <%=isCheck%> class="validate[required]"/>血腥暴力
                 <% isCheck = "";
                 if(data['a_alert'].search("性转") != -1)
                     isCheck = "checked";
                 %>
-                <input type="checkbox" name="alert[]" value="性转" <%=isCheck%>/>性轉
+                <input type="checkbox" name="alert[]" value="性转" <%=isCheck%> class="validate[required]"/>性轉
                 <br />
                 <input type="checkbox" name="alert[]" value="other" />其他
                 <input type="text" name="alert[]" placeholder="自訂，以分號分隔" />
@@ -78,25 +83,30 @@
             <span class="col-xs-12">
                 <label class="col-xs-2">标签</label>
                 <% isCheck = "";
+                if(data['a_tag'].search("无") != -1)
+                    isCheck = "checked";
+                %>
+                <input type="checkbox" name="tag[]" value="无" <%=isCheck%> class="validate[required]"/>无
+                <% isCheck = "";
                 if(data['a_tag'].search("ABO") != -1)
                     isCheck = "checked";
                 %>
-                <input type="checkbox" name="tag[]" value="ABO" <%=isCheck%>/>ABO 
+                <input type="checkbox" name="tag[]" value="ABO" <%=isCheck%> class="validate[required]"/>ABO 
                 <% isCheck = "";
                 if(data['a_tag'].search("PWP") != -1)
                     isCheck = "checked";
                 %>
-                <input type="checkbox" name="tag[]" value="PWP" <%=isCheck%>/>PWP
+                <input type="checkbox" name="tag[]" value="PWP" <%=isCheck%> class="validate[required]"/>PWP
                 <% isCheck = "";
                 if(data['a_tag'].search("AU") != -1)
                     isCheck = "checked";
                 %>
-                <input type="checkbox" name="tag[]" value="AU" <%=isCheck%>/>AU
+                <input type="checkbox" name="tag[]" value="AU" <%=isCheck%> class="validate[required]"/>AU
                 <% isCheck = "";
                 if(data['a_tag'].search("哨兵向导") != -1)
                     isCheck = "checked";
                 %>
-                <input type="checkbox" name="tag[]" value="哨兵向导" <%=isCheck%>/>哨兵向导
+                <input type="checkbox" name="tag[]" value="哨兵向导" <%=isCheck%> class="validate[required]"/>哨兵向导
                 <% isCheck = "";
                 if(data['a_tag'].search("互攻") != -1)
                     isCheck = "checked";

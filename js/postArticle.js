@@ -35,10 +35,26 @@ $(document).ready(function() {
     });
     */
 
-    $.getScript("lib/CookieAPI.js", function() {
+    if(getQueryVariable("isChapter") == "Y") {
         atTitle = getCookie("atTitle");
         $("input[name=title]").val(atTitle);
-    });
+
+        var alertstr = getCookie("alert");
+        var alerts = $("input[name='alert[]']");
+        for(var i = 0;i < alerts.length;++i) 
+            if(alertstr.search($(alerts[i]).val()) != -1) 
+                $(alerts[i]).attr("checked", true);
+        //console.log(alerts);
+
+        var tagstr = getCookie("tag");
+        var tags = $("input[name='tag[]']")
+        for(var i = 0;i < tags.length;++i)
+            if(tagstr.search($(tags[i]).val()) != -1) 
+                $(tags[i]).attr("checked", true);
+        //console.log(tags);
+        $("input[name=aChapter]").val("");
+        $("input[name=aChapter]").attr("readonly", false);
+    }
 
     var mySerPost = {};
     mySerPost['nowPage'] = 1;
