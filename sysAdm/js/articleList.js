@@ -2,6 +2,15 @@ var articlesView = null;
 var pager = null;
 var nowpage = 1;
 $(document).ready(function() {
+    $("#sidebar").load("template/sidebar.html", function() {
+        $("#sidebar a").on("click", function() {
+            /*
+            $("#header a").removeClass("choosed");
+            $("#sidebar a").removeClass("choosed");
+            $(this).addClass("choosed");
+            */
+        });
+    });
     $("#articleListScript").load("template/articleList.html", function() {
         articlesView = new ArticleTable({'el' : "#articleList", 'model' : new ArticleModel()});
         pager = new Pager({'el' : "#pager", "model" : articlesView.model});
