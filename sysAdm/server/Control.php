@@ -31,7 +31,7 @@ class Control {
 	    $instr = $this->instr;
 
             //檢查管理員有無登入，才可使用
-            if(!isset($_SESSION['adm'])) {
+            if(in_array($instr, $mustBeLogin) && !isset($_SESSION['adm'])) {
                 throw new Exception("admin not login");
             }
 
