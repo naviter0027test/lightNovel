@@ -93,4 +93,50 @@ class Article {
         $dbAdm->deleteData($tablename, $conditionArr);
         $dbAdm->execSQL();
     }
+
+    public function get($aid) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $column = Array();
+        $column[0] = "*";
+
+        $conditionArr = Array();
+        $conditionArr['a_id'] = $aid;
+
+        //$dbAdm->selectData($tablename, $column, $conditionArr, null, null);
+        $dbAdm->sqlSet("select count(p.m_id) praiseAmount, m.m_user,
+                case when (att.at_lastCh = 0) then '?' 
+                else att.at_lastCh end as at_lastCh, 
+                a.*, att.at_title, att.at_lastCh, att.as_id asid,
+                ss.as_name
+                from `Article` a 
+                inner join ArticleTitle att on a.at_id = att.at_id
+                left join ArticleSeries ss on ss.as_id = att.as_id
+                left join Praise p on p.a_id = a.a_id
+                inner join Member m on m.m_id = a.m_id
+            where a.a_id = ". $aid. " group by p.a_id");
+        $dbAdm->execSQL();
+
+        return $dbAdm->getAll()[0];
+    }
+
+    public function articlesByArtTitle($atid) {
+        $dbAdm = $this->dbAdm;
+        $tablename = $this->table;
+
+	$columns = Array();
+	$columns[0] = "*";
+
+        $conditionArr = Array();
+        $conditionArr['at_id'] = $atid;
+
+        $order = Array();
+        $order['col'] = "a_chapter";
+        $order['order'] = "asc";
+
+	$dbAdm->selectData($tablename, $columns, $conditionArr, $order);
+	$dbAdm->execSQL();
+	return $dbAdm->getAll();
+    }
 }

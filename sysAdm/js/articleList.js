@@ -25,9 +25,10 @@ ArticleRout = Backbone.Router.extend({
         var postData = {};
         postData['instr'] = "articleDel";
         postData['aid'] = aid;
-        console.log(postData);
-        if(confirm("是否刪除?")) 
+        if(confirm("是否刪除?")) {
+            console.log(postData);
             $.post("instr.php", postData, function(data) {
+                console.log("test");
                 console.log(data);
                 data = JSON.parse(data);
                 console.log(data);
@@ -39,6 +40,7 @@ ArticleRout = Backbone.Router.extend({
                 }
                 history.go(-1);
             });
+        }
         else
             history.go(-1);
     },

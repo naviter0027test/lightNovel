@@ -31,7 +31,7 @@ class Control {
 	    $instr = $this->instr;
 
             //檢查管理員有無登入，才可使用
-            if(in_array($instr, $mustBeLogin) && !isset($_SESSION['adm'])) {
+            if(!isset($_SESSION['adm'])) {
                 throw new Exception("admin not login");
             }
 
@@ -74,8 +74,15 @@ function articleList() {
 
 function articleDel() {
     require_once("Article/Article.php");
-    $article = new Article();
-    $article->del($_POST['aid']);
+    require_once("Article/ArticleTitle.php");
+    $articleAdm = new Article();
+    $artTitleAdm = new ArticleTitle();
+
+    $article = $articleAdm->get($_POST['aid']);
+    $articles = $articleAdm->articlesByArtTitle($article['at_id']);
+    if(count($articles) <= 1)
+        $artTitleAdm->del($article['at_id']);
+    $articleAdm->del($_POST['aid']);
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "articleDel success";
