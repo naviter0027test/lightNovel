@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <html>
     <head>
         <title> message form </title>
@@ -9,6 +10,13 @@
             aid : <input type="text" name="aid" /><br />
             now page : <input type="text" name="nowPage" /><br />
             <button>msgList</button>
+        </form>
+
+        <form action="../instr.php" method="post">
+            <input type="hidden" name="instr" value="msgReply" />
+            msid : <input type="text" name="msid" /><br />
+            <textarea name="replyText"></textarea><br />
+            <button>reply</button>
         </form>
     </body>
 </html>

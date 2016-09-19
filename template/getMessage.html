@@ -8,16 +8,25 @@
         <thead>
             <tr>
                 <td>留言名称</td>
+                <td>文章标题</td>
                 <td>留言內容</td>
+                <td>章节</td>
                 <td>留言時間</td>
+                <td>操作</td>
             </tr>
         </thead>
         <tbody>
             <% _.each(data, function(item) { %>
             <tr>
                 <td><%=item['m_user']%></td>
+                <td><%=item['at_title']%></td>
                 <td><%=item['ms_text']%></td>
+                <td><%=item['a_chapter']%>/<%=(item['at_lastCh']==0?"?":item['at_lastCh'])%></td>
                 <td><%=item['ms_crtime']%></td>
+                <td>
+                    <a class="glyphicon glyphicon-share-alt" href="#msgReply/<%=item['ms_id']%>" alt="回复"></a>
+                    <a class="glyphicon glyphicon-trash" href="#msgDel/<%=item['ms_id']%>" alt="删除"></a>
+                </td>
             </tr>
             <% }); %>
         </tbody>
@@ -31,7 +40,7 @@
         <% if(idx == nowPage) { %>
         <label><%=idx%></label>
         <% } else { %>
-        <a href="#changePage/mySeries/<%=idx%>/<%=pageLimit%>"><%=idx%></a>
+        <a href="#changePage/getMessage/<%=idx%>/<%=pageLimit%>"><%=idx%></a>
         <% } %>
     <% } %>
     <a class="left-arrow" href="#changePage/getMessage/<%=(nowPage-1 > 0 ?nowPage-1: nowPage)%>/<%=pageLimit%>">&lsaquo;</a>

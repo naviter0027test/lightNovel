@@ -36,6 +36,8 @@ DashboardRout = Backbone.Router.extend({
         "subSeries/:mid/:nowPage" : "subSeries",
         "subScriptArticles/:asid/:nowPage" : "subScriptArticles",
         "subscriptDel/:cls/:id" : "subscriptDel",
+        "msgReply/:msid" : "msgReply",
+        "msgDel/:msid" : "msgDel",
         "changePage/:page" : "changePage",
         "changePage/:page/:nowPage/:pageLimit" : "changePage"
     },
@@ -509,6 +511,46 @@ DashboardRout = Backbone.Router.extend({
     subscriptDel : function(cls, id) {
         if(confirm("確定取消訂閱?")) {
             mySubScrt.model.del(cls, id);
+        }
+    },
+
+    msgReply : function(msid) {
+        var postData = {};
+        postData['instr'] = "msgReply";
+        postData['msid'] = msid;
+        var text = prompt("请输入回覆内容");
+        if(text != null) {
+            postData['replyText'] = text;
+            $.post("instr.php", postData, function(data) {
+                //console.log(data);
+                data = JSON.parse(data);
+                //console.log(data);
+                if(data['status'] == 200) 
+                    alert("回覆成功");
+                else
+                    console.log(data);
+                history.go(-1);
+            });
+        }
+    },
+
+    msgDel : function(msid) {
+        var postData = {};
+        postData['instr'] = "msgDel";
+        postData['msid'] = msid;
+        if(confirm("确定删除?")) {
+            $.post("instr.php", postData, function(data) {
+                //console.log(data);
+                data = JSON.parse(data);
+                //console.log(data);
+                if(data['status'] == 200) 
+                    alert("删除成功");
+                else {
+                    alert("删除失敗");
+                    console.log(data);
+                }
+                history.go(-1);
+            });
         }
     },
 

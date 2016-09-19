@@ -2,9 +2,6 @@ Message = Backbone.View.extend({
     initialize : function() {
         var self = this;
         this.template = _.template($("#msgListTem").html());
-        this.model.on("change:data", function() {
-            self.render();
-        });
     },
 
     events : {

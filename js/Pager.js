@@ -29,5 +29,13 @@ Pager = Backbone.View.extend({
         data['amount'] = amount;
         data['sid'] = sid;
         $("#pager").html(this.template(data));
+    },
+    render4 : function(nowPage, pageLimit, amount, aid) {
+        var data = {};
+        data['nowPage'] = nowPage;
+        data['pageLimit'] = pageLimit;
+        data['amount'] = amount;
+        data['aid'] = aid;
+        $("#pager").html(this.template(data));
     }
 });

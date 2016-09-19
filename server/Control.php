@@ -23,7 +23,9 @@ class Control {
 	    $this->instr = $_POST['instr'];
     }
     public function execInstr() {
-        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "seriesGet", "postArticle", "myData", "mySeriesList", "myLastArticle", "articleDel", "memSrsPages", "personalImg", "personalUpd", "passReset", "addMessage", "pressPraise", "articleEdit", "articleBySid", "changeArticleChapter", "myArticleList", "delArticleFromSeries", "storeDraft", "myDraftDel", "editDraft", "myDraftList", "findMem", "subscript", "subScriptAll", "bookmark", "bookmarkCancel", "bookmarkList");
+        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "seriesGet", "postArticle", "myData", "mySeriesList", "myLastArticle", "articleDel", "memSrsPages", "personalImg", "personalUpd", "passReset", "addMessage", "pressPraise", "articleEdit", "articleBySid", "changeArticleChapter", "myArticleList", "delArticleFromSeries", 
+        "msgReply", 
+        "storeDraft", "myDraftDel", "editDraft", "myDraftList", "findMem", "subscript", "subScriptAll", "bookmark", "bookmarkCancel", "bookmarkList");
 	try {
 	    if(!function_exists($this->instr))
 		throw new Exception("instr not defined");
@@ -681,7 +683,9 @@ function msgList() {
     $msg = new Message();
     $data = $msg->getList($_POST['aid'], $_POST['nowPage']);
     foreach($data as $i => $item) {
-        if(file_exists("imgs/tmp/". $item['m_headImg']))
+        if($item['m_headImg'] == "")
+            $data[$i]['headImg'] = "imgs/80x80.png";
+        else if(file_exists("imgs/tmp/". $item['m_headImg']))
             $data[$i]['headImg'] = "imgs/tmp/". $item['m_headImg'];
         else
             $data[$i]['headImg'] = "imgs/80x80.png";
@@ -691,6 +695,29 @@ function msgList() {
     $reData['status'] = 200;
     $reData['msg'] = "msgList success";
     $reData['data'] = $data;
+    $reData['msgAmount'] = $msg->listAmount($_POST['aid']);
+    return $reData;
+}
+
+function msgReply() {
+    require_once("Article/Message.php");
+    $msg = new Message();
+    $msg->reply($_POST['msid'], $_POST['replyText']);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "msgReply success";
+    return $reData;
+}
+
+function msgDel() {
+    require_once("Article/Message.php");
+    $msg = new Message();
+    $msg->del($_POST['msid']);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "msgDel success";
     return $reData;
 }
 
