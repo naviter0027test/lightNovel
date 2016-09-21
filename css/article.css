@@ -18,11 +18,21 @@
     margin : 5px;
 }
 
+.operPanel label {
+    float : right;
+    display : inline-block;
+    padding : 3px;
+    margin : 5px 0px 0px 0px;
+
+    text-align : center;
+    vertical-align : middle;
+}
+
 .operPanel a {
     float : right;
     display : inline-block;
     margin : 5px;
-    padding : 5px;
+    padding : 3px;
 
     color : #5b5b5b;
     text-decoration : none;

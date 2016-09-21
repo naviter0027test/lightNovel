@@ -49,12 +49,14 @@
         <a class="col-sm-1" href="#pressPraise/<%=data['a_id']%>">点赞</a>
         <br />
         <span class="subscriptShow col-sm-12">
-            <div class="col-sm-5 scriptTitle">訂閱</div>
-            <a class="col-sm-2" href="##subscript/mid/<%=data['m_id']%>">該篇作者</a>
+            <a class="col-sm-2" href="#subscript/mid/<%=data['m_id']%>">該篇作者</a>
             <% if(data['asid'] != "0") { %>
             <a class="col-sm-2" href="#subscript/asid/<%=data['asid']%>">該篇系列</a>
             <% } %>
             <a class="col-sm-2" href="#subscript/aid/<%=data['a_id']%>">該篇文章</a>
+            <label class="col-sm-2">訂閱</label>
+            <a class="col-sm-2" href="#bookmark/<%=data['a_id']%>">收藏此章節</a>
+            <label class="col-sm-1">書籤</label>
         </span>
     </div>
     <div class="articleItem">
@@ -145,12 +147,14 @@
         <a class="col-sm-1" href="#pressPraise/<%=data['a_id']%>">点赞</a>
         <br />
         <span class="subscriptShow col-sm-12">
-            <div class="col-sm-5 scriptTitle">訂閱</div>
-            <a class="col-sm-2" href="##subscript/mid/<%=data['m_id']%>">該篇作者</a>
+            <a class="col-sm-2" href="#subscript/mid/<%=data['m_id']%>">該篇作者</a>
             <% if(data['asid'] != "0") { %>
             <a class="col-sm-2" href="#subscript/asid/<%=data['asid']%>">該篇系列</a>
             <% } %>
             <a class="col-sm-2" href="#subscript/aid/<%=data['a_id']%>">該篇文章</a>
+            <label class="col-sm-2">訂閱</label>
+            <a class="col-sm-2" href="#bookmark/<%=data['a_id']%>">收藏此章節</a>
+            <label class="col-sm-1">書籤</label>
         </span>
     </div>
 </script>
