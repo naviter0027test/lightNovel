@@ -37,6 +37,7 @@ ArticleRout = Backbone.Router.extend({
     routes : {
         "pressPraise/:aid" : "pressPraise",
         "subscript/:cls/:id" : "subscript",
+        "bookmark/:aid" : "bookmark",
         "article/:aid/:nowPage" : "articleShow",
         "article/:aid" : "articleShow"
     },
@@ -88,6 +89,24 @@ ArticleRout = Backbone.Router.extend({
             }
             else {
                 alert("訂閱失敗");
+                console.log(data);
+            }
+            history.go(-1);
+        });
+    },
+
+    bookmark : function(aid) {
+        var postData = {};
+        postData['instr'] = "bookmark";
+        postData['bookId'] = aid;
+        $.post("instr.php", postData, function(data) {
+            console.log(data);
+            data = JSON.parse(data);
+            console.log(data);
+            if(data['status'] == 200) {
+                alert("收藏成功");
+            }
+            else {
                 console.log(data);
             }
             history.go(-1);

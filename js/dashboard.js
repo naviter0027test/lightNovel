@@ -33,6 +33,7 @@ DashboardRout = Backbone.Router.extend({
         "articleDel/:aid" : "articleDel",
         "myArticles/:nowPage" : "myArticles",
         "mySubscript/:cls/:nowPage" : "mySubScript",
+        "myBookmark/:nowPage" : "myBookmark",
         "subSeries/:mid/:nowPage" : "subSeries",
         "subScriptArticles/:asid/:nowPage" : "subScriptArticles",
         "subscriptDel/:cls/:id" : "subscriptDel",
@@ -491,6 +492,25 @@ DashboardRout = Backbone.Router.extend({
 
             if(cls != "none") 
                 mySubScrt.model.list(cls, nowPage);
+        });
+    },
+
+    myBookmark : function(nowPage) {
+        var clickBtn = $("#dashboard a[temid=myBookmark]");
+
+        //變換按鈕顏色
+        var allLi = $("#dashboard").find("li");
+        $(allLi).removeClass("nowChoose");
+        $(clickBtn).parent().addClass("nowChoose");
+        $("#contentTem").load("template/myBookmarkList.html", function() {
+            var postData = {};
+            postData['instr'] = "bookmarkList";
+            postData['nowPage'] = nowPage;
+            $.post("instr.php", postData, function(data) {
+                console.log(data);
+                data = JSON.parse(data);
+                console.log(data);
+            });
         });
     },
 
