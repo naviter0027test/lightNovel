@@ -271,6 +271,23 @@ class Member {
         $dbAdm->execSQL();
     }
 
+    public function find($user) {
+        $dbAdm = $this->dbAdm;
+        $columns = Array();
+        $columns[0] = "*";
+
+        $conditionArr = Array();
+        $conditionArr['m_user'] = $user;
+        $conditionArr['m_active'] = "Y";
+
+        $dbAdm->selectData("Member", $columns, $conditionArr);
+        $dbAdm->execSQL();
+        $mems = $dbAdm->getAll();
+        if(count($mems) < 1)
+            throw new Exception("member not find");
+        return $mems[0];
+    }
+
     public function error() {
         $dbAdm = $this->dbAdm;
         return $dbAdm->errorMsg();

@@ -1,178 +1,131 @@
-<?php session_start(); ?>
-<html>
-    <head>
-        <title> series test</title>
-        <meta charset="utf-8" />
-    </head>
-    <body>
-        <h1> mid : <?=$_SESSION['mid']?></h1>
-        <form action="../instr.php" method="post">
-            <input type="hidden" name="instr" value="memArticleList" />
-            now page : 
-            <input type="text" name="nowPage" /><br />
-            page limit : 
-            <input type="text" name="pageLimit" /><br />
-            <button>my list</button>
-        </form>
-
-        <form action="../instr.php" method="post">
-            <input type="hidden" name="instr" value="articleList" />
-            now page : 
-            <input type="text" name="nowPage" /><br />
-            page limit : 
-            <input type="text" name="pageLimit" /><br />
-            <button>list</button>
-        </form>
-
-        <form action="../instr.php" method="post">
-            <input type="hidden" name="instr" value="articleDel" />
-            <input type="hidden" name="mId" value="<?=$_SESSION['mid']?>" />
-            article delete id :
-            <input type="text" name="articleId" /><br />
-            <button>delete</button>
-        </form>
-
-        <form action="../instr.php" method="post">
-            <input type="hidden" name="instr" value="articleGet" />
-            <input type="hidden" name="mId" value="<?=$_SESSION['mid']?>" />
-            article id :
-            <input type="text" name="articleId" /><br />
-            <button>delete</button>
-        </form>
-
-        <form action="../instr.php" method="post">
-            <input type="hidden" name="instr" value="mySeriesList" />
-            now page : 
-            <input type="text" name="nowPage" />
-            <br />
-            page limit : 
-            <input type="text" name="pageLimit" />
-            <br />
-            <button>my series list</button>
-        </form>
-
-        <form action="../instr.php" method="post">
-            <input type="hidden" name="instr" value="myLastArticle" />
-            now page : 
-            <input type="text" name="nowPage" />
-            <br />
-            page limit : 
-            <input type="text" name="pageLimit" />
-            <br />
-            <button>my last article list</button>
-        </form>
-
-        <form action="../instr.php" method="post">
-            <input type="hidden" name="instr" value="memSrsPages" />
-            <br />
-            <button>member series pages</button>
-        </form>
-
-        <form action="../instr.php" method="post">
-            <input type="hidden" name="instr" value="articleList" />
-            <input type="text" name="nowPage" value="1" /><br />
-            <input type="text" name="pageLimit" value="25" /><br />
-            <button>article list</button>
-        </form>
-
-        <form action="../instr.php" method="post">
-            <input type="hidden" name="instr" value="articleGet" />
-            aid : <input type="text" name="aid" /><br />
-            <button>article show</button>
-        </form>
-
-        <form action="../instr.php" method="post">
-            <input type="hidden" name="instr" value="postArticle" />
+<script id="draftEdit" type="text/template">
+    <div class="postArticle">
+        <h4 class="col-xs-6">文章修改</h4>
+        <form id="postArticleForm" action="instr.php" method="post">
+            <input type="hidden" name="instr" draftcls="editDraft" value="postArticle" />
+            <input type="hidden" name="mdid" value="<%=data['md_id']%>" />
             <span class="col-xs-12">
-                <label class="col-xs-2">獻給的對象</label> 
-                <input class="col-xs-6" name="sendUser" type="text" /> 
+                <label class="col-xs-2">标题</label> 
+                <input class="col-xs-6 validate[required]" type="text" name="title" value="<%=data['a_title']%>"/> 
             </span>
             <br />
             <span class="col-xs-12">
-                <label class="col-xs-2">標題</label> 
-                <input class="col-xs-6" name="title" type="text" /> 
-            </span>
-            <br />
-            <span class="col-xs-12">
-                <label class="col-xs-2">屬性</label> 
-                <input type="radio" name="articleType" value="article" />文 
-                <input type="radio" name="articleType" value="postArticle" />推文 
+                <label class="col-xs-2">属性</label> 
+                <input type="radio" name="articleType" class="validate[required]" value="article" <%=(data['a_attr']=="article"?"checked":"")%> />文 
+                <input type="radio" name="articleType" class="validate[required]" value="postArticle" <%=(data['a_attr']=="article"?"":"checked")%> />推文 
                 <br />
             </span>
             <span class="col-xs-12">
                 <label class="col-xs-2">分級</label>
-                <select name="level">
-                    <option value="Gen">Gen</option>
-                    <option value="PG">PG</option>
-                    <option value="NC17">NC17</option>
+                <select name="level" class="validate[required]">
+                    <option value="Gen" <%=(data['a_level']=="Gen"?"selected":"")%>>Gen</option>
+                    <option value="PG" <%=(data['a_level']=="PG"?"selected":"")%>>PG</option>
+                    <option value="NC17" <%=(data['a_level']=="NC17"?"selected":"")%>>NC17</option>
                 </select>
             </span>
             <br />
             <span class="col-xs-12">
                 <label class="col-xs-2">主CP1</label>
-                <input type="text" class="smInput" name="cp1[]" placeholder="點我" /> /
-                <input type="text" class="smInput" name="cp1[]" placeholder="點我" />
+                <input type="text" class="smInput validate[required]" name="cp1[]" placeholder="點我" readonly value="<%=data['a_mainCp'][0]%>"/> /
+                <input type="text" class="smInput validate[required]" name="cp1[]" placeholder="點我" readonly value="<%=data['a_mainCp'][1]%>" />
             </span>
             <br />
             <span class="col-xs-12">
                 <label class="col-xs-2">主CP2</label>
-                <input type="text" class="smInput" name="cp2[]" placeholder="點我" /> /
-                <input type="text" class="smInput" name="cp2[]" placeholder="點我" />
+                <input type="text" class="smInput " name="cp2[]" placeholder="點我" readonly value="<%=data['a_mainCp2'][0]%>"/> /
+                <input type="text" class="smInput " name="cp2[]" placeholder="點我" readonly value="<%=data['a_mainCp2'][1]%>"/>
             </span>
             <br />
             <span class="col-xs-12">
                 <label class="col-xs-2">副CP</label>
-                <input type="text" name="viceCp" placeholder="以分號隔開" />
+                <input type="text" name="viceCp" placeholder="以分號隔開" value="<%=data['a_subCp']%>" />
             </span>
             <br />
             <span class="col-xs-12">
                 <label class="col-xs-2">系列</label>
                 <select name="series">
                     <option value="">請選擇</option>
+                    <option value="7">开声</option>
+                    <option value="8">山兵</option>
+                    <option value="9">光凌</option>
+                    <option value="10">徐魁</option>
                 </select>
-            或新系列 
+                或新系列 <input type="text" name="newSeries" />
             </span>
             <br />
             <span class="col-xs-12">
                 <label class="col-xs-2">警告</label>
-                <input type="checkbox" name="alert[]" value="主要角色死亡" />主要角色死亡 
-                <input type="checkbox" name="alert[]" value="血腥暴力" />血腥暴力
-                <input type="checkbox" name="alert[]" value="性转" />性转
+                <% isCheck = "";
+                if(data['a_alert'].search("主要角色死亡") != -1)
+                    isCheck = "checked";
+                %>
+                <input type="checkbox" name="alert[]" value="主要角色死亡" <%=isCheck%> />主要角色死亡 
+                <% isCheck = "";
+                if(data['a_alert'].search("血腥暴力") != -1)
+                    isCheck = "checked";
+                %>
+                <input type="checkbox" name="alert[]" value="血腥暴力" <%=isCheck%>/>血腥暴力
+                <% isCheck = "";
+                if(data['a_alert'].search("性轉") != -1)
+                    isCheck = "checked";
+                %>
+                <input type="checkbox" name="alert[]" value="性轉" <%=isCheck%>/>性转
                 <br />
                 <input type="checkbox" name="alert[]" value="other" />其他
                 <input type="text" name="alert[]" placeholder="自訂，以分號分隔" />
             </span>
             <br />
             <span class="col-xs-12">
-                <label class="col-xs-2">標籤</label>
-                <input type="checkbox" name="tag[]" value="ABO" />ABO 
-                <input type="checkbox" name="tag[]" value="PWP" />PWP
-                <input type="checkbox" name="tag[]" value="AU" />AU
-                <input type="checkbox" name="tag[]" value="哨兵向导" />哨兵向导
-                <input type="checkbox" name="tag[]" value="互攻" />互攻
+                <label class="col-xs-2">标签</label>
+                <% isCheck = "";
+                if(data['a_tag'].search("ABO") != -1)
+                    isCheck = "checked";
+                %>
+                <input type="checkbox" name="tag[]" value="ABO" <%=isCheck%>/>ABO 
+                <% isCheck = "";
+                if(data['a_tag'].search("PWP") != -1)
+                    isCheck = "checked";
+                %>
+                <input type="checkbox" name="tag[]" value="PWP" <%=isCheck%>/>PWP
+                <% isCheck = "";
+                if(data['a_tag'].search("AU") != -1)
+                    isCheck = "checked";
+                %>
+                <input type="checkbox" name="tag[]" value="AU" <%=isCheck%>/>AU
+                <% isCheck = "";
+                if(data['a_tag'].search("哨兵向导") != -1)
+                    isCheck = "checked";
+                %>
+                <input type="checkbox" name="tag[]" value="哨兵向导" <%=isCheck%>/>哨兵向导
+                <% isCheck = "";
+                if(data['a_tag'].search("互攻") != -1)
+                    isCheck = "checked";
+                %>
+                <input type="checkbox" name="tag[]" value="互攻" <%=isCheck%>/>互攻
                 <br />
                 <input type="checkbox" name="tag[]" value="other" />其他
                 <input type="text" name="tag[]" placeholder="自訂，以分號分隔" />
             </span>
             <br />
             <span class="col-xs-12">
-                <label class="col-xs-2">章節標題</label> <input type="text" name="aTitle"/>
+                <label class="col-xs-2">章节标题</label> <input type="text" class="" name="aTitle" value="<%=data['a_aTitle']%>" />
             </span>
             <br />
             <span class="col-xs-12">
-                <label class="col-xs-2">章節</label> <input name="aChapter" class="smInput" type="text" /> / <input name="chapterSum" class="smInput" type="text" />
+                <label class="col-xs-2">章节</label> <input class="smInput" type="text" name="aChapter" value="<%=data['a_chapter']%>" /> / <input class="smInput" name="chapterSum" type="text" />
             </span>
             <br />
             <span class="col-xs-12">
-                <label class="col-xs-2">章節備註</label> <textarea name="aMemo" class="col-xs-8" placeholder="最多輸入300字，顯示於文章開頭"> </textarea>
+                <label class="col-xs-2">章节备注</label> <textarea name="aMemo" class="col-xs-8" placeholder="最多输入300字，显示于文章开头"> </textarea>
             </span>
             <br />
             <span class="col-xs-12">
                 <h4>文章撰寫</h4>
-                <textarea id="editor1"  class="ckeditor col-xs-12" name="content"></textarea>
+                <textarea id="editor1"  class="ckeditor col-xs-12 validate[required]" name="content"></textarea>
             </span>
             <span class="col-xs-12">
-                <button class="col-xs-3 postBtn">儲存草稿</button>
+                <button class="col-xs-3 postBtn">發送文章</button>
+                <button class="col-xs-3 storeBtn">儲存草稿</button>
             </span>
         </form>
         <form class="cpPanel">
@@ -233,7 +186,9 @@
                 <input type="radio" name="cpClassChoose" value="黄克功" />黄克功
                 <input type="radio" name="cpClassChoose" value="史路威" />史路威
             </div>
-            <button class="col-xs-3 check">確定</button>
+            <button class="col-xs-3 check">确定</button>
+            <button class="col-xs-3">取消</button>
         </form>
-    </body>
-</html>
+    </div>
+</script>
+

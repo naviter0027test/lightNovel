@@ -201,5 +201,12 @@ session_start();
             message : <textarea name="message"></textarea><br />
             <button>leave message</button>
         </form>
+
+        <form action="../instr.php" method="post">
+            <input type="hidden" name="instr" value="findMem" />
+            account : <input type="text" name="user" />
+            <br />
+            <button>find member</button>
+        </form>
     </body>
 </html>

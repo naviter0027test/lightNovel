@@ -120,8 +120,6 @@ class ArticleTitle {
         $dbAdm->execSQL();
 
         $datas = $dbAdm->getAll();
-        if(count($datas) < 1) 
-            throw new Exception("not found the article title");
 
         return $datas;
     }

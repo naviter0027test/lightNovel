@@ -36,6 +36,8 @@ $(document).ready(function() {
 ArticleRout = Backbone.Router.extend({
     routes : {
         "pressPraise/:aid" : "pressPraise",
+        "subscript/:cls/:id" : "subscript",
+        "bookmark/:aid" : "bookmark",
         "article/:aid/:nowPage" : "articleShow",
         "article/:aid" : "articleShow"
     },
@@ -44,11 +46,11 @@ ArticleRout = Backbone.Router.extend({
         var postData = {};
         postData['instr'] = "pressPraise";
         postData['aid'] = aid;
-        console.log(postData);
+        //console.log(postData);
         $.post("instr.php", postData, function(data) {
-            console.log(data);
+            //console.log(data);
             data = JSON.parse(data);
-            console.log(data);
+            //console.log(data);
             if(data['status'] == 200) {
                 alert("點讚成功");
                 history.go(-1);
@@ -61,6 +63,53 @@ ArticleRout = Backbone.Router.extend({
                     alert("你尚未登入");
                 history.go(-1);
             }
+        });
+    },
+
+    subscript : function(cls, id) {
+        var postData = {};
+        postData['instr'] = "subscript";
+        if(cls == "aid") {
+            postData['aid'] = id;
+        }
+        else if(cls == "asid") {
+            postData['asid'] = id;
+        }
+        else if(cls == "mid") {
+            postData['mid'] = id;
+        }
+
+        //console.log(postData);
+        $.post("instr.php", postData, function(data) {
+            //console.log(data);
+            data = JSON.parse(data);
+            //console.log(data);
+            if(data['status'] == 200) {
+                alert("訂閱成功");
+            }
+            else {
+                alert("訂閱失敗");
+                console.log(data);
+            }
+            history.go(-1);
+        });
+    },
+
+    bookmark : function(aid) {
+        var postData = {};
+        postData['instr'] = "bookmark";
+        postData['bookId'] = aid;
+        $.post("instr.php", postData, function(data) {
+            console.log(data);
+            data = JSON.parse(data);
+            console.log(data);
+            if(data['status'] == 200) {
+                alert("收藏成功");
+            }
+            else {
+                console.log(data);
+            }
+            history.go(-1);
         });
     },
 

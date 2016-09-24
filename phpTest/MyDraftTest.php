@@ -2,29 +2,23 @@
 <?php
 /*
  *  File Name :
- *	ArticleTest.php
+ *	MyDraftTest.php
  *  Describe :
  *      測試以下功能
+ *      草稿的
  *	文章新增、文章修改、文章刪除、文章列表
+ *	單篇取出
  *  Start Date :
- *	2016.07.05
+ *	2016.08.18
  *  Author :
  *	Lanker
  */
 require_once("../srvLib/simpletest/autorun.php");
 
-class ArticleTest extends UnitTestCase {
-    function testInit() {
-        require_once("../Article/Article.php");
-        $this->assertEqual(true, true);
-    }
-
+class MyDraftTest extends UnitTestCase {
     function testAdd() {
-        require_once("../Article/Series.php");
-        require_once("../Article/Article.php");
-        $series = new Series();
-        $articleAdm = new Article();
-
+        require_once("../Article/MyDraft.php");
+        $myDraft = new MyDraft();
         $content = "活他家市車的……條來資大你校朋：牛海於藝然些球滿此日難各服興星、作苦要中神裡假自受英必須；輪獨存的提般著熱時超事：必不陸養推……那一會，人年港德物得英進東，合物一性民智十魚算倒提異西分不？
 
             位人信龍：回常明和座，它什位：是我病年不生時對。研斷育可受嗎他的奇工的不加背生。只望園感少何說文錢領師以唱因費形術樣的，神象角他外一健中河數來、看媽決？進期工標母望經原我後時行人，過品個小清類，有哥直資了一界……基人國、樣那市到來金事公王個的件孩關故收長人急？思人界合代，大師頭新落萬面股藝低多日會……廣自的些由的、東落樂微，以實亞化覺考技學氣……包英關提急算驚中朋；出陽實：年造的，字打健自為樂但老但程安重兩從民弟不策不題上她確此嚴老安黃！如及班一作係了媽青著客王兒而告點質書，上他上聯獨；轉人園生。
@@ -60,9 +54,7 @@ class ArticleTest extends UnitTestCase {
         $article['cp1'] = $cpAArr[rand(0, count($cpAArr)-1)]. ";". $cpBArr[rand(0, count($cpBArr)-1)];
         $article['cp2'] = $cpAArr[rand(0, count($cpAArr)-1)]. ";". $cpBArr[rand(0, count($cpBArr)-1)];
         $article['subCp'] = $cpAArr[rand(0, count($cpAArr)-1)]. ";". $cpBArr[rand(0, count($cpBArr)-1)]; 
-        $article['series'] = $series->getOne(2)['as_id'];
-
-        $alertArr = Array("主要角色死亡", "血腥暴力", "性转");
+        $alertArr = Array("主要角色死亡", "血腥暴力", "性轉");
         $article['alert'] = $alertArr[rand(0, count($alertArr)-1)];
         $tagArr = Array("ABO", "PWP", "AU", "哨兵向导", "互攻");
         $article['tag'] = $tagArr[rand(0, count($tagArr)-1)];
@@ -70,33 +62,50 @@ class ArticleTest extends UnitTestCase {
         $article['aChapter'] = "";
         $article['aMemo'] = "memo test insert";
         $contentStart = rand(0, 400);
-        echo $contentStart. ",";
-        echo $contentStart%3;
+        //echo $contentStart. ",";
+        //echo $contentStart%3;
         $article['content'] = substr($content, $contentStart-$contentStart%3, rand(400, strlen($content)-1));
         require_once("../Member/Member.php");
         $randMember = new Member();
         $article['mId'] = $randMember->randOneMem()['m_id'];
-        print_r($article);
-        $articleAdm->articleAdd($article);
+        //print_r($article);
+        $myDraft->draftAdd($article);
+    }
+
+    function testGetOne() {
+        require_once("../Article/MyDraft.php");
+        $myDraft = new MyDraft();
+        $md_id = 1;
+        $draft = $myDraft->getOne($md_id);
+        $this->assertEqual(1, $draft['md_id']);
+        $this->assertEqual("postArticle", $draft['a_attr']);
+        $this->assertEqual("文章標題4227", $draft['a_title']);
+    }
+
+    function testUpd() {
+        require_once("../Article/MyDraft.php");
+        $myDraft = new MyDraft();
+        $md_id = 5;
+        $draft = $myDraft->getOne($md_id);
+        $colData = Array();
+        $colData['a_attr'] = $draft['a_attr'];
+        $colData['a_level'] = $draft['a_level'];
+        $colData['a_title'] = "55555";
+
+        $myDraft->upd($colData, $md_id);
+        $draft = $myDraft->getOne($md_id);
+        $this->assertEqual("55555", $draft['a_title']);
+
     }
 
     function testList() {
-        require_once("../Article/Article.php");
-        $articleAdm = new Article();
-
-        $mid = 1;
-        $lists = $articleAdm->lastList($mid);
-        //print_r($lists);
-        $article1 = $lists[0];
-        $article2 = $lists[1];
-        $this->assertTrue($article1['a_crtime'] > $article2['a_crtime']);
-    }
-
-    function testGet() {
-        require_once("../Article/Article.php");
-        $articleAdm = new Article();
-        $data = $articleAdm->get(2);
-        $this->assertEqual($data['a_title'], "文章標題6939");
-        $this->assertEqual($data['a_id'], 2);
+        require_once("../Article/MyDraft.php");
+        $myDraft = new MyDraft();
+        $nowPage = 1;
+        $draftList = $myDraft->myDraftList(1, $nowPage);
+        //print_r($draftList);
+        $this->assertTrue($draftList[0]['md_id']);
+        $this->assertTrue($draftList[1]['md_id']);
+        $this->assertTrue($draftList[2]['md_id']);
     }
 }

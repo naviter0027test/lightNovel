@@ -1,0 +1,300 @@
+<script id="mySubScriptNone" type="text/template">
+    <ol class="breadcrumb">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li class="active">我的訂閱</li>
+    </ol>
+    <div class="operating">
+        <h4>訂閱分類</h4>
+        <a href="#mySubscript/all/1">
+            <button class="col-xs-1">全部</button>
+        </a>
+        <a href="#mySubscript/article/1">
+            <button class="col-xs-2">訂閱文章</button>
+        </a>
+        <a href="#mySubscript/series/1">
+            <button class="col-xs-2">訂閱系列</button>
+        </a>
+        <a href="#mySubscript/member/1">
+            <button class="col-xs-2">訂閱作者</button>
+        </a>
+    </div>
+</script>
+
+<script id="mySubScriptAll" type="text/template">
+    <ol class="breadcrumb">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li class="active">我的訂閱</li>
+    </ol>
+    <div class="operating">
+        <h4>訂閱分類</h4>
+        <a href="#mySubscript/all/1">
+            <button class="col-xs-1">全部</button>
+        </a>
+        <a href="#mySubscript/article/1">
+            <button class="col-xs-2">訂閱文章</button>
+        </a>
+        <a href="#mySubscript/series/1">
+            <button class="col-xs-2">訂閱系列</button>
+        </a>
+        <a href="#mySubscript/member/1">
+            <button class="col-xs-2">訂閱作者</button>
+        </a>
+    </div>
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <td>标题</td>
+                <td>分類</td>
+                <td>更新時間</td>
+                <td>操作</td>
+            </tr>
+            <% _.each(data, function(item) { %>
+            <tr>
+                <% if(item['cls'] == "article") { %>
+                <td><%=item['at_title']%></td>
+                <% } else if(item['cls'] == "member") { %>
+                <td><%=item['m_user']%></td>
+                <% } else if(item['cls'] == "series") { %>
+                <td><%=item['as_name']%></td>
+                <% } else { %>
+                <td></td>
+                <% } %>
+                <% if(item['cls'] == "article") { %>
+                <td>文章</td>
+                <% } else if(item['cls'] == "member") { %>
+                <td>作者</td>
+                <% } else if(item['cls'] == "series") { %>
+                <td>系列</td>
+                <% } else { %>
+                <td></td>
+                <% } %>
+                <td><%=item['ss_updTime']%></td>
+                <td>
+                <% 
+                var eyeHref = "";
+                var delHref = "";
+                if(item['cls'] == "article") { 
+                    eyeHref = "article.html#article/"+item['a_id'];
+                    delHref = "#subscriptDel/article/"+item['a_id'];
+                } else if(item['cls'] == "member") { 
+                    eyeHref = "#subSeries/"+item['m_id']+"/1";
+                    delHref = "#subscriptDel/member/"+item['m_id'];
+                } else if(item['cls'] == "series") { 
+                    eyeHref = "#subScriptArticles/"+item['as_id']+"/1";
+                    delHref = "#subscriptDel/series/"+item['as_id'];
+                } else { 
+                } 
+                %>
+                    <a class="glyphicon glyphicon-eye-open" href="<%=eyeHref%>"></a>
+                    <a class="glyphicon glyphicon-remove" href="<%=delHref%>"></a>
+                </td>
+            </tr>
+            <% }); %>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</script>
+
+<script id="mySubScriptArticle" type="text/template">
+    <ol class="breadcrumb">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li class="active">我的訂閱</li>
+    </ol>
+    <div class="operating">
+        <h4>訂閱分類</h4>
+        <a href="#mySubscript/all/1">
+            <button class="col-xs-1">全部</button>
+        </a>
+        <a href="#mySubscript/article/1">
+            <button class="col-xs-2">訂閱文章</button>
+        </a>
+        <a href="#mySubscript/series/1">
+            <button class="col-xs-2">訂閱系列</button>
+        </a>
+        <a href="#mySubscript/member/1">
+            <button class="col-xs-2">訂閱作者</button>
+        </a>
+    </div>
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <td>文章标题</td>
+                <td>更新時間</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <% _.each(data, function(item) { %>
+            <tr>
+                <td><%=item['a_title']%></td>
+                <td><%=item['ss_updTime']%></td>
+                <td>
+                    <a class="glyphicon glyphicon-eye-open" href="article.html#article/<%=item['a_id']%>"></a>
+                    <a class="glyphicon glyphicon-remove" href="#subscriptDel/article/<%=item['a_id']%>"></a>
+                </td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</script>
+
+<script id="mySubScriptSeries" type="text/template">
+    <ol class="breadcrumb">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li class="active">我的訂閱</li>
+    </ol>
+    <div class="operating">
+        <h4>訂閱分類</h4>
+        <a href="#mySubscript/all/1">
+            <button class="col-xs-1">全部</button>
+        </a>
+        <a href="#mySubscript/article/1">
+            <button class="col-xs-2">訂閱文章</button>
+        </a>
+        <a href="#mySubscript/series/1">
+            <button class="col-xs-2">訂閱系列</button>
+        </a>
+        <a href="#mySubscript/member/1">
+            <button class="col-xs-2">訂閱作者</button>
+        </a>
+    </div>
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <td>系列标题</td>
+                <td>更新時間</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <% _.each(data, function(item) { %>
+            <tr>
+                <td><%=item['as_name']%></td>
+                <td><%=item['ss_updTime']%></td>
+                <td>
+                    <a class="glyphicon glyphicon-eye-open" href="#subScriptArticles/<%=item['as_id']%>/1"></a>
+                    <a class="glyphicon glyphicon-remove" href="#subscriptDel/series/<%=item['as_id']%>"></a>
+                </td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</script>
+
+<script id="mySubScriptMember" type="text/template">
+    <ol class="breadcrumb">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li class="active">我的訂閱</li>
+    </ol>
+    <div class="operating">
+        <h4>訂閱分類</h4>
+        <a href="#mySubscript/all/1">
+            <button class="col-xs-1">全部</button>
+        </a>
+        <a href="#mySubscript/article/1">
+            <button class="col-xs-2">訂閱文章</button>
+        </a>
+        <a href="#mySubscript/series/1">
+            <button class="col-xs-2">訂閱系列</button>
+        </a>
+        <a href="#mySubscript/member/1">
+            <button class="col-xs-2">訂閱作者</button>
+        </a>
+    </div>
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <td>作者名稱</td>
+                <td>更新時間</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <% _.each(data, function(item) { %>
+            <tr>
+                <td><%=item['m_user']%></td>
+                <td><%=item['ss_updTime']%></td>
+                <td>
+                    <a class="glyphicon glyphicon-eye-open" href="#subSeries/<%=item['m_id']%>/1"></a>
+                    <a class="glyphicon glyphicon-remove" href="#subscriptDel/member/<%=item['m_id']%>"></a>
+                </td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</script>
+
+<script id="subscriptSeriesTem" type="text/template">
+    <ol class="breadcrumb">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li class="active">訂閱的系列</li>
+    </ol>
+    <div class="operating">
+    </div>
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <td>系列名称</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <% _.each(data, function(item) { %>
+            <tr>
+                <td><%=item['as_name']%></td>
+                <td>
+                    <a class="glyphicon glyphicon-eye-open" href="#subScriptArticles/<%=item['as_id']%>/1"></a>
+                </td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</script>
+
+<script id="subscriptArticlesTem" type="text/template">
+    <ol class="breadcrumb">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li class="active">訂閱的文章</li>
+    </ol>
+    <div class="operating">
+    </div>
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <td>文章名称</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <% _.each(data, function(item) { %>
+            <tr>
+                <td><%=item['a_title']%></td>
+                <td>
+                    <a class="glyphicon glyphicon-eye-open" href="article.html#article/<%=item['a_id']%>"></a>
+                </td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</script>
+
+<script id="pagerTem" type="text/template">
+    <% pageSum = Math.ceil(amount / pageLimit); %>
+    <a class="right-arrow" href="#myArticles/<%=(parseInt(nowPage)+1 <= pageSum ?parseInt(nowPage)+1: nowPage)%>">&rsaquo;</a>
+    <% for(idx = pageSum; idx >= 1;--idx) { %>
+        <% if(idx == nowPage) { %>
+        <label><%=idx%></label>
+        <% } else { %>
+        <a href="#myArticles/<%=idx%>"><%=idx%></a>
+        <% } %>
+    <% } %>
+    <a class="left-arrow" href="#myArticles/<%=(nowPage-1 > 0 ?nowPage-1: nowPage)%>">&lsaquo;</a>
+</script>

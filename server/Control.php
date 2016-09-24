@@ -23,7 +23,9 @@ class Control {
 	    $this->instr = $_POST['instr'];
     }
     public function execInstr() {
-        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "seriesGet", "postArticle", "myData", "mySeriesList", "myLastArticle", "articleDel", "memSrsPages", "personalImg", "personalUpd", "passReset", "addMessage", "pressPraise", "articleEdit", "articleBySid", "changeArticleChapter", "myArticleList", "delArticleFromSeries", "msgReply");
+        $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "seriesGet", "postArticle", "myData", "mySeriesList", "myLastArticle", "articleDel", "memSrsPages", "personalImg", "personalUpd", "passReset", "addMessage", "pressPraise", "articleEdit", "articleBySid", "changeArticleChapter", "myArticleList", "delArticleFromSeries", 
+        "msgReply", 
+        "storeDraft", "myDraftDel", "editDraft", "myDraftList", "findMem", "subscript", "subScriptAll", "bookmark", "bookmarkCancel", "bookmarkList");
 	try {
 	    if(!function_exists($this->instr))
 		throw new Exception("instr not defined");
@@ -301,6 +303,13 @@ function postArticle() {
         $article['series'] = $series->getLastOneId($_SESSION['mid']);
     }
 
+    if(isset($article['sendUser'])) {
+        require_once("Member/Member.php");
+        $memAdm = new Member();
+        $mem = $memAdm->find($article['sendUser']);
+        $article['sendUser'] = $mem['m_id'];
+    }
+
     if(!$articleTitleAdm->isRepeat($article['title'], $_SESSION['mid'])) {
         $insData = Array();
         $insData['title'] = $article['title'];
@@ -393,6 +402,17 @@ function myData() {
     $reData['status'] = 200;
     $reData['msg'] = "myData success";
     $reData['data'] = $myData;
+    return $reData;
+}
+
+function findMem() {
+    require_once("Member/Member.php");
+    $memAdm = new Member();
+    $mem = $memAdm->find($_POST['user']);
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "findMem success";
+    $reData['data'] = $mem;
     return $reData;
 }
 
@@ -556,6 +576,100 @@ function articleGet() {
     return $reData;
 }
 
+function storeDraft() {
+    require_once("Article/MyDraft.php");
+    require_once("Article/Series.php");
+    $myDraftAdm = new MyDraft();
+    $article = Array();
+    foreach($_POST as $key => $val) {
+        $article[$key] = $val;
+    }
+    $article['mId'] = $_SESSION['mid'];
+    $article['cp1'] = implode(";", $article['cp1']);
+    if(is_array($article['cp2'] ))
+        $article['cp2'] = implode(";", $article['cp2']);
+    if(isset($article['viceCp']))
+        $article['subCp'] = $article['viceCp'];
+    $article['tag'] = implode(";", $article['tag']);
+    $article['alert'] = implode(";", $article['alert']);
+
+    if(isset($article['newSeries'])) {
+        $series->serAdd($_SESSION['mid'], $article['newSeries']);
+        $article['series'] = $series->getLastOneId($_SESSION['mid']);
+    }
+
+    $myDraftAdm->draftAdd($article);
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "storeDraft success";
+    return $reData;
+}
+
+function editDraft() {
+    require_once("Article/MyDraft.php");
+    require_once("Article/Series.php");
+    $series = new Series();
+
+    $myDraftAdm = new MyDraft();
+    $article = Array();
+    foreach($_POST as $key => $val) {
+        $article[$key] = $val;
+    }
+    //$article['mId'] = $_SESSION['mid'];
+    $article['cp1'] = implode(";", $article['cp1']);
+    if(is_array($article['cp2'] ))
+        $article['cp2'] = implode(";", $article['cp2']);
+    if(isset($article['viceCp']))
+        $article['subCp'] = $article['viceCp'];
+    $article['tag'] = implode(";", $article['tag']);
+    $article['alert'] = implode(";", $article['alert']);
+
+    /*
+    if(isset($article['newSeries'])) {
+        $series->serAdd($_SESSION['mid'], $article['newSeries']);
+        $article['series'] = $series->getLastOneId($_SESSION['mid']);
+    }
+     */
+
+    $myDraftAdm->upd($article);
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "editDraft success";
+    return $reData;
+}
+
+function draftGet() {
+    require_once("Article/MyDraft.php");
+    $myDraftAdm = new MyDraft();
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "draftGet success";
+    $reData['data'] = $myDraftAdm->getOne($_POST['mdid']);
+    return $reData;
+}
+
+function myDraftList() {
+    require_once("Article/MyDraft.php");
+    $myDraftAdm = new MyDraft();
+    $myDraftList = $myDraftAdm->myDraftList($_SESSION['mid'], $_POST['nowPage']);
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "myDraftList success";
+    $reData['data'] = $myDraftList;
+    return $reData;
+}
+
+function myDraftDel() {
+    require_once("Article/MyDraft.php");
+    $myDraftAdm = new MyDraft();
+    $myDraftAdm->myDraftDel($_SESSION['mid'], $_POST['md_id']);
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "myDraftDel success";
+    return $reData;
+}
+
 function addMessage() {
     require_once("Member/Member.php");
     $member = new Member();
@@ -704,6 +818,166 @@ function changeArticleChapter() {
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "changeArticleChapter success";
+    return $reData;
+}
+
+//第三階段
+function subscript() {
+    require_once("Article/SubScript.php");
+    $ssAdm = new SubScript();
+
+    $subScriptItem = Array();
+    if(isset($_POST['mid']) && $_POST['mid'] != "")
+        $subScriptItem['m_id'] = $_POST['mid'];
+    else if(isset($_POST['asid']) && $_POST['asid'] != "")
+        $subScriptItem['as_id'] = $_POST['asid'];
+    else if(isset($_POST['aid']) && $_POST['aid'] != "")
+        $subScriptItem['a_id'] = $_POST['aid'];
+
+    $ssAdm->subscript($_SESSION['mid'], $subScriptItem);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "subscript success";
+    return $reData;
+}
+
+function subScriptList() {
+    require_once("Article/SubScript.php");
+    $ssAdm = new SubScript();
+
+    $chooseCls = Array();
+    if(isset($_POST['subCls']))
+        $chooseCls = $_POST['subCls'];
+    else
+        $chooseCls = null;
+
+    $data = $ssAdm->lists($_SESSION['mid'], $_POST['nowPage'], $chooseCls);
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "subScriptList success";
+    $reData['data'] = $data;
+    return $reData;
+}
+
+function subScriptAll() {
+    require_once("Article/SubScript.php");
+    $ssAdm = new SubScript();
+
+    $data = $ssAdm->all($_SESSION['mid'], $_POST['nowPage']);
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "subScriptAll success";
+    $reData['data'] = $data;
+    return $reData;
+}
+
+function subScriptDel() {
+    require_once("Article/SubScript.php");
+    $ssAdm = new SubScript();
+
+    $subScriptItem = Array();
+    if(isset($_POST['mid']) && $_POST['mid'] != "")
+        $subScriptItem['m_id'] = $_POST['mid'];
+    else if(isset($_POST['asid']) && $_POST['asid'] != "")
+        $subScriptItem['as_id'] = $_POST['asid'];
+    else if(isset($_POST['aid']) && $_POST['aid'] != "")
+        $subScriptItem['a_id'] = $_POST['aid'];
+
+    $ssAdm->cancel($_SESSION['mid'], $subScriptItem);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "subScriptDel success";
+    return $reData;
+}
+
+function articleListBySubSrs() {
+    require_once("Article/Article.php");
+    $articleAdm = new Article();
+    $para = Array();
+    $para['asid'] = $_POST['asid'];
+    $para['nowPage'] = $_POST['nowPage'];
+    $articlesList = $articleAdm->articleBySubscriptSeries($para);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "articleBySid success";
+    $reData['data'] = $articlesList;
+    return $reData;
+}
+
+function search() {
+    require_once("Article/Article.php");
+    $articleAdm = new Article();
+    $condition = Array();
+    if($_POST['mainCp'] != "")
+        $condition['mainCp'] = "%". str_replace(";", "%", $_POST['mainCp']). "%";
+    if($_POST['nonMainCp'] != "")
+        $condition['nonMainCp'] = "%". str_replace(";", "%", $_POST['nonMainCp']). "%";
+    if($_POST['subCp'] != "")
+        $condition['subCp'] = "%". str_replace(";", "%", $_POST['subCp']). "%";
+    if($_POST['nonSubCp'] != "")
+        $condition['nonSubCp'] = "%". str_replace(";", "%", $_POST['nonSubCp']). "%";
+    if($_POST['title'] != "")
+        $condition['title'] = "%". str_replace(";", "%", $_POST['title']). "%";
+    if($_POST['series'] != "")
+        $condition['series'] = str_replace(";", "','", $_POST['series']);
+    if($_POST['member'] != "")
+        $condition['member'] = "%". str_replace(";", "%", $_POST['member']). "%";
+    if(isset($_POST['level'][0]))
+        $condition['level'] = implode("','", $_POST['level']);
+    if(isset($_POST['alert'][0]))
+        $condition['alert'] = "%". implode("%", $_POST['alert']);
+    if(isset($_POST['tag'][0]))
+        $condition['tag'] = "%". implode("%", $_POST['tag']);
+
+    //print_r($condition);
+
+    $articleList = $articleAdm->search($_POST['nowPage'], $condition);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "search success";
+    $reData['data'] = $articleList;
+    return $reData;
+}
+
+function bookmark() {
+    require_once("Article/Bookmark.php");
+    $bookmarkAdm = new Bookmark();
+
+    if($bookmarkAdm->isBook($_SESSION['mid'], $_POST['bookId']))
+        throw new Exception("book id repeat");
+    else
+        $bookmarkAdm->adds($_SESSION['mid'], $_POST['bookId']);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "bookmark success";
+    return $reData;
+}
+
+function bookmarkCancel() {
+    require_once("Article/Bookmark.php");
+    $bookmarkAdm = new Bookmark();
+
+    $bookmarkAdm->cancel($_SESSION['mid'], $_POST['bookId']);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "bookmarkCancel success";
+    return $reData;
+}
+
+function bookmarkList() {
+    require_once("Article/Bookmark.php");
+    $bookmarkAdm = new Bookmark();
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "bookmarkList success";
+    $reData['data'] = $bookmarkAdm->lists($_SESSION['mid'], $_POST['nowPage']);
     return $reData;
 }
 

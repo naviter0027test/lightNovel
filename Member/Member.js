@@ -21,6 +21,13 @@ HeadPanel = Backbone.View.extend({
                 //因為這兩個網頁需要登入才能使用，否則強至跳到首頁
                 if(nowHref == "dashboard.html" || nowHref == "postArticle.html")
                     location.href = "index.html";
+
+                //文章的訂閱功能表
+                $(".subscriptShow").hide();
+            }
+            else {
+                //文章的訂閱功能表
+                $(".subscriptShow").show();
             }
             self.render();
         });
