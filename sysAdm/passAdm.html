@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <title>管理頁面</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+	<link href='../lib/bootstrap/dist/css/bootstrap.min.css' rel='stylesheet' />
+	<link href='../lib/bootstrap/dist/css/bootstrap-theme.min.css' rel='stylesheet' />
+	<link rel="stylesheet" href="../lib/validationengine/css/validationEngine.jquery.css" type="text/css" />
+	<link href='css/header.css' rel='stylesheet' />
+	<link href='css/sidebar.css' rel='stylesheet' />
+    </head>
+    <body>
+        <div id="header" class="col-sm-12">
+        </div>
+        <div id="sidebar" class="col-sm-2 sidebar">
+        </div>
+        <div id="content" class="col-sm-10">
+            <div id="operatingPanel">
+                <ol class="breadcrumb">
+                    <li><a href="#">首頁</a></li>
+                    <li class="active">密碼修改</li>
+                </ol>
+            </div>
+            <form action="instr.php" method="post" class="col-xs-12 passForm">
+                <input type="hidden" name="instr" value="passEdit" />
+                <label class="col-xs-3">舊密碼</label>
+                <input type="password" class="col-xs-9 validate[required]" name="oldPass" />
+                <label class="col-xs-3">新密碼</label>
+                <input type="password" class="col-xs-9 validate[required]" id="newPass" name="newPass" />
+                <label class="col-xs-3">新密碼再次輸入</label>
+                <input type="password" class="col-xs-9 validate[required, equals[newPass]]" name="newPassAgain" />
+                <button class="col-xs-2">修改</button>
+            </form>
+        </div>
+        <div id="footer" class="col-sm-12">
+        </div>
+    </body>
+    <script src='../lib/jquery-2.1.4.min.js'></script>
+    <script src='../lib/bootstrap/dist/js/bootstrap.min.js'></script>
+    <script src="../lib/validationengine/js/languages/jquery.validationEngine-zh_TW.js"></script>
+    <script src="../lib/validationengine/js/jquery.validationEngine.js"></script>
+    <script src="../lib/jquery.form.js"></script>
+    <script src="../lib/underscore.js"></script>
+    <script src="../lib/backbone.js"></script>
+    <script src="Admin/Admin.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/left.js"></script>
+    <script src="js/passAdm.js"></script>
+</html>
+

@@ -23,7 +23,7 @@ class Control {
 	    $this->instr = $_POST['instr'];
     }
     public function execInstr() {
-        $mustBeLogin = Array("articleList", "articleDel", "memberList", "memberActive", "memberDel", "logout");
+        $mustBeLogin = Array("articleList", "articleDel", "memberList", "memberActive", "memberDel", "logout", "passEdit");
 	try {
 	    if(!isset($this->instr))
 		throw new Exception("instr not defined");
@@ -156,6 +156,17 @@ function logout() {
         throw new Exception("you are not login");
     $reData['status'] = 200;
     $reData['msg'] = "logout success";
+    return $reData;
+}
+
+function passEdit() {
+    require_once("Admin/Admin.php");
+    $admin = new Admin();
+
+    $admin->passUpd($_POST['oldPass'], $_POST['newPass']);
+
+    $reData['status'] = 200;
+    $reData['msg'] = "passEdit success";
     return $reData;
 }
 
