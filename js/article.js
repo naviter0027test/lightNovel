@@ -88,8 +88,12 @@ ArticleRout = Backbone.Router.extend({
                 alert("訂閱成功");
             }
             else {
-                alert("訂閱失敗");
-                console.log(data);
+                if(data['msg'] == "have been subscript")
+                    alert("已訂閱");
+                else {
+                    alert("訂閱失敗");
+                    console.log(data);
+                }
             }
             history.go(-1);
         });

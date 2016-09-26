@@ -470,11 +470,12 @@ class Article {
 
         $limit = Array();
         $limit['offset'] = 0;
-        $limit['amount'] = 10;
+        $limit['amount'] = 25;
         if(isset($para['nowPage']))
-            $limit['offset'] = ($para['nowPage'] -1) * 10;
+            $limit['offset'] = ($para['nowPage'] -1) * 25;
 
-	$dbAdm->selectData($tablename, $columns, $conditionArr, null, $limit);
+	//$dbAdm->selectData($tablename, $columns, $conditionArr, null, $limit);
+        $dbAdm->sqlSet("select a.*, att.at_title, att.at_lastCh from Article a inner join ArticleTitle att on att.at_id = a.at_id and att.as_id = ". $para['asid']. " order by a_chapter asc limit ". $limit['offset']. ", ". $limit['amount']);
 	$dbAdm->execSQL();
 	return $dbAdm->getAll();
     }
