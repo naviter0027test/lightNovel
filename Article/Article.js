@@ -238,20 +238,21 @@ PostArticleForm = Backbone.View.extend({
                 else {
 
                     //針對草稿編輯後發文的情況，發文成功要順帶刪除草稿
-                    if(Backbone.history.fragment.search("draftEdit") != -1) {
-                        var draftArr = Backbone.history.fragment.split("/");
-                        var postData2 = {};
-                        postData2['instr'] = "myDraftDel";
-                        postData2['md_id'] = draftArr[1];
-                        $.post("instr.php", postData2, function(delDraftResult) {
-                            //console.log(delDraftResult);
-                            delDraftResult = JSON.parse(delDraftResult);
-                            //console.log(delDraftResult);
-                            if(delDraftResult['status'] == 200) {
-                                //console.log("delete draft finish");
-                            }
-                        });
-                    }
+                    if(typeof(Backbone.history.fragment) !== 'undefined') 
+                        if(Backbone.history.fragment.search("draftEdit") != -1) {
+                            var draftArr = Backbone.history.fragment.split("/");
+                            var postData2 = {};
+                            postData2['instr'] = "myDraftDel";
+                            postData2['md_id'] = draftArr[1];
+                            $.post("instr.php", postData2, function(delDraftResult) {
+                                //console.log(delDraftResult);
+                                delDraftResult = JSON.parse(delDraftResult);
+                                //console.log(delDraftResult);
+                                if(delDraftResult['status'] == 200) {
+                                    //console.log("delete draft finish");
+                                }
+                            });
+                        }
 
                     alert("發文成功!");
                 }

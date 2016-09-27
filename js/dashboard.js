@@ -3,6 +3,7 @@ var myArticleList = null;
 var pgr = null;
 var myDraftList = null;
 var mySubScrt = null;
+var myBookList = null;
 $(document).ready(function() {
     dashboard = new Dashboard({'el' : '#dashboard'});
     myArticleList = new MyArticle({'el' : '#content', 'model' : new ArticleModel()});
@@ -14,6 +15,11 @@ $(document).ready(function() {
     mySubScrt = new SubScriptList({'el' : '#content', 'model' : new SubScriptModel() });
     mySubScrt.model.on("change:data", function() {
         mySubScrt.render();
+    });
+
+    mybookList = new MyBookmarkList({'el' : '#content', 'model' : new BookmarkModel() });
+    mybookList.model.on("change:data", function() {
+        mybookList.render();
     });
     new DashboardRout();
     Backbone.history.start();
@@ -34,6 +40,7 @@ DashboardRout = Backbone.Router.extend({
         "myArticles/:nowPage" : "myArticles",
         "mySubscript/:cls/:nowPage" : "mySubScript",
         "myBookmark/:nowPage" : "myBookmark",
+        "bookmarkCancel/:bid" : "bookmarkCancel",
         "subSeries/:mid/:nowPage" : "subSeries",
         "subScriptArticles/:asid/:nowPage" : "subScriptArticles",
         "subscriptDel/:cls/:id" : "subscriptDel",
@@ -503,15 +510,13 @@ DashboardRout = Backbone.Router.extend({
         $(allLi).removeClass("nowChoose");
         $(clickBtn).parent().addClass("nowChoose");
         $("#contentTem").load("template/myBookmarkList.html", function() {
-            var postData = {};
-            postData['instr'] = "bookmarkList";
-            postData['nowPage'] = nowPage;
-            $.post("instr.php", postData, function(data) {
-                console.log(data);
-                data = JSON.parse(data);
-                console.log(data);
-            });
+            mybookList.template = _.template($("#myBookmartListTem").html());
+            mybookList.model.list(nowPage);
         });
+    },
+
+    bookmarkCancel : function(bid) {
+        mybookList.model.cancel(bid);
     },
 
     subSeries : function(mid, nowPage) {
