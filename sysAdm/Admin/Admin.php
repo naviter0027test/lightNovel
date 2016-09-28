@@ -101,5 +101,30 @@ class Admin {
         $dbAdm->updateData($table, $colData, $conditionArr);
         $dbAdm->execSQL();
     }
+
+    public function passUpd($oldPass, $newPass) {
+        $dbAdm = $this->dbAdm;
+        $table = $this->table;
+
+        $columns = Array();
+        $columns[0] = "*";
+
+        $conditionArr = Array();
+        $conditionArr['`key`'] = "password";
+
+        $dbAdm->selectData($table, $columns, $conditionArr);
+        $dbAdm->execSQL();
+        $pass = $dbAdm->getAll()[0];
+
+        if($pass['value'] != md5($oldPass)) {
+            throw new Exception("old password error");
+        }
+
+        $colData = Array();
+        $colData['value'] = md5($newPass);
+
+        $dbAdm->updateData($table, $colData, $conditionArr);
+        $dbAdm->execSQL();
+    }
 }
 

@@ -56,6 +56,11 @@
             <span class="col-xs-12">
                 <label class="col-xs-2">警告</label>
                 <% isCheck = "";
+                if(data['a_alert'].search("无") != -1)
+                    isCheck = "checked";
+                %>
+                <input type="checkbox" name="alert[]" value="无" <%=isCheck%> />无 
+                <% isCheck = "";
                 if(data['a_alert'].search("主要角色死亡") != -1)
                     isCheck = "checked";
                 %>
@@ -77,6 +82,11 @@
             <br />
             <span class="col-xs-12">
                 <label class="col-xs-2">标签</label>
+                <% isCheck = "";
+                if(data['a_tag'].search("无") != -1)
+                    isCheck = "checked";
+                %>
+                <input type="checkbox" name="tag[]" value="无" <%=isCheck%> />无 
                 <% isCheck = "";
                 if(data['a_tag'].search("ABO") != -1)
                     isCheck = "checked";
@@ -112,11 +122,11 @@
             </span>
             <br />
             <span class="col-xs-12">
-                <label class="col-xs-2">章节</label> <input class="smInput" type="text" name="aChapter" value="<%=data['a_chapter']%>" /> / <input class="smInput" name="chapterSum" type="text" />
+                <label class="col-xs-2">章节</label> <input class="smInput" type="text" name="aChapter" value="<%=data['a_chapter']%>" /> / <input class="smInput" name="chapterSum" type="text" value="?" />
             </span>
             <br />
             <span class="col-xs-12">
-                <label class="col-xs-2">章节备注</label> <textarea name="aMemo" class="col-xs-8" placeholder="最多输入300字，显示于文章开头"> </textarea>
+                <label class="col-xs-2">章节备注</label> <textarea name="aMemo" class="col-xs-8" placeholder="最多输入300字，显示于文章开头"><%=data['a_memo']%></textarea>
             </span>
             <br />
             <span class="col-xs-12">

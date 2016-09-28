@@ -75,7 +75,7 @@ class SubScript {
         else if($chooseCls == "as_id")
             $sql = "select ss.*, `as`.as_name from $tablename ss, ArticleSeries `as` where ss.as_id = `as`.as_id ";
         else if($chooseCls == "a_id")
-            $sql = "select ss.*, a.a_title from $tablename ss, Article a where ss.a_id = a.a_id ";
+            $sql = "select ss.*, a.a_chapter, att.at_title, att.at_lastCh from $tablename ss, Article a, ArticleTitle att where ss.a_id = a.a_id and att.at_id = a.at_id";
         if($chooseCls != null)
             $sql .= " and ss.$chooseCls <> 0 ";
         $sql .= " and ss.m_who = $who limit ". $limit['offset']. ", ". $limit['amount'];

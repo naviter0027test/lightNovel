@@ -123,6 +123,7 @@
         <thead>
             <tr>
                 <td>文章标题</td>
+                <td>章節</td>
                 <td>更新時間</td>
                 <td>操作</td>
             </tr>
@@ -130,7 +131,8 @@
         <tbody>
             <% _.each(data, function(item) { %>
             <tr>
-                <td><%=item['a_title']%></td>
+                <td><%=item['at_title']%></td>
+                <td><%=item['a_chapter']%>/<%=(item['at_lastCh']==0?"?":item['at_lastCh'])%></td>
                 <td><%=item['ss_updTime']%></td>
                 <td>
                     <a class="glyphicon glyphicon-eye-open" href="article.html#article/<%=item['a_id']%>"></a>
@@ -270,13 +272,15 @@
         <thead>
             <tr>
                 <td>文章名称</td>
+                <td>章節</td>
                 <td>操作</td>
             </tr>
         </thead>
         <tbody>
             <% _.each(data, function(item) { %>
             <tr>
-                <td><%=item['a_title']%></td>
+                <td><%=item['at_title']%></td>
+                <td><%=item['a_chapter']%>/<%=(item['at_lastCh']==0?"?":item['at_lastCh'])%></td>
                 <td>
                     <a class="glyphicon glyphicon-eye-open" href="article.html#article/<%=item['a_id']%>"></a>
                 </td>
