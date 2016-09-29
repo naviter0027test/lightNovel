@@ -9,7 +9,6 @@ $(document).ready(function() {
         searchRes.template = _.template($("#searchResTem").html());
         searchRes.model.on("change:data", function() {
             var data = this.get("data");
-            console.log("search res");
             console.log(data);
 
             searchRes.render();
@@ -17,5 +16,29 @@ $(document).ready(function() {
             $(".searchRes").show();
 
         });
+        new SearchRout();
+        Backbone.history.start();
     });
+});
+
+SearchRout = Backbone.Router.extend({
+    routes : {
+        "" : "searchPrev",
+        "search/:nowPage" : "searchResult"
+    },
+
+    searchPrev : function() {
+        $(".searchPrev").show();
+        $(".searchRes").hide();
+    },
+
+    searchResult : function(nowPage) {
+        $("#searchPrev input[name=nowPage]").val(nowPage);
+        searchPanel.$el.ajaxSubmit(function(data) {
+            //console.log(data);
+            data = JSON.parse(data);
+            //console.log(data);
+            searchPanel.model.set("data", data);
+        });
+    }
 });

@@ -486,7 +486,7 @@ class Article {
 
         $startNum = ($nowPage -1) * 25;
 
-        $sql = "select a.*, att.at_title from Article a 
+        $sql = "select a.*, att.at_title, att.at_lastCh, m.m_user from Article a 
             inner join ArticleTitle att on att.at_id = a.at_id ";
         if(isset($conditionLike['title']))
             $sql .= " and att.at_title like '". $conditionLike['title']. "' ";
