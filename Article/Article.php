@@ -522,4 +522,47 @@ class Article {
 	$dbAdm->execSQL();
 	return $dbAdm->getAll();
     }
+
+    public function searchAmount($conditionLike) {
+        $dbAdm = $this->dbAdm;
+        $tablename = $this->table;
+
+        //$startNum = ($nowPage -1) * 25;
+
+        $sql = "select count(a.a_id) amount from Article a 
+            inner join ArticleTitle att on att.at_id = a.at_id ";
+        if(isset($conditionLike['title']))
+            $sql .= " and att.at_title like '". $conditionLike['title']. "' ";
+
+        if(isset($conditionLike['series'])) {
+            $sql .= " inner join ArticleSeries ass on ass.as_id = att.as_id ";
+            $sql .= " and ass.as_name in ('". $conditionLike['series']. "') ";
+        }
+
+        $sql .= " inner join Member m on m.m_id = a.m_id ";
+        if(isset($conditionLike['member'])) {
+            $sql .= " and m.m_user like '". $conditionLike['member']. "' ";
+        }
+
+        $sql .= " where 1 = 1 ";
+        if(isset($conditionLike['mainCp']))
+            $sql .= " and a.a_mainCp like '". $conditionLike['mainCp']. "' or a.a_mainCp2 like '". $conditionLike['mainCp']. "' ";
+        if(isset($conditionLike['nonMainCp']))
+            $sql .= " and a.a_mainCp not like '". $conditionLike['nonMainCp']. "' and a.a_mainCp2 not like '". $conditionLike['nonMainCp']. "' ";
+        if(isset($conditionLike['subCp']))
+            $sql .= " and a.a_subCp like '". $conditionLike['subCp']. "' ";
+        if(isset($conditionLike['nonSubCp']))
+            $sql .= " and a.a_subCp not like '". $conditionLike['nonSubCp']. "' ";
+        if(isset($conditionLike['level']))
+            $sql .= " and a.a_level in ('". $conditionLike['level']. "') ";
+        if(isset($conditionLike['alert']))
+            $sql .= " and a.a_alert like '". $conditionLike['alert']. "' ";
+        if(isset($conditionLike['tag']))
+            $sql .= " and a.a_tag like '". $conditionLike['tag']. "' ";
+        //$sql .= " limit $startNum, 25";
+        //echo $sql;
+        $dbAdm->sqlSet($sql);
+	$dbAdm->execSQL();
+	return $dbAdm->getAll()[0]['amount'];
+    }
 }

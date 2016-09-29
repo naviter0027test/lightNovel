@@ -935,11 +935,13 @@ function search() {
     //print_r($condition);
 
     $articleList = $articleAdm->search($_POST['nowPage'], $condition);
+    $searchAmount = $articleAdm->searchAmount($condition);
 
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "search success";
     $reData['data'] = $articleList;
+    $reData['amount'] = $searchAmount;
     return $reData;
 }
 
