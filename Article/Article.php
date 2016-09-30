@@ -283,6 +283,9 @@ class Article {
             $articleArray[$counter]['at']['m_user'] = $aTitle['m_user'];
             $articleArray[$counter]['at']['at_lastCh'] = $aTitle['at_lastCh'];
             $articleArray[$counter]['at']['at_updtime'] = $aTitle['at_updtime'];
+            $dbAdm->sqlSet("select count(b_id) amount from Bookmark where b_bookId = ". $articleArray[$counter]['a_id']);
+            $dbAdm->execSQL();
+            $articleArray[$counter]['at']['bookmarkCount'] = $dbAdm->getAll()[0]['amount'];
             ++$counter;
         }
 

@@ -13,6 +13,7 @@ Article = Backbone.View.extend({
     template : null,
     render : function() {
         var data = this.model.get("data");
+        console.log(data);
         for(var idx in data['data']) {
             if(data['data'][idx]['a_mainCp'] != null) {
                 data['data'][idx]['a_mainCp'] = data['data'][idx]['a_mainCp'].replace(";", "/");
