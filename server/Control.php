@@ -23,6 +23,11 @@ class Control {
 	    $this->instr = $_POST['instr'];
     }
     public function execInstr() {
+
+        //針對點擊數的前置作業
+        if(!isset($_SESSION['articleClicked']))
+            $_SESSION['articleClicked'] = Array();
+
         $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "seriesGet", "postArticle", "myData", "mySeriesList", "myLastArticle", "articleDel", "memSrsPages", "personalImg", "personalUpd", "passReset", "addMessage", "pressPraise", "articleEdit", "articleBySid", "changeArticleChapter", "myArticleList", "delArticleFromSeries", 
         "msgReply", 
         "storeDraft", "myDraftDel", "editDraft", "myDraftList", "findMem", "subscript", "subScriptAll", "bookmark", "bookmarkCancel", "bookmarkList");
@@ -980,6 +985,25 @@ function bookmarkList() {
     $reData['status'] = 200;
     $reData['msg'] = "bookmarkList success";
     $reData['data'] = $bookmarkAdm->lists($_SESSION['mid'], $_POST['nowPage']);
+    return $reData;
+}
+
+//session 還在的情況下點擊第二次的文章不會累計點擊數
+function articleClick() {
+    $aid = $_POST['aid'];
+    require_once("Article/Article.php");
+    $articleAdm = new Article();
+
+    //如果有點擊過，拋出此文章已點擊
+    if(isset($_SESSION['articleClicked'][$aid]))
+        throw new Exception("this article clicked");
+    else {
+        $_SESSION['articleClicked'][$aid] = true;
+        $articleAdm->clicked($aid);
+    }
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "articleClick success";
     return $reData;
 }
 

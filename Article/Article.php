@@ -565,4 +565,11 @@ class Article {
 	$dbAdm->execSQL();
 	return $dbAdm->getAll()[0]['amount'];
     }
+
+    public function clicked($aid) {
+        $dbAdm = $this->dbAdm;
+        $tablename = $this->table;
+        $dbAdm->sqlSet("update $tablename set a_clickCount = a_clickCount+1 where a_id = $aid");
+	$dbAdm->execSQL();
+    }
 }
