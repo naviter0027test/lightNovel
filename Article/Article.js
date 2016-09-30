@@ -5,6 +5,10 @@ Article = Backbone.View.extend({
         this.template = _.template($("#contentTem").html());
     },
 
+    events : {
+        "click h3 a" : "articleClick"
+    },
+
     el : '',
     template : null,
     render : function() {
@@ -19,6 +23,28 @@ Article = Backbone.View.extend({
             }
         }
         this.$el.html(this.template(data));
+    },
+
+    articleClick : function(evt) {
+        var link = evt.target;
+        var linkArr = $(link).attr("href").split("/");
+        //console.log(linkArr);
+        var aid = linkArr[linkArr.length-2];
+        //console.log(aid);
+        var postData = {};
+        postData['instr'] = "articleClick";
+        postData['aid'] = aid;
+        $.post("instr.php", postData, function(data) {
+            //console.log(data);
+            data = JSON.parse(data);
+            //console.log(data);
+            if(data['status'] != 200)
+                console.log(data);
+            setTimeout(function() {
+                location.href = $(link).attr("href");
+            }, 200);
+        });
+        return false;
     }
 });
 
