@@ -286,6 +286,9 @@ class Article {
             $dbAdm->sqlSet("select count(b_id) amount from Bookmark where b_bookId = ". $articleArray[$counter]['a_id']);
             $dbAdm->execSQL();
             $articleArray[$counter]['at']['bookmarkCount'] = $dbAdm->getAll()[0]['amount'];
+            $dbAdm->sqlSet("select count(ss_id) amount from SubScription where a_id = ". $articleArray[$counter]['a_id']);
+            $dbAdm->execSQL();
+            $articleArray[$counter]['at']['subscriptCount'] = $dbAdm->getAll()[0]['amount'];
             ++$counter;
         }
 
@@ -316,7 +319,14 @@ class Article {
             where a.a_id = ". $aid. " group by p.a_id");
         $dbAdm->execSQL();
 
-        return $dbAdm->getAll()[0];
+        $data = $dbAdm->getAll()[0];
+        $dbAdm->sqlSet("select count(b_id) amount from Bookmark where b_bookId = ". $aid);
+        $dbAdm->execSQL();
+        $data['bookmarkCount'] = $dbAdm->getAll()[0]['amount'];
+        $dbAdm->sqlSet("select count(ss_id) amount from SubScription where a_id = ". $aid);
+        $dbAdm->execSQL();
+        $data['subscriptCount'] = $dbAdm->getAll()[0]['amount'];
+        return $data;
     }
 
     public function listAmount() {

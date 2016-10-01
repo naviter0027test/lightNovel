@@ -104,12 +104,13 @@ ArticleRout = Backbone.Router.extend({
         postData['instr'] = "bookmark";
         postData['bookId'] = aid;
         $.post("instr.php", postData, function(data) {
-            console.log(data);
+            //console.log(data);
             data = JSON.parse(data);
-            console.log(data);
-            if(data['status'] == 200) {
+            //console.log(data);
+            if(data['status'] == 200) 
                 alert("收藏成功");
-            }
+            else if(data['msg'] == "book id repeat") 
+                alert("已收藏过了");
             else {
                 console.log(data);
             }
