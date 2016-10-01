@@ -30,7 +30,13 @@
         <% if(item['as_finally'] != null) { %>
             章节：<label><%=item['a_chapter']%>/<%=item['as_finally']%></label> 
         <% } %>
-        <label>赞：</label><%=(item['praiseAmount']!=null?item['praiseAmount']:0)%> <label>点击数：</label>功能尚未开放 </span><br />
+            <label>赞：</label>
+            <%=(item['praiseAmount']!=null?item['praiseAmount']:0)%> 
+            <label>点击数：</label><%=item['a_clickCount']%> 
+            <label>收藏数：</label><%=item['at']['bookmarkCount']%> 
+            <label>订阅数：</label><%=item['at']['subscriptCount']%> 
+        </span>
+        <br />
     </div>
     <hr />
     <% }); %>

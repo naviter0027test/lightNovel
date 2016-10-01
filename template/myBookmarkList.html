@@ -1,17 +1,19 @@
-<script id="myArticlesTem" type="text/template">
+<script id="myBookmartListTem" type="text/template">
     <ol class="breadcrumb">
         <li><a href="index.html">首页</a></li>
         <li><a href="dashboard.html">Dashboard</a></li>
-        <li class="active">我的書籤</li>
+        <li class="active">我的书签</li>
     </ol>
     <table class="table table-condensed">
         <thead>
             <tr>
                 <td>文章标题</td>
                 <td>分級</td>
+                <!--
                 <td>系列</td>
+                -->
                 <td>章节</td>
-                <td>修改时间</td>
+                <td>訂閱时间</td>
                 <td>操作</td>
             </tr>
         </thead>
@@ -19,14 +21,16 @@
             <% _.each(data, function(item) { %>
             <tr>
                 <td>
-                    <a href="article.html#article/<%=item['a_id']%>">
+                    <a href="article.html#article/<%=item['a_id']%>/1">
                         <%=item['at_title']%>
                     </a>
                 </td>
                 <td><%=item['a_level']%></td>
+                <!--
                 <td><%=item['as_name']%></td>
+                -->
                 <td><%=item['a_chapter']%>/<%=(item['at_lastCh']!=0?item['at_lastCh']:"?")%></td>
-                <td><%=item['a_crtime']%></td>
+                <td><%=item['b_crtime']%></td>
                 <td>
                     <a class="glyphicon glyphicon-trash" href="#bookmarkCancel/<%=item['a_id']%>"></a>
                 </td>

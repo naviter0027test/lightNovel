@@ -93,7 +93,12 @@ class Bookmark {
         $limit['offset'] = ($nowPage -1) * 25;
         $limit['amount'] = 25;
 
-        $dbAdm->selectData($tablename, $column, $conditionArr, null, $limit);
+        //$dbAdm->selectData($tablename, $column, $conditionArr, null, $limit);
+        $dbAdm->sqlSet("select a.*, att.at_title, att.at_lastCh, bm.b_crtime, bm.b_id from Bookmark bm 
+            inner join Article a on a.a_id = bm.b_bookId 
+            inner join ArticleTitle att on att.at_id = a.at_id
+            where bm_who = $who
+            limit ". $limit['offset']. ", ". $limit['amount']);
         $dbAdm->execSQL();
         return $dbAdm->getAll();
     }

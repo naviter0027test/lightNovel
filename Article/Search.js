@@ -10,13 +10,7 @@ SearchPanel = Backbone.View.extend({
     },
 
     search : function(evt) {
-        var self = this;
-        this.$el.ajaxSubmit(function(data) {
-            //console.log(data);
-            data = JSON.parse(data);
-            //console.log(data);
-            self.model.set("data", data);
-        });
+        location.href = "#search/1";
         return false;
     }
 });

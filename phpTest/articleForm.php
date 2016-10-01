@@ -1,7 +1,7 @@
 <?php session_start(); ?>
 <html>
     <head>
-        <title> series test</title>
+        <title> article test</title>
         <meta charset="utf-8" />
     </head>
     <body>
@@ -234,6 +234,13 @@
                 <input type="radio" name="cpClassChoose" value="史路威" />史路威
             </div>
             <button class="col-xs-3 check">確定</button>
+        </form>
+
+        <form action="../instr.php" method="post">
+            <input type="hidden" name="instr" value="articleClick" />
+            article id: <input type="text" name="aid" />
+            <br />
+            <button>click</button>
         </form>
     </body>
 </html>

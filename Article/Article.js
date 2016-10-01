@@ -5,10 +5,15 @@ Article = Backbone.View.extend({
         this.template = _.template($("#contentTem").html());
     },
 
+    events : {
+        "click h3 a" : "articleClick"
+    },
+
     el : '',
     template : null,
     render : function() {
         var data = this.model.get("data");
+        console.log(data);
         for(var idx in data['data']) {
             if(data['data'][idx]['a_mainCp'] != null) {
                 data['data'][idx]['a_mainCp'] = data['data'][idx]['a_mainCp'].replace(";", "/");
@@ -19,6 +24,28 @@ Article = Backbone.View.extend({
             }
         }
         this.$el.html(this.template(data));
+    },
+
+    articleClick : function(evt) {
+        var link = evt.target;
+        var linkArr = $(link).attr("href").split("/");
+        //console.log(linkArr);
+        var aid = linkArr[linkArr.length-2];
+        //console.log(aid);
+        var postData = {};
+        postData['instr'] = "articleClick";
+        postData['aid'] = aid;
+        $.post("instr.php", postData, function(data) {
+            //console.log(data);
+            data = JSON.parse(data);
+            //console.log(data);
+            if(data['status'] != 200)
+                console.log(data);
+            setTimeout(function() {
+                location.href = $(link).attr("href");
+            }, 200);
+        });
+        return false;
     }
 });
 
@@ -238,20 +265,21 @@ PostArticleForm = Backbone.View.extend({
                 else {
 
                     //針對草稿編輯後發文的情況，發文成功要順帶刪除草稿
-                    if(Backbone.history.fragment.search("draftEdit") != -1) {
-                        var draftArr = Backbone.history.fragment.split("/");
-                        var postData2 = {};
-                        postData2['instr'] = "myDraftDel";
-                        postData2['md_id'] = draftArr[1];
-                        $.post("instr.php", postData2, function(delDraftResult) {
-                            //console.log(delDraftResult);
-                            delDraftResult = JSON.parse(delDraftResult);
-                            //console.log(delDraftResult);
-                            if(delDraftResult['status'] == 200) {
-                                //console.log("delete draft finish");
-                            }
-                        });
-                    }
+                    if(typeof(Backbone.history.fragment) !== 'undefined') 
+                        if(Backbone.history.fragment.search("draftEdit") != -1) {
+                            var draftArr = Backbone.history.fragment.split("/");
+                            var postData2 = {};
+                            postData2['instr'] = "myDraftDel";
+                            postData2['md_id'] = draftArr[1];
+                            $.post("instr.php", postData2, function(delDraftResult) {
+                                //console.log(delDraftResult);
+                                delDraftResult = JSON.parse(delDraftResult);
+                                //console.log(delDraftResult);
+                                if(delDraftResult['status'] == 200) {
+                                    //console.log("delete draft finish");
+                                }
+                            });
+                        }
 
                     alert("發文成功!");
                 }
