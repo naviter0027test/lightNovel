@@ -16,11 +16,21 @@ Article = Backbone.View.extend({
         console.log(data);
         for(var idx in data['data']) {
             if(data['data'][idx]['a_mainCp'] != null) {
-                data['data'][idx]['a_mainCp'] = data['data'][idx]['a_mainCp'].replace(";", "/");
+                //data['data'][idx]['a_mainCp'] = data['data'][idx]['a_mainCp'].replace(";", "/");
+                var mainCpArr = data['data'][idx]['a_mainCp'].split(";");
+                for(var jdx in mainCpArr) {
+                    mainCpArr[jdx] = "<a href='search.html#search/1/mainCp/"+ mainCpArr[jdx]+ "'>"+ mainCpArr[jdx]+ "</a>";
+                }
+                data['data'][idx]['a_mainCp'] = mainCpArr.join("/");
             }
             if(data['data'][idx]['a_mainCp2'] != null) {
                 var cp2 = data['data'][idx]['a_mainCp2'];
-                data['data'][idx]['a_mainCp2'] = cp2.replace(";", "/");
+                //data['data'][idx]['a_mainCp2'] = cp2.replace(";", "/");
+                var mainCp2Arr = data['data'][idx]['a_mainCp2'].split(";");
+                for(var jdx in mainCp2Arr) {
+                    mainCp2Arr[jdx] = "<a href='search.html#search/1/mainCp/"+ mainCp2Arr[jdx]+ "'>"+ mainCp2Arr[jdx]+ "</a>";
+                }
+                data['data'][idx]['a_mainCp2'] = mainCp2Arr.join("/");
             }
             if(data['data'][idx]['a_alert'] != "") {
                 var alertArr = data['data'][idx]['a_alert'].split(";");
