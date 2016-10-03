@@ -193,7 +193,19 @@ class Article {
             where a.m_id = $mid order by a_updtime desc limit ". $limit['offset']. ", ". $limit['amount']);
         $dbAdm->execSQL();
 
-        return $dbAdm->getAll();
+        $artList = $dbAdm->getAll();
+        foreach($artList as $idx => $article) {
+
+            $dbAdm->sqlSet("select count(b_id) amount from Bookmark where b_bookId = ". $article['a_id']);
+            $dbAdm->execSQL();
+            $artList[$idx]['bookmarkCount'] = $dbAdm->getAll()[0]['amount'];
+
+            $dbAdm->sqlSet("select count(ss_id) amount from SubScription where a_id = ". $article['a_id']);
+            $dbAdm->execSQL();
+            $artList[$idx]['subscriptCount'] = $dbAdm->getAll()[0]['amount'];
+        }
+
+        return $artList;
     }
 
     public function articleList($page) {

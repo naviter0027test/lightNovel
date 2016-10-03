@@ -16,6 +16,9 @@
                 <td>分級</td>
                 <td>系列</td>
                 <td>章节</td>
+                <td>点击数</td>
+                <td>收藏数</td>
+                <td>订阅数</td>
                 <td>修改时间</td>
                 <td>操作</td>
             </tr>
@@ -31,6 +34,9 @@
                 <td><%=item['a_level']%></td>
                 <td><%=item['as_name']%></td>
                 <td><%=item['a_chapter']%>/<%=(item['at_lastCh']!=0?item['at_lastCh']:"?")%></td>
+                <td><%=item['a_clickCount']%></td>
+                <td><%=item['bookmarkCount']%></td>
+                <td><%=item['subscriptCount']%></td>
                 <td><%=item['a_crtime']%></td>
                 <td>
                     <a class="glyphicon glyphicon-plus" href="#articlePlus/<%=item['a_id']%>"></a>

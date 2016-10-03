@@ -22,6 +22,22 @@ Article = Backbone.View.extend({
                 var cp2 = data['data'][idx]['a_mainCp2'];
                 data['data'][idx]['a_mainCp2'] = cp2.replace(";", "/");
             }
+            if(data['data'][idx]['a_alert'] != "") {
+                var alertArr = data['data'][idx]['a_alert'].split(";");
+                for(var jdx in alertArr) {
+                    alertArr[jdx] = "<a href='search.html#search/1/alert/"+ alertArr[jdx]+ "'>"+ alertArr[jdx]+ "</a>";
+                    //console.log(alertArr[idx]);
+                }
+                data['data'][idx]['a_alert'] = alertArr.join(";");
+            }
+            if(data['data'][idx]['a_tag'] != "") {
+                var tagArr = data['data'][idx]['a_tag'].split(";");
+                for(var jdx in tagArr) {
+                    tagArr[jdx] = "<a href='search.html#search/1/tag/"+ tagArr[jdx]+ "'>"+ tagArr[jdx]+ "</a>";
+                    //console.log(tagArr[idx]);
+                }
+                data['data'][idx]['a_tag'] = tagArr.join(";");
+            }
         }
         this.$el.html(this.template(data));
     },
