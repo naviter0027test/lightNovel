@@ -29,7 +29,8 @@ $(document).ready(function() {
 SearchRout = Backbone.Router.extend({
     routes : {
         "" : "searchPrev",
-        "search/:nowPage" : "searchResult"
+        "search/:nowPage" : "searchResult",
+        "search/:nowPage/:cls/:arg" : "searchOne"
     },
 
     searchPrev : function() {
@@ -38,6 +39,21 @@ SearchRout = Backbone.Router.extend({
     },
 
     searchResult : function(nowPage) {
+        $("#searchPrev input[name=nowPage]").val(nowPage);
+        searchPanel.model.set("nowPage", nowPage);
+        searchPanel.$el.ajaxSubmit(function(data) {
+            //console.log(data);
+            data = JSON.parse(data);
+            //console.log(data);
+            searchPanel.model.set("data", data);
+        });
+    },
+
+    searchOne : function(nowPage, cls, arg) {
+        if(cls == "alert[]" || cls == "tag[]" || cls == "level[]")
+            $("input[name='"+ cls+ "'][value="+ arg+ "]").attr("checked", true);
+        else
+            $("input[name='"+ cls+ "']").val(arg);
         $("#searchPrev input[name=nowPage]").val(nowPage);
         searchPanel.model.set("nowPage", nowPage);
         searchPanel.$el.ajaxSubmit(function(data) {

@@ -25,7 +25,7 @@ Article = Backbone.View.extend({
             if(data['data'][idx]['a_alert'] != "") {
                 var alertArr = data['data'][idx]['a_alert'].split(";");
                 for(var jdx in alertArr) {
-                    alertArr[jdx] = "<a href='search.html#search/1/alert/"+ alertArr[jdx]+ "'>"+ alertArr[jdx]+ "</a>";
+                    alertArr[jdx] = "<a href='search.html#search/1/alert[]/"+ alertArr[jdx]+ "'>"+ alertArr[jdx]+ "</a>";
                     //console.log(alertArr[idx]);
                 }
                 data['data'][idx]['a_alert'] = alertArr.join(";");
@@ -33,7 +33,7 @@ Article = Backbone.View.extend({
             if(data['data'][idx]['a_tag'] != "") {
                 var tagArr = data['data'][idx]['a_tag'].split(";");
                 for(var jdx in tagArr) {
-                    tagArr[jdx] = "<a href='search.html#search/1/tag/"+ tagArr[jdx]+ "'>"+ tagArr[jdx]+ "</a>";
+                    tagArr[jdx] = "<a href='search.html#search/1/tag[]/"+ tagArr[jdx]+ "'>"+ tagArr[jdx]+ "</a>";
                     //console.log(tagArr[idx]);
                 }
                 data['data'][idx]['a_tag'] = tagArr.join(";");
