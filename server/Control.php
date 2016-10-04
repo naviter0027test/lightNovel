@@ -839,11 +839,19 @@ function subscript() {
     else if(isset($_POST['aid']) && $_POST['aid'] != "")
         $subScriptItem['a_id'] = $_POST['aid'];
 
-    $ssAdm->subscript($_SESSION['mid'], $subScriptItem);
-
     $reData = Array();
-    $reData['status'] = 200;
-    $reData['msg'] = "subscript success";
+
+    if($ssAdm->isRepeat($_SESSION['mid'], $subScriptItem)) {
+        $ssAdm->cancel($_SESSION['mid'], $subScriptItem);
+        $reData['status'] = 200;
+        $reData['msg'] = "subscriptCancel success";
+    }
+    else {
+        $ssAdm->subscript($_SESSION['mid'], $subScriptItem);
+        $reData['status'] = 200;
+        $reData['msg'] = "subscript success";
+    }
+
     return $reData;
 }
 
@@ -954,14 +962,18 @@ function bookmark() {
     require_once("Article/Bookmark.php");
     $bookmarkAdm = new Bookmark();
 
-    if($bookmarkAdm->isBook($_SESSION['mid'], $_POST['bookId']))
-        throw new Exception("book id repeat");
-    else
-        $bookmarkAdm->adds($_SESSION['mid'], $_POST['bookId']);
-
     $reData = Array();
-    $reData['status'] = 200;
-    $reData['msg'] = "bookmark success";
+    if($bookmarkAdm->isBook($_SESSION['mid'], $_POST['bookId'])) {
+        $bookmarkAdm->cancel($_SESSION['mid'], $_POST['bookId']);
+        $reData['status'] = 200;
+        $reData['msg'] = "bookmarkCancel success";
+    }
+    else {
+        $bookmarkAdm->adds($_SESSION['mid'], $_POST['bookId']);
+        $reData['status'] = 200;
+        $reData['msg'] = "bookmark success";
+    }
+
     return $reData;
 }
 

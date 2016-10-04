@@ -85,15 +85,14 @@ ArticleRout = Backbone.Router.extend({
             data = JSON.parse(data);
             //console.log(data);
             if(data['status'] == 200) {
-                alert("訂閱成功");
+                if(data['msg'] == "subscript success")
+                    alert("訂閱成功");
+                else if(data['msg'] == "subscriptCancel success")
+                    alert("訂閱取消 成功");
             }
             else {
-                if(data['msg'] == "have been subscript")
-                    alert("已訂閱");
-                else {
-                    alert("訂閱失敗");
-                    console.log(data);
-                }
+                alert("訂閱失敗");
+                console.log(data);
             }
             history.go(-1);
         });
@@ -107,13 +106,14 @@ ArticleRout = Backbone.Router.extend({
             //console.log(data);
             data = JSON.parse(data);
             //console.log(data);
-            if(data['status'] == 200) 
-                alert("收藏成功");
-            else if(data['msg'] == "book id repeat") 
-                alert("已收藏过了");
-            else {
-                console.log(data);
+            if(data['status'] == 200) {
+                if(data['msg'] == "bookmark success")
+                    alert("收藏成功");
+                else if(data['msg'] == "bookmarkCancel success")
+                    alert("收藏取消 成功");
             }
+            else 
+                console.log(data);
             history.go(-1);
         });
     },

@@ -35,7 +35,7 @@ class SubScript {
         $this->dbAdm->execSQL();
     }
 
-    public function subscript($who, $insData) {
+    public function isRepeat($who, $insData) {
         $tablename = $this->table;
         $dbAdm = $this->dbAdm;
 
@@ -49,7 +49,21 @@ class SubScript {
         $dbAdm->sqlSet("select * from SubScription where m_who = $who and $col = $val");
         $dbAdm->execSQL();
         if(count($dbAdm->getAll()) > 0)
-            throw new Exception("have been subscript");
+            return true;
+        return false;
+    }
+
+    public function subscript($who, $insData) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        if(count($insData) != 1) 
+            throw new Exception("need only one argu");
+
+        foreach($insData as $selecCol => $findValue) {
+            $col = $selecCol;
+            $val = $findValue;
+        }
 
         $insData['m_who'] = $who;
         $insData['ss_chkTime'] = date("Y-m-d H:i:s");
