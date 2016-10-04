@@ -23,7 +23,7 @@ Article = Backbone.View.extend({
                 }
                 data['data'][idx]['a_mainCp'] = mainCpArr.join("/");
             }
-            if(data['data'][idx]['a_mainCp2'] != "") {
+            if(data['data'][idx]['a_mainCp2'] != "" && data['data'][idx]['a_mainCp2'] != null) {
                 var cp2 = data['data'][idx]['a_mainCp2'];
                 //data['data'][idx]['a_mainCp2'] = cp2.replace(";", "/");
                 var mainCp2Arr = data['data'][idx]['a_mainCp2'].split(";");
