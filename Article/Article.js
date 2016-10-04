@@ -23,7 +23,7 @@ Article = Backbone.View.extend({
                 }
                 data['data'][idx]['a_mainCp'] = mainCpArr.join("/");
             }
-            if(data['data'][idx]['a_mainCp2'] != null) {
+            if(data['data'][idx]['a_mainCp2'] != "") {
                 var cp2 = data['data'][idx]['a_mainCp2'];
                 //data['data'][idx]['a_mainCp2'] = cp2.replace(";", "/");
                 var mainCp2Arr = data['data'][idx]['a_mainCp2'].split(";");
@@ -31,6 +31,20 @@ Article = Backbone.View.extend({
                     mainCp2Arr[jdx] = "<a href='search.html#search/1/mainCp/"+ mainCp2Arr[jdx]+ "'>"+ mainCp2Arr[jdx]+ "</a>";
                 }
                 data['data'][idx]['a_mainCp2'] = mainCp2Arr.join("/");
+            }
+            if(data['data'][idx]['a_subCp'] != "") {
+                var subCp = data['data'][idx]['a_subCp'];
+                var subCpArr = data['data'][idx]['a_subCp'].split(";");
+                console.log(subCpArr);
+                for(var jdx in subCpArr) {
+                    var subNames = subCpArr[jdx].split("/");
+                    for(var ldx in subNames) {
+                        subNames[ldx] = "<a href='search.html#search/1/subCp/"+ subNames[ldx]+ "'>"+ subNames[ldx]+ "</a>";
+                    }
+                    subCpArr[jdx] = subNames.join("/");
+                }
+                console.log(subCpArr);
+                data['data'][idx]['a_subCp'] = subCpArr.join(";");
             }
             if(data['data'][idx]['a_alert'] != "") {
                 var alertArr = data['data'][idx]['a_alert'].split(";");
