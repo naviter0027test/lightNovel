@@ -179,19 +179,19 @@
             <a class="col-xs-5 nowChoose" href="#cpAclass">明楼及衍生</a>
             <a class="col-xs-5" href="#cpBclass">明诚及衍生</a>
             <div class="col-xs-12" id="cpAclass">
-                <input type="radio" name="cpClassChoose" value="明楼" />明楼
-                <input type="radio" name="cpClassChoose" value="蔺晨" />蔺晨
+                <input type="radio" name="cpClassChoose" value="明楼" />  明楼
+                <input type="radio" name="cpClassChoose" value="蔺晨" />  蔺晨
                 <input type="radio" name="cpClassChoose" value="谭宗明" />谭宗明
-                <input type="radio" name="cpClassChoose" value="凌远" />凌远
-                <input type="radio" name="cpClassChoose" value="荣石" />荣石
+                <input type="radio" name="cpClassChoose" value="凌远" />  凌远
+                <input type="radio" name="cpClassChoose" value="荣石" />  荣石
                 <input type="radio" name="cpClassChoose" value="黄志雄" />黄志雄
                 <input type="radio" name="cpClassChoose" value="胡八一" />胡八一
                 <input type="radio" name="cpClassChoose" value="杜见锋" />杜见锋
                 <input type="radio" name="cpClassChoose" value="沈剑秋" />沈剑秋
                 <input type="radio" name="cpClassChoose" value="李川奇" />李川奇
-                <input type="radio" name="cpClassChoose" value="何鸣" />何鸣
-                <input type="radio" name="cpClassChoose" value="徐安" />徐安
-                <input type="radio" name="cpClassChoose" value="刘彻" />刘彻
+                <input type="radio" name="cpClassChoose" value="何鸣" />  何鸣
+                <input type="radio" name="cpClassChoose" value="徐安" />  徐安
+                <input type="radio" name="cpClassChoose" value="刘彻" />  刘彻
                 <input type="radio" name="cpClassChoose" value="岳振声" />岳振声
                 <input type="radio" name="cpClassChoose" value="牧良逢" />牧良逢
                 <input type="radio" name="cpClassChoose" value="秦玄策" />秦玄策
@@ -207,23 +207,23 @@
                 <input type="radio" name="cpClassChoose" value="张红兵" />张红兵
                 <input type="radio" name="cpClassChoose" value="王开复" />王开复
                 <input type="radio" name="cpClassChoose" value="重光葵" />重光葵
-                <input type="radio" name="cpClassChoose" value="龟田一郎" />龟田一郎
+                <input type="radio" name="cpClassChoose"value="龟田一郎"/>龟田一郎
             </div>
             <div class="col-xs-12" id="cpBclass">
-                <input type="radio" name="cpClassChoose" value="明诚" />明诚
+                <input type="radio" name="cpClassChoose" value="明诚" />  明诚
                 <input type="radio" name="cpClassChoose" value="萧景琰" />萧景琰
                 <input type="radio" name="cpClassChoose" value="赵启平" />赵启平
                 <input type="radio" name="cpClassChoose" value="方孟韦" />方孟韦
                 <input type="radio" name="cpClassChoose" value="李熏然" />李熏然
                 <input type="radio" name="cpClassChoose" value="石太璞" />石太璞
-                <input type="radio" name="cpClassChoose" value="季白" />季白
+                <input type="radio" name="cpClassChoose" value="季白" />  季白
                 <input type="radio" name="cpClassChoose" value="陈亦度" />陈亦度
-                <input type="radio" name="cpClassChoose" value="曲和" />曲和
-                <input type="radio" name="cpClassChoose" value="戴刀" />戴刀
-                <input type="radio" name="cpClassChoose" value="靳以" />靳以
-                <input type="radio" name="cpClassChoose" value="齐勇" />齐勇
-                <input type="radio" name="cpClassChoose" value="郝晨" />郝晨
-                <input type="radio" name="cpClassChoose" value="王瑞" />王瑞
+                <input type="radio" name="cpClassChoose" value="曲和" />  曲和
+                <input type="radio" name="cpClassChoose" value="戴刀" />  戴刀
+                <input type="radio" name="cpClassChoose" value="靳以" />  靳以
+                <input type="radio" name="cpClassChoose" value="齐勇" />  齐勇
+                <input type="radio" name="cpClassChoose" value="郝晨" />  郝晨
+                <input type="radio" name="cpClassChoose" value="王瑞" />  王瑞
                 <input type="radio" name="cpClassChoose" value="许一霖" />许一霖
                 <input type="radio" name="cpClassChoose" value="公孙泽" />公孙泽
                 <input type="radio" name="cpClassChoose" value="刘承志" />刘承志

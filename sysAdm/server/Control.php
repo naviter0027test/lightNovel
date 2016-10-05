@@ -23,7 +23,7 @@ class Control {
 	    $this->instr = $_POST['instr'];
     }
     public function execInstr() {
-        $mustBeLogin = Array("articleList", "articleDel", "memberList", "memberActive", "memberDel", "logout", "passEdit");
+        $mustBeLogin = Array("articleList", "articleDel", "memberList", "memberActive", "memberDel", "logout", "passEdit", "cpGet");
 	try {
 	    if(!isset($this->instr))
 		throw new Exception("instr not defined");
@@ -172,8 +172,22 @@ function passEdit() {
 
     $admin->passUpd($_POST['oldPass'], $_POST['newPass']);
 
+    $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "passEdit success";
+    return $reData;
+}
+
+function cpGet() {
+    require_once("Admin/Admin.php");
+    $admin = new Admin();
+
+    $cpData = $admin->cpGet();
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "cpGet success";
+    $reData['cpData'] = $cpData;
     return $reData;
 }
 

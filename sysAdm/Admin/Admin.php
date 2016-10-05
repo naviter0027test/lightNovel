@@ -126,5 +126,28 @@ class Admin {
         $dbAdm->updateData($table, $colData, $conditionArr);
         $dbAdm->execSQL();
     }
+
+    public function cpGet() {
+        $dbAdm = $this->dbAdm;
+        $table = $this->table;
+        $cpData = Array();
+
+        $columns = Array();
+        $columns[0] = "*";
+
+        $conditionArr = Array();
+        $conditionArr['`key`'] = "cp1";
+        $dbAdm->selectData($table, $columns, $conditionArr);
+        $dbAdm->execSQL();
+
+        $cpData['cp1'] = $dbAdm->getAll()[0];
+
+        $conditionArr['`key`'] = "cp2";
+        $dbAdm->selectData($table, $columns, $conditionArr);
+        $dbAdm->execSQL();
+        $cpData['cp2'] = $dbAdm->getAll()[0];
+
+        return $cpData;
+    }
 }
 

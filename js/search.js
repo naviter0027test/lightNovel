@@ -50,6 +50,7 @@ SearchRout = Backbone.Router.extend({
     },
 
     searchOne : function(nowPage, cls, arg) {
+        $(".searchPrev").hide();
         if(cls == "alert[]" || cls == "tag[]" || cls == "level[]")
             $("input[name='"+ cls+ "'][value="+ arg+ "]").attr("checked", true);
         else

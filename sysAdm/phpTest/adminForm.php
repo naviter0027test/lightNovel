@@ -24,6 +24,11 @@
             <input type="hidden" name="instr" value="logout" />
             <button>logout</button>
         </form>
+
+        <form action="../instr.php" method="post">
+            <input type="hidden" name="instr" value="cpGet" />
+            <button>cp panel get</button>
+        </form>
     </body>
 </html>
 
