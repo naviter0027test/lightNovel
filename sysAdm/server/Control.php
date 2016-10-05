@@ -191,4 +191,15 @@ function cpGet() {
     return $reData;
 }
 
+function cpUpdate() {
+    require_once("Admin/Admin.php");
+    $admin = new Admin();
+
+    $cpData = $admin->cpUpd($_POST['cp1'], $_POST['cp2']);
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "cpUpdate success";
+    return $reData;
+}
+
 ?>

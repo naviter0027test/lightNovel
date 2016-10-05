@@ -149,5 +149,25 @@ class Admin {
 
         return $cpData;
     }
+
+    public function cpUpd($cp1, $cp2) {
+        $dbAdm = $this->dbAdm;
+        $table = $this->table;
+        $colData = Array();
+        $colData['value'] = $cp1;
+
+        $conditionArr = Array();
+        $conditionArr['`key`'] = "cp1";
+
+        $dbAdm->updateData($table, $colData, $conditionArr);
+        $dbAdm->execSQL();
+
+        $colData['value'] = $cp2;
+
+        $conditionArr['`key`'] = "cp2";
+
+        $dbAdm->updateData($table, $colData, $conditionArr);
+        $dbAdm->execSQL();
+    }
 }
 
