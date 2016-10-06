@@ -567,17 +567,25 @@ function myArticleList() {
 
 function articleGet() {
     require_once("Article/Article.php");
+    require_once("Article/SubScript.php");
+    require_once("Article/Bookmark.php");
     $articleAdm = new Article();
+    $subscriptAdm = new SubScript();
+    $bookmarkAdm = new Bookmark();
     $data = $articleAdm->get($_POST['aid']);
     //if($data['as_id'] > 0)
         //$articlesList = $articleAdm->allArticleBySeries($data['as_id']);
     $articlesList = $articleAdm->articlesByArtTitle($data['at_id']);
+    $isScript = $subscriptAdm->isSubscript($_SESSION['mid'], $_POST['aid']);
+    $isBook = $bookmarkAdm->isBook($_SESSION['mid'], $_POST['aid']);
 
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "articleGet success";
     $reData['data'] = $data;
     $reData['articles'] = $articlesList;
+    $reData['isSubScript'] = $isScript;
+    $reData['isBook'] = $isBook;
     return $reData;
 }
 

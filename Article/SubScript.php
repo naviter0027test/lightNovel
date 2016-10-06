@@ -143,4 +143,24 @@ class SubScript {
         $dbAdm->deleteData($tablename, $conditionArr);
         $dbAdm->execSQL();
     }
+
+    public function isSubscript($who, $aid) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $column = Array();
+        $column[0] = "*";
+
+        $conditionArr = Array();
+        $conditionArr['m_who'] = $who;
+        $conditionArr['a_id'] = $aid;
+
+        $dbAdm->selectData($tablename, $column, $conditionArr);
+        $dbAdm->execSQL();
+        $data = $dbAdm->getAll();
+        if(isset($data[0]))
+            return true;
+        else
+            return false;
+    }
 }

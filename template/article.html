@@ -53,9 +53,21 @@
             <% if(data['asid'] != "0") { %>
             <a class="col-sm-2" href="#subscript/asid/<%=data['asid']%>">該篇系列</a>
             <% } %>
-            <a class="col-sm-2" href="#subscript/aid/<%=data['a_id']%>">該篇文章</a>
+            <a class="col-sm-2" href="#subscript/aid/<%=data['a_id']%>">
+            <% if(isSubScript) { %>
+                已訂閱文章
+            <% } else { %>
+                該篇文章
+            <% } %>
+            </a>
             <label class="col-sm-2">訂閱</label>
-            <a class="col-sm-2" href="#bookmark/<%=data['a_id']%>">收藏此章節</a>
+            <a class="col-sm-2" href="#bookmark/<%=data['a_id']%>">
+            <% if(isBook) { %>
+                已收藏
+            <% } else { %>
+                收藏此章節
+            <% } %>
+            </a>
             <label class="col-sm-1">書籤</label>
         </span>
     </div>
@@ -154,9 +166,21 @@
             <% if(data['asid'] != "0") { %>
             <a class="col-sm-2" href="#subscript/asid/<%=data['asid']%>">該篇系列</a>
             <% } %>
-            <a class="col-sm-2" href="#subscript/aid/<%=data['a_id']%>">該篇文章</a>
+            <a class="col-sm-2" href="#subscript/aid/<%=data['a_id']%>">
+            <% if(isSubScript) { %>
+                已訂閱文章
+            <% } else { %>
+                該篇文章
+            <% } %>
+            </a>
             <label class="col-sm-2">訂閱</label>
-            <a class="col-sm-2" href="#bookmark/<%=data['a_id']%>">收藏此章節</a>
+            <a class="col-sm-2" href="#bookmark/<%=data['a_id']%>">
+            <% if(isBook) { %>
+                已收藏
+            <% } else { %>
+                收藏此章節
+            <% } %>
+            </a>
             <label class="col-sm-1">書籤</label>
         </span>
     </div>
