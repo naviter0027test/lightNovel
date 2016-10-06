@@ -174,11 +174,22 @@
         <img src="<%=item['headImg']%>" />
         <h5 class="col-xs-10"><%=item['m_user']%><label class="msCrTime"><%=item['ms_crtime']%></label></h5>
         <div class="col-xs-10"><%=item['ms_text']%></div>
+        <% if(item['isMe'] == true) { %>
+        <div class="col-xs-12 operPanel">
+            <a href="#delMsg/<%=item['ms_id']%>" class="col-xs-1">刪除</a>
+        </div>
+        <% } %>
         <% if(item['ms_reply'] != "") { %>
         <div class="reply col-xs-12">
-            <label>作者回覆:</label>
+            <label>&nbsp;</label>
+            <img src="<%=authorImg%>" />
             <%=item['ms_reply']%>
         </div>
+        <% if(isAuthor == true) { %>
+        <div class="col-xs-12 operPanel">
+            <a href="#delMsgReply/<%=item['ms_id']%>" class="col-xs-1">刪除</a>
+        </div>
+        <% } %>
         <% } %>
     </div>
     <% ++msgCounter; %>

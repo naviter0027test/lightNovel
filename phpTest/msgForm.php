@@ -18,5 +18,11 @@
             <textarea name="replyText"></textarea><br />
             <button>reply</button>
         </form>
+
+        <form action="../instr.php" method="post">
+            <input type="hidden" name="instr" value="msgDelReply" />
+            msid : <input type="text" name="msid" /><br />
+            <button>del msg reply</button>
+        </form>
     </body>
 </html>

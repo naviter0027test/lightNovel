@@ -21,7 +21,7 @@ Message = Backbone.View.extend({
         postData['instr'] = "addMessage";
         postData['aid'] = this.model.get("aid");
         postData['message'] = $("#msgInput").val();
-        console.log(postData);
+        //console.log(postData);
         $.post("instr.php", postData, function(data) {
             //console.log(data);
             data = JSON.parse(data);
@@ -30,6 +30,8 @@ Message = Backbone.View.extend({
                 alert("留言成功");
                 self.model.list();
             }
+            else if(data['msg'] = "member not login") 
+                alert("请登入后再留言");
         });
     }
 });

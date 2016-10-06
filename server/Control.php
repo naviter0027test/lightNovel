@@ -29,7 +29,7 @@ class Control {
             $_SESSION['articleClicked'] = Array();
 
         $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "seriesGet", "postArticle", "myData", "mySeriesList", "myLastArticle", "articleDel", "memSrsPages", "personalImg", "personalUpd", "passReset", "addMessage", "pressPraise", "articleEdit", "articleBySid", "changeArticleChapter", "myArticleList", "delArticleFromSeries", 
-        "msgReply", 
+        "msgReply", "msgDelReply", "msgDel",
         "storeDraft", "myDraftDel", "editDraft", "myDraftList", "findMem", "subscript", "subScriptAll", "bookmark", "bookmarkCancel", "bookmarkList");
 	try {
 	    if(!function_exists($this->instr))
@@ -701,13 +701,33 @@ function msgList() {
             $data[$i]['headImg'] = "imgs/tmp/". $item['m_headImg'];
         else
             $data[$i]['headImg'] = "imgs/80x80.png";
+
+        //留言者是否為登入者本身
+        if($item['m_id'] == $_SESSION['mid'])
+            $data[$i]['isMe'] = true;
+        else
+            $data[$i]['isMe'] = false;
     }
+
+    $author = $msg->getAuthor($_POST['aid']);
+    if($author['m_headImg'] == "")
+        $authorImg = "imgs/80x80.png";
+    else if(file_exists("imgs/tmp/". $author['m_headImg']))
+        $authorImg = "imgs/tmp/". $author['m_headImg'];
+    else
+        $authorImg = "imgs/80x80.png";
+    if($author['m_id'] == $_SESSION['mid'])
+        $isAuthor = true;
+    else
+        $isAuthor = false;
 
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "msgList success";
     $reData['data'] = $data;
     $reData['msgAmount'] = $msg->listAmount($_POST['aid']);
+    $reData['authorImg'] = $authorImg;
+    $reData['isAuthor'] = $isAuthor;
     return $reData;
 }
 
@@ -730,6 +750,22 @@ function msgDel() {
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "msgDel success";
+    return $reData;
+}
+
+function msgDelReply() {
+    require_once("Article/Message.php");
+    $msg = new Message();
+
+    $author = $msg->getAuthorBymsid($_POST['msid']);
+    if($author['m_id'] == $_SESSION['mid'])
+        $msg->delReply($_POST['msid']);
+    else
+        throw new Exception("you are not author");
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "msgDelReply success";
     return $reData;
 }
 

@@ -39,7 +39,9 @@ ArticleRout = Backbone.Router.extend({
         "subscript/:cls/:id" : "subscript",
         "bookmark/:aid" : "bookmark",
         "article/:aid/:nowPage" : "articleShow",
-        "article/:aid" : "articleShow"
+        "article/:aid" : "articleShow",
+        "delMsg/:msid" : "delMsg",
+        "delMsgReply/:msid" : "delMsgReply"
     },
 
     pressPraise : function(aid) {
@@ -124,4 +126,38 @@ ArticleRout = Backbone.Router.extend({
         msgArea.model.set("nowPage", nowPage);
         msgArea.model.list();
     },
+
+    delMsg : function(msid) {
+        var postData = {};
+        postData['instr'] = "msgDel";
+        postData['msid'] = msid;
+        $.post("instr.php", postData, function(data) {
+            //console.log(data);
+            data = JSON.parse(data);
+            //console.log(data);
+            if(data['status'] == 200) 
+                alert("删除成功");
+            else
+                console.log(data);
+            history.go(-1);
+        });
+    },
+
+    delMsgReply : function(msid) {
+        var postData = {};
+        postData['instr'] = "msgDelReply";
+        postData['msid'] = msid;
+        $.post("instr.php", postData, function(data) {
+            //console.log(data);
+            data = JSON.parse(data);
+            //console.log(data);
+            if(data['status'] == 200) 
+                alert("删除回覆成功");
+            else if(data['msg'] == "you are not author")
+                alert("你不是作者");
+            else
+                console.log(data);
+            history.go(-1);
+        });
+    }
 });

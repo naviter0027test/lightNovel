@@ -116,5 +116,37 @@ class Message {
         $dbAdm->deleteData($tablename, $conditionArr);
         $dbAdm->execSQL();
     }
+
+    public function delReply($msid) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $colData = Array();
+        $colData['ms_reply'] = "";
+
+        $conditionArr = Array();
+        $conditionArr['ms_id'] = $msid;
+        $dbAdm->updateData($tablename, $colData, $conditionArr);
+        $dbAdm->execSQL();
+    }
+
+    public function getAuthor($aid) {
+        $dbAdm = $this->dbAdm;
+
+        $dbAdm->sqlSet("select m.* from Member m inner join Article a on a.a_id = $aid and a.m_id = m.m_id");
+        $dbAdm->execSQL();
+        return $dbAdm->getAll()[0];
+    }
+
+    public function getAuthorBymsid($msid) {
+        $dbAdm = $this->dbAdm;
+
+        $dbAdm->sqlSet("select m.* from Message ms 
+            inner join Article a on a.a_id = ms.a_id 
+            inner join Member m on m.m_id = a.m_id
+            where ms.ms_id = $msid");
+        $dbAdm->execSQL();
+        return $dbAdm->getAll()[0];
+    }
 }
 ?>
