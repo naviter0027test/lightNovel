@@ -567,8 +567,11 @@ function myArticleList() {
 
 function articleGet() {
     require_once("Article/Article.php");
+    require_once("Article/ArticleTitle.php");
     require_once("Article/SubScript.php");
     require_once("Article/Bookmark.php");
+    require_once("Article/Praise.php");
+    $praise = new Praise();
     $articleAdm = new Article();
     $subscriptAdm = new SubScript();
     $bookmarkAdm = new Bookmark();
@@ -577,7 +580,20 @@ function articleGet() {
         //$articlesList = $articleAdm->allArticleBySeries($data['as_id']);
     $articlesList = $articleAdm->articlesByArtTitle($data['at_id']);
     $isScript = $subscriptAdm->isSubscript($_SESSION['mid'], $_POST['aid']);
+
+    $articleTitleAdm = new ArticleTitle();
+    $artTitle = $articleTitleAdm->getById($data['at_id']);
+    if($artTitle['as_id'] > 0)
+        $isSeriesSubscript = $subscriptAdm->isSeriesSubscript($_SESSION['mid'], $artTitle['as_id']);
+
+    $isMemberSubscript = $subscriptAdm->isMemberSubscript($_SESSION['mid'], $data['m_id']);
+
     $isBook = $bookmarkAdm->isBook($_SESSION['mid'], $_POST['aid']);
+
+    $praiseList = $praise->getPraise($_SESSION['mid'], $_POST['aid']);
+    $isPraise = false;
+    if(count($praiseList) > 0) 
+        $isPraise = true;
 
     $reData = Array();
     $reData['status'] = 200;
@@ -585,6 +601,9 @@ function articleGet() {
     $reData['data'] = $data;
     $reData['articles'] = $articlesList;
     $reData['isSubScript'] = $isScript;
+    $reData['isSeriesSubscript'] = $isSeriesSubscript;
+    $reData['isMemberSubscript'] = $isMemberSubscript;
+    $reData['isPraise'] = $isPraise;
     $reData['isBook'] = $isBook;
     return $reData;
 }

@@ -208,5 +208,10 @@ session_start();
             <br />
             <button>find member</button>
         </form>
+
+        <form action="memLogin.php" method="post">
+            account : <input type="text" name="mamber" />
+            <button>member login<button>
+        </form>
     </body>
 </html>

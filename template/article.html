@@ -46,12 +46,30 @@
         <a class="col-sm-2" href="#article/<%=(prevCh['aid']!=0?prevCh['aid']:data['a_id'])%>/1">前一章节</a>
         <!-- <a class="col-sm-2" href="#">全文显示</a> -->
         <% } %>
-        <a class="col-sm-1" href="#pressPraise/<%=data['a_id']%>">点赞</a>
+        <a class="col-sm-1" href="#pressPraise/<%=data['a_id']%>">
+        <% if(isPraise) { %>
+            已赞
+        <% } else { %>
+            点赞
+        <% } %>
+        </a>
         <br />
         <span class="subscriptShow col-sm-12">
-            <a class="col-sm-2" href="#subscript/mid/<%=data['m_id']%>">該篇作者</a>
+            <a class="col-sm-2" href="#subscript/mid/<%=data['m_id']%>">
+            <% if(isMemberSubscript) { %>
+                已訂閱該作者
+            <% } else { %>
+                該篇作者
+            <% } %>
+            </a>
             <% if(data['asid'] != "0") { %>
-            <a class="col-sm-2" href="#subscript/asid/<%=data['asid']%>">該篇系列</a>
+            <a class="col-sm-2" href="#subscript/asid/<%=data['asid']%>">
+            <% if(isSeriesSubscript) { %>
+                已訂閱該系列
+            <% } else { %>
+                該篇系列
+            <% } %>
+            </a>
             <% } %>
             <a class="col-sm-2" href="#subscript/aid/<%=data['a_id']%>">
             <% if(isSubScript) { %>
@@ -159,12 +177,30 @@
         <a class="col-sm-2" href="#article/<%=(prevCh['aid']!=0?prevCh['aid']:data['a_id'])%>/1">前一章节</a>
         <!-- <a class="col-sm-2" href="#">全文显示</a> -->
         <% } %>
-        <a class="col-sm-1" href="#pressPraise/<%=data['a_id']%>">点赞</a>
+        <a class="col-sm-1" href="#pressPraise/<%=data['a_id']%>">
+        <% if(isPraise) { %>
+            已赞
+        <% } else { %>
+            点赞
+        <% } %>
+        </a>
         <br />
         <span class="subscriptShow col-sm-12">
-            <a class="col-sm-2" href="#subscript/mid/<%=data['m_id']%>">該篇作者</a>
+            <a class="col-sm-2" href="#subscript/mid/<%=data['m_id']%>">
+            <% if(isMemberSubscript) { %>
+                已訂閱該作者
+            <% } else { %>
+                該篇作者
+            <% } %>
+            </a>
             <% if(data['asid'] != "0") { %>
-            <a class="col-sm-2" href="#subscript/asid/<%=data['asid']%>">該篇系列</a>
+            <a class="col-sm-2" href="#subscript/asid/<%=data['asid']%>">
+            <% if(isSeriesSubscript) { %>
+                已訂閱該系列
+            <% } else { %>
+                該篇系列
+            <% } %>
+            </a>
             <% } %>
             <a class="col-sm-2" href="#subscript/aid/<%=data['a_id']%>">
             <% if(isSubScript) { %>
@@ -198,11 +234,14 @@
         <img src="<%=item['headImg']%>" />
         <h5 class="col-xs-10"><%=item['m_user']%><label class="msCrTime"><%=item['ms_crtime']%></label></h5>
         <div class="col-xs-10"><%=item['ms_text']%></div>
-        <% if(item['isMe'] == true) { %>
         <div class="col-xs-12 operPanel">
+        <% if(item['isMe'] == true) { %>
             <a href="#delMsg/<%=item['ms_id']%>" class="col-xs-1">刪除</a>
-        </div>
         <% } %>
+        <% if(isAuthor == true && item['ms_reply'] == "") { %>
+            <a href="#msgReply/<%=item['ms_id']%>" class="col-xs-1">回覆</a>
+        <% } %>
+        </div>
         <% if(item['ms_reply'] != "") { %>
         <div class="reply col-xs-12">
             <label>&nbsp;</label>

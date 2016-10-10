@@ -41,7 +41,8 @@ ArticleRout = Backbone.Router.extend({
         "article/:aid/:nowPage" : "articleShow",
         "article/:aid" : "articleShow",
         "delMsg/:msid" : "delMsg",
-        "delMsgReply/:msid" : "delMsgReply"
+        "delMsgReply/:msid" : "delMsgReply",
+        "msgReply/:msid" : "msgReply"
     },
 
     pressPraise : function(aid) {
@@ -159,5 +160,25 @@ ArticleRout = Backbone.Router.extend({
                 console.log(data);
             history.go(-1);
         });
+    }, 
+
+    msgReply : function(msid) {
+        var postData = {};
+        postData['instr'] = "msgReply";
+        postData['msid'] = msid;
+        var text = prompt("请输入回覆内容");
+        if(text != null) {
+            postData['replyText'] = text;
+            $.post("instr.php", postData, function(data) {
+                //console.log(data);
+                data = JSON.parse(data);
+                //console.log(data);
+                if(data['status'] == 200) 
+                    alert("回覆成功");
+                else
+                    console.log(data);
+                history.go(-1);
+            });
+        }
     }
 });

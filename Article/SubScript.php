@@ -163,4 +163,44 @@ class SubScript {
         else
             return false;
     }
+
+    public function isSeriesSubscript($who, $sid) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $column = Array();
+        $column[0] = "*";
+
+        $conditionArr = Array();
+        $conditionArr['m_who'] = $who;
+        $conditionArr['as_id'] = $sid;
+
+        $dbAdm->selectData($tablename, $column, $conditionArr);
+        $dbAdm->execSQL();
+        $data = $dbAdm->getAll();
+        if(isset($data[0]))
+            return true;
+        else
+            return false;
+    }
+
+    public function isMemberSubscript($who, $author) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $column = Array();
+        $column[0] = "*";
+
+        $conditionArr = Array();
+        $conditionArr['m_who'] = $who;
+        $conditionArr['m_id'] = $author;
+
+        $dbAdm->selectData($tablename, $column, $conditionArr);
+        $dbAdm->execSQL();
+        $data = $dbAdm->getAll();
+        if(isset($data[0]))
+            return true;
+        else
+            return false;
+    }
 }
