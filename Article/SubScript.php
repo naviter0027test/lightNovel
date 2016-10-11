@@ -132,6 +132,27 @@ class SubScript {
         return $data;
     }
 
+    public function allAmount($mid) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $column = Array();
+        $column[0] = "*";
+
+        $sql = "select count(ss.a_id) amount from $tablename ss
+            left join Article a on a.a_id = ss.a_id
+            left join Member m on m.m_id = ss.m_id
+            left join ArticleSeries s on s.as_id = ss.as_id
+            left join ArticleTitle att on att.at_id = a.at_id
+            where ss.m_who = $mid 
+            order by ss_updTime desc ";
+        //echo $sql;
+        $dbAdm->sqlSet($sql);
+        $dbAdm->execSQL();
+        $amount = $dbAdm->getAll()[0]['amount'];
+        return $amount;
+    }
+
     public function cancel($who, $conditionArr) {
         $tablename = $this->table;
         $dbAdm = $this->dbAdm;

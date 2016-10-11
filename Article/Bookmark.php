@@ -102,4 +102,27 @@ class Bookmark {
         $dbAdm->execSQL();
         return $dbAdm->getAll();
     }
+
+    public function listAmount($who) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $column = Array();
+        $column[0] = "*";
+
+        $conditionArr = Array();
+        $conditionArr['bm_who'] = $who;
+
+        $limit = Array();
+        $limit['offset'] = ($nowPage -1) * 25;
+        $limit['amount'] = 25;
+
+        //$dbAdm->selectData($tablename, $column, $conditionArr, null, $limit);
+        $dbAdm->sqlSet("select count(bm.b_id) amount from Bookmark bm 
+            inner join Article a on a.a_id = bm.b_bookId 
+            inner join ArticleTitle att on att.at_id = a.at_id
+            where bm_who = $who ");
+        $dbAdm->execSQL();
+        return $dbAdm->getAll()[0]['amount'];
+    }
 }

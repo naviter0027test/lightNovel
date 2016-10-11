@@ -941,10 +941,12 @@ function subScriptAll() {
     $ssAdm = new SubScript();
 
     $data = $ssAdm->all($_SESSION['mid'], $_POST['nowPage']);
+    $amount = $ssAdm->allAmount($_SESSION['mid']);
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "subScriptAll success";
     $reData['data'] = $data;
+    $reData['amount'] = $amount;
     return $reData;
 }
 
@@ -1064,6 +1066,7 @@ function bookmarkList() {
     $reData['status'] = 200;
     $reData['msg'] = "bookmarkList success";
     $reData['data'] = $bookmarkAdm->lists($_SESSION['mid'], $_POST['nowPage']);
+    $reData['amount'] = $bookmarkAdm->listAmount($_SESSION['mid']);
     return $reData;
 }
 

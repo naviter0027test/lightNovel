@@ -14,6 +14,7 @@ BookmarkModel = Backbone.Model.extend({
     initialize : function() {
     },
     defaults : {
+        'nowPage' : 1,
         'data' : null
     },
 

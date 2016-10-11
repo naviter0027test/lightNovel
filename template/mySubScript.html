@@ -291,14 +291,15 @@
 </script>
 
 <script id="pagerTem" type="text/template">
+    <% var cls = this.model.get("cls"); %>
     <% pageSum = Math.ceil(amount / pageLimit); %>
-    <a class="right-arrow" href="#myArticles/<%=(parseInt(nowPage)+1 <= pageSum ?parseInt(nowPage)+1: nowPage)%>">&rsaquo;</a>
+    <a class="right-arrow" href="#mySubscript/<%=cls%>/<%=(parseInt(nowPage)+1 <= pageSum ?parseInt(nowPage)+1: nowPage)%>">&rsaquo;</a>
     <% for(idx = pageSum; idx >= 1;--idx) { %>
         <% if(idx == nowPage) { %>
         <label><%=idx%></label>
         <% } else { %>
-        <a href="#myArticles/<%=idx%>"><%=idx%></a>
+        <a href="#mySubscript/<%=cls%>/<%=idx%>"><%=idx%></a>
         <% } %>
     <% } %>
-    <a class="left-arrow" href="#myArticles/<%=(nowPage-1 > 0 ?nowPage-1: nowPage)%>">&lsaquo;</a>
+    <a class="left-arrow" href="#mySubscript/<%=cls%>/<%=(nowPage-1 > 0 ?nowPage-1: nowPage)%>">&lsaquo;</a>
 </script>

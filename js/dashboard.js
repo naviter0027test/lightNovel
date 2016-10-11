@@ -15,11 +15,15 @@ $(document).ready(function() {
     mySubScrt = new SubScriptList({'el' : '#content', 'model' : new SubScriptModel() });
     mySubScrt.model.on("change:data", function() {
         mySubScrt.render();
+        var nowPage = this.get("nowPage");
+        pgr.render2(nowPage, 25);
     });
 
     mybookList = new MyBookmarkList({'el' : '#content', 'model' : new BookmarkModel() });
     mybookList.model.on("change:data", function() {
         mybookList.render();
+        var nowPage = this.get("nowPage");
+        pgr.render2(nowPage, 25);
     });
     new DashboardRout();
     Backbone.history.start();
@@ -480,12 +484,21 @@ DashboardRout = Backbone.Router.extend({
         $(allLi).removeClass("nowChoose");
         $(clickBtn).parent().addClass("nowChoose");
         $("#contentTem").load("template/mySubScript.html", function() {
+            if(pgr == null) {
+                pgr = new Pager({'el' : '#pager'});
+                pgr.model = mySubScrt.model;
+            }
+            mySubScrt.model.set("nowPage", nowPage);
             if(cls == "none") {
                 mySubScrt.template = _.template($("#mySubScriptNone").html());
                 mySubScrt.render();
             }
             else if(cls == "all") {
                 mySubScrt.template = _.template($("#mySubScriptAll").html());
+                if(mySubScrt.model.get("data") != null) {
+                    mySubScrt.render();
+                    pgr.render2(nowPage, 25);
+                }
             }
             else if(cls == "article") {
                 mySubScrt.template = _.template($("#mySubScriptArticle").html());
@@ -510,8 +523,17 @@ DashboardRout = Backbone.Router.extend({
         $(allLi).removeClass("nowChoose");
         $(clickBtn).parent().addClass("nowChoose");
         $("#contentTem").load("template/myBookmarkList.html", function() {
+            mybookList.model.set("nowPage");
+            if(pgr == null) {
+                pgr = new Pager({'el' : '#pager'});
+                pgr.model = mybookList.model;
+            }
             mybookList.template = _.template($("#myBookmartListTem").html());
             mybookList.model.list(nowPage);
+            if(mybookList.model.get("data") != null) {
+                mybookList.render();
+                pgr.render2(nowPage, 25);
+            }
         });
     },
 

@@ -17,6 +17,7 @@ SubScriptModel = Backbone.Model.extend({
     initialize : function() {
     },
     defaults : {
+        'nowPage' : 1,
         'cls' : "none",
         'data' : null
     },

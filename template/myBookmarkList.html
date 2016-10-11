@@ -42,14 +42,14 @@
 
 <script id="pagerTem" type="text/template">
     <% pageSum = Math.ceil(amount / pageLimit); %>
-    <a class="right-arrow" href="#myArticles/<%=(parseInt(nowPage)+1 <= pageSum ?parseInt(nowPage)+1: nowPage)%>">&rsaquo;</a>
+    <a class="right-arrow" href="#myBookmark/<%=(parseInt(nowPage)+1 <= pageSum ?parseInt(nowPage)+1: nowPage)%>">&rsaquo;</a>
     <% for(idx = pageSum; idx >= 1;--idx) { %>
         <% if(idx == nowPage) { %>
         <label><%=idx%></label>
         <% } else { %>
-        <a href="#myArticles/<%=idx%>"><%=idx%></a>
+        <a href="#myBookmark/<%=idx%>"><%=idx%></a>
         <% } %>
     <% } %>
-    <a class="left-arrow" href="#myArticles/<%=(nowPage-1 > 0 ?nowPage-1: nowPage)%>">&lsaquo;</a>
+    <a class="left-arrow" href="#myBookmark/<%=(nowPage-1 > 0 ?nowPage-1: nowPage)%>">&lsaquo;</a>
 </script>
 
