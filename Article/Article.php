@@ -527,14 +527,16 @@ class Article {
         }
 
         $sql .= " where 1 = 1 ";
-        if(isset($conditionLike['mainCp']))
-            $sql .= " and a.a_mainCp like '". $conditionLike['mainCp']. "' or a.a_mainCp2 like '". $conditionLike['mainCp']. "' ";
-        if(isset($conditionLike['nonMainCp']))
-            $sql .= " and a.a_mainCp not like '". $conditionLike['nonMainCp']. "' and a.a_mainCp2 not like '". $conditionLike['nonMainCp']. "' ";
-        if(isset($conditionLike['subCp']))
-            $sql .= " and a.a_subCp like '". $conditionLike['subCp']. "' ";
-        if(isset($conditionLike['nonSubCp']))
-            $sql .= " and a.a_subCp not like '". $conditionLike['nonSubCp']. "' ";
+        if(isset($conditionLike['mainCp'])) {
+            $sql .= " and (a.a_mainCp like '". $conditionLike['mainCp']. "' or a.a_mainCp2 like '". $conditionLike['mainCp']. "' ";
+            $sql .= " or a.a_subCp like '". $conditionLike['mainCp']. "') ";
+        }
+        if(isset($conditionLike['nonMainCp'])) {
+            $sql .= " and (a.a_mainCp not like '". $conditionLike['nonMainCp']. "' and a.a_mainCp2 not like '". $conditionLike['nonMainCp']. "' ";
+            $sql .= " or a.a_subCp not like '". $conditionLike['nonMainCp']. "') ";
+        }
+        //if(isset($conditionLike['subCp']))
+        //if(isset($conditionLike['nonSubCp']))
         if(isset($conditionLike['level']))
             $sql .= " and a.a_level in ('". $conditionLike['level']. "') ";
         if(isset($conditionLike['alert']))

@@ -987,14 +987,18 @@ function search() {
     require_once("Article/Article.php");
     $articleAdm = new Article();
     $condition = Array();
+
+    //要求是主、副CP合併搜尋,mainCp 有含subCp字串
     if($_POST['mainCp'] != "")
         $condition['mainCp'] = "%". str_replace(";", "%", $_POST['mainCp']). "%";
     if($_POST['nonMainCp'] != "")
         $condition['nonMainCp'] = "%". str_replace(";", "%", $_POST['nonMainCp']). "%";
+    /*
     if($_POST['subCp'] != "")
         $condition['subCp'] = "%". str_replace(";", "%", $_POST['subCp']). "%";
     if($_POST['nonSubCp'] != "")
         $condition['nonSubCp'] = "%". str_replace(";", "%", $_POST['nonSubCp']). "%";
+     */
     if($_POST['title'] != "")
         $condition['title'] = "%". str_replace(";", "%", $_POST['title']). "%";
     if($_POST['series'] != "")
