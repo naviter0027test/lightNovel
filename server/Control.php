@@ -30,7 +30,8 @@ class Control {
 
         $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "seriesGet", "postArticle", "myData", "mySeriesList", "myLastArticle", "articleDel", "memSrsPages", "personalImg", "personalUpd", "passReset", "addMessage", "pressPraise", "articleEdit", "articleBySid", "changeArticleChapter", "myArticleList", "delArticleFromSeries", 
         "msgReply", "msgDelReply", "msgDel",
-        "storeDraft", "myDraftDel", "editDraft", "myDraftList", "findMem", "subscript", "subScriptAll", "bookmark", "bookmarkCancel", "bookmarkList");
+        "storeDraft", "myDraftDel", "editDraft", "myDraftList", "findMem", "subscript", "subScriptAll", "bookmark", "bookmarkCancel", "bookmarkList",
+        "subScriptList");
 	try {
 	    if(!function_exists($this->instr))
 		throw new Exception("instr not defined");
@@ -929,10 +930,12 @@ function subScriptList() {
         $chooseCls = null;
 
     $data = $ssAdm->lists($_SESSION['mid'], $_POST['nowPage'], $chooseCls);
+    $amount = $ssAdm->amount($_SESSION['mid'], $chooseCls);
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "subScriptList success";
     $reData['data'] = $data;
+    $reData['amount'] = $amount;
     return $reData;
 }
 
