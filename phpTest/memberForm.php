@@ -210,7 +210,7 @@ session_start();
         </form>
 
         <form action="memLogin.php" method="post">
-            account : <input type="text" name="mamber" />
+            account : <input type="text" name="member" />
             <button>member login</button>
         </form>
     </body>

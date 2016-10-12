@@ -229,8 +229,10 @@
     <button id="msgSend">送出留言</button>
     <hr />
     <% var msgCounter = 1; %>
+    <% var nowPage = this.model.get("nowPage"); %>
     <% _.each(data, function(item) { %>
     <div class="userMsg col-xs-12">
+        <span class="col-xs-12"><%=(nowPage-1)*50+msgCounter%>楼</span>
         <img src="<%=item['headImg']%>" />
         <h5 class="col-xs-10"><%=item['m_user']%><label class="msCrTime"><%=item['ms_crtime']%></label></h5>
         <div class="col-xs-10"><%=item['ms_text']%></div>

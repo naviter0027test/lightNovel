@@ -16,6 +16,7 @@ class Config {
     private $user;
     private $pass;
     private $host;
+    private $mail;
 
     public function __construct() {
         date_default_timezone_set("Asia/Taipei");
@@ -23,6 +24,11 @@ class Config {
         $this->dbName = "walnu10_Novel";
         $this->user = "walnu10_novel";
         $this->pass = "n,4n8kkvn";
+
+        $this->mailer = Array();
+        $this->mailer['host'] = "mail.walnutfics.com";
+        $this->mailer['user'] = "system@walnutfics.com";
+        $this->mailer['pass'] = "v$3c8eMf5";
         if($_SERVER['HTTP_HOST'] == "www.walnutfics.com")
             $this->host = "216.97.238.71";
         else if($_SERVER['HTTP_HOST'] == "walnutfics.com")

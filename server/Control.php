@@ -709,7 +709,7 @@ function addMessage() {
     $para = Array();
     $para['mid'] = $_SESSION['mid'];
     $para['aid'] = $_POST['aid'];
-    $para['message'] = $_POST['message'];
+    $para['message'] = nl2br($_POST['message']);
     $member->addMsg($para);
 
     $reData = Array();
