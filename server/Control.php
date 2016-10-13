@@ -313,7 +313,10 @@ function postArticle() {
         require_once("Member/Member.php");
         $memAdm = new Member();
         $mem = $memAdm->find($article['sendUser']);
-        $article['sendUser'] = $mem['m_id'];
+        if(isset($mem['m_id']))
+            $article['sendUser'] = $mem['m_id'];
+        else
+            throw new Exception("send user not found");
     }
 
     if(!$articleTitleAdm->isRepeat($article['title'], $_SESSION['mid'])) {

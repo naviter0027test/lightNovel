@@ -35,7 +35,7 @@ Article = Backbone.View.extend({
             if(data['data'][idx]['a_subCp'] != "") {
                 var subCp = data['data'][idx]['a_subCp'];
                 var subCpArr = data['data'][idx]['a_subCp'].split(";");
-                console.log(subCpArr);
+                //console.log(subCpArr);
                 for(var jdx in subCpArr) {
                     var subNames = subCpArr[jdx].split("/");
                     for(var ldx in subNames) {
@@ -43,7 +43,7 @@ Article = Backbone.View.extend({
                     }
                     subCpArr[jdx] = subNames.join("/");
                 }
-                console.log(subCpArr);
+                //console.log(subCpArr);
                 data['data'][idx]['a_subCp'] = subCpArr.join(";");
             }
             if(data['data'][idx]['a_alert'] != "") {
@@ -331,6 +331,8 @@ PostArticleForm = Backbone.View.extend({
                     alert("系列名重复");
                 else if(data['msg'] == "title is used")
                     alert("已有人用過此標題");
+                else if(data['msg'] == "send user not found");
+                    alert("献给的对象找不到");
             }
         });
         return false;
