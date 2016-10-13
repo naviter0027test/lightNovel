@@ -4,10 +4,13 @@ var pgr = null;
 var myDraftList = null;
 var mySubScrt = null;
 var myBookList = null;
+var myGiftAdm = null;
 $(document).ready(function() {
     dashboard = new Dashboard({'el' : '#dashboard'});
     myArticleList = new MyArticle({'el' : '#content', 'model' : new ArticleModel()});
     myDraftList = new MyDraftList({'el' : '#content', 'model' : new MyDraftModel()});
+    myGiftAdm = new MyGift({'el' : '#content', 'model' : new MyGiftModel()});
+
     myDraftList.model.on("change:data", function() {
         var data = this.get("data");
         myDraftList.render(data);
@@ -22,6 +25,12 @@ $(document).ready(function() {
     mybookList = new MyBookmarkList({'el' : '#content', 'model' : new BookmarkModel() });
     mybookList.model.on("change:data", function() {
         mybookList.render();
+        var nowPage = this.get("nowPage");
+        pgr.render2(nowPage, 25);
+    });
+
+    myGiftAdm.model.on("change:data", function() {
+        myGiftAdm.render();
         var nowPage = this.get("nowPage");
         pgr.render2(nowPage, 25);
     });
@@ -48,6 +57,7 @@ DashboardRout = Backbone.Router.extend({
         "subSeries/:mid/:nowPage" : "subSeries",
         "subScriptArticles/:asid/:nowPage" : "subScriptArticles",
         "subscriptDel/:cls/:id" : "subscriptDel",
+        "myGift/:nowPage" : "myGift",
         "msgReply/:msid" : "msgReply",
         "msgDel/:msid" : "msgDel",
         "changePage/:page" : "changePage",
@@ -559,6 +569,23 @@ DashboardRout = Backbone.Router.extend({
         if(confirm("確定取消訂閱?")) {
             mySubScrt.model.del(cls, id);
         }
+    },
+
+    myGift : function(nowPage) {
+        var clickBtn = $("#dashboard a[temid=myGift]");
+
+        //變換按鈕顏色
+        var allLi = $("#dashboard").find("li");
+        $(allLi).removeClass("nowChoose");
+        $(clickBtn).parent().addClass("nowChoose");
+        $("#contentTem").load("template/myGift.html", function() {
+            if(pgr == null) {
+                pgr = new Pager({'el' : '#pager'});
+            }
+            pgr.model = myGiftAdm.model;
+            myGiftAdm.template = _.template($("#myGiftTem").html());
+            myGiftAdm.model.lists(nowPage);
+        });
     },
 
     msgReply : function(msid) {

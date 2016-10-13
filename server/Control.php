@@ -31,7 +31,7 @@ class Control {
         $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "seriesGet", "postArticle", "myData", "mySeriesList", "myLastArticle", "articleDel", "memSrsPages", "personalImg", "personalUpd", "passReset", "addMessage", "pressPraise", "articleEdit", "articleBySid", "changeArticleChapter", "myArticleList", "delArticleFromSeries", 
         "msgReply", "msgDelReply", "msgDel",
         "storeDraft", "myDraftDel", "editDraft", "myDraftList", "findMem", "subscript", "subScriptAll", "bookmark", "bookmarkCancel", "bookmarkList",
-        "subScriptList");
+        "subScriptList", "giftList");
 	try {
 	    if(!function_exists($this->instr))
 		throw new Exception("instr not defined");
@@ -1092,6 +1092,18 @@ function articleClick() {
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "articleClick success";
+    return $reData;
+}
+
+function giftList() {
+    require_once("Article/Article.php");
+    $articleAdm = new Article();
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "giftList success";
+    $reData['data'] = $articleAdm->myGiftList($_SESSION['mid'], $_POST['nowPage']);
+    $reData['amount'] = $articleAdm->myGiftListAmount($_SESSION['mid']); 
     return $reData;
 }
 

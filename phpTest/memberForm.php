@@ -213,5 +213,13 @@ session_start();
             account : <input type="text" name="member" />
             <button>member login</button>
         </form>
+
+        <br />
+        <form action="../instr.php" method="post">
+            <input type="hidden" name="instr" value="giftList" />
+            gift list<br />
+            now page : <input type="text" name="nowPage" /><br />
+            <button>see</button>
+        </form>
     </body>
 </html>

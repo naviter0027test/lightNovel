@@ -1,0 +1,51 @@
+<script id="myGiftTem" type="text/template">
+    <ol class="breadcrumb">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li class="active">我的礼物</li>
+    </ol>
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <td>文章标题</td>
+                <td>分級</td>
+                <td>作者</td>
+                <!--
+                <td>章节</td>
+                -->
+                <td>發表时间</td>
+            </tr>
+        </thead>
+        <tbody>
+            <% _.each(data, function(item) { %>
+            <tr>
+                <td>
+                    <a href="article.html#article/<%=item['a_id']%>/1">
+                        <%=item['at_title']%>
+                    </a>
+                </td>
+                <td><%=item['a_level']%></td>
+                <td><%=item['m_user']%></td>
+                <!--
+                <td><%=item['a_chapter']%>/<%=(item['at_lastCh']!=0?item['at_lastCh']:"?")%></td>
+                -->
+                <td><%=item['a_crtime']%></td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</script>
+
+<script id="pagerTem" type="text/template">
+    <% pageSum = Math.ceil(amount / pageLimit); %>
+    <a class="right-arrow" href="#myGift/<%=(parseInt(nowPage)+1 <= pageSum ?parseInt(nowPage)+1: nowPage)%>">&rsaquo;</a>
+    <% for(idx = pageSum; idx >= 1;--idx) { %>
+        <% if(idx == nowPage) { %>
+        <label><%=idx%></label>
+        <% } else { %>
+        <a href="#myGift/<%=idx%>"><%=idx%></a>
+        <% } %>
+    <% } %>
+    <a class="left-arrow" href="#myGift/<%=(nowPage-1 > 0 ?nowPage-1: nowPage)%>">&lsaquo;</a>
+</script>
+

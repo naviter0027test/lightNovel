@@ -599,4 +599,31 @@ class Article {
         $dbAdm->sqlSet("update $tablename set a_clickCount = a_clickCount+1 where a_id = $aid");
 	$dbAdm->execSQL();
     }
+
+    public function myGiftList($mid, $nowPage) {
+        $dbAdm = $this->dbAdm;
+        $tablename = $this->table;
+
+        $limit = Array();
+        $limit['offset'] = ($nowPage -1) * 25;
+        $limit['amount'] = 25;
+
+        $dbAdm->sqlSet("select a.*, att.at_title, m.m_user from Article a 
+            inner join ArticleTitle att on a.at_id = att.at_id 
+            inner join Member m on m.m_id = a.m_id 
+            where a.g_sendMid = $mid limit ". $limit['offset']. ", ". $limit['amount']);
+
+	$dbAdm->execSQL();
+        return $dbAdm->getAll();
+    }
+    
+    public function myGiftListAmount($mid) {
+        $dbAdm = $this->dbAdm;
+        $tablename = $this->table;
+
+        $dbAdm->sqlSet("select count(a.a_id) as amount from Article a inner join ArticleTitle att on a.at_id = att.at_id where a.g_sendMid = $mid");
+
+	$dbAdm->execSQL();
+        return $dbAdm->getAll()[0]['amount'];
+    }
 }
