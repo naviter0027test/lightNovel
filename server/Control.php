@@ -718,12 +718,41 @@ function myDraftDel() {
 
 function addMessage() {
     require_once("Member/Member.php");
+    require_once("Article/Article.php");
+    require_once("srvLib/GenMail.php");
+    require_once("server/config.php");
+
+    $config = new Config();
+    $mailer = new GenMail($config->getMailHost(),
+        $config->getMailPort());
+
     $member = new Member();
+    $articleAdm = new Article();
     $para = Array();
     $para['mid'] = $_SESSION['mid'];
     $para['aid'] = $_POST['aid'];
     $para['message'] = nl2br($_POST['message']);
     $member->addMsg($para);
+
+    //留言的會員
+    $leaveMember = $member->getOneById($_SESSION['mid']);
+
+    //取出文章作者資料
+    $article = $articleAdm->get($_POST['aid']);
+    $author = $member->getOneById($article['m_id']);
+
+    if($author['isEmailForGetMsg'] == "Y") {
+        $mailto = Array();
+        $mailto['address'] = $author['m_email'];
+        $mailto['name'] = $author['m_user'];
+        $mailContent = "亲爱的会员您好：
+            <br />
+            刚刚有会员（". $leaveMember['m_user']. 
+            "）在您的文章留下评论 留言內容為:<br />". 
+            $para['message'].
+            "<br /><br />核桃管理";
+        $mailer->send($mailto, "[系统发送] 核桃通知", $mailContent);
+    }
 
     $reData = Array();
     $reData['status'] = 200;
@@ -1114,6 +1143,23 @@ function giftList() {
     $reData['msg'] = "giftList success";
     $reData['data'] = $articleAdm->myGiftList($_SESSION['mid'], $_POST['nowPage']);
     $reData['amount'] = $articleAdm->myGiftListAmount($_SESSION['mid']); 
+    return $reData;
+}
+
+function mailTest() {
+    require_once("srvLib/GenMail.php");
+    require_once("server/config.php");
+    $config = new Config();
+    $mailer = new GenMail($config->getMailHost(),
+        $config->getMailPort());
+
+    $mailto = Array();
+    $mailto['address'] = $_POST['mailto'];
+    $mailto['name'] = "testName";
+    $mailer->send($mailto, "[系统发送] 核桃通知", $_POST['content']);
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "mailTest success";
     return $reData;
 }
 
