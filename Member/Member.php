@@ -73,6 +73,9 @@ class Member {
         $columns[0] = "m_user";
         $columns[1] = "m_email";
         $columns[2] = "m_headImg";
+        $columns[3] = "isEmailForGetMsg";
+        $columns[4] = "isEmailForGetPraise";
+        $columns[5] = "isEmailForGetGift";
 
         $conditionArr = Array();
         $conditionArr['m_id'] = $mid;

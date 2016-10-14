@@ -465,11 +465,21 @@ function personalUpd() {
     $member = new Member();
     $colData = Array();
     $colData['m_email'] = $_POST['email'];
+    $colData['isEmailForGetMsg'] = 'N';
+    $colData['isEmailForGetPraise'] = 'N';
+    $colData['isEmailForGetGift'] = 'N';
+    if(isset($_POST['isEmailForGetMsg']))
+        $colData['isEmailForGetMsg'] = 'Y';
+    if(isset($_POST['isEmailForGetPraise']))
+        $colData['isEmailForGetPraise'] = 'Y';
+    if(isset($_POST['isEmailForGetGift']))
+        $colData['isEmailForGetGift'] = 'Y';
     $member->dataUpdate($colData, $_SESSION['mid']);
 
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "personalUpd success";
+    $reData['post'] = $_POST;
     return $reData;
 }
 

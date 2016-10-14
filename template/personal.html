@@ -9,17 +9,19 @@
         <div class="col-xs-12">
             <label class="col-xs-3">email : </label>
             <input class="col-xs-6" type="text" name="email" value="<%=data['m_email']%>" />
+            <!--
             <button class="col-xs-2 personal">修改</button>
+            -->
             <br />
         </div>
         <div class="col-xs-12">
-            <span>當我收到评论，是否email通知 </span><input type="checkbox" name="isEmailForGetMsg"/><br />
+            <span>當我收到评论，是否email通知 </span><input type="checkbox" name="isEmailForGetMsg" <% if(data['isEmailForGetMsg'] == 'Y') { %> checked <% } %>/><br />
         </div>
         <div class="col-xs-12">
-            <span>當我收到点赞，是否email通知 </span><input type="checkbox" name="isEmailForGetPraise"/><br />
+            <span>當我收到点赞，是否email通知 </span><input type="checkbox" name="isEmailForGetPraise" <% if(data['isEmailForGetPraise'] == 'Y') { %> checked <% } %>/><br />
         </div>
         <div class="col-xs-12">
-            <span>當我收到礼物，是否email通知 </span><input type="checkbox" name="isEmailForGetGift"/><br />
+            <span>當我收到礼物，是否email通知 </span><input type="checkbox" name="isEmailForGetGift" <% if(data['isEmailForGetGift'] == 'Y') { %> checked <% } %>/><br />
         </div>
         <button class="col-xs-3">修改</button>
     </form>

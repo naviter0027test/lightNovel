@@ -649,6 +649,7 @@ DashboardRout = Backbone.Router.extend({
 
         //設定資料修改的瞬間進行render
         memModel.on("change:myData", function() {
+            console.log(memModel.get("myData"));
             self.render(memModel.get("myData"));
             $.getScript("Member/Personal.js", function() {
                 personal = new Personal({'el' : "#personalForm"});
