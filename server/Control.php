@@ -593,32 +593,43 @@ function articleGet() {
     //if($data['as_id'] > 0)
         //$articlesList = $articleAdm->allArticleBySeries($data['as_id']);
     $articlesList = $articleAdm->articlesByArtTitle($data['at_id']);
-    $isScript = $subscriptAdm->isSubscript($_SESSION['mid'], $_POST['aid']);
 
-    $articleTitleAdm = new ArticleTitle();
-    $artTitle = $articleTitleAdm->getById($data['at_id']);
-    if($artTitle['as_id'] > 0)
-        $isSeriesSubscript = $subscriptAdm->isSeriesSubscript($_SESSION['mid'], $artTitle['as_id']);
+    if(isset($_SESSION['mid'])) {
+        $isScript = $subscriptAdm->isSubscript($_SESSION['mid'], $_POST['aid']);
 
-    $isMemberSubscript = $subscriptAdm->isMemberSubscript($_SESSION['mid'], $data['m_id']);
+        $articleTitleAdm = new ArticleTitle();
+        $artTitle = $articleTitleAdm->getById($data['at_id']);
+        if($artTitle['as_id'] > 0)
+            $isSeriesSubscript = $subscriptAdm->isSeriesSubscript($_SESSION['mid'], $artTitle['as_id']);
 
-    $isBook = $bookmarkAdm->isBook($_SESSION['mid'], $_POST['aid']);
+        $isMemberSubscript = $subscriptAdm->isMemberSubscript($_SESSION['mid'], $data['m_id']);
 
-    $praiseList = $praise->getPraise($_SESSION['mid'], $_POST['aid']);
-    $isPraise = false;
-    if(count($praiseList) > 0) 
-        $isPraise = true;
+        $isBook = $bookmarkAdm->isBook($_SESSION['mid'], $_POST['aid']);
+
+        $praiseList = $praise->getPraise($_SESSION['mid'], $_POST['aid']);
+        $isPraise = false;
+        if(count($praiseList) > 0) 
+            $isPraise = true;
+    }
 
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "articleGet success";
     $reData['data'] = $data;
     $reData['articles'] = $articlesList;
-    $reData['isSubScript'] = $isScript;
-    $reData['isSeriesSubscript'] = $isSeriesSubscript;
-    $reData['isMemberSubscript'] = $isMemberSubscript;
-    $reData['isPraise'] = $isPraise;
-    $reData['isBook'] = $isBook;
+    $reData['isSubScript'] = false;
+    $reData['isSeriesSubscript'] = false;
+    $reData['isMemberSubscript'] = false;
+    $reData['isPraise'] = false;
+    $reData['isBook'] = false;
+
+    if(isset($_SESSION['mid'])) {
+        $reData['isSubScript'] = $isScript;
+        $reData['isSeriesSubscript'] = $isSeriesSubscript;
+        $reData['isMemberSubscript'] = $isMemberSubscript;
+        $reData['isPraise'] = $isPraise;
+        $reData['isBook'] = $isBook;
+    }
     return $reData;
 }
 
