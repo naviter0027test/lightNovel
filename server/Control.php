@@ -879,6 +879,18 @@ function msgMyList() {
 
 function pressPraise() {
     require_once("Article/Praise.php");
+    require_once("Article/Article.php");
+    require_once("Member/Member.php");
+    require_once("srvLib/GenMail.php");
+    require_once("server/config.php");
+
+    $config = new Config();
+    $mailer = new GenMail($config->getMailHost(),
+        $config->getMailPort());
+
+    $articleAdm = new Article();
+    $member = new Member();
+
     $praise = new Praise();
     $praiseList = $praise->getPraise($_SESSION['mid'], $_POST['aid']);
 
@@ -887,6 +899,27 @@ function pressPraise() {
         $praise->addPraise($_SESSION['mid'], $_POST['aid']);
         $reData['status'] = 200;
         $msg = "pressPraise success";
+
+        //留言的會員
+        $leaveMember = $member->getOneById($_SESSION['mid']);
+
+        //取出文章作者資料
+        $article = $articleAdm->get($_POST['aid']);
+        $author = $member->getOneById($article['m_id']);
+
+        if($author['isEmailForGetPraise'] == "Y") {
+            $mailto = Array();
+            $mailto['address'] = $author['m_email'];
+            $mailto['name'] = $author['m_user'];
+
+            $lastSlash = strrpos($_SERVER['PHP_SELF'], '/', -1);
+            $mailContent = "亲爱的会员您好：
+                <br />
+                刚刚有会员（". $leaveMember['m_user']. 
+                "）在您的<a href='". "http://". $_SERVER['HTTP_HOST']. substr($_SERVER['PHP_SELF'], 0, $lastSlash) . "/article.html#article/". $article['a_id']. "/1'>文章</a>點贊. <br />". 
+                "<br /><br />核桃管理";
+            $mailer->send($mailto, "[系统发送] 核桃通知", $mailContent);
+        }
     }
     else {
         $reData['status'] = 500;
