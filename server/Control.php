@@ -580,16 +580,23 @@ function myArticleList() {
 }
 
 function articleGet() {
+    require_once("Member/Member.php");
     require_once("Article/Article.php");
     require_once("Article/ArticleTitle.php");
     require_once("Article/SubScript.php");
     require_once("Article/Bookmark.php");
     require_once("Article/Praise.php");
+    $memAdm = new Member();
     $praise = new Praise();
     $articleAdm = new Article();
     $subscriptAdm = new SubScript();
     $bookmarkAdm = new Bookmark();
     $data = $articleAdm->get($_POST['aid']);
+    $data['sendUser'] = "";
+    if($data['g_sendMid'] != 0) {
+        $sendUser = $memAdm->getOneById($data['g_sendMid']);
+        $data['sendUser'] = $sendUser['m_user'];
+    }
     //if($data['as_id'] > 0)
         //$articlesList = $articleAdm->allArticleBySeries($data['as_id']);
     $articlesList = $articleAdm->articlesByArtTitle($data['at_id']);
@@ -815,7 +822,7 @@ function msgList() {
 function msgReply() {
     require_once("Article/Message.php");
     $msg = new Message();
-    $msg->reply($_POST['msid'], $_POST['replyText']);
+    $msg->reply($_POST['msid'], nl2br($_POST['replyText']));
 
     $reData = Array();
     $reData['status'] = 200;
@@ -1046,7 +1053,7 @@ function search() {
     $articleAdm = new Article();
     $condition = Array();
 
-    //要求是主、副CP合併搜尋,mainCp 有含subCp字串
+    //要求是主、副CP合併搜索,mainCp 有含subCp字串
     if($_POST['mainCp'] != "")
         $condition['mainCp'] = "%". str_replace(";", "%", $_POST['mainCp']). "%";
     if($_POST['nonMainCp'] != "")

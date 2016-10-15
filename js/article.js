@@ -30,6 +30,7 @@ $(document).ready(function() {
 
         new ArticleRout();
         Backbone.history.start();
+
     });
 });
 
@@ -89,12 +90,12 @@ ArticleRout = Backbone.Router.extend({
             //console.log(data);
             if(data['status'] == 200) {
                 if(data['msg'] == "subscript success")
-                    alert("訂閱成功");
+                    alert("订阅成功");
                 else if(data['msg'] == "subscriptCancel success")
-                    alert("訂閱取消 成功");
+                    alert("订阅取消 成功");
             }
             else {
-                alert("訂閱失敗");
+                alert("订阅失敗");
                 console.log(data);
             }
             history.go(-1);
@@ -163,11 +164,12 @@ ArticleRout = Backbone.Router.extend({
     }, 
 
     msgReply : function(msid) {
-        var postData = {};
-        postData['instr'] = "msgReply";
-        postData['msid'] = msid;
-        var text = prompt("请输入回覆内容");
-        if(text != null) {
+        $.blockUI({ message: $("#replyMsg")});
+        $("#replyMsg button.check").on("click", function() {
+            var text = $("#replyMsg textarea").val();
+            var postData = {};
+            postData['instr'] = "msgReply";
+            postData['msid'] = msid;
             postData['replyText'] = text;
             $.post("instr.php", postData, function(data) {
                 //console.log(data);
@@ -178,7 +180,13 @@ ArticleRout = Backbone.Router.extend({
                 else
                     console.log(data);
                 history.go(-1);
+                location.reload();
             });
-        }
+        });
+        $("#replyMsg button.cancel").on("click", function() {
+            $.unblockUI();
+            history.go(-1);
+            location.reload();
+        });
     }
 });

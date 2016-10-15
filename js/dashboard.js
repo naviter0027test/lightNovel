@@ -566,7 +566,7 @@ DashboardRout = Backbone.Router.extend({
     },
 
     subscriptDel : function(cls, id) {
-        if(confirm("確定取消訂閱?")) {
+        if(confirm("確定取消订阅?")) {
             mySubScrt.model.del(cls, id);
         }
     },

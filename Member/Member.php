@@ -186,7 +186,7 @@ class Member {
         $colData['m_pass'] = md5($newPassword);
         $this->dataUpdate($colData, $mem['m_id']);
         $content = "忘记密码信件，您的新密码：". $newPassword;
-        sendMail($mem['m_email'], "[楼诚]忘记密码信件（系统发信，请勿回覆）", $content);
+        sendMail($mem['m_email'], "[核桃]忘记密码信件（系统发信，请勿回覆）", $content);
     }
 
     public function authenticate($user, $authCode) {

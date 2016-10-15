@@ -16,8 +16,8 @@
             <option value="<%=item['a_id']%>">Ch<%=counter++%> <%=item['a_aTitle']%></option>
         <% }); %>
             <!--
-            <option>Ch4 章節標題</option>
-            <option>Ch5 章節標題</option>
+            <option>Ch4 章节標題</option>
+            <option>Ch5 章节標題</option>
             -->
         </select>
         <% 
@@ -42,7 +42,7 @@
             }
         }
         %>
-        <a class="col-sm-2" href="#article/<%=nextCh['aid']%>/1">後一章节</a>
+        <a class="col-sm-2" href="#article/<%=nextCh['aid']%>/1">后一章节</a>
         <a class="col-sm-2" href="#article/<%=(prevCh['aid']!=0?prevCh['aid']:data['a_id'])%>/1">前一章节</a>
         <!-- <a class="col-sm-2" href="#">全文显示</a> -->
         <% } %>
@@ -57,7 +57,7 @@
         <span class="subscriptShow col-sm-12">
             <a class="col-sm-2" href="#subscript/mid/<%=data['m_id']%>">
             <% if(isMemberSubscript) { %>
-                已訂閱該作者
+                已订阅該作者
             <% } else { %>
                 該篇作者
             <% } %>
@@ -65,7 +65,7 @@
             <% if(data['asid'] != "0") { %>
             <a class="col-sm-2" href="#subscript/asid/<%=data['asid']%>">
             <% if(isSeriesSubscript) { %>
-                已訂閱該系列
+                已订阅該系列
             <% } else { %>
                 該篇系列
             <% } %>
@@ -73,20 +73,20 @@
             <% } %>
             <a class="col-sm-2" href="#subscript/aid/<%=data['a_id']%>">
             <% if(isSubScript) { %>
-                已訂閱文章
+                已订阅文章
             <% } else { %>
                 該篇文章
             <% } %>
             </a>
-            <label class="col-sm-2">訂閱</label>
+            <label class="col-sm-2">订阅</label>
             <a class="col-sm-2" href="#bookmark/<%=data['a_id']%>">
             <% if(isBook) { %>
                 已收藏
             <% } else { %>
-                收藏此章節
+                收藏此章节
             <% } %>
             </a>
-            <label class="col-sm-1">書籤</label>
+            <label class="col-sm-1">书签</label>
         </span>
     </div>
     <div class="articleItem">
@@ -102,6 +102,9 @@
         <h4>副CP：<%=data['a_subCp']%></h4>
         <h4>警告：<%=data['a_alert']%></h4>
         <h4>标签：<%=data['a_tag']%></h4>
+        <% if(data['sendUser'] != "") { %>
+            <h4>献给：<%=data['sendUser']%></h4>
+        <% } %>
         <span class="col-xs-6">
         <% if(data['as_finally'] != null) { %>
             章节：<label><%=data['a_chapter']%>/<%=data['as_finally']%></label> 
@@ -146,10 +149,6 @@
         <% _.each(articles, function(item) { %>
             <option value="<%=item['a_id']%>"><%=item['a_aTitle']%></option>
         <% }); %>
-            <!--
-            <option>Ch4 章節標題</option>
-            <option>Ch5 章節標題</option>
-            -->
         </select>
         <% 
         for(var i = 0; i < articles.length-1;++i) {
@@ -188,7 +187,7 @@
         <span class="subscriptShow col-sm-12">
             <a class="col-sm-2" href="#subscript/mid/<%=data['m_id']%>">
             <% if(isMemberSubscript) { %>
-                已訂閱該作者
+                已订阅該作者
             <% } else { %>
                 該篇作者
             <% } %>
@@ -196,7 +195,7 @@
             <% if(data['asid'] != "0") { %>
             <a class="col-sm-2" href="#subscript/asid/<%=data['asid']%>">
             <% if(isSeriesSubscript) { %>
-                已訂閱該系列
+                已订阅該系列
             <% } else { %>
                 該篇系列
             <% } %>
@@ -204,20 +203,20 @@
             <% } %>
             <a class="col-sm-2" href="#subscript/aid/<%=data['a_id']%>">
             <% if(isSubScript) { %>
-                已訂閱文章
+                已订阅文章
             <% } else { %>
                 該篇文章
             <% } %>
             </a>
-            <label class="col-sm-2">訂閱</label>
+            <label class="col-sm-2">订阅</label>
             <a class="col-sm-2" href="#bookmark/<%=data['a_id']%>">
             <% if(isBook) { %>
                 已收藏
             <% } else { %>
-                收藏此章節
+                收藏此章节
             <% } %>
             </a>
-            <label class="col-sm-1">書籤</label>
+            <label class="col-sm-1">书签</label>
         </span>
     </div>
 </script>
@@ -228,6 +227,13 @@
     <br />
     <button id="msgSend">送出留言</button>
     <hr />
+    <div id="replyMsg" style="display: none;">
+        <h3>作者回覆</h3>
+        <textarea name="replyText"></textarea>
+        <br />
+        <button class="check">回覆</button>
+        <button class="cancel">取消</button>
+    </div>
     <% var msgCounter = 1; %>
     <% var nowPage = this.model.get("nowPage"); %>
     <% _.each(data, function(item) { %>
@@ -248,7 +254,7 @@
         <div class="reply col-xs-12">
             <label>&nbsp;</label>
             <img src="<%=authorImg%>" />
-            <%=item['ms_reply']%>
+            <div class="col-xs-9"><%=item['ms_reply']%></div>
         </div>
         <% if(isAuthor == true) { %>
         <div class="col-xs-12 operPanel">

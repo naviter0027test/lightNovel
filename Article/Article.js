@@ -304,7 +304,7 @@ PostArticleForm = Backbone.View.extend({
                     alert("編輯成功");
                 else {
 
-                    //針對草稿編輯後發文的情況，發文成功要順帶刪除草稿
+                    //針對草稿編輯后發文的情況，發文成功要順帶刪除草稿
                     if(typeof(Backbone.history.fragment) !== 'undefined') 
                         if(Backbone.history.fragment.search("draftEdit") != -1) {
                             var draftArr = Backbone.history.fragment.split("/");
@@ -321,7 +321,7 @@ PostArticleForm = Backbone.View.extend({
                             });
                         }
 
-                    alert("發文成功!");
+                    alert("发文成功!");
                 }
                 location.href = "index.html#/1";
             }

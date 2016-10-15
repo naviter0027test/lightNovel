@@ -22,11 +22,11 @@ HeadPanel = Backbone.View.extend({
                 if(nowHref == "dashboard.html" || nowHref == "postArticle.html")
                     location.href = "index.html";
 
-                //文章的訂閱功能表
+                //文章的订阅功能表
                 $(".subscriptShow").hide();
             }
             else {
-                //文章的訂閱功能表
+                //文章的订阅功能表
                 $(".subscriptShow").show();
             }
             self.render();
