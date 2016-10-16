@@ -62,7 +62,7 @@ class Message {
         $tablename = $this->table;
         $dbAdm = $this->dbAdm;
 
-        $dbAdm->sqlSet("select ms.*, m.m_user, m.m_headImg from Message ms inner join Member m on ms.m_id = m.m_id where ms.parentMs_id = $parentId order by ms_crtime asc");
+        $dbAdm->sqlSet("select ms.*, m.m_user, m.m_headImg from Message ms inner join Member m on ms.m_id = m.m_id where ms.parentMs_id = $parentId order by ms_crtime desc");
         $dbAdm->execSQL();
         return $dbAdm->getAll();
     }

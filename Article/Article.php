@@ -539,10 +539,10 @@ class Article {
         //if(isset($conditionLike['nonSubCp']))
         if(isset($conditionLike['level']))
             $sql .= " and a.a_level in ('". $conditionLike['level']. "') ";
-        if(isset($conditionLike['alert']))
-            $sql .= " and a.a_alert like '". $conditionLike['alert']. "' ";
-        if(isset($conditionLike['tag']))
-            $sql .= " and a.a_tag like '". $conditionLike['tag']. "' ";
+        if(isset($conditionLike['alertTag']))
+            $sql .= " and (a.a_alert like '". $conditionLike['alertTag']. "' ";
+        if(isset($conditionLike['alertTag']))
+            $sql .= " or a.a_tag like '". $conditionLike['alertTag']. "') ";
         $sql .= " limit $startNum, 25";
         //echo $sql;
         $dbAdm->sqlSet($sql);
@@ -582,10 +582,10 @@ class Article {
             $sql .= " and a.a_subCp not like '". $conditionLike['nonSubCp']. "' ";
         if(isset($conditionLike['level']))
             $sql .= " and a.a_level in ('". $conditionLike['level']. "') ";
-        if(isset($conditionLike['alert']))
-            $sql .= " and a.a_alert like '". $conditionLike['alert']. "' ";
-        if(isset($conditionLike['tag']))
-            $sql .= " and a.a_tag like '". $conditionLike['tag']. "' ";
+        if(isset($conditionLike['alertTag']))
+            $sql .= " and (a.a_alert like '". $conditionLike['alertTag']. "' ";
+        if(isset($conditionLike['alertTag']))
+            $sql .= " or a.a_tag like '". $conditionLike['alertTag']. "') ";
         //$sql .= " limit $startNum, 25";
         //echo $sql;
         $dbAdm->sqlSet($sql);
