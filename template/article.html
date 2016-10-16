@@ -237,7 +237,7 @@
     <% var msgCounter = 1; %>
     <% var nowPage = this.model.get("nowPage"); %>
     <% _.each(data, function(item) { %>
-    <span class="col-xs-12"><%=(nowPage-1)*50+msgCounter%>楼</span>
+    <span class="col-xs-12"><%=parseInt(item['ms_floor'])+1%>楼</span>
     <div class="userMsg col-xs-12">
         <img src="<%=item['headImg']%>" />
         <h5 class="col-xs-10"><%=item['m_user']%><label class="msCrTime"><%=item['ms_crtime']%></label></h5>
@@ -250,17 +250,17 @@
             <a href="#msgReply/<%=item['ms_id']%>" class="col-xs-1">回覆</a>
         <% } %>
         </div>
-        <% if(item['ms_reply'] != "") { %>
-        <div class="reply col-xs-12">
-            <label>&nbsp;</label>
-            <img src="<%=authorImg%>" />
-            <div class="col-xs-9"><%=item['ms_reply']%></div>
-        </div>
-        <% if(isAuthor == true) { %>
-        <div class="col-xs-12 operPanel">
-            <a href="#delMsgReply/<%=item['ms_id']%>" class="col-xs-1">刪除</a>
-        </div>
-        <% } %>
+        <% for(var msRidx = 0;msRidx < item['replyArr'].length;++msRidx) { %>
+            <div class="reply col-xs-12">
+                <label>&nbsp;</label>
+                <img src="<%=authorImg%>" />
+                <div class="col-xs-9"><%=item['replyArr'][msRidx]['ms_reply']%></div>
+            </div>
+            <% if(isAuthor == true) { %>
+            <div class="col-xs-12 operPanel">
+                <a href="#delMsgReply/<%=item['replyArr'][msRidx]['ms_id']%>" class="col-xs-1">刪除</a>
+            </div>
+            <% } %>
         <% } %>
     </div>
     <% ++msgCounter; %>

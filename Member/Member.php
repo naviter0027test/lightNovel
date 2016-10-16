@@ -265,7 +265,16 @@ class Member {
         if(!isset($para['message']) || $para['message'] == "")
             throw new Exception("message is empty");
 
+        $dbAdm->sqlSet("select max(ms_floor) floor from Message where a_id = ". $para['aid']);
+        $dbAdm->execSQL();
+        $maxFloor = $dbAdm->getAll()[0]['floor'];
+        if($maxFloor == null)
+            $maxFloor = 0;
+        else
+            $maxFloor += 1;
+
         $insData = Array();
+        $insData['ms_floor'] = $maxFloor;
         $insData['a_id'] = $para['aid'];
         $insData['m_id'] = $para['mid'];
         $insData['ms_text'] = $para['message'];

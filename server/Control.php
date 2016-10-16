@@ -790,6 +790,8 @@ function msgList() {
         else
             $data[$i]['headImg'] = "imgs/80x80.png";
 
+        $data[$i]['replyArr'] = $msg->getReplyList($_POST['aid'], $item['ms_id']);
+
         //留言者是否為登入者本身
         if($item['m_id'] == $_SESSION['mid'])
             $data[$i]['isMe'] = true;

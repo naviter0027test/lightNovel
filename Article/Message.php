@@ -53,7 +53,16 @@ class Message {
         $limit['offset'] = ($nowPage -1) * 50;
         $limit['amount'] = 50;
         //$dbAdm->selectData($tablename, $columns, $conditionArr, $order, $limit);
-        $dbAdm->sqlSet("select ms.*, m.m_user, m.m_headImg from Message ms inner join Member m on ms.m_id = m.m_id where ms.a_id = $aid order by ms_crtime asc limit ". $limit['offset']. ", ". $limit['amount']);
+        $dbAdm->sqlSet("select ms.*, m.m_user, m.m_headImg from Message ms inner join Member m on ms.m_id = m.m_id where ms.a_id = $aid and ms.parentMs_id = 0 order by ms_crtime asc limit ". $limit['offset']. ", ". $limit['amount']);
+        $dbAdm->execSQL();
+        return $dbAdm->getAll();
+    }
+
+    public function getReplyList($aid, $parentId) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $dbAdm->sqlSet("select ms.*, m.m_user, m.m_headImg from Message ms inner join Member m on ms.m_id = m.m_id where ms.parentMs_id = $parentId order by ms_crtime asc");
         $dbAdm->execSQL();
         return $dbAdm->getAll();
     }
@@ -98,13 +107,28 @@ class Message {
         $tablename = $this->table;
         $dbAdm = $this->dbAdm;
 
+        $dbAdm->sqlSet("select * from Message ms where ms_id = $msid");
+        $dbAdm->execSQL();
+        $message = $dbAdm->getAll()[0];
+
+        $insData = Array();
+        $insData['a_id'] = $message['a_id'];
+        $insData['m_id'] = $message['m_id'];
+        $insData['parentMs_id'] = $msid;
+        $insData['ms_reply'] = $text;
+        $insData['ms_crtime'] = date('Y-m-d H:i:s');
+
+        $dbAdm->insertData($tablename, $insData);
+        $dbAdm->execSQL();
+
+        /*
         $colData = Array();
         $colData['ms_reply'] = $text;
 
         $conditionArr = Array();
         $conditionArr['ms_id'] = $msid;
         $dbAdm->updateData($tablename, $colData, $conditionArr);
-        $dbAdm->execSQL();
+        */
     }
 
     public function del($msid) {
