@@ -30,8 +30,29 @@ HeadPanel = Backbone.View.extend({
                 $(".subscriptShow").show();
             }
             self.render();
+
+            //取出'已讚'、'禮物'與'留言'的總數印在登入小窗上
+            self.model.getPraiseAmount();
+            self.model.getGiftAmount();
+            self.model.getMsgAmount();
+            self.model.on("change:praiseAmount", function() {
+                var amount = this.get("praiseAmount");
+                //console.log(amount);
+                $(".myPraiseAmount").text(amount);
+            });
+            self.model.on("change:giftAmount", function() {
+                var amount = this.get("giftAmount");
+                //console.log(amount);
+                $(".myGiftAmount").text(amount);
+            });
+            self.model.on("change:msgAmount", function() {
+                var amount = this.get("msgAmount");
+                //console.log(amount);
+                $(".myMsgAmount").text(amount);
+            });
         });
 
+        //會員的資料取出,印出使用者帳號
         this.model.on("change:myData", function() {
             var data = this.get("myData");
             if(data['status'] == 200) {
@@ -106,6 +127,9 @@ MemberModel = Backbone.Model.extend({
         'seriesList' : null,
         'seriesAmount' : null,
         'orderDetail' : null,
+        'praiseAmount' : null,
+        'giftAmount' : null,
+        'msgAmount' : null,
         'isLogin' : null
     },
 
@@ -189,6 +213,48 @@ MemberModel = Backbone.Model.extend({
             data = JSON.parse(data);
             //console.log(data);
             self.set("seriesAmount", data['amount']);
+        });
+    },
+
+    getPraiseAmount : function() {
+        var self = this;
+        var postData = {};
+        postData['instr'] = "praiseAmount";
+        $.post("instr.php", postData, function(data) {
+            //console.log(data);
+            data = JSON.parse(data);
+            //console.log(data);
+            if(data['status'] == 200) {
+                self.set("praiseAmount", data['data']);
+            }
+        });
+    },
+
+    getGiftAmount : function() {
+        var self = this;
+        var postData = {};
+        postData['instr'] = "giftAmount";
+        $.post("instr.php", postData, function(data) {
+            //console.log(data);
+            data = JSON.parse(data);
+            //console.log(data);
+            if(data['status'] == 200) {
+                self.set("giftAmount", data['data']);
+            }
+        });
+    },
+
+    getMsgAmount : function() {
+        var self = this;
+        var postData = {};
+        postData['instr'] = "msgAmount";
+        $.post("instr.php", postData, function(data) {
+            //console.log(data);
+            data = JSON.parse(data);
+            //console.log(data);
+            if(data['status'] == 200) {
+                self.set("msgAmount", data['data']);
+            }
         });
     }
 });
