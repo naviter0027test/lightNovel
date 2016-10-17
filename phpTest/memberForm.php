@@ -221,5 +221,23 @@ session_start();
             now page : <input type="text" name="nowPage" /><br />
             <button>see</button>
         </form>
+
+        <form action="../instr.php" method="post">
+            praise amount
+            <input type="hidden" name="instr" value="praiseAmount" />
+            <button>check</button>
+        </form>
+
+        <form action="../instr.php" method="post">
+            gift amount
+            <input type="hidden" name="instr" value="giftAmount" />
+            <button>check </button>
+        </form>
+
+        <form action="../instr.php" method="post">
+            message amount
+            <input type="hidden" name="instr" value="msgAmount" />
+            <button>check </button>
+        </form>
     </body>
 </html>

@@ -31,7 +31,7 @@ class Control {
         $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "seriesGet", "postArticle", "myData", "mySeriesList", "myLastArticle", "articleDel", "memSrsPages", "personalImg", "personalUpd", "passReset", "addMessage", "pressPraise", "articleEdit", "articleBySid", "changeArticleChapter", "myArticleList", "delArticleFromSeries", 
         "msgReply", "msgDelReply", "msgDel",
         "storeDraft", "myDraftDel", "editDraft", "myDraftList", "findMem", "subscript", "subScriptAll", "bookmark", "bookmarkCancel", "bookmarkList",
-        "subScriptList", "giftList");
+        "subScriptList", "giftList", "praiseAmount", "giftAmount", "msgAmount");
 	try {
 	    if(!function_exists($this->instr))
 		throw new Exception("instr not defined");
@@ -879,6 +879,25 @@ function msgMyList() {
     return $reData;
 }
 
+function msgAmount() {
+    require_once("Article/Message.php");
+    require_once("Article/Article.php");
+    $msgAdm = new Message();
+    $articleAdm = new Article();
+
+    $amount = 0;
+    $articles = $articleAdm->myAllList($_SESSION['mid']);
+    foreach($articles as $art) {
+        $amount += (int) $msgAdm->listAmount($art['a_id']);
+    }
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "msgAmount success";
+    $reData['data'] = $amount;
+    return $reData;
+}
+
 function pressPraise() {
     require_once("Article/Praise.php");
     require_once("Article/Article.php");
@@ -929,6 +948,24 @@ function pressPraise() {
     }
 
     $reData['msg'] = $msg;
+    return $reData;
+}
+
+function praiseAmount() {
+    require_once("Article/Praise.php");
+    require_once("Article/Article.php");
+    $praise = new Praise();
+    $articleAdm = new Article();
+
+    $praiseAmount = 0;
+    $articles = $articleAdm->myAllList($_SESSION['mid']);
+    foreach($articles as $art) 
+        $praiseAmount += (int) $praise->amountByAid($art['a_id']);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "praiseAmount success";
+    $reData['data'] = $praiseAmount;
     return $reData;
 }
 
@@ -1198,6 +1235,17 @@ function giftList() {
     $reData['msg'] = "giftList success";
     $reData['data'] = $articleAdm->myGiftList($_SESSION['mid'], $_POST['nowPage']);
     $reData['amount'] = $articleAdm->myGiftListAmount($_SESSION['mid']); 
+    return $reData;
+}
+
+function giftAmount() {
+    require_once("Article/Article.php");
+    $articleAdm = new Article();
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "giftAmount success";
+    $reData['data'] = $articleAdm->myGiftListAmount($_SESSION['mid']); 
     return $reData;
 }
 

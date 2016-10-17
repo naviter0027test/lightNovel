@@ -51,6 +51,21 @@ class Praise {
         return $dbAdm->getAll();
     }
 
+    public function amountByAid($aid) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+        $column = Array();
+        $column[0] = "count(p_id) amount";
+
+        $conditionArr = Array();
+        $conditionArr['a_id'] = $aid;
+
+        $dbAdm->selectData($tablename, $column, $conditionArr);
+        $dbAdm->execSQL();
+
+        return $dbAdm->getAll()[0]['amount'];
+    }
+
     public function addPraise($mid, $aid) {
         $tablename = $this->table;
         $dbAdm = $this->dbAdm;
