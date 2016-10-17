@@ -239,5 +239,11 @@ session_start();
             <input type="hidden" name="instr" value="msgAmount" />
             <button>check </button>
         </form>
+
+        <form action="../instr.php" method="post">
+            subscript update amount
+            <input type="hidden" name="instr" value="subscriptUpdAmount" />
+            <button>check</button>
+        </form>
     </body>
 </html>

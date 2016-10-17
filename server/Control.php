@@ -1085,6 +1085,23 @@ function subScriptAll() {
     return $reData;
 }
 
+function subscriptUpdAmount() {
+    require_once("Article/SubScript.php");
+    $ssAdm = new SubScript();
+
+    $amount = 0;
+    $subscripts = $ssAdm->allSubscript($_SESSION['mid']);
+    foreach($subscripts as $item) 
+        if($item['ss_updTime'] > $item['ss_chkTime'])
+            ++$amount;
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "subscriptUpdAmount success";
+    $reData['data'] = $amount;
+    return $reData;
+}
+
 function subScriptDel() {
     require_once("Article/SubScript.php");
     $ssAdm = new SubScript();

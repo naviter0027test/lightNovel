@@ -132,6 +132,19 @@ class SubScript {
         return $data;
     }
 
+    public function allSubscript($mid) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $column = Array();
+        $column[0] = "*";
+
+        $dbAdm->selectData($tablename, $column);
+        $dbAdm->execSQL();
+        $data = $dbAdm->getAll();
+        return $data;
+    }
+
     public function allAmount($mid) {
         $tablename = $this->table;
         $dbAdm = $this->dbAdm;
