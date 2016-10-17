@@ -35,6 +35,7 @@ HeadPanel = Backbone.View.extend({
             self.model.getPraiseAmount();
             self.model.getGiftAmount();
             self.model.getMsgAmount();
+            self.model.getSubscriptAmount();
             self.model.on("change:praiseAmount", function() {
                 var amount = this.get("praiseAmount");
                 //console.log(amount);
@@ -49,6 +50,11 @@ HeadPanel = Backbone.View.extend({
                 var amount = this.get("msgAmount");
                 //console.log(amount);
                 $(".myMsgAmount").text(amount);
+            });
+            self.model.on("change:subscriptAmount", function() {
+                var amount = this.get("subscriptAmount");
+                //console.log(amount);
+                $(".mySubscriptAmount").text(amount);
             });
         });
 
@@ -130,6 +136,7 @@ MemberModel = Backbone.Model.extend({
         'praiseAmount' : null,
         'giftAmount' : null,
         'msgAmount' : null,
+        'subscriptAmount' : null,
         'isLogin' : null
     },
 
@@ -254,6 +261,20 @@ MemberModel = Backbone.Model.extend({
             //console.log(data);
             if(data['status'] == 200) {
                 self.set("msgAmount", data['data']);
+            }
+        });
+    },
+
+    getSubscriptAmount : function() {
+        var self = this;
+        var postData = {};
+        postData['instr'] = "subscriptUpdAmount";
+        $.post("instr.php", postData, function(data) {
+            //console.log(data);
+            data = JSON.parse(data);
+            //console.log(data);
+            if(data['status'] == 200) {
+                self.set("subscriptAmount", data['data']);
             }
         });
     }

@@ -352,6 +352,7 @@ function articleEdit() {
     require_once("Article/Series.php");
     require_once("Article/Article.php");
     require_once("Article/ArticleTitle.php");
+    require_once("Article/SubScript.php");
     $series = new Series();
     $articleTitleAdm = new ArticleTitle();
     $articleAdm = new Article();
@@ -391,6 +392,14 @@ function articleEdit() {
     }
 
     $articleAdm->articleUpd($article);
+
+    //當文章修改成功，要更改Subscript的更新時間
+    $subscriptAdm = new SubScript();
+    $subArts = $subscriptAdm->getAllByAid($article['aid']);
+    foreach($subArts as $subs) {
+        $subscriptAdm->artUpdTime($subs['ss_id']);
+    }
+
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "articleEdit success";

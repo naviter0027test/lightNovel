@@ -259,4 +259,31 @@ class SubScript {
         else
             return false;
     }
+
+    public function artUpdTime($ssid) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $updata = Array();
+        $updata['ss_updTime'] = date('Y-m-d H:i:s');
+
+        $conditionArr = Array();
+        $conditionArr['ss_id'] = $ssid;
+        $dbAdm->updateData($tablename, $updata, $conditionArr);
+        $dbAdm->execSQL();
+    }
+
+    public function getAllByAid($aid) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $column = Array();
+        $column[0] = "*";
+
+        $conditionArr = Array();
+        $conditionArr['a_id'] = $aid;
+        $dbAdm->selectData($tablename, $column, $conditionArr);
+        $dbAdm->execSQL();
+        return $dbAdm->getAll();
+    }
 }
