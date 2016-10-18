@@ -589,6 +589,7 @@ DashboardRout = Backbone.Router.extend({
     },
 
     msgReply : function(msid) {
+        /*
         var postData = {};
         postData['instr'] = "msgReply";
         postData['msid'] = msid;
@@ -606,6 +607,31 @@ DashboardRout = Backbone.Router.extend({
                 history.go(-1);
             });
         }
+        */
+        $.blockUI({ message: $("#replyMsg")});
+        $("#replyMsg button.check").on("click", function() {
+            var text = $("#replyMsg textarea").val();
+            var postData = {};
+            postData['instr'] = "msgReply";
+            postData['msid'] = msid;
+            postData['replyText'] = text;
+            $.post("instr.php", postData, function(data) {
+                //console.log(data);
+                data = JSON.parse(data);
+                //console.log(data);
+                if(data['status'] == 200) 
+                    alert("回覆成功");
+                else
+                    console.log(data);
+                history.go(-1);
+                location.reload();
+            });
+        });
+        $("#replyMsg button.cancel").on("click", function() {
+            $.unblockUI();
+            history.go(-1);
+            location.reload();
+        });
     },
 
     msgDel : function(msid) {

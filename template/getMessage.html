@@ -16,7 +16,10 @@
             </tr>
         </thead>
         <tbody>
-            <% _.each(data, function(item) { %>
+            <% 
+            _.each(data, function(item) { 
+                if(item['parentMs_id'] == 0) {
+            %>
             <tr>
                 <td><%=item['m_user']%></td>
                 <td><%=item['at_title']%></td>
@@ -30,9 +33,16 @@
                     <a class="glyphicon glyphicon-trash" href="#msgDel/<%=item['ms_id']%>" alt="删除"></a>
                 </td>
             </tr>
-            <% }); %>
+            <% } }); %>
         </tbody>
     </table>
+    <div id="replyMsg" style="display: none;">
+        <h3>作者回覆</h3>
+        <textarea name="replyText"></textarea>
+        <br />
+        <button class="check">回覆</button>
+        <button class="cancel">取消</button>
+    </div>
 </script>
 
 <script id="pagerTem" type="text/template">

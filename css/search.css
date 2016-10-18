@@ -23,3 +23,8 @@
     text-align : center;
     border : 1px solid #dddddd;
 }
+
+.searchPrev div.labelDiv {
+    margin-top : 10px;
+    padding-top : 10px;
+}
