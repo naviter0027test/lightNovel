@@ -286,4 +286,32 @@ class SubScript {
         $dbAdm->execSQL();
         return $dbAdm->getAll();
     }
+
+    public function getAllByAsid($asid) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $column = Array();
+        $column[0] = "*";
+
+        $conditionArr = Array();
+        $conditionArr['as_id'] = $asid;
+        $dbAdm->selectData($tablename, $column, $conditionArr);
+        $dbAdm->execSQL();
+        return $dbAdm->getAll();
+    }
+
+    public function getAllByMid($mid) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $column = Array();
+        $column[0] = "*";
+
+        $conditionArr = Array();
+        $conditionArr['m_id'] = $mid;
+        $dbAdm->selectData($tablename, $column, $conditionArr);
+        $dbAdm->execSQL();
+        return $dbAdm->getAll();
+    }
 }

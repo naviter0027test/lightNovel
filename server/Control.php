@@ -399,6 +399,14 @@ function articleEdit() {
     foreach($subArts as $subs) {
         $subscriptAdm->artUpdTime($subs['ss_id']);
     }
+    $subArts = $subscriptAdm->getAllByAsid($artTitle['at_id']);
+    foreach($subArts as $subs) {
+        $subscriptAdm->artUpdTime($subs['ss_id']);
+    }
+    $subArts = $subscriptAdm->getAllByAsid($artTitle['m_id']);
+    foreach($subArts as $subs) {
+        $subscriptAdm->artUpdTime($subs['ss_id']);
+    }
 
     $reData = Array();
     $reData['status'] = 200;
