@@ -901,17 +901,25 @@ function msgAmount() {
     require_once("Article/Article.php");
     $msgAdm = new Message();
     $articleAdm = new Article();
+    $recentDate = date("Y-m-d H:i:s", 
+        strtotime(date("Y-m-d H:i:s"). '-3 day'));
+    $recentAmount = 0;
 
     $amount = 0;
     $articles = $articleAdm->myAllList($_SESSION['mid']);
     foreach($articles as $art) {
         $amount += (int) $msgAdm->listAmount($art['a_id']);
+        $msgList = $msgAdm->listByAid($art['a_id']);
+        foreach($msgList as $msg) 
+            if($msg['ms_crtime'] > $recentDate)
+                ++$recentAmount;
     }
 
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "msgAmount success";
     $reData['data'] = $amount;
+    $reData['recentAmount'] = $recentAmount;
     return $reData;
 }
 
@@ -973,16 +981,28 @@ function praiseAmount() {
     require_once("Article/Article.php");
     $praise = new Praise();
     $articleAdm = new Article();
+    $recentDate = date("Y-m-d H:i:s", strtotime(date("Y-m-d H:i:s"). '-3 day'));
 
     $praiseAmount = 0;
+    $recentPraiseAmount = 0;
+
     $articles = $articleAdm->myAllList($_SESSION['mid']);
-    foreach($articles as $art) 
+    foreach($articles as $art) {
         $praiseAmount += (int) $praise->amountByAid($art['a_id']);
+
+        //取出該篇文章有按讚的項目，是最近的按讚計數
+        $praiseList = $praise->listByAid($art['a_id']);
+        foreach($praiseList as $praiseItem) 
+            if($praiseItem['p_crtime'] > $recentDate)
+                ++$recentPraiseAmount;
+    }
 
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "praiseAmount success";
     $reData['data'] = $praiseAmount;
+    $reData['recentAmount'] = $recentPraiseAmount;
+    //$reData['recentDate'] = $recentDate;
     return $reData;
 }
 
@@ -1275,11 +1295,13 @@ function giftList() {
 function giftAmount() {
     require_once("Article/Article.php");
     $articleAdm = new Article();
+    $mid = $_SESSION['mid'];
 
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "giftAmount success";
-    $reData['data'] = $articleAdm->myGiftListAmount($_SESSION['mid']); 
+    $reData['data'] = $articleAdm->myGiftListAmount($mid); 
+    $reData['recentAmount'] = $articleAdm->myRecentGiftAmount($mid);
     return $reData;
 }
 

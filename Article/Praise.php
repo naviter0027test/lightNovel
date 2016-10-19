@@ -66,6 +66,21 @@ class Praise {
         return $dbAdm->getAll()[0]['amount'];
     }
 
+    public function listByAid($aid) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+        $column = Array();
+        $column[0] = "*";
+
+        $conditionArr = Array();
+        $conditionArr['a_id'] = $aid;
+
+        $dbAdm->selectData($tablename, $column, $conditionArr);
+        $dbAdm->execSQL();
+
+        return $dbAdm->getAll();
+    }
+
     public function addPraise($mid, $aid) {
         $tablename = $this->table;
         $dbAdm = $this->dbAdm;

@@ -70,7 +70,7 @@ class Message {
     public function listAmount($aid) {
         $tablename = $this->table;
         $dbAdm = $this->dbAdm;
-        $dbAdm->sqlSet("select count(ms.ms_id) amount from Message ms where ms.a_id = $aid ");
+        $dbAdm->sqlSet("select count(ms.ms_id) amount from Message ms where ms.a_id = $aid and ms.parentMs_id = 0");
         $dbAdm->execSQL();
 
         return $dbAdm->getAll()[0]['amount'];
@@ -171,6 +171,15 @@ class Message {
             where ms.ms_id = $msid");
         $dbAdm->execSQL();
         return $dbAdm->getAll()[0];
+    }
+
+    public function listByAid($aid) {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+        $dbAdm->sqlSet("select ms.* from Message ms where ms.a_id = $aid and ms.parentMs_id = 0");
+        $dbAdm->execSQL();
+
+        return $dbAdm->getAll();
     }
 }
 ?>

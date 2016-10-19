@@ -38,18 +38,24 @@ HeadPanel = Backbone.View.extend({
             self.model.getSubscriptAmount();
             self.model.on("change:praiseAmount", function() {
                 var amount = this.get("praiseAmount");
+                var recentAmount = this.get("recentPraiseAmount");
                 //console.log(amount);
                 $(".myPraiseAmount").text(amount);
+                $(".myRecentPraiseAmount").text(amount);
             });
             self.model.on("change:giftAmount", function() {
                 var amount = this.get("giftAmount");
-                //console.log(amount);
+                var recentAmount = this.get("recentGiftAmount");
+                //console.log(recentAmount);
                 $(".myGiftAmount").text(amount);
+                $(".myRecentGiftAmount").text(recentAmount);
             });
             self.model.on("change:msgAmount", function() {
                 var amount = this.get("msgAmount");
+                var recentAmount = this.get("recentMsgAmount");
                 //console.log(amount);
                 $(".myMsgAmount").text(amount);
+                $(".myRecentMsgAmount").text(recentAmount);
             });
             self.model.on("change:subscriptAmount", function() {
                 var amount = this.get("subscriptAmount");
@@ -134,8 +140,11 @@ MemberModel = Backbone.Model.extend({
         'seriesAmount' : null,
         'orderDetail' : null,
         'praiseAmount' : null,
+        'recentPraiseAmount' : null,
         'giftAmount' : null,
+        'recentGiftAmount' : null,
         'msgAmount' : null,
+        'recentMsgAmount' : null,
         'subscriptAmount' : null,
         'isLogin' : null
     },
@@ -233,6 +242,7 @@ MemberModel = Backbone.Model.extend({
             //console.log(data);
             if(data['status'] == 200) {
                 self.set("praiseAmount", data['data']);
+                self.set("recentPraiseAmount", data['recentAmount']);
             }
         });
     },
@@ -246,6 +256,7 @@ MemberModel = Backbone.Model.extend({
             data = JSON.parse(data);
             //console.log(data);
             if(data['status'] == 200) {
+                self.set("recentGiftAmount", data['recentAmount']);
                 self.set("giftAmount", data['data']);
             }
         });
@@ -258,8 +269,9 @@ MemberModel = Backbone.Model.extend({
         $.post("instr.php", postData, function(data) {
             //console.log(data);
             data = JSON.parse(data);
-            //console.log(data);
+            console.log(data);
             if(data['status'] == 200) {
+                self.set("recentMsgAmount", data['recentAmount']);
                 self.set("msgAmount", data['data']);
             }
         });

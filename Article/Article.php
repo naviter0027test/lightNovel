@@ -626,4 +626,21 @@ class Article {
 	$dbAdm->execSQL();
         return $dbAdm->getAll()[0]['amount'];
     }
+
+    public function myRecentGiftAmount($mid) {
+        $dbAdm = $this->dbAdm;
+        $tablename = $this->table;
+        $recentDate = date("Y-m-d H:i:s", 
+            strtotime(date("Y-m-d H:i:s"). '-3 day'));
+        $recentAmount = 0;
+
+        $dbAdm->sqlSet("select a.* from Article a inner join ArticleTitle att on a.at_id = att.at_id where a.g_sendMid = $mid");
+        $articles = $dbAdm->getAll();
+        foreach($articles as $art) 
+            if($art['a_crtime'] > $recentDate)
+                ++$recentAmount;
+
+	$dbAdm->execSQL();
+        return $recentAmount;
+    }
 }

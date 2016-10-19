@@ -47,7 +47,7 @@ SearchResult = Backbone.View.extend({
                 for(var jdx in subCpArr) {
                     var subNames = subCpArr[jdx].split("/");
                     for(var ldx in subNames) {
-                        subNames[ldx] = "<a href='search.html#search/1/subCp/"+ subNames[ldx]+ "'>"+ subNames[ldx]+ "</a>";
+                        subNames[ldx] = "<a href='search.html#search/1/mainCp/"+ subNames[ldx]+ "'>"+ subNames[ldx]+ "</a>";
                     }
                     subCpArr[jdx] = subNames.join("/");
                 }
