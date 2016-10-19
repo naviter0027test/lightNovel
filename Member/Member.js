@@ -254,7 +254,7 @@ MemberModel = Backbone.Model.extend({
         $.post("instr.php", postData, function(data) {
             //console.log(data);
             data = JSON.parse(data);
-            //console.log(data);
+            console.log(data);
             if(data['status'] == 200) {
                 self.set("recentGiftAmount", data['recentAmount']);
                 self.set("giftAmount", data['data']);
@@ -269,7 +269,7 @@ MemberModel = Backbone.Model.extend({
         $.post("instr.php", postData, function(data) {
             //console.log(data);
             data = JSON.parse(data);
-            console.log(data);
+            //console.log(data);
             if(data['status'] == 200) {
                 self.set("recentMsgAmount", data['recentAmount']);
                 self.set("msgAmount", data['data']);

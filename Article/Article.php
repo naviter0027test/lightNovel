@@ -634,13 +634,13 @@ class Article {
             strtotime(date("Y-m-d H:i:s"). '-3 day'));
         $recentAmount = 0;
 
-        $dbAdm->sqlSet("select a.* from Article a inner join ArticleTitle att on a.at_id = att.at_id where a.g_sendMid = $mid");
+        $dbAdm->sqlSet("select a.* from Article a where a.g_sendMid = $mid");
+	$dbAdm->execSQL();
         $articles = $dbAdm->getAll();
         foreach($articles as $art) 
             if($art['a_crtime'] > $recentDate)
                 ++$recentAmount;
 
-	$dbAdm->execSQL();
         return $recentAmount;
     }
 }
