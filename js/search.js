@@ -52,8 +52,11 @@ SearchRout = Backbone.Router.extend({
     searchOne : function(nowPage, cls, arg) {
         $("#searchPrev").resetForm();
         $(".searchPrev").hide();
-        if(cls == "alert[]" || cls == "tag[]" || cls == "level[]")
-            $("input[name='"+ cls+ "'][value="+ arg+ "]").attr("checked", true);
+        $("input[name='alertTag[]']").prop("checked", false);
+        if(cls == "level[]")
+            $("input[name='"+ cls+ "'][value="+ arg+ "]").prop("checked", true);
+        else if (cls == "alertTag[]") 
+            $($("input[name='alertTag[]'][type=text]")[0]).val(arg);
         else
             $("input[name='"+ cls+ "']").val(arg);
         $("#searchPrev input[name=nowPage]").val(nowPage);

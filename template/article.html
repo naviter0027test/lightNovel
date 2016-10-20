@@ -229,7 +229,7 @@
     <hr />
     <div id="replyMsg" style="display: none;">
         <h3>作者回覆</h3>
-        <textarea name="replyText"></textarea>
+        <textarea cols="25" rows="6" name="replyText"></textarea>
         <br />
         <button class="check">回覆</button>
         <button class="cancel">取消</button>
@@ -255,6 +255,7 @@
                 <label>&nbsp;</label>
                 <img src="<%=authorImg%>" />
                 <div class="col-xs-9"><%=item['replyArr'][msRidx]['ms_reply']%></div>
+                <label class="msCrTime"><%=item['replyArr'][msRidx]['ms_crtime']%></label>
             </div>
             <% if(isAuthor == true) { %>
             <div class="col-xs-12 operPanel">
