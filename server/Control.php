@@ -31,7 +31,8 @@ class Control {
         $mustBeLogin = Array("logout", "seriesAdd", "seriesList", "seriesUpd", "seriesDel", "seriesGet", "postArticle", "myData", "mySeriesList", "myLastArticle", "articleDel", "memSrsPages", "personalImg", "personalUpd", "passReset", "addMessage", "pressPraise", "articleEdit", "articleBySid", "changeArticleChapter", "myArticleList", "delArticleFromSeries", 
         "msgReply", "msgDelReply", "msgDel",
         "storeDraft", "myDraftDel", "editDraft", "myDraftList", "findMem", "subscript", "subScriptAll", "bookmark", "bookmarkCancel", "bookmarkList",
-        "subScriptList", "giftList", "praiseAmount", "giftAmount", "msgAmount");
+        "subScriptList", "giftList", "praiseAmount", "giftAmount", "msgAmount", 
+    "cpGet");
 	try {
 	    if(!function_exists($this->instr))
 		throw new Exception("instr not defined");
@@ -1319,6 +1320,19 @@ function mailTest() {
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "mailTest success";
+    return $reData;
+}
+
+function cpGet() {
+    require_once("Admin/Admin.php");
+    $admin = new Admin();
+
+    $cpData = $admin->cpGet();
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "cpGet success";
+    $reData['cpData'] = $cpData;
     return $reData;
 }
 

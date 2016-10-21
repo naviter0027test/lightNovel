@@ -283,25 +283,28 @@ class Article {
                     GROUP BY a.a_id
                 )pp ON pp.a_id = a.a_id
                 where a.at_id = ". $aTitle['at_id']."
+                and a.a_isShow = 'Y'
                 order by a.a_chapter desc 
                 limit 0, 1
             ");
             $dbAdm->execSQL();
             $articleArray[$counter] = $dbAdm->getAll()[0];
-            $articleArray[$counter]['at'] = Array();
-            $articleArray[$counter]['at']['at_id'] = $aTitle['at_id'];
-            $articleArray[$counter]['at']['at_title'] = $aTitle['at_title'];
-            $articleArray[$counter]['at']['as_name'] = $aTitle['as_name'];
-            $articleArray[$counter]['at']['m_user'] = $aTitle['m_user'];
-            $articleArray[$counter]['at']['at_lastCh'] = $aTitle['at_lastCh'];
-            $articleArray[$counter]['at']['at_updtime'] = $aTitle['at_updtime'];
-            $dbAdm->sqlSet("select count(b_id) amount from Bookmark where b_bookId = ". $articleArray[$counter]['a_id']);
-            $dbAdm->execSQL();
-            $articleArray[$counter]['at']['bookmarkCount'] = $dbAdm->getAll()[0]['amount'];
-            $dbAdm->sqlSet("select count(ss_id) amount from SubScription where a_id = ". $articleArray[$counter]['a_id']);
-            $dbAdm->execSQL();
-            $articleArray[$counter]['at']['subscriptCount'] = $dbAdm->getAll()[0]['amount'];
-            ++$counter;
+            if(isset($articleArray[$counter]['a_id'])) {
+                $articleArray[$counter]['at'] = Array();
+                $articleArray[$counter]['at']['at_id'] = $aTitle['at_id'];
+                $articleArray[$counter]['at']['at_title'] = $aTitle['at_title'];
+                $articleArray[$counter]['at']['as_name'] = $aTitle['as_name'];
+                $articleArray[$counter]['at']['m_user'] = $aTitle['m_user'];
+                $articleArray[$counter]['at']['at_lastCh'] = $aTitle['at_lastCh'];
+                $articleArray[$counter]['at']['at_updtime'] = $aTitle['at_updtime'];
+                $dbAdm->sqlSet("select count(b_id) amount from Bookmark where b_bookId = ". $articleArray[$counter]['a_id']);
+                $dbAdm->execSQL();
+                $articleArray[$counter]['at']['bookmarkCount'] = $dbAdm->getAll()[0]['amount'];
+                $dbAdm->sqlSet("select count(ss_id) amount from SubScription where a_id = ". $articleArray[$counter]['a_id']);
+                $dbAdm->execSQL();
+                $articleArray[$counter]['at']['subscriptCount'] = $dbAdm->getAll()[0]['amount'];
+                ++$counter;
+            }
         }
 
         return $articleArray;

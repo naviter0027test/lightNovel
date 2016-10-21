@@ -112,4 +112,21 @@ $(document).ready(function() {
         cpInput = this;
         $(".cpPanel").fadeIn();
     });
+
+    var postData = {};
+    postData['instr'] = "cpGet";
+    $.post("instr.php", postData, function(data) {
+        //console.log(data);
+        data = JSON.parse(data);
+        //console.log(data);
+        $("#cpAclass").html("");
+        var cp1 = data['cpData']['cp1']['value'].split(";");
+        for(var cidx = 0;cidx < cp1.length;++cidx)
+            $("#cpAclass").append("<input type='radio' name='cpClassChoose' value='"+ cp1[cidx]+ "' />"+ cp1[cidx]);
+        $("#cpBclass").html("");
+
+        var cp2 = data['cpData']['cp2']['value'].split(";");
+        for(var cidx = 0;cidx < cp2.length;++cidx)
+            $("#cpBclass").append("<input type='radio' name='cpClassChoose' value='"+ cp2[cidx]+ "' />"+ cp2[cidx]);
+    });
 });

@@ -31,6 +31,9 @@ class Admin {
             $config->getDBPass(), $config->getDB());
         $this->table = "Sys";
 
+        //設定php mysql client 的編碼為utf8
+        $this->dbAdm->sqlSet("SET NAMES 'utf8'");
+        $this->dbAdm->execSQL();
     }
 
     public function isOpen() {
@@ -48,6 +51,29 @@ class Admin {
         if("Y" == $admRes['value'])
             return true;
         return false;
+    }
+
+    public function cpGet() {
+        $dbAdm = $this->dbAdm;
+        $table = $this->table;
+        $cpData = Array();
+
+        $columns = Array();
+        $columns[0] = "*";
+
+        $conditionArr = Array();
+        $conditionArr['`key`'] = "cp1";
+        $dbAdm->selectData($table, $columns, $conditionArr);
+        $dbAdm->execSQL();
+
+        $cpData['cp1'] = $dbAdm->getAll()[0];
+
+        $conditionArr['`key`'] = "cp2";
+        $dbAdm->selectData($table, $columns, $conditionArr);
+        $dbAdm->execSQL();
+        $cpData['cp2'] = $dbAdm->getAll()[0];
+
+        return $cpData;
     }
 }
 ?>
