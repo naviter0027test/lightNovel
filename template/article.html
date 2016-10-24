@@ -97,6 +97,7 @@
         属性：<label><%=(data['a_attr']=="article"?"文":"推文")%></label> 
         章节：<label><%=data['a_chapter']%> / <%=data['at_lastCh']!=0?data['at_lastCh']:"?"%></label>
         更新日期：<label><%=data['a_crtime']%></label> <br />
+        <br />
         <h4>主CP：<%=data['a_mainCp']%></h4>
         <h4>主CP2：<%=data['a_mainCp2']%></h4>
         <h4>副CP：<%=data['a_subCp']%></h4>
@@ -105,6 +106,7 @@
         <% if(data['sendUser'] != "") { %>
             <h4>献给：<%=data['sendUser']%></h4>
         <% } %>
+        <br />
         <span class="col-xs-6">
         <% if(data['as_finally'] != null) { %>
             章节：<label><%=data['a_chapter']%>/<%=data['as_finally']%></label> 
