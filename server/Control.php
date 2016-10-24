@@ -1181,10 +1181,16 @@ function search() {
     $condition = Array();
 
     //要求是主、副CP合併搜索,mainCp 有含subCp字串
-    if($_POST['mainCp'] != "")
+    if($_POST['mainCp'] != "") {
         $condition['mainCp'] = "%". str_replace(";", "%", $_POST['mainCp']). "%";
-    if($_POST['nonMainCp'] != "")
+        $condition['mainCp'] = str_replace("/", ";", $condition['mainCp']);
+        $condition['mainCp'] = str_replace("*", "%", $condition['mainCp']);
+    }
+    if($_POST['nonMainCp'] != "") {
         $condition['nonMainCp'] = "%". str_replace(";", "%", $_POST['nonMainCp']). "%";
+        $condition['nonMainCp'] = str_replace("/", ";", $condition['nonMainCp']);
+        $condition['nonMainCp'] = str_replace("*", "%", $condition['nonMainCp']);
+    }
     /*
     if($_POST['subCp'] != "")
         $condition['subCp'] = "%". str_replace(";", "%", $_POST['subCp']). "%";

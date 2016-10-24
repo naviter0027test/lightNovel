@@ -536,7 +536,7 @@ class Article {
         }
         if(isset($conditionLike['nonMainCp'])) {
             $sql .= " and (a.a_mainCp not like '". $conditionLike['nonMainCp']. "' and a.a_mainCp2 not like '". $conditionLike['nonMainCp']. "' ";
-            $sql .= " or a.a_subCp not like '". $conditionLike['nonMainCp']. "') ";
+            $sql .= " and a.a_subCp not like '". $conditionLike['nonMainCp']. "') ";
         }
         //if(isset($conditionLike['subCp']))
         //if(isset($conditionLike['nonSubCp']))

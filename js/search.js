@@ -42,7 +42,7 @@ SearchRout = Backbone.Router.extend({
         $("#searchPrev input[name=nowPage]").val(nowPage);
         searchPanel.model.set("nowPage", nowPage);
         searchPanel.$el.ajaxSubmit(function(data) {
-            //console.log(data);
+            console.log(data);
             data = JSON.parse(data);
             //console.log(data);
             searchPanel.model.set("data", data);

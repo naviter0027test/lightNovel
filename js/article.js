@@ -164,8 +164,29 @@ ArticleRout = Backbone.Router.extend({
     }, 
 
     msgReply : function(msid) {
-        $.blockUI({ message: $("#replyMsg")});
-        $("#replyMsg button.check").on("click", function() {
+        //$.blockUI({ message: $("#replyMsg")});
+        $("[name=replyText]").each(function() {
+            if($(this).val() != "") {
+                var text = $(this).val();
+                var postData = {};
+                postData['instr'] = "msgReply";
+                postData['msid'] = msid;
+                postData['replyText'] = text;
+                $.post("instr.php", postData, function(data) {
+                    //console.log(data);
+                    data = JSON.parse(data);
+                    //console.log(data);
+                    if(data['status'] == 200) 
+                        alert("回覆成功");
+                    else
+                        console.log(data);
+                    history.go(-1);
+                });
+            }
+        });
+        $("[name=replyText]").val('');
+        //history.go(-1);
+            /*
             var text = $("#replyMsg textarea").val();
             var postData = {};
             postData['instr'] = "msgReply";
@@ -182,11 +203,6 @@ ArticleRout = Backbone.Router.extend({
                 history.go(-1);
                 location.reload();
             });
-        });
-        $("#replyMsg button.cancel").on("click", function() {
-            $.unblockUI();
-            history.go(-1);
-            location.reload();
-        });
+            */
     }
 });

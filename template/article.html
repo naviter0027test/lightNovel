@@ -247,6 +247,7 @@
             <a href="#delMsg/<%=item['ms_id']%>" class="col-xs-1">刪除</a>
         <% } else if(isAuthor == true) { %>
             <a href="#delMsg/<%=item['ms_id']%>" class="col-xs-1">刪除</a>
+            <textarea class="col-xs-12" name="replyText" placeholder="作者回覆输入区"></textarea>
             <a href="#msgReply/<%=item['ms_id']%>" class="col-xs-1">回覆</a>
         <% } %>
         </div>
