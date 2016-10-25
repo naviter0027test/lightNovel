@@ -19,7 +19,7 @@ $(document).ready(function() {
             $(".searchPrev").hide();
             $(".searchRes").show();
 
-            pager.render2(nowPage, 25);
+            pager.render2(nowPage, 20);
         });
         new SearchRout();
         Backbone.history.start();

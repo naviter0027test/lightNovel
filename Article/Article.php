@@ -512,7 +512,7 @@ class Article {
         $dbAdm = $this->dbAdm;
         $tablename = $this->table;
 
-        $startNum = ($nowPage -1) * 25;
+        $startNum = ($nowPage -1) * 20;
 
         $sql = "select a.*, att.at_title, att.at_lastCh, m.m_user from Article a 
             inner join ArticleTitle att on att.at_id = a.at_id ";
@@ -546,7 +546,7 @@ class Article {
             $sql .= " and (a.a_alert like '". $conditionLike['alertTag']. "' ";
         if(isset($conditionLike['alertTag']))
             $sql .= " or a.a_tag like '". $conditionLike['alertTag']. "') ";
-        $sql .= " limit $startNum, 25";
+        $sql .= " limit $startNum, 20";
         //echo $sql;
         $dbAdm->sqlSet($sql);
 	$dbAdm->execSQL();
@@ -556,8 +556,6 @@ class Article {
     public function searchAmount($conditionLike) {
         $dbAdm = $this->dbAdm;
         $tablename = $this->table;
-
-        //$startNum = ($nowPage -1) * 25;
 
         $sql = "select count(a.a_id) amount from Article a 
             inner join ArticleTitle att on att.at_id = a.at_id ";
@@ -589,7 +587,6 @@ class Article {
             $sql .= " and (a.a_alert like '". $conditionLike['alertTag']. "' ";
         if(isset($conditionLike['alertTag']))
             $sql .= " or a.a_tag like '". $conditionLike['alertTag']. "') ";
-        //$sql .= " limit $startNum, 25";
         //echo $sql;
         $dbAdm->sqlSet($sql);
 	$dbAdm->execSQL();
