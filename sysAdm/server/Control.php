@@ -23,7 +23,7 @@ class Control {
 	    $this->instr = $_POST['instr'];
     }
     public function execInstr() {
-        $mustBeLogin = Array("articleList", "articleDel", "memberList", "memberActive", "memberDel", "logout", "passEdit", "cpGet");
+        $mustBeLogin = Array("articleList", "articleDel", "memberList", "memberActive", "memberDel", "logout", "passEdit", "cpGet", "synonymsAdd", "synonymsDel", "synonymsList");
 	try {
 	    if(!isset($this->instr))
 		throw new Exception("instr not defined");
@@ -199,6 +199,40 @@ function cpUpdate() {
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "cpUpdate success";
+    return $reData;
+}
+
+function synonymsAdd() {
+    require_once("Article/Synonyms.php");
+    $synAdm = new Synonyms();
+    $synAdm->adds($_POST['key'], $_POST['value']);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "synonymsAdd success";
+    return $reData;
+}
+
+function synonymsDel() {
+    require_once("Article/Synonyms.php");
+    $synAdm = new Synonyms();
+    $synAdm->del($_POST['syid']);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "synonymsDel success";
+    return $reData;
+}
+
+function synonymsList() {
+    require_once("Article/Synonyms.php");
+    $synAdm = new Synonyms();
+    $lists = $synAdm->lists($_POST['nowPage']);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "synonymsList success";
+    $reData['data'] = $lists;
     return $reData;
 }
 

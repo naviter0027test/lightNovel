@@ -1,0 +1,30 @@
+<script id="synonymsListTem" type="text/template">
+    <form id="synonymsAdd" action="instr.php" method="post" class="col-xs-12">
+        <h3>新增同義字</h3>
+        <input type="hidden" name="instr" value="synonymsAdd" />
+        <label class="col-xs-2">同義字</label>
+        <input name="key" class="col-xs-3"/>
+        <label class="col-xs-2">同義字對應</label>
+        <input name="value" class="col-xs-3"/>
+        <button>新增</button>
+    </form>
+    <table id="synonymsList" class="table">
+        <thead>
+            <tr>
+                <td>同義字</td>
+                <td>同義字對應</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>楼诚</td>
+                <td>明楼/明诚</td>
+                <td>
+                    <a href="#del" class="glyphicon glyphicon-trash"></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</script>
+
