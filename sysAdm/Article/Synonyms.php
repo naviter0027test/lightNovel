@@ -29,7 +29,7 @@ class Synonyms {
         $this->dbAdm = new MysqlCon(
             $config->getHost(), $config->getDBUser(),
             $config->getDBPass(), $config->getDB());
-        $this->table = "Article";
+        $this->table = "Synonyms";
 
         //設定php mysql client 的編碼為utf8
         $this->dbAdm->sqlSet("SET NAMES 'utf8'");
