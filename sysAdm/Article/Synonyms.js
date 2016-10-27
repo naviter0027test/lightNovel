@@ -1,29 +1,43 @@
-ArticleTable = Backbone.View.extend({
+SynonymsForm = Backbone.View.extend({
     initialize : function() {
-        this.template = _.template($("#articleListTem").html());
+        //console.log("synonyms view created");
     },
     el : '',
-
     events : {
-        "submit .searchForm" : "searchForm"
+        "click button" : "add"
     },
+    add : function(evt) {
+        this.$el.ajaxSubmit(function(data) {
+            //console.log(data);
+            data = JSON.parse(data);
+            //console.log(data);
+            if(data['status'] == 200) {
+                alert("新增成功");
+            }
+            else
+                alert("新增失敗");
+            history.go(-1);
+        });
+        return false;
+    }
+});
+
+SynonymsList = Backbone.View.extend({
+    initialize : function() {
+        //console.log("synonyms view created");
+    },
+    el : '',
 
     template : null,
     render : function() {
         var data = this.model.get("data");
         //console.log(data);
         this.$el.html(this.template(data));
-    },
-
-    searchForm : function(evt) {
-        var self = this;
-        this.model.set("search", $(".searchForm input[name=search]").val());
-        location.href = "#search/1";
-        return false;
     }
+
 });
 
-ArticleModel = Backbone.Model.extend({
+SynonymsModel = Backbone.Model.extend({
     initialize : function() {
     },
     defaults : {
@@ -33,7 +47,7 @@ ArticleModel = Backbone.Model.extend({
     list : function(nowPage) {
         var self = this;
         var postData = {};
-        postData['instr'] = "articleList";
+        postData['instr'] = "synonymsList";
         postData['nowPage'] = nowPage;
         postData['search'] = this.get("search");
         $.post("instr.php", postData, function(data) {
