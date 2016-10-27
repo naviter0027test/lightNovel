@@ -1,0 +1,21 @@
+<script id="synonymsListTem" type="text/template">
+    <thead>
+        <tr>
+            <td>同義字</td>
+            <td>同義字對應</td>
+            <td>操作</td>
+        </tr>
+    </thead>
+    <tbody>
+    <% _.each(data, function(item) { %>
+        <tr>
+            <td><%=item['sy_key']%></td>
+            <td><%=item['sy_value']%></td>
+            <td>
+                <a href="#del/<%=item['sy_id']%>" class="glyphicon glyphicon-trash"></a>
+            </td>
+        </tr>
+    <% }); %>
+    </tbody>
+</script>
+
