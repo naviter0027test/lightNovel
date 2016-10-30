@@ -33,3 +33,16 @@
     padding : 10px 0 10px 0;
     font-size : 18px;
 }
+
+.articleItem {
+    padding-bottom : 10px;
+    border-bottom : 1px dashed #bbbbbb;
+}
+
+.articleItem h3 {
+    font-size : 22px;
+}
+
+.articleItem h3 span {
+    font-size : 20px;
+}

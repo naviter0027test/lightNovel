@@ -18,9 +18,7 @@
                 <td>文章名稱</td>
                 <td>发表會員</td>
                 <td>章节</td>
-                <!--
-                <td>狀態</td>
-                -->
+                <td>顯示與否</td>
                 <td>修改日期</td>
                 <td>操作</td>
             </tr>
@@ -34,14 +32,12 @@
                 <td><%=item['at_title']%></td>
                 <td><%=item['m_user']%></td>
                 <td><%=item['a_chapter']%>/<%=item['at_lastCh']%></td>
-                <!--
                 <td>
-                    <select>
-                        <option>啟用</option>
-                        <option>禁用</option>
+                    <select class="showSelect" aid="<%=item['a_id']%>">
+                        <option value="Y" <%=(item['a_isShow']=="Y"?"selected":"")%> >顯示</option>
+                        <option value="N" <%=(item['a_isShow']=="N"?"selected":"")%> >隱藏</option>
                     </select>
                 </td>
-                -->
                 <td><%=item['a_updtime']%></td>
                 <td>
                     <a href="#del/<%=item['a_id']%>" class="glyphicon glyphicon-trash"></a>

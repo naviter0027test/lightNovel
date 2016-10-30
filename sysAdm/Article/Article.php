@@ -139,4 +139,18 @@ class Article {
 	$dbAdm->execSQL();
 	return $dbAdm->getAll();
     }
+
+    public function showUpd($aid, $act) {
+        $dbAdm = $this->dbAdm;
+        $tablename = $this->table;
+
+        $colData = Array();
+        $colData['a_isShow'] = $act;
+
+        $conditionArr = Array();
+        $conditionArr['a_id'] = $aid;
+
+        $dbAdm->updateData($tablename, $colData, $conditionArr);
+	$dbAdm->execSQL();
+    }
 }

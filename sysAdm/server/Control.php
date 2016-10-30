@@ -23,7 +23,7 @@ class Control {
 	    $this->instr = $_POST['instr'];
     }
     public function execInstr() {
-        $mustBeLogin = Array("articleList", "articleDel", "memberList", "memberActive", "memberDel", "logout", "passEdit", "cpGet", "synonymsAdd", "synonymsDel", "synonymsList");
+        $mustBeLogin = Array("articleList", "articleDel", "memberList", "memberActive", "memberDel", "logout", "passEdit", "cpGet", "synonymsAdd", "synonymsDel", "synonymsList", "articleShowUpd");
 	try {
 	    if(!isset($this->instr))
 		throw new Exception("instr not defined");
@@ -233,6 +233,40 @@ function synonymsList() {
     $reData['status'] = 200;
     $reData['msg'] = "synonymsList success";
     $reData['data'] = $lists;
+    return $reData;
+}
+
+function articleShowUpd() {
+    require_once("Article/Article.php");
+    $articleAdm = new Article();
+
+    $article = $articleAdm->showUpd($_POST['aid'], $_POST['active']);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "articleShowUpd success";
+    return $reData;
+}
+
+function permitList() {
+    require_once("Admin/Admin.php");
+    $admOper = new Admin();
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "permitList success";
+    $reData['data'] = $admOper->lists();
+    return $reData;
+}
+
+function permitGet() {
+    require_once("Admin/Admin.php");
+    $admOper = new Admin();
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "permitGet success";
+    $reData['data'] = $admOper->get($_POST['admid']);
     return $reData;
 }
 

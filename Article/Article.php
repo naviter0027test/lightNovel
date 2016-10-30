@@ -64,7 +64,7 @@ class Article {
         if(isset($article['aMemo']))
             $insData['a_memo'] = $article['aMemo'];
         $insData['a_content'] = $article['content'];
-        $updData['a_updtime'] = date('Y-m-d H:i:s');
+        $insData['a_updtime'] = date('Y-m-d H:i:s');
         $insData['a_crtime'] = date('Y-m-d H:i:s');
 
         $dbAdm->insertData($tablename, $insData);
