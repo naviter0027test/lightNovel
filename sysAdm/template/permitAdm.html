@@ -1,0 +1,67 @@
+<script id="permitListTem" type="text/template">
+    <div id="operatingPanel">
+        <ol class="breadcrumb">
+            <li><a href="#">首頁</a></li>
+            <li class="active">權限管理</li>
+        </ol>
+    </div>
+    <form id="permitAddForm" action="instr.php" method="post">
+        <input type="hidden" name="instr" value="permitAdd" />
+        <label class="col-xs-2">新帳號：</label><input type="text" name="user" class="col-xs-3"/>
+        <label class="col-xs-2">新密碼：</label><input type="password" name="pass" class="col-xs-3" />
+        <label class="col-xs-1">&nbsp;</label>
+        <button class="col-xs-1">增加</button>
+    </form>
+    <table id="permitList" class="table">
+        <thead>
+            <tr>
+                <td>帳號</td>
+                <td>權限</td>
+                <td>操作</td>
+            </tr>
+        </thead>
+        <tbody>
+            <% _.each(data, function(item) { %>
+            <tr>
+                <td><%=item['adm_user']%></td>
+                <td><%=item['adm_permission']%></td>
+                <td>
+                    <a href="#edit/<%=item['adm_id']%>" class="glyphicon glyphicon-edit"></a>
+                    <a href="#del/<%=item['adm_id']%>" class="glyphicon glyphicon-trash"></a>
+                </td>
+            </tr>
+            <% }); %>
+            <!--
+            <tr>
+                <td>admin1324</td>
+                <td>同義字管理,主CP管理</td>
+                <td>
+                    <a href="#edit/" class="glyphicon glyphicon-edit"></a>
+                    <a href="#del/" class="glyphicon glyphicon-trash"></a>
+                </td>
+            </tr>
+            <tr>
+                <td>admin1235</td>
+                <td>會員列表,同義字管理,主CP管理</td>
+                <td>
+                    <a href="#edit/" class="glyphicon glyphicon-edit"></a>
+                    <a href="#del/" class="glyphicon glyphicon-trash"></a>
+                </td>
+            </tr>
+            -->
+        </tbody>
+    </table>
+    <form id="permitEdit" action="instr.php" method="post">
+        <h4>修改權限</h4>
+        <input type="hidden" name="instr" />
+        <label>帳號</label>：
+        <br /> <br />
+        <input type="checkbox" name="passAdm" />密碼修改
+        <input type="checkbox" name="memberList"/>會員管理
+        <input type="checkbox" name="articleList"/>文章管理
+        <input type="checkbox" name="cpPanel"/>主CP管理
+        <input type="checkbox" name="synonyms"/>同義字管理
+        <br /> <br />
+        <button class="col-xs-3">修改</button>
+    </form>
+</script>

@@ -251,11 +251,31 @@ function articleShowUpd() {
 function permitList() {
     require_once("Admin/Admin.php");
     $admOper = new Admin();
+    $data = $admOper->lists();
+
+    //權限數字表示對應的連結
+    $permitHash = Array(
+        "0" => "passAdm.html",
+        "1" => "permitAdm.html#list", 
+        "2" => "memberList.html#list/1",
+        "3" => "articleList.html#list/1", 
+        "4" => "cpPanel.html#edit", 
+        "5" => "synonyms.html#list/1"
+    );
+
+    //將權限替換為網頁連結
+    foreach($data as $idx => $item) {
+        foreach($permitHash as $num => $link) {
+            $item['adm_permission'] = str_replace($num, $link, $item['adm_permission']);
+        }
+        $data[$idx] = $item;
+        unset($data[$idx]["3"]);
+    }
 
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "permitList success";
-    $reData['data'] = $admOper->lists();
+    $reData['data'] = $data;
     return $reData;
 }
 
