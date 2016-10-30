@@ -11,11 +11,11 @@
             <% if(item['as_id'] != null) { %>
             （<%=item['as_id']%>）
             <% } %>
-            By <%=item['m_user']%>
+            <span>By <%=item['m_user']%></span>
         </h3>
-        分級：<label><%=item['a_level']%></label> 
-        属性：<label><%=(item['a_attr']=="article"?"文":"推文")%></label> 
-        建立日期：<label><%=item['a_crtime']%></label> <br />
+        分级：<label><%=item['a_level']%></label> &nbsp;
+        属性：<label><%=(item['a_attr']=="article"?"文":"推文")%></label> &nbsp;
+        建立日期：<label><%=item['a_crtime']%></label> &nbsp;<br />
         <h4>主CP：<%=item['a_mainCp']%></h4>
         <% if(item['a_mainCp2'] != "") { %>
         <h4>主CP2：<%=item['a_mainCp2']%></h4>

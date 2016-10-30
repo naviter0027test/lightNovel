@@ -5,6 +5,7 @@ ArticleTable = Backbone.View.extend({
     el : '',
 
     events : {
+        "change .showSelect" : "showUpd",
         "submit .searchForm" : "searchForm"
     },
 
@@ -13,6 +14,23 @@ ArticleTable = Backbone.View.extend({
         var data = this.model.get("data");
         //console.log(data);
         this.$el.html(this.template(data));
+    },
+
+    showUpd : function(evt) {
+        postData = {};
+        postData['instr'] = "articleShowUpd";
+        postData['aid'] = $(evt.target).attr('aid');
+        postData['active'] = $(evt.target).val();
+        console.log(postData);
+        $.post("instr.php", postData, function(data) {
+            console.log(data);
+            data = JSON.parse(data);
+            console.log(data);
+            if(data['status'] == 200) 
+                alert("修改完成");
+            else
+                alert("修改失敗");
+        });
     },
 
     searchForm : function(evt) {

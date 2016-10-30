@@ -93,9 +93,9 @@
         <% if($.trim(data['as_name']) != "") { %>
         系列：<label><%=data['as_name']%></label>
         <% } %>
-        分級：<label><%=data['a_level']%></label> 
-        属性：<label><%=(data['a_attr']=="article"?"文":"推文")%></label> 
-        章节：<label><%=data['a_chapter']%> / <%=data['at_lastCh']!=0?data['at_lastCh']:"?"%></label>
+        分级：<label><%=data['a_level']%></label> &nbsp;
+        属性：<label><%=(data['a_attr']=="article"?"文":"推文")%></label> &nbsp;
+        章节：<label><%=data['a_chapter']%> / <%=data['at_lastCh']!=0?data['at_lastCh']:"?"%></label> &nbsp;
         更新日期：<label><%=data['a_crtime']%></label> <br />
         <br />
         <h4>主CP：<%=data['a_mainCp']%></h4>

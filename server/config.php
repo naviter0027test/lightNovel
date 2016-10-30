@@ -17,6 +17,7 @@ class Config {
     private $pass;
     private $host;
     private $mail;
+    private $permission;
 
     public function __construct() {
         date_default_timezone_set("Asia/Taipei");
@@ -41,6 +42,15 @@ class Config {
             $this->host = "localhost";
             $this->mailer['host'] = "192.168.3.16";
         }
+
+        $permission = Array();
+        $permission[0] = "passAdm.html";
+        $permission[1] = "permitAdm.html";
+        $permission[2] = "memberList.html#list/1";
+        $permission[3] = "articleList.html#list/1";
+        $permission[4] = "cpPanel.html#edit";
+        $permission[5] = "synonyms.html#list/1";
+        $this->permission = $permission;
     }
 
     public function getDB() {

@@ -169,5 +169,26 @@ class Admin {
         $dbAdm->updateData($table, $colData, $conditionArr);
         $dbAdm->execSQL();
     }
+
+    public function lists() {
+        $dbAdm = $this->dbAdm;
+        $tablename = "Admin";
+
+        $dbAdm->sqlSet("select * from Admin where adm_id <> 1");
+        $dbAdm->execSQL();
+        return $dbAdm->getAll();
+    }
+
+    public function get($admid) {
+        $dbAdm = $this->dbAdm;
+        $tablename = "Admin";
+
+        if($admid == 1) 
+            throw new Exception("you can't get root");
+
+        $dbAdm->sqlSet("select * from Admin where adm_id = $admid");
+        $dbAdm->execSQL();
+        return $dbAdm->getAll()[0];
+    }
 }
 
