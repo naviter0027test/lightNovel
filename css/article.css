@@ -1,16 +1,17 @@
 
 .articleItem h4 {
-    font-size : 20px;
+    font-size : 12px;
 }
 
 .articleData h2 {
     text-align : center;
+    font-size : 16px;
 }
 
 .articleData h3 {
     color : #777777;
     text-align : center;
-    font-size : 24px;
+    font-size : 12px;
 }
 
 .operPanel .scriptTitle {
@@ -52,6 +53,10 @@
 .operPanel a:hover {
     color : black;
     background : #f6d1ac;
+}
+
+#msgList > h2 {
+    font-size : 14px;
 }
 
 .userMsg {
