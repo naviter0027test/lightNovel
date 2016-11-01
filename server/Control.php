@@ -343,6 +343,30 @@ function postArticle() {
     }
 
     $articleAdm->articleAdd($article);
+    if(isset($article['sendUser'])) {
+        require_once("Member/Member.php");
+        $memAdm = new Member();
+        $mem = $memAdm->getOneById($article['sendUser']);
+        $author = $memAdm->getOneById($_SESSION['mid']);
+        if($mem['isEmailForGetGift'] == "Y") {
+            require_once("srvLib/GenMail.php");
+            require_once("server/config.php");
+
+            $config = new Config();
+            $mailer = new GenMail($config->getMailHost(),
+                $config->getMailPort());
+            $mailto = Array();
+            $mailto['address'] = $mem['m_email'];
+            $mailto['name'] = $mem['m_user'];
+            $mailContent = "亲爱的会员您好：
+                <br />
+                刚刚有会员（". $author['m_user']. 
+                "）献礼给您<br />". 
+                "文章名称为 ". $article['title'].
+                "<br /><br />核桃管理";
+            $mailer->send($mailto, "[系统发送] 核桃通知", $mailContent);
+        }
+    }
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "post article success";
