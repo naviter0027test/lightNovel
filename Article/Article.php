@@ -531,12 +531,25 @@ class Article {
 
         $sql .= " where 1 = 1 ";
         if(isset($conditionLike['mainCp'])) {
-            $sql .= " and (a.a_mainCp like '". $conditionLike['mainCp']. "' or a.a_mainCp2 like '". $conditionLike['mainCp']. "' ";
-            $sql .= " or a.a_subCp like '". $conditionLike['mainCp']. "') ";
+            $mainCpArr = preg_split('/,/', $conditionLike['mainCp']);
+            //print_r($mainCpArr);
+            $sql .= "and ( ";
+            foreach($mainCpArr as $idx => $cpCondition) {
+                if($idx > 0) $sql .= " or ";
+                $sql .= " a.a_mainCp like '". $cpCondition. "' or a.a_mainCp2 like '". $cpCondition. "' ";
+                $sql .= " or a.a_subCp like '". $cpCondition. "' ";
+            }
+            $sql .= " )";
         }
         if(isset($conditionLike['nonMainCp'])) {
-            $sql .= " and (a.a_mainCp not like '". $conditionLike['nonMainCp']. "' and a.a_mainCp2 not like '". $conditionLike['nonMainCp']. "' ";
-            $sql .= " and a.a_subCp not like '". $conditionLike['nonMainCp']. "') ";
+            $mainCpArr = preg_split('/,/', $conditionLike['nonMainCp']);
+            $sql .= "and ( ";
+            foreach($mainCpArr as $idx => $cpCondition) {
+                if($idx > 0) $sql .= " and ";
+                $sql .= " a.a_mainCp not like '". $cpCondition. "' and a.a_mainCp2 not like '". $cpCondition. "' ";
+                $sql .= " and a.a_subCp not like '". $cpCondition. "' ";
+            }
+            $sql .= " )";
         }
         //if(isset($conditionLike['subCp']))
         //if(isset($conditionLike['nonSubCp']))
@@ -574,12 +587,25 @@ class Article {
 
         $sql .= " where 1 = 1 ";
         if(isset($conditionLike['mainCp'])) {
-            $sql .= " and (a.a_mainCp like '". $conditionLike['mainCp']. "' or a.a_mainCp2 like '". $conditionLike['mainCp']. "' ";
-            $sql .= " or a.a_subCp like '". $conditionLike['mainCp']. "') ";
+            $mainCpArr = preg_split('/,/', $conditionLike['mainCp']);
+            //print_r($mainCpArr);
+            $sql .= "and ( ";
+            foreach($mainCpArr as $idx => $cpCondition) {
+                if($idx > 0) $sql .= " or ";
+                $sql .= " a.a_mainCp like '". $cpCondition. "' or a.a_mainCp2 like '". $cpCondition. "' ";
+                $sql .= " or a.a_subCp like '". $cpCondition. "' ";
+            }
+            $sql .= " )";
         }
         if(isset($conditionLike['nonMainCp'])) {
-            $sql .= " and (a.a_mainCp not like '". $conditionLike['nonMainCp']. "' and a.a_mainCp2 not like '". $conditionLike['nonMainCp']. "' ";
-            $sql .= " and a.a_subCp not like '". $conditionLike['nonMainCp']. "') ";
+            $mainCpArr = preg_split('/,/', $conditionLike['nonMainCp']);
+            $sql .= "and ( ";
+            foreach($mainCpArr as $idx => $cpCondition) {
+                if($idx > 0) $sql .= " and ";
+                $sql .= " a.a_mainCp not like '". $cpCondition. "' and a.a_mainCp2 not like '". $cpCondition. "' ";
+                $sql .= " and a.a_subCp not like '". $cpCondition. "' ";
+            }
+            $sql .= " )";
         }
         /*
         if(isset($conditionLike['subCp']))
