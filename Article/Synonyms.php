@@ -39,18 +39,23 @@ class Synonyms {
         $dbAdm = $this->dbAdm;
         $tableName = $this->table;
 
-        $column = Array();
-        $column[0] = "*";
-
-        $conditionArr = Array();
-        $conditionArr['sy_key'] = "$str";
-
-        $dbAdm->selectData($tableName, $column, $conditionArr);
-        $dbAdm->execSQL();
-        $data = $dbAdm->getAll();
+        //echo $str;
+        $strArr = preg_split('/;/', $str);
         $synonStr = $str;
-        if(count($data) > 0)
-            $synonStr = $data[0]['sy_value'];
+        foreach($strArr as $sy_key) {
+            $column = Array();
+            $column[0] = "*";
+
+            $conditionArr = Array();
+            $conditionArr['sy_key'] = "$sy_key";
+
+            $dbAdm->selectData($tableName, $column, $conditionArr);
+            $dbAdm->execSQL();
+            $data = $dbAdm->getAll();
+            if(count($data) > 0)
+                $synonStr = preg_replace("/$sy_key/", $data[0]['sy_value'], $synonStr);
+        }
+        //echo $synonStr;
         return $synonStr;
     }
 }
