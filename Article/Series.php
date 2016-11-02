@@ -100,7 +100,7 @@ class Series {
 
         $upData = Array();
         $upData['as_name'] = $data['as_name'];
-        $upData['as_finally'] = $data['as_finally'];
+        //$upData['as_finally'] = $data['as_finally'];
 
         $conditionArr = Array();
         $conditionArr['as_id'] = $data['as_id'];

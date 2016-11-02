@@ -472,15 +472,15 @@ class Article {
 	$dbAdm->execSQL();
     }
 
-    public function deleteFromSeries($aid) {
+    public function deleteFromSeries($atid) {
         $dbAdm = $this->dbAdm;
-        $tablename = $this->table;
+        $tablename = "ArticleTitle";
 
         $colData = Array();
         $colData['as_id'] = 0;
 
         $conditionArr = Array();
-        $conditionArr['a_id'] = $aid;
+        $conditionArr['at_id'] = $atid;
 
         $dbAdm->updateData($tablename, $colData, $conditionArr);
 	$dbAdm->execSQL();

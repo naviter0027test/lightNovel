@@ -43,7 +43,7 @@ DashboardRout = Backbone.Router.extend({
         "addSeries" : "addSeries",
         "editSeries/:sid/:nowPage" : "editMySeries",
         "delSeries/:sid" : "delSeries",
-        "delArticleFromSeries/:aid" : "delArtFromSrs",
+        "delArticleFromSeries/:atid" : "delArtFromSrs",
         "myDraft/:nowPage" : "myDraftList",
         "draftEdit/:mdid" : "draftEdit",
         "draftDel/:mdid" : "draftDel",
@@ -167,16 +167,16 @@ DashboardRout = Backbone.Router.extend({
             });
     },
 
-    delArtFromSrs : function(aid) {
+    delArtFromSrs : function(atid) {
         //console.log("delete article(" + aid+ ")");
         var postData = {};
         postData['instr'] = "delArticleFromSeries";
-        postData['aid'] = aid;
+        postData['atid'] = atid;
         if(confirm("是否將該篇文章從此系列剔除?")) 
             $.post("instr.php", postData, function(data) {
                 //console.log(data);
                 data = JSON.parse(data);
-                //console.log(data);
+                console.log(data);
                 if(data['status'] == 200) {
                     alert("剔除成功");
                 }
@@ -374,13 +374,13 @@ DashboardRout = Backbone.Router.extend({
 
                     memModel.on("change:seriesList", function() {
                         var serdata = this.get("seriesList");
-                        //console.log(data);
+                        console.log(serdata);
                         if(data['status'] == 200) {
                             $("select[name=series]").html("<option num='X' value='0'>請選擇</option>");
                             for(var i in serdata['data']) {
                                 var option = document.createElement("option");
                                 $(option).attr("num", i);
-                                if(draftSeries == serdata[i]['as_id'])
+                                if(draftSeries == serdata['data'][i]['as_id'])
                                     $(option).attr("selected", true);
                                 $(option).val(serdata['data'][i]['as_id']);
                                 $(option).text(serdata['data'][i]['as_name']);

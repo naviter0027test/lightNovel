@@ -226,7 +226,7 @@ function seriesUpd() {
     $data = Array();
     $series = new Series();
     $data['as_name'] = $_POST['seriesName'];
-    $data['as_finally'] = $_POST['finallyCh'];
+    //$data['as_finally'] = $_POST['finallyCh'];
     $data['as_id'] = $_POST['asId'];
     $series->serUpd($data);
 
@@ -276,7 +276,7 @@ function seriesGet() {
 function delArticleFromSeries() {
     require_once("Article/Article.php");
     $articleAdm = new Article();
-    $articleAdm->deleteFromSeries($_POST['aid']);
+    $articleAdm->deleteFromSeries($_POST['atid']);
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "delArticleFromSeries success";
