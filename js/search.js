@@ -52,17 +52,20 @@ SearchRout = Backbone.Router.extend({
     searchOne : function(nowPage, cls, arg) {
         $("#searchPrev").resetForm();
         $(".searchPrev").hide();
-        $("input[name='alertTag[]']").prop("checked", false);
+        $("input[name='alert[]']").prop("checked", false);
+        $("input[name='tag[]']").prop("checked", false);
         if(cls == "level[]")
             $("input[name='"+ cls+ "'][value="+ arg+ "]").prop("checked", true);
-        else if (cls == "alertTag[]") 
-            $($("input[name='alertTag[]'][type=text]")[0]).val(arg);
+        else if (cls == "alert[]") 
+            $($("input[name='alert[]'][type=text]")[0]).val(arg);
+        else if (cls == "tag[]")
+            $($("input[name='tag[]'][type=text]")[0]).val(arg);
         else
             $("input[name='"+ cls+ "']").val(arg);
         $("#searchPrev input[name=nowPage]").val(nowPage);
         searchPanel.model.set("nowPage", nowPage);
         searchPanel.$el.ajaxSubmit(function(data) {
-            //console.log(data);
+            console.log(data);
             data = JSON.parse(data);
             //console.log(data);
             searchPanel.model.set("data", data);

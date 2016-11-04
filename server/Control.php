@@ -1233,12 +1233,11 @@ function search() {
         $condition['member'] = "%". str_replace(";", "%", $_POST['member']). "%";
     if(isset($_POST['level'][0]))
         $condition['level'] = implode("','", $_POST['level']);
-    if(isset($_POST['alertTag'][0]))
-        $condition['alertTag'] = "%". implode("%", $_POST['alertTag']). "%";
-    /*
-    if(isset($_POST['tag'][0]))
-        $condition['tag'] = "%". implode("%", $_POST['tag']);
-     */
+    if($_POST['alert'][0] != "")
+        $condition['alert'] = "%". implode("%", $_POST['alert']). "%";
+    if($_POST['tag'][0] != "")
+        $condition['tag'] = "%". implode("%", $_POST['tag']). "%";
+    //print_r($_POST);
 
     //print_r($condition);
 
