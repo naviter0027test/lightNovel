@@ -555,10 +555,24 @@ class Article {
         //if(isset($conditionLike['nonSubCp']))
         if(isset($conditionLike['level']))
             $sql .= " and a.a_level in ('". $conditionLike['level']. "') ";
-        if(isset($conditionLike['alert']))
-            $sql .= " and a.a_alert like '". $conditionLike['alert']. "' ";
-        if(isset($conditionLike['tag']))
-            $sql .= " and a.a_tag like '". $conditionLike['tag']. "' ";
+        if(isset($conditionLike['alert'])) {
+            $alertArr = preg_split('/;/', $conditionLike['alert']);
+            $sql .= "and ( ";
+            foreach($alertArr as $idx => $alertStr) {
+                if($idx > 0) $sql .= " or ";
+                $sql .= " a.a_alert like '%$alertStr%' ";
+            }
+            $sql .= " )";
+        }
+        if(isset($conditionLike['tag'])) {
+            $tagArr = preg_split('/;/', $conditionLike['tag']);
+            $sql .= "and ( ";
+            foreach($tagArr as $idx => $tagStr) {
+                if($idx > 0) $sql .= " or ";
+                $sql .= " a.a_tag like '%$tagStr%' ";
+            }
+            $sql .= " )";
+        }
         $sql .= " limit $startNum, 20";
         //echo $sql;
         $dbAdm->sqlSet($sql);
@@ -615,10 +629,24 @@ class Article {
          */
         if(isset($conditionLike['level']))
             $sql .= " and a.a_level in ('". $conditionLike['level']. "') ";
-        if(isset($conditionLike['alert']))
-            $sql .= " and a.a_alert like '". $conditionLike['alert']. "' ";
-        if(isset($conditionLike['tag']))
-            $sql .= " and a.a_tag like '". $conditionLike['tag']. "' ";
+        if(isset($conditionLike['alert'])) {
+            $alertArr = preg_split('/;/', $conditionLike['alert']);
+            $sql .= "and ( ";
+            foreach($alertArr as $idx => $alertStr) {
+                if($idx > 0) $sql .= " or ";
+                $sql .= " a.a_alert like '%$alertStr%' ";
+            }
+            $sql .= " )";
+        }
+        if(isset($conditionLike['tag'])) {
+            $tagArr = preg_split('/;/', $conditionLike['tag']);
+            $sql .= "and ( ";
+            foreach($tagArr as $idx => $tagStr) {
+                if($idx > 0) $sql .= " or ";
+                $sql .= " a.a_tag like '%$tagStr%' ";
+            }
+            $sql .= " )";
+        }
         //echo $sql;
         $dbAdm->sqlSet($sql);
 	$dbAdm->execSQL();

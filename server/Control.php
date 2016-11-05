@@ -1234,9 +1234,9 @@ function search() {
     if(isset($_POST['level'][0]))
         $condition['level'] = implode("','", $_POST['level']);
     if($_POST['alert'][0] != "")
-        $condition['alert'] = "%". implode("%", $_POST['alert']). "%";
+        $condition['alert'] = implode(";", $_POST['alert']);
     if($_POST['tag'][0] != "")
-        $condition['tag'] = "%". implode("%", $_POST['tag']). "%";
+        $condition['tag'] = implode(";", $_POST['tag']);
     //print_r($_POST);
 
     //print_r($condition);
