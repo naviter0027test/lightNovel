@@ -273,6 +273,8 @@ class Article {
         $articleArray = Array();
         $counter = 0;
         foreach($aTitleList as $aTitle) {
+
+            //找出與at_id相同的文章，並取出按讚數
             $dbAdm->sqlSet("
                 select pp.praiseAmount, a.* 
                 FROM `Article` a
@@ -514,7 +516,7 @@ class Article {
 
         $startNum = ($nowPage -1) * 20;
 
-        $sql = "select a.*, att.at_title, att.at_lastCh, m.m_user from Article a 
+        $sql = "select a.*, att.at_title, att.at_lastCh, att.at_updtime, m.m_user from Article a 
             inner join ArticleTitle att on att.at_id = a.at_id ";
         if(isset($conditionLike['title']))
             $sql .= " and att.at_title like '". $conditionLike['title']. "' ";
@@ -529,7 +531,7 @@ class Article {
             $sql .= " and m.m_user like '". $conditionLike['member']. "' ";
         }
 
-        $sql .= " where 1 = 1 ";
+        $sql .= " where a.a_isShow = 'Y' ";
         if(isset($conditionLike['mainCp'])) {
             $mainCpArr = preg_split('/,/', $conditionLike['mainCp']);
             //print_r($mainCpArr);
@@ -599,7 +601,7 @@ class Article {
             $sql .= " and m.m_user like '". $conditionLike['member']. "' ";
         }
 
-        $sql .= " where 1 = 1 ";
+        $sql .= " where a.a_isShow = 'Y' ";
         if(isset($conditionLike['mainCp'])) {
             $mainCpArr = preg_split('/,/', $conditionLike['mainCp']);
             //print_r($mainCpArr);
