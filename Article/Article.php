@@ -412,6 +412,7 @@ class Article {
 
         $conditionArr = Array();
         $conditionArr['at_id'] = $atid;
+        $conditionArr['a_isShow'] = "Y";
 
         $order = Array();
         $order['col'] = "a_chapter";
