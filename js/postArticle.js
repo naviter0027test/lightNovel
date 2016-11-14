@@ -6,7 +6,7 @@ $(document).ready(function() {
         var data = this.get("seriesList");
         if(data['status'] == 200) {
             data = data['data'];
-            $("select[name=series]").html("<option num='X' value=''>請選擇</option>");
+            $("select[name=series]").html("<option num='X' value=''>请选择</option>");
 
             var asid = null;
             if(getQueryVariable("isChapter") == "Y") 
