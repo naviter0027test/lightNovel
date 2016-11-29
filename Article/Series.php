@@ -132,6 +132,24 @@ class Series {
 	return $dbAdm->getAll()[0];
     }
 
+    //從指定會員中隨機取一個該會員持有的系列
+    public function getRandSidForMid($mid) {
+        $dbAdm = $this->dbAdm;
+        $tablename = $this->table;
+
+	$columns = Array();
+	$columns[0] = "*";
+	$conditionArr = Array();
+        $conditionArr['m_id'] = $mid;
+
+	$dbAdm->selectData($tablename, $columns, $conditionArr);
+	$dbAdm->execSQL();
+        $result = $dbAdm->getAll();
+        if(count($result) < 1)
+            return Array('as_id' => 0);;
+	return $result[rand(0, count($result)-1)];
+    }
+
     public function amount($mid) {
         $dbAdm = $this->dbAdm;
         $tablename = $this->table;

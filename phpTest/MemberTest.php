@@ -45,7 +45,7 @@ class MemberTest extends UnitTestCase {
         $user['user'] = "test". rand(1000, 9999);
         $user['pass'] = "123456";
         $user['email'] = "t". rand(10000, 99999). "@test.com.tw";
-        $member->register($user);
+        //$member->register($user);
     }
 
     function testIsRegister() {
@@ -55,6 +55,7 @@ class MemberTest extends UnitTestCase {
     }
 
     function testUpActiveMail() {
+        /*
         require_once("../Member/Member.php");
         $member = new Member();
         $user = Array();
@@ -62,9 +63,11 @@ class MemberTest extends UnitTestCase {
         $user['pass'] = "123456";
         $user['email'] = "naviter0027test@gmail.com";
         $member->upActiveMail($user);
+         */
     }
 
     function testLeaveMsg() {
+        /*
         require_once("../Member/Member.php");
         $member = new Member();
         $text = Array();
@@ -86,5 +89,6 @@ class MemberTest extends UnitTestCase {
             echo $e->getMessage();
             $this->assertEqual(true, false);
         }
+         */
     }
 }

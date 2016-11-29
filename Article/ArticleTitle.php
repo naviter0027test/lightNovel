@@ -191,4 +191,16 @@ class ArticleTitle {
         $dbAdm->deleteData($tablename, $conditionArr);
         $dbAdm->execSQL();
     }
+
+    public function delOnlyTitle() {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+        $sql = "DELETE FROM ArticleTitle WHERE NOT EXISTS (
+            SELECT *
+            FROM Article a
+            WHERE ArticleTitle.at_id = a.at_id
+        )";
+        $dbAdm->sqlSet($sql);
+        $dbAdm->execSQL();
+    }
 }
