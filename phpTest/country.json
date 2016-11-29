@@ -1,0 +1,655 @@
+[
+    {
+        "ch" : "阿富汗",
+        "en" : "Afghanistan"
+    },
+    {
+        "ch" : "孟加拉國", 
+        "en" : "Bangladesh"          
+    },
+    {
+        "ch" : "不丹",
+        "en" : "Bhutan"
+    },
+    {
+        "ch" : "緬甸",
+        "en" : "Burma"
+    },
+    {
+        "ch" : "柬埔寨",
+        "en" : "Cambodia"
+    },
+    {
+        "ch" : "中國",
+        "en" : "China"
+    },
+    {
+        "ch" : "印度",
+        "en" : "India"
+    },
+    {
+        "ch" : "印度尼西亞",
+        "en" : "Indonesia"
+    },
+    {
+        "ch" : "日本",
+        "en" : "Japan"
+    },
+    {              
+        "ch" : "寮國",
+        "en" : "Laos"
+    },
+    {
+        "ch" : "馬來西亞",
+        "en" : "Malaysia"
+    },
+    {
+        "ch" : "馬爾地夫", 
+        "en" : "Maldives"
+    },
+    {
+        "ch" : "蒙古",
+        "en" : "Mongolia"
+    },
+    {
+        "ch" : "尼泊爾",
+        "en" : "Nepal"
+    },
+    {
+        "ch" : "北韓",
+        "en" : "North Korea"
+    },
+    {
+        "ch" : "巴基斯坦",
+        "en" : "Pakistan"
+    },
+    {
+        "ch" : "菲律賓共和國",
+        "en" : "Philippines"
+    },
+    {
+        "ch" : "新加坡", 
+        "en" : "Singapore"
+    },
+    {
+        "ch" : "南韓", 
+        "en" : "South Korea"
+    },
+    {
+        "ch" : "斯里蘭卡",
+        "en" : "Sri Lanka"
+    },
+    {
+        "ch" : "泰國", 
+        "en" : "Thailand"
+    },
+    {
+        "ch" : "土耳其", 
+        "en" : "Turkey"
+    },
+    {
+        "ch" : "越南", 
+        "en" : "Vietnam"
+    },
+    {
+        "ch" : "汶萊",
+        "en" : "Brunei"
+    },
+    {
+        "ch" : "巴勒斯坦", 
+        "en" : "Palestine"
+    },
+    {
+        "ch" : "錫金",
+        "en" : "Sikkim"
+    },
+    {
+        "ch" : "阿爾巴尼亞" ,
+        "en" : "Albania"
+    },
+    {
+        "ch" : "奧地利" ,
+        "en" : "Austria"
+    },
+    {
+        "ch" : "比利時" ,
+        "en" : "Belgium"
+    },
+    {
+        "ch" : "保加利亞" ,
+        "en" : "Bulgaria"
+    },
+    {
+        "ch" : "克羅埃西亞", 
+        "en" : "Croatia"
+    },
+    {
+        "ch" : "塞普勒斯" ,
+        "en" : "Cyprus"
+    },
+    {
+        "ch" : "丹麥" ,
+        "en" : "Denmark"
+    },
+    {
+        "ch" : "芬蘭" ,
+        "en" : "Finland"
+    },
+    {
+        "ch" : "法國" ,
+        "en" : "France"
+    },
+    {
+        "ch" : "德國" ,
+        "en" : "Germany"
+    },
+    {
+        "ch" : "希臘" ,
+        "en" : "Greece"
+    },
+    {
+        "ch" : "匈牙利", 
+        "en" : "Hungary"
+    },
+    {
+        "ch" : "冰島" ,
+        "en" : "Iceland"
+    },
+    {
+        "ch" : "愛爾蘭" ,
+        "en" : "Ireland"
+    },
+    {
+        "ch" : "義大利" ,
+        "en" : "Italy"
+    },
+    {
+        "ch" : "列支敦斯登" ,
+        "en" : "Liechtenstein"
+    },
+    {
+        "ch" : "盧森堡" ,
+        "en" : "Luxembourg"
+    },
+    {
+        "ch" : "馬其頓" ,
+        "en" : "Macedonia"
+    },
+    {
+        "ch" : "馬爾他" ,
+        "en" : "Malta"
+    },
+    {
+        "ch" : "摩納哥", 
+        "en" : "Monaco"
+    },
+    {
+        "ch" : "荷蘭" ,
+        "en" : "Netherlands"
+    },
+    {
+        "ch" : "挪威" ,
+        "en" : "Norway"
+    },
+    {
+        "ch" : "波蘭" ,
+        "en" : "Poland"
+    },
+    {
+        "ch" : "葡萄牙" ,
+        "en" : "Portugal"
+    },
+    {
+        "ch" : "羅馬尼亞", 
+        "en" : "Romania"
+    },
+    {
+        "ch" : "俄羅斯" ,
+        "en" : "Russia"
+    },
+    {
+        "ch" : "聖馬利諾" ,
+        "en" : "San Marino"
+    },
+    {
+        "ch" : "斯洛維尼亞" ,
+        "en" : "Slovenia"
+    },
+    {
+        "ch" : "西班牙", 
+        "en" : "Spain"
+    },
+    {
+        "ch" : "瑞典" ,
+        "en" : "Sweden"
+    },
+    {
+        "ch" : "瑞士" ,
+        "en" : "Switzerland"
+    },
+    {
+        "ch" : "大不列顛聯合王國" ,
+        "en" : "United Kingdom" 
+    },
+    {
+        "ch" : "南斯拉伕" ,
+        "en" : "Yugoslavia"
+    },
+    {
+        "ch" : "澳大利亞",
+        "en" : "Australien"
+    },
+    {
+        "ch" : "斐濟",
+        "en" : "Fidschi"
+    },
+    {
+        "ch" : "吉里巴斯", 
+        "en" : "Kiribati"
+    },
+    {
+        "ch" : "諾魯" ,
+        "en" : "Nauru"
+    },
+    {
+        "ch" : "紐西蘭", 
+        "en" : "Neuseeland"
+    },
+    {
+        "ch" : "巴布亞紐幾內亞" ,
+        "en" : "Papua-Neuguinea" 
+    },
+    {
+        "ch" : "索羅門群島" ,
+        "en" : "Salomonen"
+    },
+    {
+        "ch" : "東加" ,
+        "en" : "Tonga"
+    },
+    {
+        "ch" : "萬那杜", 
+        "en" : "Vanuatu"
+    },
+    {
+        "ch" : "西薩摩亞",
+        "en" : "Westsamoa"
+    },
+    {
+        "ch" : "安圭拉島",
+        "en" : "Anguilla The Valley"
+    },
+    {
+        "ch" : "安提瓜島",
+        "en" : "Antigua and Barbuda" 
+    },
+    {
+        "ch" : "阿根廷",
+        "en" : "Argentina" 
+    },
+    {
+        "ch" : "巴哈馬",
+        "en" : "The Bahamas"
+    },
+    {
+        "ch" : "巴貝多島", 
+        "en" : "Barbados"
+    },
+    {
+        "ch" : "貝里斯",
+        "en" : "Belize"
+    },
+    {
+        "ch" : "百慕大群島",
+        "en" : "Bermuda"
+    },
+    {
+        "ch" : "玻利維亞",
+        "en" : "Bolivia"
+    },
+    {
+        "ch" : "巴西",
+        "en" : "Brazil"
+    },
+    {
+        "ch" : "英屬維爾京群島",
+        "en" : "British Virgin Islands"
+    },
+    {
+        "ch" : "加拿大",
+        "en" : "Canada"
+    },
+    {
+        "ch" : "智利", 
+        "en" : "Chile"
+    },
+    {
+        "ch" : "哥倫比亞", 
+        "en" : "Colombia"
+    },
+    {
+        "ch" : "哥斯大黎加",
+        "en" : "Costa Rica"
+    },
+    {
+        "ch" : "古巴", 
+        "en" : "Cuba"
+    },
+    {
+        "ch" : "多明尼加",
+        "en" : "Dominican Republic" 
+    },
+    {
+        "ch" : "厄瓜多", 
+        "en" : "Ecuador"
+    },
+    {
+        "ch" : "薩爾瓦多", 
+        "en" : "El Salvador"
+    },
+    {
+        "ch" : "格陵蘭", 
+        "en" : "Greenland Nuuk (Godthab)"
+    },
+    {
+        "ch" : "格瑞那達", 
+        "en" : "Grenada"
+    },
+    {
+        "ch" : "瓜德羅普島",
+        "en" : "Guadeloupe"
+    },
+    {
+        "ch" : "瓜地馬拉", 
+        "en" : "Guatemala"
+    },
+    {
+        "ch" : "蓋亞那", 
+        "en" : "Guyana"
+    },
+    {
+        "ch" : "海地", 
+        "en" : "Haiti"
+    },
+    {
+        "ch" : "宏都拉斯", 
+        "en" : "Honduras"
+    },
+    {
+        "ch" : "牙買加", 
+        "en" : "Jamaica"
+    },
+    {
+        "ch" : "馬提尼克島", 
+        "en" : "Martinique"
+    },
+    {
+        "ch" : "墨西哥", 
+        "en" : "Mexico"
+    },
+    {
+        "ch" : "蒙特塞拉特島",
+        "en" : "Montserrat"
+    },
+    {
+        "ch" : "尼加拉瓜", 
+        "en" : "Nicaragua"
+    },
+    {
+        "ch" : "巴拿馬", 
+        "en" : "Panama"
+    },
+    {
+        "ch" : "巴拉圭", 
+        "en" : "Paraguay"
+    },
+    {
+        "ch" : "秘魯", 
+        "en" : "Peru"
+    },
+    {
+        "ch" : "波多黎各島",
+        "en" : "Puerto Rico"
+    },
+    {
+        "ch" : "聖露西亞島", 
+        "en" : "St. Lucia"
+    },
+    {
+        "ch" : "聖文森特島",
+        "en" : "St. Vincent and the Grenadines"
+    },
+    {
+        "ch" : "蘇利南", 
+        "en" : "Suriname"
+    },
+    {
+        "ch" : "特立尼達和多巴哥",
+        "en" : "Trinidad and Tobago" 
+    },
+    {
+        "ch" : "特克斯群島和凱科斯群島",
+        "en" : "Turks and Caicos Islands" 
+    },
+    {
+        "ch" : "美國", 
+        "en" : "United States"
+    },
+    {
+        "ch" : "烏拉圭", 
+        "en" : "Uruguay"
+    },
+    {
+        "ch" : "委內瑞拉", 
+        "en" : "Venezuela"
+    },
+    {
+        "ch" : "美屬維爾京群島",
+        "en" : "Virgin Islands" 
+    },
+    {
+        "ch" : "阿爾及利亞",
+        "en" : "Algeria"
+    },
+    {
+        "ch" : "安哥拉", 
+        "en" : "Angola"
+    },
+    {
+        "ch" : "貝南", 
+        "en" : "Benin"
+    },
+    {
+        "ch" : "波札那",
+        "en" : "Botswana"
+    },
+    {
+        "ch" : "蒲隆地", 
+        "en" : "Burundi"
+    },
+    {
+        "ch" : "喀麥隆", 
+        "en" : "Cameroon"
+    },
+    {
+        "ch" : "中非",
+        "en" : "Central African Republic"
+    },
+    {
+        "ch" : "查德", 
+        "en" : "Chad"
+    },
+    {
+        "ch" : "剛果共和國",
+        "en" : "Congo Rep."
+    },
+    {
+        "ch" : "吉布地共和國",
+        "en" : "Djibouti"
+    },
+    {
+        "ch" : "埃及", 
+        "en" : "Egypt"
+    },
+    {
+        "ch" : "赤道幾內亞",
+        "en" : "Equatorial Guinea"
+    },
+    {
+        "ch" : "厄利垂亞", 
+        "en" : "Eritrea"
+    },
+    {
+        "ch" : "衣索比亞", 
+        "en" : "Ethiopia"
+    },
+    {
+        "ch" : "加彭", 
+        "en" : "Gabon"
+    },
+    {
+        "ch" : "甘比亞", 
+        "en" : "The Gambia"
+    },
+    {
+        "ch" : "迦納", 
+        "en" : "Ghana"
+    },
+    {
+        "ch" : "幾內亞", 
+        "en" : "Guinea"
+    },
+    {
+        "ch" : "幾內亞比索共和國",
+        "en" : "Guinea-Bissau" 
+    },
+    {
+        "ch" : "肯亞", 
+        "en" : "Kenya"
+    },
+    {
+        "ch" : "賴索托", 
+        "en" : "Lesotho"
+    },
+    {
+        "ch" : "賴比瑞亞",
+        "en" : "Liberia"
+    },
+    {
+        "ch" : "利比亞",
+        "en" : "Libya"
+    },
+    {
+        "ch" : "馬達加斯加",
+        "en" : "Madagasca"
+    },
+    {
+        "ch" : "馬拉維", 
+        "en" : "Malawi"
+    },
+    {
+        "ch" : "馬利", 
+        "en" : "Mali"
+    },
+    {
+        "ch" : "模里西斯", 
+        "en" : "Mauritius"
+    },
+    {
+        "ch" : "毛里塔尼亞", 
+        "en" : "Mauritania"
+    },
+    {
+        "ch" : "摩洛哥", 
+        "en" : "Morocco"
+    },
+    {
+        "ch" : "莫三比克", 
+        "en" : "Mozambique"
+    },
+    {
+        "ch" : "奈米比亞", 
+        "en" : "Namibia"
+    },
+    {
+        "ch" : "尼日", 
+        "en" : "Niger"
+    },
+    {
+        "ch" : "尼日利亞", 
+        "en" : "Nigeria"
+    },
+    {
+        "ch" : "留尼旺島", 
+        "en" : "Reunion"
+    },
+    {
+        "ch" : "剛果民主共和國（扎伊爾）",
+        "en" : "Republic of the Congo" 
+    },
+    {
+        "ch" : "盧安達", 
+        "en" : "Rwanda"
+    },
+    {
+        "ch" : "聖多美及普林西比民主共和國",
+        "en" : "Sao Tome and Principe" 
+    },
+    {
+        "ch" : "塞內加爾", 
+        "en" : "Senegal"
+    },
+    {
+        "ch" : "塞席爾", 
+        "en" : "Seychelles"
+    },
+    {
+        "ch" : "塞拉里昂", 
+        "en" : "Sierra Leone"
+    },
+    {
+        "ch" : "索馬利亞",
+        "en" : "Somalia"
+    },
+    {
+        "ch" : "南非", 
+        "en" : "South Africa"
+    },
+    {
+        "ch" : "蘇丹",
+        "en" : "Sudan"
+    },
+    {
+        "ch" : "史瓦濟蘭", 
+        "en" : "Swaziland"
+    },
+    {
+        "ch" : "坦尚尼亞", 
+        "en" : "Tanzania"
+    },
+    {
+        "ch" : "多哥", 
+        "en" : "Togo"
+    },
+    {
+        "ch" : "突尼西亞", 
+        "en" : "Tunisia"
+    },
+    {
+        "ch" : "烏干達", 
+        "en" : "Uganda"
+    },
+    {
+        "ch" : "西撒哈拉", 
+        "en" : "Western"
+    },
+    {
+        "ch" : "尚比亞", 
+        "en" : "Zambia"
+    },
+    {
+        "ch" : "辛巴威",
+        "en" : "Zimbabwe"
+    }
+]
+
