@@ -25,6 +25,6 @@ IndexRout = Backbone.Router.extend({
         setTimeout(function() {
             nowpage = nowPage;
             articles.model.articleList(nowPage);
-        }, 500);
+        }, 100);
     }
 });
