@@ -2,7 +2,8 @@
 Article = Backbone.View.extend({
     initialize : function() {
         var self = this;
-        this.template = _.template($("#contentTem").html());
+        if($("#contentTem").html() != undefined)
+            this.template = _.template($("#contentTem").html());
     },
 
     events : {
