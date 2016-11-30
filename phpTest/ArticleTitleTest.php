@@ -58,4 +58,24 @@ class ArticleTitleTest extends UnitTestCase {
             $this->assertTrue(false);
         }
     }
+
+    public function testIsRepeat() {
+        require_once("../Article/ArticleTitle.php");
+        $articleTitleAdm = new ArticleTitle();
+        $idArr = Array(2, 3, 4, 5, 6, 8, 9, 10, 13, 14, 15, 16, 17, 18, 19, 20);
+        $id = $idArr[rand(0, count($idArr)-1)];
+        $artitle = $articleTitleAdm->getById($id);
+        $this->assertEqual(true, $articleTitleAdm->isRepeat($artitle['at_title'], $artitle['m_id']));
+        $this->assertEqual(false, $articleTitleAdm->isRepeat($artitle['at_title']. "123", $artitle['m_id']));
+    }
+
+    public function testGetByTitle() {
+        require_once("../Article/ArticleTitle.php");
+        $articleTitleAdm = new ArticleTitle();
+        $idArr = Array(2, 3, 4, 5, 6, 8, 9, 10, 13, 14, 15, 16, 17, 18, 19, 20);
+        $id = $idArr[rand(0, count($idArr)-1)];
+        $artitle = $articleTitleAdm->getById($id);
+        $artitle2 = $articleTitleAdm->get($artitle['at_title']);
+        $this->assertEqual($artitle['at_title'], $artitle2['at_title']);
+    }
 }
