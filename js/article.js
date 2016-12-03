@@ -56,13 +56,13 @@ ArticleRout = Backbone.Router.extend({
             data = JSON.parse(data);
             //console.log(data);
             if(data['status'] == 200) {
-                alert("點讚成功");
+                alert("点赞成功");
                 history.go(-1);
             }
             else {
                 console.log(data['msg']);
                 if(data['msg'] == "press praise repeat")
-                    alert("你已經點讚過了");
+                    alert("你已经点赞过了");
                 else if(data['msg'] == "member not login")
                     alert("你尚未登入");
                 history.go(-1);
