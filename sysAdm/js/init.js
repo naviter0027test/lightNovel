@@ -26,3 +26,7 @@ function browserResize() {
         $("#sidebarMenu").hide();
     }
 }
+
+$(document).ready(function() {
+    isLogin();
+});

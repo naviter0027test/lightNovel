@@ -14,8 +14,10 @@ function isLogin() {
                 location.href = "admin.html";
         }
         else {
-            if(pathname != "index.html" && pathname != "")
+            if(pathname != "index.html" && pathname != "") {
+                alert("尚未登入");
                 location.href = "index.html";
+            }
         }
     });
 }
