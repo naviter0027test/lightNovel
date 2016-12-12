@@ -3,7 +3,6 @@ HeadPanel = Backbone.View.extend({
         self = this;
         $('body').append("<div id='headTem' style='display: none;'></div>");
         $("#headTem").load("template/header.html");
-        $.getScript("lib/CookieAPI.js");
         this.model.on("change:isLogin", function() {
             if(this.get("isLogin") == false) {
                 var pathArr = location.pathname.split('/');

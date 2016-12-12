@@ -51,13 +51,14 @@ function registerPanelBind() {
 }
 
 $(document).ready(function() {
+    $.getScript("lib/CookieAPI.js");
     loginPanelPositionSet();
     $(window).resize(function() {
         loginPanelPositionSet();
     });
-    memberPanelBind();
-    loginPanelBind();
-    registerPanelBind();
+    //memberPanelBind();
+    //loginPanelBind();
+    //registerPanelBind();
     var headerPanel = new HeadPanel({'el' : '#header', 'model' : new MemberModel()});
     setTimeout(function() {
         headerPanel.model.isLogin();

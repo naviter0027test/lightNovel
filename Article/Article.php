@@ -408,7 +408,8 @@ class Article {
         $tablename = $this->table;
 
 	$columns = Array();
-	$columns[0] = "*";
+	$columns[0] = "a_id";
+	$columns[1] = "a_aTitle";
 
         $conditionArr = Array();
         $conditionArr['at_id'] = $atid;
