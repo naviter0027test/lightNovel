@@ -2,7 +2,6 @@ HeadPanel = Backbone.View.extend({
     initialize : function() {
         self = this;
         $('body').append("<div id='headTem' style='display: none;'></div>");
-        $("#headTem").load("template/header.html");
         this.model.on("change:isLogin", function() {
             if(this.get("isLogin") == false) {
                 var pathArr = location.pathname.split('/');
@@ -82,32 +81,35 @@ HeadPanel = Backbone.View.extend({
     el : '',
     template : null,
     render : function() {
-        var isLogin = this.model.get("isLogin");
-        if(isLogin) {
-            this.template = _.template($("#headerLogin").html());
-        }
-        else {
-            this.template = _.template($("#headerNotLogin").html());
-        }
-	this.$el.html(this.template());
-        loginPanelBind();
-        registerPanelBind();
-        memberPanelBind();
+        var self = this;
+        $("#headTem").load("template/header.html", function() {
+            var isLogin = self.model.get("isLogin");
+            if(isLogin) {
+                self.template = _.template($("#headerLogin").html());
+            }
+            else {
+                self.template = _.template($("#headerNotLogin").html());
+            }
+            self.$el.html(self.template());
+            loginPanelBind();
+            registerPanelBind();
+            memberPanelBind();
 
-        var pathArr = location.pathname.split('/');
-        //console.log(pathArr.length);
-        //console.log(pathArr[pathArr.length-1]);
-        var nowHref = pathArr[pathArr.length-1];
-        if(nowHref == "")
-            nowHref = "index.html";
-        var links = this.$el.find(".nav a");
-        $(links).removeClass("nowChoose");
-        for(var idx = 0;idx < links.length;++idx) {
-            if($(links[idx]).attr("href") == nowHref)
-                $(links[idx]).addClass("nowChoose");
-        }
+            var pathArr = location.pathname.split('/');
+            //console.log(pathArr.length);
+            //console.log(pathArr[pathArr.length-1]);
+            var nowHref = pathArr[pathArr.length-1];
+            if(nowHref == "")
+                nowHref = "index.html";
+            var links = self.$el.find(".nav a");
+            $(links).removeClass("nowChoose");
+            for(var idx = 0;idx < links.length;++idx) {
+                if($(links[idx]).attr("href") == nowHref)
+                    $(links[idx]).addClass("nowChoose");
+            }
 
-        this.model.getMyData();
+            self.model.getMyData();
+        });
     },
 
     login : function() {
