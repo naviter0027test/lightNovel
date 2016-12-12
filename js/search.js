@@ -16,8 +16,6 @@ $(document).ready(function() {
             console.log(data);
 
             searchRes.render();
-            $(".searchPrev").hide();
-            $(".searchRes").show();
 
             pager.render2(nowPage, 20);
         });
@@ -46,6 +44,8 @@ SearchRout = Backbone.Router.extend({
             data = JSON.parse(data);
             //console.log(data);
             searchPanel.model.set("data", data);
+            $(".searchPrev").hide();
+            $(".searchRes").show();
         });
     },
 
@@ -69,6 +69,8 @@ SearchRout = Backbone.Router.extend({
             data = JSON.parse(data);
             //console.log(data);
             searchPanel.model.set("data", data);
+            $(".searchPrev").hide();
+            $(".searchRes").show();
         });
     }
 });
