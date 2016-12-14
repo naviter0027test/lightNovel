@@ -18,6 +18,7 @@ $(document).ready(function() {
             searchRes.render();
 
             pager.render2(nowPage, 20);
+            $.unblockUI();
         });
         new SearchRout();
         Backbone.history.start();
@@ -37,6 +38,18 @@ SearchRout = Backbone.Router.extend({
     },
 
     searchResult : function(nowPage) {
+        $.blockUI({ 
+            css: { 
+                border: 'none', 
+                padding: '15px', 
+                backgroundColor: '#000', 
+                '-webkit-border-radius': '10px', 
+                '-moz-border-radius': '10px', 
+                opacity: .5, 
+                color: '#fff' 
+            },
+            message : '<h3>搜寻中，请稍后...</h3>'
+        });
         $("#searchPrev input[name=nowPage]").val(nowPage);
         searchPanel.model.set("nowPage", nowPage);
         searchPanel.$el.ajaxSubmit(function(data) {
