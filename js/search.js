@@ -1,3 +1,17 @@
+function waitShow() {
+    $.blockUI({ 
+        css: { 
+            border: 'none', 
+            padding: '15px', 
+            backgroundColor: '#000', 
+            '-webkit-border-radius': '10px', 
+            '-moz-border-radius': '10px', 
+            opacity: .5, 
+            color: '#fff' 
+        },
+        message : '<h3>搜寻中，请稍后...</h3>'
+    });
+}
 var searchPanel = null;
 var pager = null;
 $(document).ready(function() {
@@ -38,18 +52,7 @@ SearchRout = Backbone.Router.extend({
     },
 
     searchResult : function(nowPage) {
-        $.blockUI({ 
-            css: { 
-                border: 'none', 
-                padding: '15px', 
-                backgroundColor: '#000', 
-                '-webkit-border-radius': '10px', 
-                '-moz-border-radius': '10px', 
-                opacity: .5, 
-                color: '#fff' 
-            },
-            message : '<h3>搜寻中，请稍后...</h3>'
-        });
+        waitShow();
         $("#searchPrev input[name=nowPage]").val(nowPage);
         searchPanel.model.set("nowPage", nowPage);
         searchPanel.$el.ajaxSubmit(function(data) {
@@ -77,6 +80,7 @@ SearchRout = Backbone.Router.extend({
             $("input[name='"+ cls+ "']").val(arg);
         $("#searchPrev input[name=nowPage]").val(nowPage);
         searchPanel.model.set("nowPage", nowPage);
+        waitShow();
         searchPanel.$el.ajaxSubmit(function(data) {
             console.log(data);
             data = JSON.parse(data);
