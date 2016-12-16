@@ -563,7 +563,12 @@ class Article {
         if(isset($conditionLike['alert'])) {
             $alertArr = preg_split('/;/', $conditionLike['alert']);
             $sql .= "and ( ";
+            //print_r($alertArr);
             foreach($alertArr as $idx => $alertStr) {
+                //print_r(gettype($alertStr));
+                //print_r(strlen($alertStr)."\n");
+                if(trim($alertStr) == "") continue;
+                //if(strlen($alertStr) == 0) continue;
                 if($idx > 0) $sql .= " or ";
                 $sql .= " a.a_alert like '%$alertStr%' ";
             }
@@ -573,6 +578,7 @@ class Article {
             $tagArr = preg_split('/;/', $conditionLike['tag']);
             $sql .= "and ( ";
             foreach($tagArr as $idx => $tagStr) {
+                if(trim($tagStr) == "") continue;
                 if($idx > 0) $sql .= " or ";
                 $sql .= " a.a_tag like '%$tagStr%' ";
             }
@@ -638,6 +644,7 @@ class Article {
             $alertArr = preg_split('/;/', $conditionLike['alert']);
             $sql .= "and ( ";
             foreach($alertArr as $idx => $alertStr) {
+                if(trim($alertStr) == "") continue;
                 if($idx > 0) $sql .= " or ";
                 $sql .= " a.a_alert like '%$alertStr%' ";
             }
@@ -647,6 +654,7 @@ class Article {
             $tagArr = preg_split('/;/', $conditionLike['tag']);
             $sql .= "and ( ";
             foreach($tagArr as $idx => $tagStr) {
+                if(trim($tagStr) == "") continue;
                 if($idx > 0) $sql .= " or ";
                 $sql .= " a.a_tag like '%$tagStr%' ";
             }
