@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    $(".captcha").attr("src", "instr.php?instr=captchaLogin&ran="+ Math.random());
     $("#loginForm").submit(function() {
         var self = this;
         $(this).ajaxSubmit(function(data) {
@@ -12,6 +13,7 @@ $(document).ready(function() {
             else {
                 alert("登入失敗");
                 $(self).clearForm();
+                $(".captcha").attr("src", "instr.php?instr=captchaLogin&ran="+ Math.random());
             }
         });
         return false;
