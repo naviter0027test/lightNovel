@@ -29,15 +29,19 @@ MemRout = Backbone.Router.extend({
         var postData = {};
         postData['instr'] = "memberDel";
         postData['mid'] = mid;
-        $.post("instr.php", postData, function(data) {
-            //console.log(data);
-            data = JSON.parse(data);
-            //console.log(data);
-            if(data['status'] == 200) 
-                alert("會員刪除成功");
-            else
-                alert("會員刪除失敗");
+        if(confirm("是否刪除?")) {
+            $.post("instr.php", postData, function(data) {
+                //console.log(data);
+                data = JSON.parse(data);
+                //console.log(data);
+                if(data['status'] == 200) 
+                    alert("会员删除成功");
+                else
+                    alert("會員刪除失敗");
+                history.go(-1);
+            });
+        }
+        else
             history.go(-1);
-        });
     }
 });
