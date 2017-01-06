@@ -1,9 +1,13 @@
 var memView = null;
+var pager = null;
 $(document).ready(function() {
     $("#memberListScript").load("template/memberList.html", function() {
         memView = new MemTable({'el' : "#memberList", 'model' : new MemModel()});
+        pager = new Pager({'el' : '#pager', 'model' : memView.model});
         memView.model.on("change:data", function() {
+            var nowPage = this.get("nowPage");
             memView.render();
+            pager.render2(nowPage, 20);
         });
         new MemRout();
         Backbone.history.start();

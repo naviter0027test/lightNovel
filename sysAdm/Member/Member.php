@@ -49,10 +49,33 @@ class Member {
         if(isset($nowPage))
             $limit['offset'] = ($nowPage -1) * 20;
 
-        $dbAdm->selectData($tablename, $column, null, null, $limit);
+        $orderby = Array();
+        $orderby['col'] = "m_id";
+        $orderby['order'] = "desc";
+
+        $dbAdm->selectData($tablename, $column, null, $orderby, $limit);
         $dbAdm->execSQL();
 
         return $dbAdm->getAll();
+    }
+
+    public function amount() {
+        $tablename = $this->table;
+        $dbAdm = $this->dbAdm;
+
+        $column = Array();
+        $column[0] = "count(m_id) amount";
+
+        $orderby = Array();
+        $orderby['col'] = "m_id";
+        $orderby['order'] = "desc";
+
+        $dbAdm->selectData($tablename, $column, null, $orderby);
+        $dbAdm->execSQL();
+
+        $result = $dbAdm->getAll()[0];
+
+        return $result['amount'];
     }
 
     public function activeUpd($mid, $active) {

@@ -96,6 +96,7 @@ function memberList() {
     $reData['status'] = 200;
     $reData['msg'] = "memberList success";
     $reData['data'] = $memAdm->memberList($_POST['nowPage']);
+    $reData['amount'] = $memAdm->amount();
     return $reData;
 }
 

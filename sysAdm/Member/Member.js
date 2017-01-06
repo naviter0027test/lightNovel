@@ -37,11 +37,13 @@ MemModel = Backbone.Model.extend({
     initialize : function() {
     },
     defaults : {
+        'nowPage' : 1,
         'data' : null
     },
     list : function(nowPage) {
         var self = this;
         var postData = {};
+        this.set("nowPage", nowPage);
         postData['instr'] = "memberList";
         postData['nowPage'] = nowPage;
         $.post("instr.php", postData, function(data) {
