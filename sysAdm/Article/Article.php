@@ -56,7 +56,7 @@ class Article {
         //$dbAdm->selectData($tablename, $column, null, $order, $limit);
         $dbAdm->sqlSet("
             select m.m_user, count(p.p_id) praiseAmount , att.at_title,
-            case when (att.at_lastCh = 0) then '?' else att.at_lastCh end as at_lastCh, a.`a_id`,a.`a_attr`,a.`a_level`,a.`at_id`,a.`a_mainCp`,a.`a_mainCp2`,a.`a_subCp`,a.`a_alert`,a.`m_id`,a.`g_sendMid`,a.`a_tag`,a.`a_aTitle`,a.`a_chapter`,a.`a_isShow`, a.`a_clickCount`, a.`a_updtime`, a.`a_crtime`
+            case when (att.at_lastCh = 0) then '?' else att.at_lastCh end as at_lastCh, att.at_crtime, a.`a_id`,a.`a_attr`,a.`a_level`,a.`at_id`,a.`a_mainCp`,a.`a_mainCp2`,a.`a_subCp`,a.`a_alert`,a.`m_id`,a.`g_sendMid`,a.`a_tag`,a.`a_aTitle`,a.`a_chapter`,a.`a_isShow`, a.`a_clickCount`, a.`a_updtime`, a.`a_crtime`
             from `Article` a
             inner join Member m on a.m_id = m.m_id and m.m_user like '%$search%'
             left join ArticleSeries ass on a.as_id = ass.as_id
