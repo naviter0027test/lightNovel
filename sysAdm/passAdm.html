@@ -32,15 +32,12 @@
                 <input type="password" class="col-xs-9 validate[required, equals[newPass]]" name="newPassAgain" />
                 <button class="col-xs-2">修改</button>
             </form>
-            <form action="instr.php" method="post" class="col-xs-12 forgetSendForm">
-                <input type="hidden" name="instr" value="forgetSet" />
-                <label class="col-xs-3">寄新密碼到指定Email</label>
-                <input type="text" class="col-xs-9 validate[required, custom[email]]" name="forgetPwSendMail" />
-                <button class="col-xs-2">修改</button>
+            <form id="forgetSendForm" action="instr.php" method="post" class="col-xs-12 forgetSendForm">
             </form>
         </div>
         <div id="footer" class="col-sm-12">
         </div>
+        <div id="forgetSendFormTemplate"></div>
     </body>
     <script src='../lib/jquery-2.1.4.min.js'></script>
     <script src='../lib/bootstrap/dist/js/bootstrap.min.js'></script>

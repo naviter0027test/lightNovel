@@ -62,3 +62,52 @@ Admin = Backbone.Model.extend({
     }
 });
 
+ForgetSetPanel = Backbone.View.extend({
+    initialize : function() {
+    },
+
+    events : {
+        'click button' : 'modifyMail'
+    },
+
+    el : '',
+    template : null,
+    render : function() {
+        var data = this.model.get("data");
+        this.$el.validationEngine();
+        //console.log(data);
+        if(data == null)
+            data = {'data' : null};
+        this.$el.html(this.template(data));
+    },
+
+    modifyMail : function(evt) {
+        if(!this.$el.validationEngine("validate"))
+            return false;
+        this.$el.ajaxSubmit(function(data) {
+            //console.log(data);
+            data = JSON.parse(data);
+            //console.log(data)
+            if(data['status'] == 200) {
+                alert("修改成功");
+            }
+            else {
+                alert("修改失敗");
+                console.log(data);
+            }
+        });
+        return false;
+    }
+});
+
+SysModel = Backbone.Model.extend({
+    initialize : function() {
+    },
+
+    defaults : {
+        "data" : null
+    },
+
+    getForgetToSendMail : function() {
+    }
+});
