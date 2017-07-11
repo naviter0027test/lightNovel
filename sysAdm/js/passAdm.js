@@ -20,6 +20,9 @@ $(document).ready(function() {
     $("#forgetSendFormTemplate").load("template/forgetSendForm.html", function() {
         var forgetSendForm = new ForgetSetPanel({'el' : '#forgetSendForm', 'model' : new SysModel()});
         forgetSendForm.template = _.template($("#forgetSendFormTem").html());
-        forgetSendForm.render();
+        forgetSendForm.model.on("change:data", function() {
+            forgetSendForm.render();
+        });
+        forgetSendForm.model.getForgetToSendMail();
     });
 });

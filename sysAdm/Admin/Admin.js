@@ -109,5 +109,14 @@ SysModel = Backbone.Model.extend({
     },
 
     getForgetToSendMail : function() {
+        var self = this;
+        var postData = {};
+        postData['instr'] = 'forgetGet';
+        $.post("instr.php", postData, function(data) {
+            //console.log(data);
+            data = JSON.parse(data);
+            //console.log(data)
+            self.set('data', data);
+        });
     }
 });

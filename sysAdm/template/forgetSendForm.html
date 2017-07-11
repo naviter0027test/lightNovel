@@ -1,6 +1,6 @@
 <script id="forgetSendFormTem" type="text/template">
     <input type="hidden" name="instr" value="forgetSet" />
     <label class="col-xs-3">寄新密碼到指定Email</label>
-    <input type="text" class="col-xs-9 validate[required, custom[email]]" name="forgetPwSendMail" />
+    <input type="text" class="col-xs-9 validate[required, custom[email]]" name="forgetPwSendMail" value="<%=data['forgetMail']%>" />
     <button class="col-xs-2">修改</button>
 </script>

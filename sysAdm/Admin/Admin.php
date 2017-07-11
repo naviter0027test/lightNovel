@@ -144,6 +144,22 @@ class Admin {
         $dbAdm->execSQL();
     }
 
+    public function forgetMailGet() {
+        $dbAdm = $this->dbAdm;
+        $table = $this->table;
+
+        $columns = Array();
+        $columns[0] = "*";
+
+        $conditionArr = Array();
+        $conditionArr['`key`'] = "forgetPwSendMail";
+
+        $dbAdm->selectData($table, $columns, $conditionArr);
+        $dbAdm->execSQL();
+        $forgetMail = $dbAdm->getAll()[0];
+        return $forgetMail['value'];
+    }
+
     public function cpGet() {
         $dbAdm = $this->dbAdm;
         $table = $this->table;

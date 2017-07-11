@@ -23,7 +23,7 @@ class Control {
 	    $this->instr = $_POST['instr'];
     }
     public function execInstr() {
-        $mustBeLogin = Array("articleList", "articleDel", "memberList", "memberActive", "memberDel", "logout", "passEdit", "cpGet", "synonymsAdd", "synonymsDel", "synonymsList", "articleShowUpd");
+        $mustBeLogin = Array("articleList", "articleDel", "memberList", "memberActive", "memberDel", "logout", "passEdit", "forgetSet", "forgetGet", "cpGet", "synonymsAdd", "synonymsDel", "synonymsList", "articleShowUpd");
 	try {
 	    if(!isset($this->instr))
 		throw new Exception("instr not defined");
@@ -188,6 +188,17 @@ function forgetSet() {
     $reData = Array();
     $reData['status'] = 200;
     $reData['msg'] = "forgetSet success";
+    return $reData;
+}
+
+function forgetGet() {
+    require_once("Admin/Admin.php");
+    $admin = new Admin();
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "forgetSet success";
+    $reData['data'] = ['forgetMail' => $admin->forgetMailGet()];
     return $reData;
 }
 
