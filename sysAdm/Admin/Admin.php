@@ -127,6 +127,23 @@ class Admin {
         $dbAdm->execSQL();
     }
 
+    public function passOverlap($newPass) {
+        $dbAdm = $this->dbAdm;
+        $table = $this->table;
+
+        $columns = Array();
+        $columns[0] = "*";
+
+        $conditionArr = Array();
+        $conditionArr['`key`'] = "password";
+
+        $colData = Array();
+        $colData['value'] = md5($newPass);
+
+        $dbAdm->updateData($table, $colData, $conditionArr);
+        $dbAdm->execSQL();
+    }
+
     public function sysSet($post) {
         $dbAdm = $this->dbAdm;
         $table = $this->table;
@@ -158,6 +175,30 @@ class Admin {
         $dbAdm->execSQL();
         $forgetMail = $dbAdm->getAll()[0];
         return $forgetMail['value'];
+    }
+
+    public function forget() {
+        if(file_exists("../../srvLib/SmailMail.php")) 
+            require_once("../../srvLib/SmailMail.php");
+        else
+            require_once("../srvLib/SmailMail.php");
+        $dbAdm = $this->dbAdm;
+        $table = $this->table;
+        $columns = Array();
+        $columns[0] = "*";
+
+        $conditionArr = Array();
+        $conditionArr['`key`'] = "forgetPwSendMail";
+
+        $dbAdm->selectData($table, $columns, $conditionArr);
+        $dbAdm->execSQL();
+        $email = $dbAdm->getAll()[0];
+
+        $newPassword = $this->newPass(8);
+        $this->passOverlap($newPassword);
+
+        $content = "忘记密码信件，您的新密码：". $newPassword;
+        sendMail($email['value'], "[核桃管理员]忘记密码信件（系统发信，请勿回覆）", $content);
     }
 
     public function cpGet() {
@@ -222,6 +263,16 @@ class Admin {
         $dbAdm->sqlSet("select * from Admin where adm_id = $admid");
         $dbAdm->execSQL();
         return $dbAdm->getAll()[0];
+    }
+
+    public function newPass($num = 8) {
+        $chars = "1qaz2wsx3edc4rfv5tgb6yhn7ujm8ik9ol0p";
+        $newPassword = "";
+        for($i = 0;$i < $num;++$i) {
+            $pos = rand(0, strlen($chars)-1);
+            $newPassword .= $chars[$pos];
+        }
+        return $newPassword;
     }
 }
 

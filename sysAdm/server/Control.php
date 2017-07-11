@@ -191,6 +191,18 @@ function forgetSet() {
     return $reData;
 }
 
+function forget() {
+    require_once("Admin/Admin.php");
+    $admin = new Admin();
+
+    $admin->forget();
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "forget success";
+    return $reData;
+}
+
 function forgetGet() {
     require_once("Admin/Admin.php");
     $admin = new Admin();

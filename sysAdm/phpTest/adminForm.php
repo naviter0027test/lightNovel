@@ -29,6 +29,12 @@
             <input type="hidden" name="instr" value="cpGet" />
             <button>cp panel get</button>
         </form>
+
+        <form action="../instr.php" method="post">
+            get new password <br />
+            <input type="hidden" name="instr" value="forget" />
+            <button>get new password</button>
+        </form>
     </body>
 </html>
 
