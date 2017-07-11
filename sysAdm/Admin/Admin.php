@@ -127,6 +127,23 @@ class Admin {
         $dbAdm->execSQL();
     }
 
+    public function sysSet($post) {
+        $dbAdm = $this->dbAdm;
+        $table = $this->table;
+
+        $colData = Array();
+        $conditionArr = Array();
+        //只有一次
+        foreach($post as $key => $value) {
+            $colData['value'] = $value;
+
+            $conditionArr['`key`'] = $key;
+        }
+
+        $dbAdm->updateData($table, $colData, $conditionArr);
+        $dbAdm->execSQL();
+    }
+
     public function cpGet() {
         $dbAdm = $this->dbAdm;
         $table = $this->table;

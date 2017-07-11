@@ -179,6 +179,18 @@ function passEdit() {
     return $reData;
 }
 
+function forgetSet() {
+    require_once("Admin/Admin.php");
+    $admin = new Admin();
+
+    $admin->sysSet($_POST);
+
+    $reData = Array();
+    $reData['status'] = 200;
+    $reData['msg'] = "forgetSet success";
+    return $reData;
+}
+
 function cpGet() {
     require_once("Admin/Admin.php");
     $admin = new Admin();
