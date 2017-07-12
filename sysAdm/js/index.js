@@ -18,5 +18,20 @@ $(document).ready(function() {
         });
         return false;
     });
+    $("#forget").on("click", function() {
+        if(confirm("确定重发新密码?")) {
+            var postData = {};
+            postData['instr'] = "forget";
+            $.post("instr.php", postData, function(data) {
+                console.log(data);
+                data = JSON.parse(data);
+                console.log(data);
+                if (data['status'] == 200) {
+                    alert("重发新密码信件成功，请至邮箱领取");
+                }
+            });
+        }
+        return false;
+    });
     isLogin();
 });
