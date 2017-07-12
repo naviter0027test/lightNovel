@@ -48,3 +48,8 @@ form button {
 form button:hover {
     opacity : .7
 }
+
+form .forgetBtn {
+    display : inline-block;
+    padding : 15px 5px 5px 5px;
+}
