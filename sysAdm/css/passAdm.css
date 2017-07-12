@@ -1,4 +1,4 @@
-.passForm button {
+.passForm button, .forgetSendForm button {
     margin : 20px 0 0 3px;
     padding : 8px;
 
@@ -10,17 +10,17 @@
     border-radius: 4px;
 }
 
-.passForm button:hover {
+.passForm button:hover, .forgetSendForm button:hover {
     background : #66b3ff;
 }
 
-.passForm label {
+.passForm label, .forgetSendForm label {
     display : inline-block;
     padding : 5px;
     margin : 5px 0px 5px 0px;
 }
 
-.passForm input {
+.passForm input, .forgetSendForm input {
     padding : 5px;
     margin : 5px 0px 5px 0px;
 
@@ -30,6 +30,6 @@
     border-radius: 3px;
 }
 
-.passForm input:focus {
+.passForm input:focus, .forgetSendForm input:focus {
     border : 1px solid #66ccff;
 }
