@@ -14,11 +14,8 @@
         <% if(item['a_mainCp'] != "") { %>
         <h4>主CP：<%=item['a_mainCp']%></h4>
         <% } %>
-        <% if(item['a_mainCp2'] != "") { %>
-        <h4>主CP2：<%=item['a_mainCp2']%></h4>
-        <% } %>
-        <% if(item['a_subCp'] != "") { %>
-        <h4>副CP：<%=item['a_subCp']%></h4>
+        <% if(item['a_subCp'] != "" || item['a_mainCp2'] != "") { %>
+        <h4>副CP：<%=(item['a_mainCp2'] != "" ? item['a_mainCp2']+";":"")%><%=item['a_subCp']%></h4>
         <% } %>
         <% if(item['a_alert'] != "") { %>
         <h4>警告：<%=item['a_alert']%></h4>

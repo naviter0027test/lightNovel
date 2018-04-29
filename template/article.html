@@ -99,8 +99,7 @@
         更新日期：<label><%=data['a_crtime']%></label> <br />
         <br />
         <h4>主CP：<%=data['a_mainCp']%></h4>
-        <h4>主CP2：<%=data['a_mainCp2']%></h4>
-        <h4>副CP：<%=data['a_subCp']%></h4>
+        <h4>副CP：<%=(data['a_mainCp2'] != "" ? data['a_mainCp2']+";":"")%><%=data['a_subCp']%></h4>
         <h4>警告：<%=data['a_alert']%></h4>
         <h4>标签：<%=data['a_tag']%></h4>
         <% if(data['sendUser'] != "") { %>
