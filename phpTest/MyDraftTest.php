@@ -52,7 +52,6 @@ class MyDraftTest extends UnitTestCase {
         else
             $article['level'] = "NC17";
         $article['cp1'] = $cpAArr[rand(0, count($cpAArr)-1)]. ";". $cpBArr[rand(0, count($cpBArr)-1)];
-        $article['cp2'] = $cpAArr[rand(0, count($cpAArr)-1)]. ";". $cpBArr[rand(0, count($cpBArr)-1)];
         $article['subCp'] = $cpAArr[rand(0, count($cpAArr)-1)]. ";". $cpBArr[rand(0, count($cpBArr)-1)]; 
         $alertArr = Array("主要角色死亡", "血腥暴力", "性轉");
         $article['alert'] = $alertArr[rand(0, count($alertArr)-1)];
@@ -84,17 +83,24 @@ class MyDraftTest extends UnitTestCase {
 
     function testUpd() {
         require_once("../Article/MyDraft.php");
-        $myDraft = new MyDraft();
-        $md_id = 5;
-        $draft = $myDraft->getOne($md_id);
-        $colData = Array();
-        $colData['a_attr'] = $draft['a_attr'];
-        $colData['a_level'] = $draft['a_level'];
-        $colData['a_title'] = "55555";
+        try {
+            $myDraft = new MyDraft();
+            $md_id = 5;
+            $draft = $myDraft->getOne($md_id);
+            $colData = Array();
+            $colData['mdid'] = $md_id;
+            $colData['a_attr'] = $draft['a_attr'];
+            $colData['a_level'] = $draft['a_level'];
+            $colData['a_title'] = "55555";
 
-        $myDraft->upd($colData, $md_id);
-        $draft = $myDraft->getOne($md_id);
-        $this->assertEqual("55555", $draft['a_title']);
+            $myDraft->upd($colData);
+            $draft = $myDraft->getOne($md_id);
+            $this->assertEqual("55555", $draft['a_title']);
+        }
+        catch (Exception $e) {
+            echo $e->getMessage();
+            $this->assertEqual(false, true);
+        }
 
     }
 

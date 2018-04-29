@@ -310,7 +310,7 @@ function postArticle() {
         $article['series'] = $series->getLastOneId($_SESSION['mid']);
     }
 
-    if(isset($article['sendUser'])) {
+    if(isset($article['sendUser']) && trim($article['sendUser']) != "") {
         require_once("Member/Member.php");
         $memAdm = new Member();
         $mem = $memAdm->find($article['sendUser']);

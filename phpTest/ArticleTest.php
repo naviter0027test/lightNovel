@@ -41,7 +41,6 @@ class ArticleTest extends UnitTestCase {
             $article['articleType'] = $baseData->spanArticleType();
             $article['level'] = $baseData->spanLevel();
             $article['cp1'] = $baseData->spanCp();
-            $article['cp2'] = $baseData->spanCp();
             $article['subCp'] = $baseData->spanCp(); 
             $article['series'] = $series->getRandSidForMid($mid)['as_id'];
 

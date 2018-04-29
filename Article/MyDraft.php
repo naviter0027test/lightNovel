@@ -46,7 +46,8 @@ class MyDraft {
         if(isset($article['series']))
             $insData['as_id'] = $article['series'];
         $insData['a_mainCp'] = $article['cp1'];
-        $insData['a_mainCp2'] = $article['cp2'];
+        if(isset($article['cp2']))
+            $insData['a_mainCp2'] = $article['cp2'];
         if(isset($article['subCp']))
             $insData['a_subCp'] = $article['subCp']; 
         $insData['a_alert'] = $article['alert']; 
@@ -96,27 +97,39 @@ class MyDraft {
         $dbAdm = $this->dbAdm;
 
         $updData = Array();
-        $updData['a_title'] = $article['title'];
-        $updData['a_attr'] = $article['articleType'];
-        $updData['a_level'] = $article['level'];
+        if(isset($article['title']))
+            $updData['a_title'] = $article['title'];
+        if(isset($article['articleType']))
+            $updData['a_attr'] = $article['articleType'];
+        if(isset($article['level']))
+            $updData['a_level'] = $article['level'];
         if(isset($article['series']))
             $updData['as_id'] = $article['series'];
-        $updData['a_mainCp'] = $article['cp1'];
-        $updData['a_mainCp2'] = $article['cp2'];
+        if(isset($article['cp1']))
+            $updData['a_mainCp'] = $article['cp1'];
+        if(isset($article['cp2']))
+            $updData['a_mainCp2'] = $article['cp2'];
         if(isset($article['subCp']))
             $updData['a_subCp'] = $article['subCp']; 
-        $updData['a_alert'] = $article['alert']; 
-        $updData['a_tag'] = $article['tag'];
-        $updData['a_aTitle'] = $article['aTitle'];
+        if(isset($article['alert']))
+            $updData['a_alert'] = $article['alert']; 
+        if(isset($article['tag']))
+            $updData['a_tag'] = $article['tag'];
+        if(isset($article['aTitle']))
+            $updData['a_aTitle'] = $article['aTitle'];
         if(isset($article['aChapter']))
             $updData['a_chapter'] = $article['aChapter'];
         if(isset($article['aMemo']))
             $updData['a_memo'] = $article['aMemo']  ;
-        $updData['a_content'] = $article['content'];
+        if(isset($article['content']))
+            $updData['a_content'] = $article['content'];
         $updData['a_crtime'] = date('Y-m-d H:i:s');
 
         $conditionArr = Array();
-        $conditionArr['md_id'] = $article['mdid'];
+        if(isset($article['mdid']))
+            $conditionArr['md_id'] = $article['mdid'];
+        else
+            throw new Exception('mdid not found');
 
         $dbAdm->updateData($tablename, $updData, $conditionArr);
         $dbAdm->execSQL();
