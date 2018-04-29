@@ -29,15 +29,9 @@
             </span>
             <br />
             <span class="col-xs-12">
-                <label class="col-xs-2">主CP1</label>
+                <label class="col-xs-2">主CP</label>
                 <input type="text" class="smInput" name="cp1[]" placeholder="點我" /> /
                 <input type="text" class="smInput" name="cp1[]" placeholder="點我" />
-            </span>
-            <br />
-            <span class="col-xs-12">
-                <label class="col-xs-2">主CP2</label>
-                <input type="text" class="smInput" name="cp2[]" placeholder="點我" /> /
-                <input type="text" class="smInput" name="cp2[]" placeholder="點我" />
             </span>
             <br />
             <span class="col-xs-12">
@@ -195,15 +189,9 @@
             </span>
             <br />
             <span class="col-xs-12">
-                <label class="col-xs-2">主CP1</label>
+                <label class="col-xs-2">主CP</label>
                 <input type="text" class="smInput" name="cp1[]" placeholder="點我" /> /
                 <input type="text" class="smInput" name="cp1[]" placeholder="點我" />
-            </span>
-            <br />
-            <span class="col-xs-12">
-                <label class="col-xs-2">主CP2</label>
-                <input type="text" class="smInput" name="cp2[]" placeholder="點我" /> /
-                <input type="text" class="smInput" name="cp2[]" placeholder="點我" />
             </span>
             <br />
             <span class="col-xs-12">
