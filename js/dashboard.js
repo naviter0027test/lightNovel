@@ -206,7 +206,16 @@ DashboardRout = Backbone.Router.extend({
                 //console.log(data);
                 data = JSON.parse(data);
                 data['data']['a_mainCp'] = data['data']['a_mainCp'].split(";");
-                data['data']['a_mainCp2'] = data['data']['a_mainCp2'].split(";");
+                //data['data']['a_mainCp2'] = data['data']['a_mainCp2'].split(";");
+                if(data['data']['a_mainCp2'] != null) {
+                    var originCp2 = data['data']['a_mainCp2'];
+                    data['data']['a_mainCp2'] = originCp2.split(";");
+                    data['data']['a_mainCp2ToSubCp'] = originCp2.replace(";", "/");
+                }
+                else {
+                    data['data']['a_mainCp2'] = ["", ""];
+                    data['data']['a_mainCp2ToSubCp'] = "";
+                }
 
                 //console.log(data);
                 if(data['status'] == 200) {
@@ -281,10 +290,12 @@ DashboardRout = Backbone.Router.extend({
                         cpInput = null;
                     });
 
+                    /*
                     $("[name='cp1[]'],[name='cp2[]']").on("focus", function() {
                         cpInput = this;
                         $(".cpPanel").fadeIn();
                     });
+                    */
                 }
             });
         });
@@ -354,10 +365,15 @@ DashboardRout = Backbone.Router.extend({
                 data = JSON.parse(data);
                 //console.log(data);
                 data['data']['a_mainCp'] = data['data']['a_mainCp'].split(";");
-                if(data['data']['a_mainCp2'] != null)
-                    data['data']['a_mainCp2'] = data['data']['a_mainCp2'].split(";");
-                else
+                if(data['data']['a_mainCp2'] != null) {
+                    var originCp2 = data['data']['a_mainCp2'];
+                    data['data']['a_mainCp2'] = originCp2.split(";");
+                    data['data']['a_mainCp2ToSubCp'] = originCp2.replace(";", "/");
+                }
+                else {
                     data['data']['a_mainCp2'] = ["", ""];
+                    data['data']['a_mainCp2ToSubCp'] = "";
+                }
 
                 //console.log(data);
                 if(data['status'] == 200) {
@@ -436,10 +452,12 @@ DashboardRout = Backbone.Router.extend({
                         cpInput = null;
                     });
 
+                    /*
                     $("[name='cp1[]'],[name='cp2[]']").on("focus", function() {
                         cpInput = this;
                         $(".cpPanel").fadeIn();
                     });
+                    */
                 }
             });
         });

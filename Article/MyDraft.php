@@ -46,8 +46,7 @@ class MyDraft {
         if(isset($article['series']))
             $insData['as_id'] = $article['series'];
         $insData['a_mainCp'] = $article['cp1'];
-        if(isset($article['cp2']))
-            $insData['a_mainCp2'] = $article['cp2'];
+        $insData['a_mainCp2'] = "";
         if(isset($article['subCp']))
             $insData['a_subCp'] = $article['subCp']; 
         $insData['a_alert'] = $article['alert']; 
@@ -107,8 +106,7 @@ class MyDraft {
             $updData['as_id'] = $article['series'];
         if(isset($article['cp1']))
             $updData['a_mainCp'] = $article['cp1'];
-        if(isset($article['cp2']))
-            $updData['a_mainCp2'] = $article['cp2'];
+        $updData['a_mainCp2'] = "";
         if(isset($article['subCp']))
             $updData['a_subCp'] = $article['subCp']; 
         if(isset($article['alert']))

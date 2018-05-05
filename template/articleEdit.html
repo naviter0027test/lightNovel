@@ -26,19 +26,19 @@
             <br />
             <span class="col-xs-12">
                 <label class="col-xs-2">主CP1</label>
-                <input type="text" class="smInput validate[required]" name="cp1[]" placeholder="点我" readonly value="<%=data['a_mainCp'][0]%>"/> /
-                <input type="text" class="smInput validate[required]" name="cp1[]" placeholder="点我" readonly value="<%=data['a_mainCp'][1]%>" />
+                <input type="text" class="smInput validate[required]" name="cp1[]" placeholder="点我" value="<%=data['a_mainCp'][0]%>"/> /
+                <input type="text" class="smInput validate[required]" name="cp1[]" placeholder="点我" value="<%=data['a_mainCp'][1]%>" />
             </span>
             <br />
-            <span class="col-xs-12">
+            <span class="col-xs-12 hidden">
                 <label class="col-xs-2">主CP2</label>
-                <input type="text" class="smInput" name="cp2[]" placeholder="点我" value="<%=data['a_mainCp2'][0]%>"/> /
-                <input type="text" class="smInput" name="cp2[]" placeholder="点我" value="<%=data['a_mainCp2'][1]%>"/>
+                <input type="text" class="smInput" name="cp2[]" placeholder="点我" value=""/> /
+                <input type="text" class="smInput" name="cp2[]" placeholder="点我" value=""/>
             </span>
             <br />
             <span class="col-xs-12">
                 <label class="col-xs-2">副CP</label>
-                <input type="text" name="viceCp" placeholder="CP人物以半角'/'隔开,多个CP以半角分号隔开" value="<%=data['a_subCp']%>" class="col-xs-6" />
+                <input type="text" name="viceCp" placeholder="CP人物以半角'/'隔开,多个CP以半角分号隔开" value="<%=data['a_mainCp2ToSubCp'] != "" ? data['a_mainCp2ToSubCp']+";":""%><%=data['a_subCp']%>" class="col-xs-6" />
             </span>
             <br />
             <span class="col-xs-12">

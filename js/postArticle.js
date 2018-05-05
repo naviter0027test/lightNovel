@@ -108,10 +108,12 @@ $(document).ready(function() {
         cpInput = null;
     });
 
+    /*
     $("[name='cp1[]'],[name='cp2[]']").on("focus", function() {
         cpInput = this;
         $(".cpPanel").fadeIn();
     });
+    */
 
     var postData = {};
     postData['instr'] = "cpGet";
