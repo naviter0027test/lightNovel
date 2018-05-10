@@ -157,7 +157,21 @@ PostArticleForm = Backbone.View.extend({
         }
 
         if($("input[name=viceCp]").val() != "") {
-            postData['viceCp'] = $("input[name=viceCp]").val();
+            var viceCp = $("input[name=viceCp]").val();
+            //副cp要追加檢查
+            if(viceCp.search(";") == -1 && viceCp.search("/") == -1) {
+                alert("副cp填写格式错误，应填入xx/xx格式");
+                return false;
+            } else if (viceCp.search(";") != -1) {
+                var viceCpArr = viceCp.split(";");
+                for(var viceCpIdx = 0;viceCpIdx < viceCpArr.length;++viceCpIdx) {
+                    if(viceCpArr[viceCpIdx].search("/") == -1) {
+                        alert("副cp填写格式错误，应填入xx/xx格式");
+                        return false;
+                    }
+                }
+            }
+            postData['viceCp'] = viceCp;
         }
 
         if($("select[name=series]").val() != "") 
@@ -249,7 +263,21 @@ PostArticleForm = Backbone.View.extend({
         }
 
         if($("input[name=viceCp]").val() != "") {
-            postData['viceCp'] = $("input[name=viceCp]").val();
+            var viceCp = $("input[name=viceCp]").val();
+            //副cp要追加檢查
+            if(viceCp.search(";") == -1 && viceCp.search("/") == -1) {
+                alert("副cp填写格式错误，应填入xx/xx格式");
+                return false;
+            } else if (viceCp.search(";") != -1) {
+                var viceCpArr = viceCp.split(";");
+                for(var viceCpIdx = 0;viceCpIdx < viceCpArr.length;++viceCpIdx) {
+                    if(viceCpArr[viceCpIdx].search("/") == -1) {
+                        alert("副cp填写格式错误，应填入xx/xx格式");
+                        return false;
+                    }
+                }
+            }
+            postData['viceCp'] = viceCp;
         }
 
         if($("select[name=series]").val() != "") 

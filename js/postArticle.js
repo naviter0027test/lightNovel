@@ -24,24 +24,6 @@ $(document).ready(function() {
         }
     });
 
-    /*
-    $("select[name=series]").on("change", function() {
-        var data = memModel.get("seriesList")['data'];
-        var num = $("select[name=series] option:selected").attr("num");
-        if(num != "X") {
-            var as_finally = data[num]['as_finally'];
-            if(as_finally == 0)
-                as_finally = "?";
-            $("input[name=chapterSum]").val(as_finally);
-        }
-
-        if($(this).val() != "")
-            $("input[name=aChapter]").addClass("validate[required]");
-        else
-            $("input[name=aChapter]").removeClass("validate[required]");
-    });
-    */
-
     if(getQueryVariable("isChapter") == "Y") {
         atTitle = decodeURIComponent(getCookie("atTitle"));
         $("input[name=title]").val(atTitle);
