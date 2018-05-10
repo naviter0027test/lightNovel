@@ -165,6 +165,8 @@ PostArticleForm = Backbone.View.extend({
             } else if (viceCp.search(";") != -1) {
                 var viceCpArr = viceCp.split(";");
                 for(var viceCpIdx = 0;viceCpIdx < viceCpArr.length;++viceCpIdx) {
+                    if(viceCpArr[viceCpIdx].trim() == "")
+                        continue;
                     if(viceCpArr[viceCpIdx].search("/") == -1) {
                         alert("副cp填写格式错误，应填入xx/xx格式");
                         return false;
@@ -271,6 +273,8 @@ PostArticleForm = Backbone.View.extend({
             } else if (viceCp.search(";") != -1) {
                 var viceCpArr = viceCp.split(";");
                 for(var viceCpIdx = 0;viceCpIdx < viceCpArr.length;++viceCpIdx) {
+                    if(viceCpArr[viceCpIdx].trim() == "")
+                        continue;
                     if(viceCpArr[viceCpIdx].search("/") == -1) {
                         alert("副cp填写格式错误，应填入xx/xx格式");
                         return false;
