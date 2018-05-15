@@ -12,7 +12,14 @@ $(document).ready(function() {
             if(data['data']['a_mainCp2'] != null) {
                 var cp2 = data['data']['a_mainCp2'];
                 data['data']['a_mainCp2'] = cp2.replace(";", "/");
+                if(data['data']['a_subCp'].trim() != "" && data['data']['a_mainCp2'].trim() != "")
+                    data['data']['a_mainCp2'] += ";";
             }
+            var subCp = data['data']['a_subCp'];
+            if(subCp.lastIndexOf(";") == subCp.length-1) {
+                subCp = subCp.substr(0, subCp.length-1);
+            }
+            data['data']['a_subCp'] = subCp;
             article.$el.html(article.template(data));
             $("select[name=selectCh]").on("change", function() {
                 location.href = "#article/"+ $(this).val()+"/1";

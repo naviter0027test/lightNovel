@@ -36,10 +36,16 @@ Article = Backbone.View.extend({
                     mainCp2Arr[jdx] = "<a href='search.html#search/1/mainCp/"+ mainCp2Arr[jdx]+ "'>"+ mainCp2Arr[jdx]+ "</a>";
                 }
                 data['data'][idx]['a_mainCp2'] = mainCp2Arr.join("/");
+                if(data['data'][idx]['a_subCp'] != "") {
+                    data['data'][idx]['a_mainCp2'] = data['data'][idx]['a_mainCp2'] + ";";
+                }
             }
             if(data['data'][idx]['a_subCp'] != "") {
                 var subCp = data['data'][idx]['a_subCp'];
-                var subCpArr = data['data'][idx]['a_subCp'].split(";");
+                if(subCp.lastIndexOf(";") == subCp.length-1) {
+                    subCp = subCp.substr(0, subCp.length-1);
+                }
+                var subCpArr = subCp.split(";");
                 //console.log(subCpArr);
                 for(var jdx in subCpArr) {
                     var subNames = subCpArr[jdx].split("/");
