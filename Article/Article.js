@@ -166,7 +166,7 @@ PostArticleForm = Backbone.View.extend({
             var viceCp = $("input[name=viceCp]").val();
             //副cp要追加檢查
             if(viceCp.search(";") == -1 && viceCp.search("/") == -1) {
-                alert("副cp填写格式错误，应填入xx/xx格式");
+                alert("副cp以a/b格式填写，多个cp以半角;隔开");
                 return false;
             } else if (viceCp.search(";") != -1) {
                 var viceCpArr = viceCp.split(";");
@@ -174,7 +174,7 @@ PostArticleForm = Backbone.View.extend({
                     if(viceCpArr[viceCpIdx].trim() == "")
                         continue;
                     if(viceCpArr[viceCpIdx].search("/") == -1) {
-                        alert("副cp填写格式错误，应填入xx/xx格式");
+                        alert("副cp以a/b格式填写，多个cp以半角;隔开");
                         return false;
                     }
                 }
@@ -274,7 +274,7 @@ PostArticleForm = Backbone.View.extend({
             var viceCp = $("input[name=viceCp]").val();
             //副cp要追加檢查
             if(viceCp.search(";") == -1 && viceCp.search("/") == -1) {
-                alert("副cp填写格式错误，应填入xx/xx格式");
+                alert("副cp以a/b格式填写，多个cp以半角;隔开");
                 return false;
             } else if (viceCp.search(";") != -1) {
                 var viceCpArr = viceCp.split(";");
@@ -282,7 +282,7 @@ PostArticleForm = Backbone.View.extend({
                     if(viceCpArr[viceCpIdx].trim() == "")
                         continue;
                     if(viceCpArr[viceCpIdx].search("/") == -1) {
-                        alert("副cp填写格式错误，应填入xx/xx格式");
+                        alert("副cp以a/b格式填写，多个cp以半角;隔开");
                         return false;
                     }
                 }
