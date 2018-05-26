@@ -58,6 +58,10 @@
     background : #f6d1ac;
 }
 
+.postArticle .focus {
+    color : red;
+}
+
 .cpPanel {
     position : absolute;
     display : none;

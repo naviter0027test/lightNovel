@@ -5,18 +5,18 @@
             <input type="hidden" name="instr" draftcls="editDraft" value="postArticle" />
             <input type="hidden" name="mdid" value="<%=data['md_id']%>" />
             <span class="col-xs-12">
-                <label class="col-xs-2">标题</label> 
+                <label class="col-xs-2"><i class="focus">*</i>标题</label> 
                 <input class="col-xs-6 validate[required]" type="text" name="title" value="<%=data['a_title']%>"/> 
             </span>
             <br />
             <span class="col-xs-12">
-                <label class="col-xs-2">属性</label> 
+                <label class="col-xs-2"><i class="focus">*</i>属性</label> 
                 <input type="radio" name="articleType" class="validate[required]" value="article" <%=(data['a_attr']=="article"?"checked":"")%> />文 
-                <input type="radio" name="articleType" class="validate[required]" value="postArticle" <%=(data['a_attr']=="article"?"":"checked")%> />推文 
+                <input type="radio" name="articleType" class="validate[required]" value="postArticle" <%=(data['a_attr']=="article"?"":"checked")%> />其他 
                 <br />
             </span>
             <span class="col-xs-12">
-                <label class="col-xs-2">分級</label>
+                <label class="col-xs-2"><i class="focus">*</i>分級</label>
                 <select name="level" class="validate[required]">
                     <option value="Gen" <%=(data['a_level']=="Gen"?"selected":"")%>>Gen</option>
                     <option value="PG" <%=(data['a_level']=="PG"?"selected":"")%>>PG</option>
@@ -25,7 +25,7 @@
             </span>
             <br />
             <span class="col-xs-12">
-                <label class="col-xs-2">主CP1</label>
+                <label class="col-xs-2"><i class="focus">*</i>主CP</label>
                 <input type="text" class="smInput validate[required]" name="cp1[]" placeholder="點我" readonly value="<%=data['a_mainCp'][0]%>"/> /
                 <input type="text" class="smInput validate[required]" name="cp1[]" placeholder="點我" readonly value="<%=data['a_mainCp'][1]%>" />
             </span>
@@ -54,7 +54,7 @@
             </span>
             <br />
             <span class="col-xs-12">
-                <label class="col-xs-2">警告</label>
+                <label class="col-xs-2"><i class="focus">*</i>警告</label>
                 <% isCheck = "";
                 if(data['a_alert'].search("无") != -1)
                     isCheck = "checked";
@@ -81,7 +81,7 @@
             </span>
             <br />
             <span class="col-xs-12">
-                <label class="col-xs-2">标签</label>
+                <label class="col-xs-2"><i class="focus">*</i>标签</label>
                 <% isCheck = "";
                 if(data['a_tag'].search("无") != -1)
                     isCheck = "checked";

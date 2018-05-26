@@ -16,7 +16,7 @@
             <span class="col-xs-12">
                 <label class="col-xs-2">屬性</label> 
                 <input type="radio" name="articleType" value="article" />文 
-                <input type="radio" name="articleType" value="postArticle" />推文 
+                <input type="radio" name="articleType" value="postArticle" />其他 
                 <br />
             </span>
             <span class="col-xs-12">
@@ -176,7 +176,7 @@
             <span class="col-xs-12">
                 <label class="col-xs-2">屬性</label> 
                 <input type="radio" name="articleType" value="article" />文 
-                <input type="radio" name="articleType" value="postArticle" />推文 
+                <input type="radio" name="articleType" value="postArticle" />其他 
                 <br />
             </span>
             <span class="col-xs-12">
