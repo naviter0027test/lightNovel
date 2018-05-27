@@ -148,7 +148,7 @@ PostArticleForm = Backbone.View.extend({
         else
             postData['instr'] = "storeDraft";
         postData['title'] = $("input[name=title]").val();
-        postData['articleType'] = $("input[name=articleType]").val();
+        postData['articleType'] = $("input[name=articleType]:checked").val();
         postData['level'] = $("select[name=level]").val();
         //console.log($("input[name='cp1[]']"));
         postData['cp1'] = [];
@@ -252,9 +252,9 @@ PostArticleForm = Backbone.View.extend({
         if(postData['instr'] == "articleEdit")
             postData['aid'] = $("input[name=aid]").val();
         postData['title'] = $("input[name=title]").val();
-        postData['articleType'] = $("input[name=articleType]").val();
+        postData['articleType'] = $("input[name=articleType]:checked").val();
         postData['level'] = $("select[name=level]").val();
-        //console.log($("input[name='cp1[]']"));
+        console.log(postData);
         postData['cp1'] = [];
         for(var i = 0;i < $("input[name='cp1[]']").length;++i) {
             var cpInput = $("input[name='cp1[]']")[i];
