@@ -105,6 +105,8 @@ class MyDraft {
             $updData['a_level'] = $article['level'];
         if(isset($article['series']))
             $updData['as_id'] = $article['series'];
+        if(isset($article['a_author']))
+            $updData['a_author'] = $article['a_author'];
         if(isset($article['cp1']))
             $updData['a_mainCp'] = $article['cp1'];
         $updData['a_mainCp2'] = "";
