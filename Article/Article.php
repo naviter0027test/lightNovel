@@ -47,6 +47,7 @@ class Article {
         if(isset($article['series']))
             $insData['as_id'] = $article['series'];
         $insData['at_id'] = $article['atid'];
+        $insData['a_author'] = $article['author'];
         $insData['a_mainCp'] = $article['cp1'];
         $insData['a_mainCp2'] = "";
         if(isset($article['subCp']))
@@ -91,6 +92,7 @@ class Article {
         $updData['a_level'] = $article['level'];
         if(isset($article['series']))
             $updData['as_id'] = $article['series'];
+        $updData['a_author'] = $article['author'];
         $updData['a_mainCp'] = $article['cp1'];
         $updData['a_mainCp2'] = "";
         if(isset($article['subCp']))

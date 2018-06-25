@@ -40,8 +40,9 @@ class ArticleTest extends UnitTestCase {
             $article['title'] = $baseData->spanTitle();
             $article['articleType'] = $baseData->spanArticleType();
             $article['level'] = $baseData->spanLevel();
+            $article['author'] = $baseData->spanAuthor();
             $article['cp1'] = $baseData->spanCp();
-            $article['subCp'] = $baseData->spanCp(); 
+            $article['subCp'] = ""; 
             $article['series'] = $series->getRandSidForMid($mid)['as_id'];
 
             $article['alert'] = $baseData->spanAlert();
@@ -100,6 +101,36 @@ class ArticleTest extends UnitTestCase {
         $data = $articleAdm->get($lists[0]['a_id']);
         $articleTitle = $artTitle->getById($data['at_id']);
         $this->assertEqual($articleTitle['at_title'], $this->articleTitle);
-        //$this->assertEqual($data['a_id'], 2);
+    }
+
+    function testUpd() {
+        require_once("../Article/Article.php");
+        require_once("spanData.php");
+        $articleAdm = new Article();
+        $baseData = new BaseData();
+        $lists = $articleAdm->lastList($this->mid);
+        $data = $articleAdm->get($lists[0]['a_id']);
+        $article['articleType'] = $data['a_attr'];
+        $article['level'] = $data['a_level'];
+        if(isset($data['as_id']))
+            $article['series'] = $data['as_id'];
+        $article['author'] = $baseData->spanAuthor();
+        $article['cp1'] = $data['a_mainCp'];
+        if(isset($data['a_subCp']))
+            $article['subCp'] = $data['a_subCp']; 
+        $article['alert'] = $data['a_alert']; 
+        $article['mId'] = $data['m_id'];    
+        $article['tag'] = $data['a_tag'];
+        if(isset($data['a_aTitle']))
+            $article['aTitle'] = $data['a_aTitle'];
+        if(isset($data['a_chapter']))
+            $article['aChapter'] = $data['a_chapter'];
+        if(isset($data['a_memo']))
+            $article['aMemo'] = $data['a_memo']  ;
+        $article['content'] = $data['a_content'];
+        $article['aid'] = $data['a_id'];
+        $articleAdm->articleUpd($article);
+        $data2 = $articleAdm->get($lists[0]['a_id']);
+        $this->assertNotEqual($data['a_author'], $data2['a_author']);
     }
 }
