@@ -95,7 +95,7 @@ class MyDraftTest extends UnitTestCase {
             $colData['a_attr'] = $draft['a_attr'];
             $colData['a_level'] = $draft['a_level'];
             $colData['a_title'] = "55555";
-            $colData['a_author'] = "王和之";
+            $colData['a_author'] = "鳥鳥知音";
 
             $myDraft->upd($colData);
             $draft = $myDraft->getOne($md_id);
@@ -107,10 +107,10 @@ class MyDraftTest extends UnitTestCase {
             $colData['a_attr'] = $draft['a_attr'];
             $colData['a_level'] = $draft['a_level'];
             $colData['a_title'] = "55555";
-            $colData['a_author'] = "王淵之";
+            $colData['a_author'] = "邯鄲半步顛";
             $myDraft->upd($colData);
             $draft = $myDraft->getOne($md_id);
-            $this->assertNotEqual("王和之", $draft['a_author']);
+            $this->assertNotEqual("鳥鳥知音", $draft['a_author']);
         }
         catch (Exception $e) {
             echo $e->getMessage();
