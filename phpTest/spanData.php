@@ -264,8 +264,9 @@ class BaseData {
             return "NC17";
     }
 
+    //其實不是作者而是原著
     public function spanAuthor() {
-        $authors = Array( "陈窘名", "李白", "王维", "寒士元", "柳宗元", "苏询", "苏轼", "苏辙", "陶潜");
+        $authors = Array( "邯鄲半步顛", "鳥鳥知音", "太石元記", "寒士元記", "長恨歌", "三都賦", "陸橋歌", "八百勇士行", "護身詩歌");
         return $authors[rand(0, count($authors)-1)];
     }
 
