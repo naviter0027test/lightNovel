@@ -23,6 +23,13 @@ SearchResult = Backbone.View.extend({
     render : function() {
         var data = this.model.get("data");
         for(var idx in data['data']) {
+            if(data['data'][idx]['a_author'] != null) {
+                var authorArr = data['data'][idx]['a_author'].split(";");
+                for(var jdx in authorArr) {
+                    authorArr[jdx] = "<a href='search.html#search/1/author/"+ authorArr[jdx]+ "'>"+ authorArr[jdx]+ "</a>";
+                }
+                data['data'][idx]['a_author'] = authorArr.join(";");
+            }
             if(data['data'][idx]['a_mainCp'] != null) {
                 //data['data'][idx]['a_mainCp'] = data['data'][idx]['a_mainCp'].replace(";", "/");
                 var mainCpArr = data['data'][idx]['a_mainCp'].split(";");
