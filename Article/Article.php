@@ -276,7 +276,7 @@ class Article {
 
             //找出與at_id相同的文章，並取出按讚數
             $dbAdm->sqlSet("
-                select pp.praiseAmount, a.`a_id`,a.`a_attr`,a.`a_level`,a.`at_id`,a.`a_mainCp`,a.`a_mainCp2`,a.`a_subCp`,a.`a_alert`,a.`m_id`,a.`g_sendMid`,a.`a_tag`,a.`a_aTitle`,a.`a_chapter`,a.`a_isShow`, a.`a_clickCount`, a.`a_updtime`, a.`a_crtime` 
+                select pp.praiseAmount, a.`a_id`,a.`a_attr`,a.`a_level`,a.`at_id`, a.`a_author`, a.`a_mainCp`,a.`a_mainCp2`,a.`a_subCp`,a.`a_alert`,a.`m_id`,a.`g_sendMid`,a.`a_tag`,a.`a_aTitle`,a.`a_chapter`,a.`a_isShow`, a.`a_clickCount`, a.`a_updtime`, a.`a_crtime` 
                 FROM `Article` a
                 LEFT JOIN (
                     SELECT count( p.p_id ) praiseAmount, a.a_id
