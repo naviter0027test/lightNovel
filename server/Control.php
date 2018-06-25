@@ -1207,6 +1207,9 @@ function search() {
     $condition = Array();
 
     //要求是主、副CP合併搜索,mainCp 有含subCp字串
+    if($_POST['author'] != "") {
+        $condition['author'] = $_POST['author'];
+    }
     if($_POST['mainCp'] != "") {
         $_POST['mainCp'] = $synAdm->substitute($_POST['mainCp']);
         $condition['mainCp'] = str_replace(";", ",", $_POST['mainCp']);

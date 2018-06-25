@@ -16,6 +16,9 @@
         分级：<label><%=item['a_level']%></label> &nbsp;
         属性：<label><%=(item['a_attr']=="article"?"文":"其他")%></label> &nbsp;
         修改日期：<label><%=item['at_updtime']%></label> &nbsp;<br />
+        <% if(item['a_author'] != "") { %>
+        <h4>原作：<%=item['a_author']%></h4>
+        <% } %>
         <h4>主CP：<%=item['a_mainCp']%></h4>
         <% if(item['a_subCp'] != "" || item['a_mainCp2'] != "") { %>
         <h4>副CP：<%=item['a_mainCp2']%><%=item['a_subCp']%></h4>

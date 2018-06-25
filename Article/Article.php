@@ -534,6 +534,16 @@ class Article {
         }
 
         $sql .= " where a.a_isShow = 'Y' ";
+        if(isset($conditionLike['author'])) {
+            $authorArr = preg_split('/;/', $conditionLike['author']);
+            //print_r($authorArr);
+            $sql .= "and ( ";
+            foreach($authorArr as $idx => $authorCondition) {
+                if($idx > 0) $sql .= " or ";
+                $sql .= " a.a_author like '%". $authorCondition. "%' ";
+            }
+            $sql .= " )";
+        }
         if(isset($conditionLike['mainCp'])) {
             $mainCpArr = preg_split('/,/', $conditionLike['mainCp']);
             //print_r($mainCpArr);
@@ -611,6 +621,16 @@ class Article {
         }
 
         $sql .= " where a.a_isShow = 'Y' ";
+        if(isset($conditionLike['author'])) {
+            $authorArr = preg_split('/;/', $conditionLike['author']);
+            //print_r($authorArr);
+            $sql .= "and ( ";
+            foreach($authorArr as $idx => $authorCondition) {
+                if($idx > 0) $sql .= " or ";
+                $sql .= " a.a_author like '%". $authorCondition. "%' ";
+            }
+            $sql .= " )";
+        }
         if(isset($conditionLike['mainCp'])) {
             $mainCpArr = preg_split('/,/', $conditionLike['mainCp']);
             //print_r($mainCpArr);
