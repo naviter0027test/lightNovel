@@ -109,15 +109,16 @@
             </span>
             <br />
             <span class="col-xs-12">
+                <label class="col-xs-2">作者</label>
+                <input type="text" class="smInput" name="author" placeholder="作者" />
+            </span>
+            <br />
+            <span class="col-xs-12">
                 <label class="col-xs-2">主CP</label>
                 <input type="text" class="smInput" name="cp1[]" placeholder="點我" /> /
                 <input type="text" class="smInput" name="cp1[]" placeholder="點我" />
             </span>
             <br />
-            <span class="col-xs-12">
-                <label class="col-xs-2">副CP</label>
-                <input type="text" name="viceCp" placeholder="以分號隔開" />
-            </span>
             <br />
             <span class="col-xs-12">
                 <label class="col-xs-2">系列</label>
