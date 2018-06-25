@@ -151,6 +151,7 @@ PostArticleForm = Backbone.View.extend({
         postData['articleType'] = $("input[name=articleType]:checked").val();
         postData['level'] = $("select[name=level]").val();
         //console.log($("input[name='cp1[]']"));
+        postData['author'] = $("input[name=author]").val();
         postData['cp1'] = [];
         for(var i = 0;i < $("input[name='cp1[]']").length;++i) {
             var cpInput = $("input[name='cp1[]']")[i];

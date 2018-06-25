@@ -25,9 +25,14 @@
             </span>
             <br />
             <span class="col-xs-12">
+                <label class="col-xs-2">原作<i class="focus">*</i></label>
+                <input type="text" class="validate[required]" name="author" placeholder="以半形;隔开" value="<%=data['a_author']%>" class="col-xs-4"/>
+            </span>
+            <br />
+            <span class="col-xs-12">
                 <label class="col-xs-2">主CP<i class="focus">*</i></label>
-                <input type="text" class="smInput validate[required]" name="cp1[]" placeholder="點我" readonly value="<%=data['a_mainCp'][0]%>"/> /
-                <input type="text" class="smInput validate[required]" name="cp1[]" placeholder="點我" readonly value="<%=data['a_mainCp'][1]%>" />
+                <input type="text" class="smInput validate[required]" name="cp1[]" placeholder="點我" value="<%=data['a_mainCp'][0]%>"/> /
+                <input type="text" class="smInput validate[required]" name="cp1[]" placeholder="點我" value="<%=data['a_mainCp'][1]%>" />
             </span>
             <br />
             <span class="col-xs-12 hidden">
