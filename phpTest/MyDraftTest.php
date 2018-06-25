@@ -18,7 +18,9 @@ require_once("../srvLib/simpletest/autorun.php");
 class MyDraftTest extends UnitTestCase {
     function testAdd() {
         require_once("../Article/MyDraft.php");
+        require_once("spanData.php");
         $myDraft = new MyDraft();
+        $baseData = new BaseData();
         $content = "活他家市車的……條來資大你校朋：牛海於藝然些球滿此日難各服興星、作苦要中神裡假自受英必須；輪獨存的提般著熱時超事：必不陸養推……那一會，人年港德物得英進東，合物一性民智十魚算倒提異西分不？
 
             位人信龍：回常明和座，它什位：是我病年不生時對。研斷育可受嗎他的奇工的不加背生。只望園感少何說文錢領師以唱因費形術樣的，神象角他外一健中河數來、看媽決？進期工標母望經原我後時行人，過品個小清類，有哥直資了一界……基人國、樣那市到來金事公王個的件孩關故收長人急？思人界合代，大師頭新落萬面股藝低多日會……廣自的些由的、東落樂微，以實亞化覺考技學氣……包英關提急算驚中朋；出陽實：年造的，字打健自為樂但老但程安重兩從民弟不策不題上她確此嚴老安黃！如及班一作係了媽青著客王兒而告點質書，上他上聯獨；轉人園生。
@@ -51,6 +53,7 @@ class MyDraftTest extends UnitTestCase {
             $article['level'] = "PG";
         else
             $article['level'] = "NC17";
+        $article['author'] = $baseData->spanAuthor();
         $article['cp1'] = $cpAArr[rand(0, count($cpAArr)-1)]. ";". $cpBArr[rand(0, count($cpBArr)-1)];
         $article['subCp'] = $cpAArr[rand(0, count($cpAArr)-1)]. ";". $cpBArr[rand(0, count($cpBArr)-1)]; 
         $alertArr = Array("主要角色死亡", "血腥暴力", "性轉");
@@ -92,10 +95,22 @@ class MyDraftTest extends UnitTestCase {
             $colData['a_attr'] = $draft['a_attr'];
             $colData['a_level'] = $draft['a_level'];
             $colData['a_title'] = "55555";
+            $colData['a_author'] = "王和之";
 
             $myDraft->upd($colData);
             $draft = $myDraft->getOne($md_id);
             $this->assertEqual("55555", $draft['a_title']);
+
+            $draft = $myDraft->getOne($md_id);
+            $colData = Array();
+            $colData['mdid'] = $md_id;
+            $colData['a_attr'] = $draft['a_attr'];
+            $colData['a_level'] = $draft['a_level'];
+            $colData['a_title'] = "55555";
+            $colData['a_author'] = "王淵之";
+            $myDraft->upd($colData);
+            $draft = $myDraft->getOne($md_id);
+            $this->assertNotEqual("王和之", $draft['a_author']);
         }
         catch (Exception $e) {
             echo $e->getMessage();

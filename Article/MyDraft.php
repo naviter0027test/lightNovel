@@ -45,6 +45,7 @@ class MyDraft {
         $insData['a_level'] = $article['level'];
         if(isset($article['series']))
             $insData['as_id'] = $article['series'];
+        $insData['a_author'] = $article['author'];
         $insData['a_mainCp'] = $article['cp1'];
         $insData['a_mainCp2'] = "";
         if(isset($article['subCp']))
