@@ -20,7 +20,7 @@ Article = Backbone.View.extend({
                 delete data['data'][idx];
                 continue;
             }
-            if(data['data'][idx]['a_author'] != null) {
+            if(data['data'][idx]['a_author'] != "" && data['data'][idx]['a_author'] != null) {
                 var authorArr = data['data'][idx]['a_author'].split(";");
                 for(var jdx in authorArr) {
                     authorArr[jdx] = "<a href='search.html#search/1/author/"+ authorArr[jdx]+ "'>"+ authorArr[jdx]+ "</a>";
