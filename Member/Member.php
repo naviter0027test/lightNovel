@@ -156,7 +156,7 @@ class Member {
             使用本站请遵守如下规则：<br />
             1. 遵守同人礼仪，请勿在真人在场场合或不宜提及同人创作的社交媒体提及本站；<br />
             2. 理性交流、文明用语。<br />
-            3. 如需投诉发布有误的文章，或任何需求及建议，请联系管理组（walnutfics@163.com）或shijinhetao.lofter.com<br />
+            3. 如需投诉涉嫌抄袭或发布有误的文章，或任何需求及建议，请联系管理组（walnutfics@163.com）或shijinhetao.lofter.com <br />
             <br /> <br />
             ";
         sendMail($user['email'], "[核桃文库]启用信件（系统发信，请勿回覆）", $content);
