@@ -38,7 +38,7 @@ class Control {
 		throw new Exception("instr not defined");
 	    $instr = $this->instr;
 
-            $logFile = fopen("log.txt", "a") or die("Unable to open file!");
+            $logFile = fopen("log.txt", "a+") or die("Unable to open file!");
             $txt = "[". date("Y-m-d H:i:s"). "]:". get_client_ip(). ":$instr\n";
             fwrite($logFile, $txt);
             fclose($logFile);
