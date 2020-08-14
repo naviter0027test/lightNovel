@@ -290,7 +290,12 @@ class Article {
                 limit 0, 1
             ");
             $dbAdm->execSQL();
-            $articleArray[$counter] = $dbAdm->getAll()[0];
+            $getGoodRes = $dbAdm->getAll();
+            //$articleArray[$counter] = [];
+            if(isset($getGoodRes[0])) 
+                $articleArray[$counter] = $getGoodRes[0];
+            else
+                continue;
             if(isset($articleArray[$counter]['a_id'])) {
                 $articleArray[$counter]['at'] = Array();
                 $articleArray[$counter]['at']['at_id'] = $aTitle['at_id'];
