@@ -674,7 +674,8 @@ function articleGet() {
 
     if(isset($_SESSION['mid'])) {
         $reData['isSubScript'] = $isScript;
-        $reData['isSeriesSubscript'] = $isSeriesSubscript;
+        if(isset($isSeriesSubscript))
+            $reData['isSeriesSubscript'] = $isSeriesSubscript;
         $reData['isMemberSubscript'] = $isMemberSubscript;
         $reData['isPraise'] = $isPraise;
         $reData['isBook'] = $isBook;
