@@ -10,6 +10,7 @@
  *  Author :
  *      Lanker
  */
+require_once(__DIR__. '/configure.php');
 
 class Config {
     private $dbName;
@@ -22,9 +23,9 @@ class Config {
     public function __construct() {
         date_default_timezone_set("Asia/Taipei");
 
-        $this->dbName = "walnu10_Novel";
-        $this->user = "walnu10_novel";
-        $this->pass = "n,4n8kkvn";
+        $this->dbName = DB_BASE;
+        $this->user = DB_USER;
+        $this->pass = DB_PASS;
 
         $this->mailer = Array();
         $this->mailer['port'] = 25;
@@ -39,7 +40,7 @@ class Config {
             $this->mailer['host'] = "test0010.axcell28.idv.tw";
         }
         else {
-            $this->host = "localhost";
+            $this->host = DB_HOST;
             $this->mailer['host'] = "192.168.3.16";
         }
 

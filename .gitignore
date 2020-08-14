@@ -1,3 +1,4 @@
 *.swp*
 log.txt
 imgs/tmp
+server/configure.php
