@@ -103,7 +103,7 @@ class Bookmark {
         return $dbAdm->getAll();
     }
 
-    public function listAmount($who) {
+    public function listAmount($who, $nowPage = 1) {
         $tablename = $this->table;
         $dbAdm = $this->dbAdm;
 

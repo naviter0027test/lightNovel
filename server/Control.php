@@ -298,7 +298,7 @@ function postArticle() {
     }
     $article['mId'] = $_SESSION['mid'];
     $article['cp1'] = implode(";", $article['cp1']);
-    if(is_array($article['cp2'] ))
+    if(isset($article['cp2']) == true && is_array($article['cp2'] ))
         $article['cp2'] = implode(";", $article['cp2']);
     if(isset($article['viceCp']))
         $article['subCp'] = $article['viceCp'];
@@ -693,7 +693,7 @@ function storeDraft() {
     }
     $article['mId'] = $_SESSION['mid'];
     $article['cp1'] = implode(";", $article['cp1']);
-    if(is_array($article['cp2'] ))
+    if(isset($article['cp2']) == true && is_array($article['cp2'] ))
         $article['cp2'] = implode(";", $article['cp2']);
     if(isset($article['viceCp']))
         $article['subCp'] = $article['viceCp'];
@@ -1295,7 +1295,7 @@ function bookmarkList() {
     $reData['status'] = 200;
     $reData['msg'] = "bookmarkList success";
     $reData['data'] = $bookmarkAdm->lists($_SESSION['mid'], $_POST['nowPage']);
-    $reData['amount'] = $bookmarkAdm->listAmount($_SESSION['mid']);
+    $reData['amount'] = $bookmarkAdm->listAmount($_SESSION['mid'], $_POST['nowPage']);
     return $reData;
 }
 
