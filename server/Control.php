@@ -1295,7 +1295,7 @@ function bookmarkList() {
     $reData['status'] = 200;
     $reData['msg'] = "bookmarkList success";
     $reData['data'] = $bookmarkAdm->lists($_SESSION['mid'], $_POST['nowPage']);
-    $reData['amount'] = $bookmarkAdm->listAmount($_SESSION['mid'], $_POST['nowPage']);
+    $reData['amount'] = $bookmarkAdm->listAmount($_SESSION['mid']);
     return $reData;
 }
 

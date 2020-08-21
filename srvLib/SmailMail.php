@@ -14,14 +14,14 @@ function sendMail($mailto, $contentTitle, $contentBody) {
     $mail->IsSMTP();
     $mail->SMTPAuth = true;
 
-    $webmaster_email = "l1a3nk7er@gmail.com";
+    $webmaster_email = "dwu446227@gmail.com";
 
     $mail->WordWrap = 50;
 
     $mail->IsHTML(true);
 
-    $mail->Username = "l1a3nk7er@gmail.com";
-    $mail->Password = "uk8c32m66";
+    $mail->Username = "dwu446227@gmail.com";
+    $mail->Password = "usbhcvzoiahyacdo";
 
     $mail->FromName = "System";
     $mail->From = $webmaster_email;

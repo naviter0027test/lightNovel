@@ -103,7 +103,7 @@ class Bookmark {
         return $dbAdm->getAll();
     }
 
-    public function listAmount($who, $nowPage = 1) {
+    public function listAmount($who) {
         $tablename = $this->table;
         $dbAdm = $this->dbAdm;
 
@@ -112,10 +112,6 @@ class Bookmark {
 
         $conditionArr = Array();
         $conditionArr['bm_who'] = $who;
-
-        $limit = Array();
-        $limit['offset'] = ($nowPage -1) * 25;
-        $limit['amount'] = 25;
 
         //$dbAdm->selectData($tablename, $column, $conditionArr, null, $limit);
         $dbAdm->sqlSet("select count(bm.b_id) amount from Bookmark bm 
