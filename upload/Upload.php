@@ -49,6 +49,8 @@ class Upload {
                     $exts["image/png"] = ".png";
                     $exts["image/gif"] = ".gif";
                     $exts["image/bmp"] = ".bmp";
+                    if(is_dir(__DIR__. "/../imgs/tmp") == false)
+                        mkdir(__DIR__. "/../imgs/tmp");
 		    move_uploaded_file($_FILES['file']['tmp_name'][$count], "imgs/tmp/$newFileName". $exts[$type]); //. $_FILES['file']['name'][$count]);
 		    $data['success'][$sussCount]['newName'] = $newFileName. $exts[$type];
 		    ++$sussCount;
