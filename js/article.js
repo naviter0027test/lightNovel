@@ -90,7 +90,7 @@ ArticleRout = Backbone.Router.extend({
             postData['mid'] = id;
         }
 
-        //console.log(postData);
+        console.log(postData);
         $.post("instr.php", postData, function(data) {
             //console.log(data);
             data = JSON.parse(data);

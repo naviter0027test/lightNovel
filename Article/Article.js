@@ -262,6 +262,10 @@ PostArticleForm = Backbone.View.extend({
         postData['title'] = $("input[name=title]").val();
         postData['articleType'] = $("input[name=articleType]:checked").val();
         postData['level'] = $("select[name=level]").val();
+        if(postData['sendUser'] == undefined)
+            delete postData['sendUser'];
+        if(postData['chapterSum'] == undefined)
+            delete postData['chapterSum'];
         console.log(postData);
         postData['author'] = $("input[name=author]").val();
         postData['cp1'] = [];

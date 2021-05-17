@@ -388,7 +388,7 @@ function articleEdit() {
     }
     $article['mId'] = $_SESSION['mid'];
     $article['cp1'] = implode(";", $article['cp1']);
-    if(is_array($article['cp2'] ))
+    if(isset($article['cp2']) && is_array($article['cp2'] ))
         $article['cp2'] = implode(";", $article['cp2']);
     if(isset($article['viceCp']))
         $article['subCp'] = $article['viceCp'];
