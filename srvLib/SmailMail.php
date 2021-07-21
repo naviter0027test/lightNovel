@@ -9,6 +9,8 @@ if(file_exists("../srvLib/PHPMailer-master/class.phpmailer.php"))
 else
     include_once("srvLib/PHPMailer-master/class.phpmailer.php");
 
+require_once(__DIR__."/../server/configure.php");
+
 function sendMail($mailto, $contentTitle, $contentBody) {
     $mail = new PHPMailer();
     $mail->IsSMTP();
@@ -20,8 +22,8 @@ function sendMail($mailto, $contentTitle, $contentBody) {
 
     $mail->IsHTML(true);
 
-    $mail->Username = "dwu446227@gmail.com";
-    $mail->Password = "usbhcvzoiahyacdo";
+    $mail->Username = GMAIL_USER;
+    $mail->Password = GMAIL_PASS;
 
     $mail->FromName = "System";
     $mail->From = $webmaster_email;
